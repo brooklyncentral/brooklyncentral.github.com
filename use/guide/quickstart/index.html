@@ -1,0 +1,694 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+  <title>brooklyn Introduction</title>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+
+  <link rel="stylesheet" type="text/css" href="/style/main.css" />
+  <link rel="stylesheet" type="text/css" href="/style/page.css" />
+  <link rel="stylesheet" type="text/css" href="/style/toc.css" />
+  <link rel="stylesheet" type="text/css" href="/style/docs/code.css" />
+  
+	<!-- Sidebar/ToC Scripts and CSS -->
+	<script src="/style/js/jquery/jquery-1.7.1.min.js"></script>
+	<script src="/style/js/jquery/jquery-ui-1.8.18.custom.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/style/js/jquery/smoothness/jquery-ui-1.8.18.custom.css" />
+
+	<script>
+	$(function() {
+		$('#simple_google').submit(function() {
+      		$('input[name="q"]').val("site:" + document.location.hostname + " " + $('input[name="qfront"]').val());
+        return true;
+		});
+    });
+	</script>
+
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-30530918-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+</head>
+
+<body>
+  <div id="all">
+
+    <div id="page_header" class="page_row">
+     <table width="100%"><tr><td rowspan="2">
+      <div id="header_logo">
+        <a href = "/"><img height="68" width="220" border='0' src="/style/brooklyn-logo.png"/></a>
+      </div>
+     </td><td align="right" valign="top" width="100%">
+        <div id="top-right-quick-links">
+            <a href="/meta/contact.html">Contact</a> &nbsp;|&nbsp;
+            <a href="/start/download.html">Download</a> &nbsp;|&nbsp;
+            <a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a>
+        </div>
+     </td></tr>
+     <tr><td valign="bottom">
+     </td></tr></table>
+    </div>
+
+    
+
+
+
+
+
+<div id="topbar">
+<table height="100%"><tr style="vertical-align: middle;"><td width="100%" align="left" style="padding-bottom: 12px; padding-left: 18px;">
+
+  
+  
+  <a class="topbar-item " href="/index.html">Overview</a>
+
+  
+  
+  <a class="topbar-item " href="/start/download.html">Download</a>
+
+  
+  
+  <a class="topbar-item " href="/start/walkthrough/index.html">Walkthrough</a>
+
+  
+  
+  <a class="topbar-item toc-active" href="/use/guide/index.html">Guide</a>
+
+  
+  
+  <a class="topbar-item " href="/use/examples/index.html">Examples</a>
+
+  
+  
+  <a class="topbar-item " href="/dev/code/index.html">Contributing</a>
+
+</td><td align="right" style="padding-top: 5px; padding-right: 18px;">
+      <div id="search_box">
+        <form id="simple_google" action="http://www.google.com/search" method="get">
+        <input name="q" type="hidden" />
+        <input name="qfront" type="text" placeholder='Search'/></p>
+        </form>
+      </div>
+</td></table>
+
+</div>
+
+    <div class="page_row">
+
+
+      <div id="page_content">
+        
+  
+
+
+
+
+
+
+
+    
+    
+
+    
+    
+        
+            
+            
+            
+            
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+        
+            
+        
+            
+        
+    
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+
+
+
+
+<div class="breadcrumbs">
+    <span class="breadcrumb-item bc1"><a class='breadcrumb bc1' href="/use/guide/index.html">User Guide</a></span>
+    
+        <span class="bcsep bc1">&raquo;</span> <span class="breadcrumb-item bc2"><a class='breadcrumb bc2' href="/use/guide/quickstart/index.html">Quick Start</a></span>
+        
+    
+</div>
+
+<!-- FIND HIERARCHY IN TOC AND USE THAT
+        
+        
+        <span class="breadcrumb-item"><a class='breadcrumb' href="/">Home</a></span>
+        
+        <span class="bcsep">&raquo;</span> <span class="breadcrumb-item"><a class='breadcrumb' href="/use">use</a></span>
+        
+        
+        <span class="bcsep">&raquo;</span> <span class="breadcrumb-item"><a class='breadcrumb' href="/use/guide">guide</a></span>
+        
+        
+ -->
+ 
+		
+		<h1 id="header_title">brooklyn Introduction</h1>
+		<hr/>
+
+		<p><strong>brooklyn</strong> is a library that simplifies application deployment and management.
+It allows you to:</p>
+
+<ul>
+<li>Describe an application topology once, and use this definition to set it up (provision) and keep it up (manage)</li>
+<li>Describe the application topology in code, for re-use, version control, power and readability</li>
+<li>Run multiple tiers and even varying stacks, configured and managed together</li>
+<li>Run in multiple locations with efficient, secure, wide-area management</li>
+</ul>
+
+
+<h2>Prerequisites</h2>
+
+<p>This guide requires that you have the Java 6 JDK, curl, wget and Maven 3 installed.</p>
+
+<p>If you are using Eclipse, you will likely want the Git, Groovy, and Maven plugins.
+Via Help -> Install New Software, or from the Eclipse Marketplace,
+we recommend:</p>
+
+<ul>
+<li><p>Groovy Plugin: GRECLIPSE from <a href="http://dist.springsource.org/release/GRECLIPSE/e3.7">dist.springsource.org/release/GRECLIPSE/e3.7</a></p></li>
+<li><p>Maven Plugin: m2e from <a href="http://download.eclipse.org/technology/m2e/releases">download.eclipse.org/technology/m2e/releases</a></p></li>
+<li><p>Git Plugin: egit <a href="http://download.eclipse.org/egit/updates">download.eclipse.org/egit/updates</a></p></li>
+</ul>
+
+
+<p>For more information and other development environments,
+visit the <a href="/dev/build/ide.html">IDE section</a> of the brooklyn web site.</p>
+
+<h2>Web Cluster and Database Example</h2>
+
+<p>Here is an example class which uses the Brooklyn library
+to launch a three-tier application in the cloud,
+complete with management:</p>
+
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">WebClusterDatabaseExample</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
+    <span class="n">ControlledDynamicWebAppCluster</span> <span class="n">webCluster</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ControlledDynamicWebAppCluster</span><span class="o">(</span><span class="k">this</span><span class="o">,</span>
+        <span class="nl">war:</span> <span class="s">&quot;classpath://hello-world-webapp.war&quot;</span><span class="o">);</span>
+
+    <span class="n">MySqlNode</span> <span class="n">mysql</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MySqlNode</span><span class="o">(</span><span class="k">this</span><span class="o">,</span>
+        <span class="nl">creationScriptUrl:</span> <span class="s">&quot;classpath://visitors-database-setup.sql&quot;</span><span class="o">);</span>
+    
+    <span class="o">{</span>
+        <span class="n">web</span><span class="o">.</span><span class="na">factory</span><span class="o">.</span><span class="na">configure</span><span class="o">(</span>
+            <span class="nl">httpPort:</span> <span class="s">&quot;8080+&quot;</span><span class="o">,</span>
+            <span class="o">(</span><span class="n">JBoss7Server</span><span class="o">.</span><span class="na">JAVA_OPTIONS</span><span class="o">):</span>
+                <span class="c1">// -Dbrooklyn.example.db.url=&quot;jdbc:mysql://192.168.1.2:3306/visitors?user=brooklyn\\&amp;password=br00k11n&quot;</span>
+                <span class="o">[</span><span class="s">&quot;brooklyn.example.db.url&quot;</span><span class="o">:</span> <span class="n">valueWhenAttributeReady</span><span class="o">(</span><span class="n">mysql</span><span class="o">,</span> <span class="n">MySqlNode</span><span class="o">.</span><span class="na">MYSQL_URL</span><span class="o">,</span>
+                    <span class="o">{</span> <span class="s">&quot;jdbc:&quot;</span><span class="o">+</span><span class="n">it</span><span class="o">+</span><span class="s">&quot;visitors?user=brooklyn\\&amp;password=br00k11n&quot;</span> <span class="o">})</span> <span class="o">]);</span>
+                    
+        <span class="n">web</span><span class="o">.</span><span class="na">cluster</span><span class="o">.</span><span class="na">addPolicy</span><span class="o">(</span>
+            <span class="k">new</span> <span class="nf">ResizerPolicy</span><span class="o">(</span><span class="n">DynamicWebAppCluster</span><span class="o">.</span><span class="na">AVERAGE_REQUESTS_PER_SECOND</span><span class="o">).</span>
+                <span class="n">setSizeRange</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">5</span><span class="o">).</span>
+                <span class="n">setMetricRange</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="mi">100</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+
+<p>This consists of a JBoss web-app tier
+behind an nginx load-balancer (built up in the class <code>ControlledDynamicWebAppCluster</code>),
+connected to a MySQL database instance.</p>
+
+<p>The <code>web.factory.configure</code> call tells the appservers to run on the first available port >= 8080
+(which will be 8080 except when running multiple instances on <code>localhost</code>),
+and wires the URL where the database is running in to the app servers.
+The MySQL URL is exposed as an attribute sensor,
+as soon as the MySQL instance is started,
+and the <code>valueWhenAttributeReady</code> call sets up a Java <code>Future</code>
+so that the provisioning of the appservers can proceed as much as possible
+until the value is actually required.
+This "just-in-time" approach to dependent configuration simplifies -- as much as possible --
+some of the trickiest issues when setting up sophisticated applications.</p>
+
+<p>A management plane is launched with the application,
+running the policy configured with the <code>web.cluster.addPolicy</code> command
+(as well as other policies which ensure the load-balancer is updated whenever the <code>web.cluster</code> members change).
+Keeping a handle on the application instance allows programmatic monitoring, manual management, and
+policy change; the management plane can also be accessed through a command-line console, a web console, or a REST web
+API. The management web console shows the hierarchy of entities active in real-time --
+from a high-level view all the way down to the level of
+each JBoss process on every VM, if desired.</p>
+
+<!-- TODO screenshot could be useful? -->
+
+
+
+
+<!--
+TODO: could be useful to include an about- the guide here, with links
+
+About the Guide
+---------------
+
+The guide is divided into sections aimed at developers building applications using Brooklyn ...
+-->
+
+
+      </div>
+
+      <div id="page_toc">
+        <!-- Sidebar -->
+        
+<div id="sidebar_image"><img width="204" src="/style/brooklyn-bridge-v2.png"/></div>
+<br/>
+
+
+  
+
+
+
+
+
+
+<div id="sidebar_toc">
+
+    
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/start/index.html"><div class="toc-1-item">Start</div></a>
+  
+      </div>
+
+    
+    
+    
+    
+	  <div class="toc-1 toc-active">
+  
+	    <a href="/use/guide/index.html"><div class="toc-1-item toc-1-header ">User Guide</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 toc-active">
+      
+	        <a href="/use/guide/quickstart/index.html"><div class="toc-2-item toc-active">Quick Start</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/guide/defining-applications/basic-concepts.html"><div class="toc-2-item toc-2-header">Defining Applications</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/defining-applications/basic-concepts.html"><div class="toc-3-item">Basic Concepts</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/defining-applications/advanced-concepts.html"><div class="toc-3-item">Advanced Concepts</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/defining-applications/common-usage.html"><div class="toc-3-item">Common Usage</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/guide/management/index.html"><div class="toc-2-item toc-2-header">Management</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#introduction"><div class="toc-3-item">Introduction</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#startup-config"><div class="toc-3-item">Startup Configuration</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#console"><div class="toc-3-item">Management Web Console</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#observation-other"><div class="toc-3-item">Observation APIs</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#distributed-management"><div class="toc-3-item">Distributed Management</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#resilience"><div class="toc-3-item">Resilience</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#key-apis"><div class="toc-3-item">Key APIs</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#sensors-and-effectors"><div class="toc-3-item">Sensors and Effectors</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/guide/policies/index.html"><div class="toc-2-item toc-2-header">Policies</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/policies/index.html#introduction"><div class="toc-3-item">Introduction</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/policies/index.html#writing-policies"><div class="toc-3-item">Writing Policies</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/policies/index.html#off-the-shelf-policies"><div class="toc-3-item">Off-the-Shelf Policies</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/policies/index.html#implementing-policies"><div class="toc-3-item">Implementing Policies</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/guide/entities/index.html"><div class="toc-2-item toc-2-header">Custom Entities</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/entities/index.html#entity-lifestyle"><div class="toc-3-item">Entity Lifecycle</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/entities/index.html#implementation-classes"><div class="toc-3-item">What to Extend</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/entities/index.html#configuration"><div class="toc-3-item">Configuration</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/entities/index.html#implementing-sensors"><div class="toc-3-item">Implementing Sensors</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/entities/index.html#implementing-effectors"><div class="toc-3-item">Implementing Effectors</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/entities/index.html#testing"><div class="toc-3-item">Testing</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/guide/extras/index.html"><div class="toc-2-item toc-2-header">Extras</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/extras/index.html#web"><div class="toc-3-item">Web</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/extras/index.html#database"><div class="toc-3-item">Database</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/extras/index.html#nosql"><div class="toc-3-item">NoSQL</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/extras/index.html#messaging"><div class="toc-3-item">Messaging</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/start/index.html"><div class="toc-1-item toc-1-header ">Elsewhere</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/examples/index.html"><div class="toc-2-item toc-2-header">Examples</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/webcluster/index.html"><div class="toc-3-item">Elastic Web Cluster</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/whirrhadoop/index.html"><div class="toc-3-item">Whirr Hadoop Cluster</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/api/index.html"><div class="toc-2-item">API Reference</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/dev/code/index.html"><div class="toc-2-item toc-2-header">Contributing</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/code/index.html"><div class="toc-3-item">The Code</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/build/index.html"><div class="toc-3-item">Build and Test</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/tips/index.html"><div class="toc-3-item">Tips and Tricks</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/wishlist.html"><div class="toc-3-item">Wishlist</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/links.html"><div class="toc-3-item">Links</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/how-to-contrib.html"><div class="toc-3-item">How to Contribute</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/license/index.html"><div class="toc-2-item">License</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+ 
+</div>
+<br/>
+
+      </div>
+
+    </div>
+
+    <div class="page_row"/>
+
+<hr/>
+
+    <div id="page_footer" class="page_row">
+      <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
+      brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
+      &copy; 2012 Cloudsoft Corporation.
+    </div>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,904 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+  <title>Runtime Management</title>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+
+  <link rel="stylesheet" type="text/css" href="/style/main.css" />
+  <link rel="stylesheet" type="text/css" href="/style/page.css" />
+  <link rel="stylesheet" type="text/css" href="/style/toc.css" />
+  <link rel="stylesheet" type="text/css" href="/style/docs/code.css" />
+  
+	<!-- Sidebar/ToC Scripts and CSS -->
+	<script src="/style/js/jquery/jquery-1.7.1.min.js"></script>
+	<script src="/style/js/jquery/jquery-ui-1.8.18.custom.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/style/js/jquery/smoothness/jquery-ui-1.8.18.custom.css" />
+
+	<script>
+	$(function() {
+		$('#simple_google').submit(function() {
+      		$('input[name="q"]').val("site:" + document.location.hostname + " " + $('input[name="qfront"]').val());
+        return true;
+		});
+    });
+	</script>
+
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-30530918-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+</head>
+
+<body>
+  <div id="all">
+
+    <div id="page_header" class="page_row">
+     <table width="100%"><tr><td rowspan="2">
+      <div id="header_logo">
+        <a href = "/"><img height="68" width="220" border='0' src="/style/brooklyn-logo.png"/></a>
+      </div>
+     </td><td align="right" valign="top" width="100%">
+        <div id="top-right-quick-links">
+            <a href="/meta/contact.html">Contact</a> &nbsp;|&nbsp;
+            <a href="/start/download.html">Download</a> &nbsp;|&nbsp;
+            <a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a>
+        </div>
+     </td></tr>
+     <tr><td valign="bottom">
+     </td></tr></table>
+    </div>
+
+    
+
+
+
+
+
+<div id="topbar">
+<table height="100%"><tr style="vertical-align: middle;"><td width="100%" align="left" style="padding-bottom: 12px; padding-left: 18px;">
+
+  
+  
+  <a class="topbar-item " href="/index.html">Overview</a>
+
+  
+  
+  <a class="topbar-item " href="/start/download.html">Download</a>
+
+  
+  
+  <a class="topbar-item " href="/start/walkthrough/index.html">Walkthrough</a>
+
+  
+  
+  <a class="topbar-item toc-active" href="/use/guide/index.html">Guide</a>
+
+  
+  
+  <a class="topbar-item " href="/use/examples/index.html">Examples</a>
+
+  
+  
+  <a class="topbar-item " href="/dev/code/index.html">Contributing</a>
+
+</td><td align="right" style="padding-top: 5px; padding-right: 18px;">
+      <div id="search_box">
+        <form id="simple_google" action="http://www.google.com/search" method="get">
+        <input name="q" type="hidden" />
+        <input name="qfront" type="text" placeholder='Search'/></p>
+        </form>
+      </div>
+</td></table>
+
+</div>
+
+    <div class="page_row">
+
+
+      <div id="page_content">
+        
+  
+
+
+
+
+
+
+
+    
+    
+
+    
+    
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+            
+            
+            
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+        
+            
+        
+            
+        
+    
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+
+
+
+
+<div class="breadcrumbs">
+    <span class="breadcrumb-item bc1"><a class='breadcrumb bc1' href="/use/guide/index.html">User Guide</a></span>
+    
+        <span class="bcsep bc1">&raquo;</span> <span class="breadcrumb-item bc2"><a class='breadcrumb bc2' href="/use/guide/management/index.html">Management</a></span>
+        
+    
+</div>
+
+<!-- FIND HIERARCHY IN TOC AND USE THAT
+        
+        
+        <span class="breadcrumb-item"><a class='breadcrumb' href="/">Home</a></span>
+        
+        <span class="bcsep">&raquo;</span> <span class="breadcrumb-item"><a class='breadcrumb' href="/use">use</a></span>
+        
+        
+        <span class="bcsep">&raquo;</span> <span class="breadcrumb-item"><a class='breadcrumb' href="/use/guide">guide</a></span>
+        
+        
+ -->
+ 
+		
+		<h1 id="header_title">Runtime Management</h1>
+		<hr/>
+
+		<p><a name="introduction"></a>
+brooklyn uses many of the ideas from autonomic computing to implement management of entities in a structured and reusable fashion (including provisioning,
+healing, and optimising).</p>
+
+<p>Each external system, process or service is represented as an entity within brooklyn, with collections of these being represented and
+managed by other entities, and so forth through a hierarchy rooted in entities referred to as "Applications". Each entity has:</p>
+
+<ul>
+<li>provisioning and tear-down logic for the external system(s) it represents</li>
+<li>sensors which it publishes to report on its state and activity</li>
+<li>effectors which can be invoked to change it</li>
+<li>policies which perform analysis, enrichment (sensors), and execution (effectors). It is the policies in brooklyn which
+perform the self-management (in autonomic terms) by monitoring sensors and invoking effectors.</li>
+</ul>
+
+
+<p>There are several ways to launch applications with brooklyn, and useful configuration options,
+as well as a debug-view web console.
+This chapter describes these high-level runtime concepts, then proceeds to present more
+detailed information on the underlying implementation of management within brooklyn.</p>
+
+<p><a name="startup-config"></a></p>
+
+<h2>Startup Configuration</h2>
+
+<p>brooklyn can read configuration from a variety of places:</p>
+
+<ul>
+<li>the file <code>~/.brooklyn/brooklyn.properties</code></li>
+<li><code>-D</code> defines on the brooklyn (java) command-line</li>
+<li>shell environment variables</li>
+</ul>
+
+
+<p>Default properties are described in the Javadoc and code of classes <code>CredentialsFromEnv</code> and <code>BrooklynSystemProperties</code>,
+but some of the most common ones are:</p>
+
+<div class="highlight"><pre><code class="properties"><span class="na">brooklyn.jclouds.aws-ec2.identity</span><span class="o">=</span><span class="s">AKA50M30N3S1DFR0MAW55</span>
+<span class="na">brooklyn.jclouds.aws-ec2.credential</span><span class="o">=</span><span class="s">aT0Ps3cr3tC0D3wh1chAW5w1llG1V3y0uTOus333</span>
+<span class="na">brooklyn.jclouds.private-key-file</span><span class="o">=</span><span class="s">~/my/id_rsa       # use specified key (default is ~/.ssh/id_rsa)</span>
+<span class="na">brooklyn.jclouds.public-key-file</span><span class="o">=</span><span class="s">~/my/id_rsa.pub    # (optional, inferred from previous if omitted)</span>
+</code></pre>
+</div>
+
+
+<p>These can be specified as a shell environment variable or as a Java system property,
+although in those contexts the conventional format <code>BROOKLYN_JCLOUDS_AWS_EC2_IDENTITY</code>
+is supported and recommended.</p>
+
+<p><a name="console"></a></p>
+
+<h2>Management Web Console</h2>
+
+<p>The web-based management console that comes with brooklyn serves as a way to observe and manage brooklyn entities.
+It provides low-level details of activity (including stack-traces), sensor values, and policies,
+and some visual widgets for observing what is happening.
+This console is not designed as a management dashboard or portal --
+many good options exist in that space --
+but what could be useful is to embed widgets from the brooklyn portal for selected high-level views.</p>
+
+<p>To start a management console from your own code, use the <code>BrooklynLaucher.manage</code> method:</p>
+
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="err">\</span><span class="o">[</span><span class="err">\</span><span class="o">]</span> <span class="n">argv</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">application</span> <span class="n">app</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyApplicationExample</span><span class="o">(</span><span class="nl">displayName:</span><span class="s">&quot;myapp&quot;</span><span class="o">)</span>
+    <span class="n">brooklyn</span><span class="o">.</span><span class="na">launcher</span><span class="o">.</span><span class="na">BrooklynLauncher</span><span class="o">.</span><span class="na">manage</span><span class="o">(</span><span class="n">app</span><span class="o">)</span>
+    <span class="c1">// ...</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+
+<p>This will start an embedded brooklyn management node, including the web console.
+The URL for the web console defaults to http://localhost:8081,
+with credentials admin/password.</p>
+
+<p>The mechanism for launching brooklyn management will change in a future release. For this release, the brooklyn management node is embedded.</p>
+
+<p>The console contains two main views: Dashboard and Detail. These update in real-time.</p>
+
+<p><strong>Dashboard</strong></p>
+
+<p>The dashboard is a high level overview of the state of the application:</p>
+
+<p><a href="webconsole-dashboard.png"><img src="webconsole-dashboard-w400.png" title="Screenshot of the Webconsole Dashboard" alt="Screenshot of the Webconsole Dashboard" /></a></p>
+
+<p><strong>Detail</strong></p>
+
+<p>The Detail view gives an in-depth view of the application and its entities.
+Child-parent relationships between entities are navigable using the entity tree;
+each entity is shown with its children (or, in the case of childless group entities, the members).
+Selecting a specific entity allows you to access detailed information about that entity.</p>
+
+<p><a href="webconsole-detail.png"><img src="webconsole-detail-w400.png" title="Screenshot of the Webconsole Detail" alt="Screenshot of the Webconsole Detail" /></a></p>
+
+<p>The Detail view contains a breadcrumb trail, showing the current entitiy's position in the heirarchy, and six tabs:</p>
+
+<p><strong>Summary:</strong> Description of the selected entity.</p>
+
+<p><strong>Sensors:</strong> Lists the attribute sensors that the entity has and their values.</p>
+
+<p><strong>Effectors:</strong> Lists the effectors that can be invoked on the selected entity.</p>
+
+<p><strong>Activity:</strong> Current and historic activity of the entity, currently running effectors, finished effectors.</p>
+
+<p><strong>Location:</strong> The geographical location of the selected entity.</p>
+
+<p><strong>Policies:</strong> Lists the policies associated with the current entity. Policies can be suspended, resumed and removed through the UI.</p>
+
+<h3>Security</h3>
+
+<p>In this release only two Spring Security users are created: user and admin. Only the admin user has access to the Management Console.</p>
+
+<p>Admin access:   username: <em>admin</em>, password: <em>password</em>.</p>
+
+<p>User access:    username: <em>user</em>, password: <em>password</em>.</p>
+
+<p>In future releases it will be possible to add and configure users.</p>
+
+<p><a name="observation-other"></a></p>
+
+<h2>Other Ways to Observe Activity</h2>
+
+<h3>Java API</h3>
+
+<p><code>ManagementContext</code> provides a Java programmatic API.</p>
+
+<p>More information can be found in the javadoc for <code>ManagementContext</code>.</p>
+
+<h3>Command-line Console</h3>
+
+<p><em>Not available yet.</em></p>
+
+<h3>Management REST API</h3>
+
+<p>Brooklyn does not yet expose a REST API. This was to allow the APi to be designed to align with emerging standards.</p>
+
+<p>Selected management operations are possible remotely using links exposed by the GUI (after authenticating with the GUI).</p>
+
+<h3>Logging</h3>
+
+<p>Brooklyn uses the SLF4J logging facade,  which allows use of many popular frameworks including java.util.logging, log4j, and logback.</p>
+
+<p>The convention for log levels is as follows:
+* ERROR and above:  exceptional situations which indicate that something has unexpectedly failed or
+some other problem has occured which the user is expected to attend to
+* WARN:  exceptional situations which the user may which to know about but which do not necessarily indicate failure or require a response
+* INFO:  a synopsis of activity, but which should not generate large volumes of events nor overwhelm a human observer
+* DEBUG and lower:  detail of activity which is not normally of interest, but which might merit closer inspection under certain circumstances.</p>
+
+<p>Loggers follow the <code>package.ClassName</code> naming standard.</p>
+
+<p>It is possible for entities to emit logging activity sensors so that an operator can observe what is occurring within their application through the web console or via programmatic means.</p>
+
+<p>Examples for testing can be found in some of the poms.</p>
+
+<!---
+
+<a name="distributed-management"></a>
+Distributed Management
+----------------------
+
+TODO Describe how and when objects become "live", pushed out to other nodes.
+-->
+
+
+
+
+<!---
+
+<a name="resilience"></a>
+Resilience
+----------
+TODO
+*This section still needs to be written. Feel free to [fork](/dev/code) the docs and lend a hand.*
+-->
+
+
+<p><a name="key-apis"></a></p>
+
+<h2>Key APIs</h2>
+
+<!---
+TODO - brief overview of key APIs
+-->
+
+
+<p><em>This section still needs to be written. Feel free to <a href="/dev/code">fork</a> the docs and lend a hand.</em></p>
+
+<ul>
+<li><code>ManagementContext</code> (Java management API)</li>
+<li><code>EntityLocal</code> (used by policies)</li>
+</ul>
+
+
+<!---
+TODO - describe how to simply configure logging slf4j
+-->
+
+
+<p><a name="sensors-and-effectors"></a></p>
+
+<h2>Sensors and Effectors</h2>
+
+<h3>Sensors</h3>
+
+<p>Sensors are typically defined as static named fields on the Entity subclass. These define the channels of events and activity that interested parties can track remotely. For example:</p>
+
+<div class="highlight"><pre><code class="java"><span class="cm">/** a sensor for saying hi (illustrative), carrying a String value </span>
+<span class="cm">   which is typically the name of the person to whom we are saying hi */</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Sensor</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">HELLO_SENSOR</span> <span class="o">=</span> <span class="o">...</span>
+</code></pre>
+</div>
+
+
+<p>If the entity is local (e.g. to a policy) these can be looked up using <code>get(Sensor)</code>. If it may be remote, you can subscribe to it through various APIs.</p>
+
+<!---
+TODO probably say about events now, quick reference about SubscriptionManager (either here or in next section on management context)
+TODO remaining section on Sensors perhaps should be moved to Writing Entities section? as reader won't need to know too much detail of sensor types to understand policies... though perhaps saying some is right. (Talking about JSON is almost certainly overkill...)
+-->
+
+
+<p>Sensors are used by operators and policies to monitor health and know when to invoke the effectors. The sensor data forms a nested map (i.e. JSON), which can be subscribed to through the <code>ManagementContext</code>.</p>
+
+<p>Often <code>Policy</code> instances will subscribe to sensor events on their associated entity or its children; these events might be an <code>AttributeValueEvent</code> – an attribute value being reported on change or periodically – or something transient such as <code>LogMessage</code> or a custom <code>Event</code> such as "TOO_HOT".</p>
+
+<!---
+TODO check classes above; is this much detail needed here?
+-->
+
+
+<p>Sensor values form a map-of-maps. An example of some simple sensor information is shown below in JSON:</p>
+
+<pre><code>{
+  config : {
+    url : "jdbc:mysql://ec2-50-17-19-65.compute-1.amazonaws.com:3306/mysql"
+    status : "running"
+  }
+  workrate : {
+    msgsPerSec : 432
+  }
+}
+</code></pre>
+
+<p>Sensor values are defined as statics, which can be used to programmatically drive the subscription.</p>
+
+<!---
+TODO , etc., example
+-->
+
+
+<h3>SubscriptionManager</h3>
+
+<p><em>This section is not complete. Feel free to <a href="/dev/code">fork</a> the docs and lend a hand.</em></p>
+
+<p><em>See the</em> <code>SubscriptionManager</code> <em>class.</em></p>
+
+<!---
+TODO
+-->
+
+
+<h3>Effectors</h3>
+
+<p>Like sensors and config info, effectors are also static fields on the Entity class. These describe actions available on the entity, similar to methods. Their implementation includes details of how to invoke them, typically this is done by calling a method on the entity. Effectors are typically defined as follows:</p>
+
+<div class="highlight"><pre><code class="java"><span class="cm">/** an effector which returns no value,</span>
+<span class="cm">   but which causes the entity to emit a HELLO sensor event */</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="n">Effector</span><span class="o">&lt;</span><span class="n">Void</span><span class="o">&gt;</span> <span class="n">SAY_HI</span> <span class="o">=</span> <span class="o">...</span>
+</code></pre>
+</div>
+
+
+<p>Effectors are invoked by calling <code>invoke(SAY_HI, name:"Bob")</code> or similar. The method may take an entity if context is not clear, and it takes parameters as named parameters or a Map.</p>
+
+<p>Invocation returns a <code>Task</code> object (extending <code>Future</code>). This allows the caller to understand progress and errors on the task, as well as <code>Task.get()</code> the return value. Be aware that <code>task.get()</code> is a blocking function that will wait until a value is available before returning.</p>
+
+<p>The management framework ensures that execution occurs on the machine where the <code>Entity</code> is mastered, with progress, result, and/or any errors reported back to the caller. It does this through the <code>ExecutionManager</code> which, where necessary, creates proxy <code>Task</code> instances. The <code>ExecutionManager</code> associates <code>Tasks</code> with the corresponding <code>Entity</code> so that these can be tracked externally (and relocated if the Entity is remastered to a different location).</p>
+
+<p>It is worth noting that where a method corresponds to an effector, direct invocation of that method on an <code>Entity</code> will implicitly generate the <code>Task</code> object as though the effector had been invoked. For example, invoking <code>Cluster.resize(int)</code>, where <code>resize</code> provides an <code>Effector RESIZE</code>, will generate a <code>Task</code> which can be observed remotely.</p>
+
+<h3>ExecutionManager</h3>
+
+<p>The <code>ExecutionManager</code> is responsible for tracking simultaneous executing tasks and associating these with given <strong>tags</strong>.
+Arbitrary tasks can be run by calling <code>Task submit(Runnable)</code> (similarly to the standard <code>Executor</code>, although it also supports <code>Callable</code> arguments including Groovy closures, and can even be passed <code>Task</code> instances which have not been started). <code>submit</code> also accepts a few other named parameters, including <code>description</code>, which allow additional metadata to be kept on the <code>Task</code>. The main benefit then is to have rich metadata for executing tasks, which can be inspected through methods on the <code>Task</code> interface.</p>
+
+<p>By using the <code>tag</code> or <code>tags</code> named parameters on <code>submit</code> (or setting <code>tags</code> in a <code>Task</code> that is submitted), execution can be associated with various categories. This allows easy viewing can be examined by calling
+<code>ExecutionManager.getTasksWithTag(...)</code>.</p>
+
+<p>The following example uses Groovy, with time delays abused for readability. brooklyn's test cases check this using mutexes, which is recommended.</p>
+
+<pre><code>ExecutionManager em = []
+em.submit(tag:"a", description:"One Mississippi", { Thread.sleep(1000) })
+em.submit(tags:["a","b"], description:"Two Mississippi", { Thread.sleep(1000) })
+assert em.getTasksWithTag("a").size()==2
+assert em.getTasksWithTag("a").every { Task t -&gt; !t.isDone() }
+Thread.sleep(1500)
+assert em.getTasksWithTag("a").size()==2
+assert em.getTasksWithTag("a").every { Task t -&gt; t.isDone() }
+</code></pre>
+
+<p>It is possible to define ParallelTasks and SequentialTasks and to specify inter-task relationships with TaskPreprocessors. This allows building quite sophisticated workflows relatively easily.</p>
+
+<p>Continuing the example above, submitting a SequentialTasks or specifying <code>em.setTaskPreprocessorForTag("a", SingleThreadedExecution.class)</code> will cause <code>Two Mississippi</code> to run after <code>One Mississippi</code> completes.</p>
+
+<p>For more information consult the javadoc on these classes and associated tests.</p>
+
+<p>Note that it is currently necessary to prune dead tasks, either periodically or by the caller. By default they are kept around for reference. It is expected that an enhancement in a future release will allow pruning completed and failed tasks after a specified amount of time.</p>
+
+      </div>
+
+      <div id="page_toc">
+        <!-- Sidebar -->
+        
+<div id="sidebar_image"><img width="204" src="/style/brooklyn-bridge-v2.png"/></div>
+<br/>
+
+
+  
+
+
+
+
+
+
+<div id="sidebar_toc">
+
+    
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/start/index.html"><div class="toc-1-item">Start</div></a>
+  
+      </div>
+
+    
+    
+    
+    
+	  <div class="toc-1 toc-active">
+  
+	    <a href="/use/guide/index.html"><div class="toc-1-item toc-1-header ">User Guide</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/guide/quickstart/index.html"><div class="toc-2-item">Quick Start</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/guide/defining-applications/basic-concepts.html"><div class="toc-2-item toc-2-header">Defining Applications</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/defining-applications/basic-concepts.html"><div class="toc-3-item">Basic Concepts</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/defining-applications/advanced-concepts.html"><div class="toc-3-item">Advanced Concepts</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/defining-applications/common-usage.html"><div class="toc-3-item">Common Usage</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 toc-active">
+      
+	        <a href="/use/guide/management/index.html"><div class="toc-2-item toc-2-header toc-active">Management</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#introduction"><div class="toc-3-item">Introduction</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#startup-config"><div class="toc-3-item">Startup Configuration</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#console"><div class="toc-3-item">Management Web Console</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#observation-other"><div class="toc-3-item">Observation APIs</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#distributed-management"><div class="toc-3-item">Distributed Management</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#resilience"><div class="toc-3-item">Resilience</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#key-apis"><div class="toc-3-item">Key APIs</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#sensors-and-effectors"><div class="toc-3-item">Sensors and Effectors</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/guide/policies/index.html"><div class="toc-2-item toc-2-header">Policies</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/policies/index.html#introduction"><div class="toc-3-item">Introduction</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/policies/index.html#writing-policies"><div class="toc-3-item">Writing Policies</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/policies/index.html#off-the-shelf-policies"><div class="toc-3-item">Off-the-Shelf Policies</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/policies/index.html#implementing-policies"><div class="toc-3-item">Implementing Policies</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/guide/entities/index.html"><div class="toc-2-item toc-2-header">Custom Entities</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/entities/index.html#entity-lifestyle"><div class="toc-3-item">Entity Lifecycle</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/entities/index.html#implementation-classes"><div class="toc-3-item">What to Extend</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/entities/index.html#configuration"><div class="toc-3-item">Configuration</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/entities/index.html#implementing-sensors"><div class="toc-3-item">Implementing Sensors</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/entities/index.html#implementing-effectors"><div class="toc-3-item">Implementing Effectors</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/entities/index.html#testing"><div class="toc-3-item">Testing</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/guide/extras/index.html"><div class="toc-2-item toc-2-header">Extras</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/extras/index.html#web"><div class="toc-3-item">Web</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/extras/index.html#database"><div class="toc-3-item">Database</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/extras/index.html#nosql"><div class="toc-3-item">NoSQL</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/extras/index.html#messaging"><div class="toc-3-item">Messaging</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/start/index.html"><div class="toc-1-item toc-1-header ">Elsewhere</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/examples/index.html"><div class="toc-2-item toc-2-header">Examples</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/webcluster/index.html"><div class="toc-3-item">Elastic Web Cluster</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/whirrhadoop/index.html"><div class="toc-3-item">Whirr Hadoop Cluster</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/api/index.html"><div class="toc-2-item">API Reference</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/dev/code/index.html"><div class="toc-2-item toc-2-header">Contributing</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/code/index.html"><div class="toc-3-item">The Code</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/build/index.html"><div class="toc-3-item">Build and Test</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/tips/index.html"><div class="toc-3-item">Tips and Tricks</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/wishlist.html"><div class="toc-3-item">Wishlist</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/links.html"><div class="toc-3-item">Links</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/how-to-contrib.html"><div class="toc-3-item">How to Contribute</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/license/index.html"><div class="toc-2-item">License</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+ 
+</div>
+<br/>
+
+      </div>
+
+    </div>
+
+    <div class="page_row"/>
+
+<hr/>
+
+    <div id="page_footer" class="page_row">
+      <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
+      brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
+      &copy; 2012 Cloudsoft Corporation.
+    </div>
+
+  </div>
+
+</body>
+</html>

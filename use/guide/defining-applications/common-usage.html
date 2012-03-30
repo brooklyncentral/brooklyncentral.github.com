@@ -1,0 +1,689 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+  <title>Common Usage</title>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+
+  <link rel="stylesheet" type="text/css" href="/style/main.css" />
+  <link rel="stylesheet" type="text/css" href="/style/page.css" />
+  <link rel="stylesheet" type="text/css" href="/style/toc.css" />
+  <link rel="stylesheet" type="text/css" href="/style/docs/code.css" />
+  
+	<!-- Sidebar/ToC Scripts and CSS -->
+	<script src="/style/js/jquery/jquery-1.7.1.min.js"></script>
+	<script src="/style/js/jquery/jquery-ui-1.8.18.custom.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/style/js/jquery/smoothness/jquery-ui-1.8.18.custom.css" />
+
+	<script>
+	$(function() {
+		$('#simple_google').submit(function() {
+      		$('input[name="q"]').val("site:" + document.location.hostname + " " + $('input[name="qfront"]').val());
+        return true;
+		});
+    });
+	</script>
+
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-30530918-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+</head>
+
+<body>
+  <div id="all">
+
+    <div id="page_header" class="page_row">
+     <table width="100%"><tr><td rowspan="2">
+      <div id="header_logo">
+        <a href = "/"><img height="68" width="220" border='0' src="/style/brooklyn-logo.png"/></a>
+      </div>
+     </td><td align="right" valign="top" width="100%">
+        <div id="top-right-quick-links">
+            <a href="/meta/contact.html">Contact</a> &nbsp;|&nbsp;
+            <a href="/start/download.html">Download</a> &nbsp;|&nbsp;
+            <a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a>
+        </div>
+     </td></tr>
+     <tr><td valign="bottom">
+     </td></tr></table>
+    </div>
+
+    
+
+
+
+
+
+<div id="topbar">
+<table height="100%"><tr style="vertical-align: middle;"><td width="100%" align="left" style="padding-bottom: 12px; padding-left: 18px;">
+
+  
+  
+  <a class="topbar-item " href="/index.html">Overview</a>
+
+  
+  
+  <a class="topbar-item " href="/start/download.html">Download</a>
+
+  
+  
+  <a class="topbar-item " href="/start/walkthrough/index.html">Walkthrough</a>
+
+  
+  
+  <a class="topbar-item toc-active" href="/use/guide/index.html">Guide</a>
+
+  
+  
+  <a class="topbar-item " href="/use/examples/index.html">Examples</a>
+
+  
+  
+  <a class="topbar-item " href="/dev/code/index.html">Contributing</a>
+
+</td><td align="right" style="padding-top: 5px; padding-right: 18px;">
+      <div id="search_box">
+        <form id="simple_google" action="http://www.google.com/search" method="get">
+        <input name="q" type="hidden" />
+        <input name="qfront" type="text" placeholder='Search'/></p>
+        </form>
+      </div>
+</td></table>
+
+</div>
+
+    <div class="page_row">
+
+
+      <div id="page_content">
+        
+  
+
+
+
+
+
+
+
+    
+    
+
+    
+    
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+                
+                
+                
+                
+                
+                
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+        
+            
+        
+            
+        
+    
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+
+
+
+
+<div class="breadcrumbs">
+    <span class="breadcrumb-item bc1"><a class='breadcrumb bc1' href="/use/guide/index.html">User Guide</a></span>
+    
+        <span class="bcsep bc1">&raquo;</span> <span class="breadcrumb-item bc2"><a class='breadcrumb bc2' href="/use/guide/defining-applications/basic-concepts.html">Defining Applications</a></span>
+        
+            <span class="bcsep bc2">&raquo;</span> <span class="breadcrumb-item bc2"><a class='breadcrumb bc3' href="/use/guide/defining-applications/common-usage.html">Common Usage</a></span>
+        
+    
+</div>
+
+<!-- FIND HIERARCHY IN TOC AND USE THAT
+        
+        
+        <span class="breadcrumb-item"><a class='breadcrumb' href="/">Home</a></span>
+        
+        <span class="bcsep">&raquo;</span> <span class="breadcrumb-item"><a class='breadcrumb' href="/use">use</a></span>
+        
+        
+        <span class="bcsep">&raquo;</span> <span class="breadcrumb-item"><a class='breadcrumb' href="/use/guide">guide</a></span>
+        
+        
+        <span class="bcsep">&raquo;</span> <span class="breadcrumb-item"><a class='breadcrumb' href="/use/guide/defining-applications">defining-applications</a></span>
+        
+        
+ -->
+ 
+		
+		<h1 id="header_title">Common Usage</h1>
+		<hr/>
+
+		<h3>Entity Class Hierarchy</h3>
+
+<p>By convention in Brooklyn the following words have a particular meaning, both as types (which extend <code>Group</code>, which extends <code>Entity</code>) and when used as words in other entities (such as <code>TomcatFabric</code>):</p>
+
+<ul>
+<li><em>Tier</em> - anything which is homogeneous (has a template and type)
+
+<ul>
+<li><em>Cluster</em> - an in-location tier</li>
+<li><em>Fabric</em> - a multi-location tier</li>
+</ul>
+</li>
+<li><em>Stack</em> - heterogeneous (mixed types of children)</li>
+<li><em>Application</em> - user's entry point</li>
+</ul>
+
+
+<!---
+TODO
+-->
+
+
+<ul>
+<li><em>template</em> entities are often used by groups to define how to instantiate themselves and scale-out.
+A template is an entity which does not have an owner and which is not an application.</li>
+<li><em>traits</em> (mixins) providing certain capabilities, such as Resizable and Balanceable</li>
+<li><em>Resizable</em></li>
+<li><em>Balanceable</em></li>
+<li><em>Moveable</em></li>
+<li><em>MoveableWithCost</em></li>
+</ul>
+
+
+<h3>Off-the-Shelf Entities</h3>
+
+<p>brooklyn includes a selection of entities already available for use in applications,
+including appropriate sensors and effectors, and in some cases include Cluster and Fabric variants.
+(These are also useful as templates for writing new entities.)</p>
+
+<p>These include:</p>
+
+<ul>
+<li><strong>Web</strong>: Tomcat, JBoss; nginx; GeoScaling; cluster and fabric</li>
+<li><strong>Relational Databases</strong>: MySQL, Derby</li>
+<li><strong>NoSQL</strong>: Infinispan, Redis, GemFire</li>
+<li><strong>Messaging</strong>: ActiveMQ, Qpid</li>
+</ul>
+
+
+<p>See <a href="../extras/">Extras</a> for a full list of systems available out of the box.</p>
+
+<h3>Off-the-Shelf Locations</h3>
+
+<ul>
+<li>SSH</li>
+<li>Compute: Amazon, GoGrid, vCloud, and many more (using jclouds)</li>
+</ul>
+
+
+<div class="highlight"><pre><code class="java">    <span class="err">#</span> <span class="n">use</span> <span class="n">a</span> <span class="n">special</span> <span class="n">key</span> <span class="n">when</span> <span class="n">connecting</span> <span class="n">to</span> <span class="kd">public</span> <span class="n">clouds</span>
+    <span class="n">brooklyn</span><span class="o">.</span><span class="na">jclouds</span><span class="o">.</span><span class="na">private</span><span class="o">-</span><span class="n">key</span><span class="o">-</span><span class="n">file</span><span class="o">=~/.</span><span class="na">ssh</span><span class="o">/</span><span class="n">public_clouds</span><span class="o">/</span><span class="n">id_rsa</span>
+    
+    <span class="err">#</span> <span class="n">need</span> <span class="k">this</span> <span class="n">one</span> <span class="k">for</span> <span class="n">localhost</span>
+    <span class="n">brooklyn</span><span class="o">.</span><span class="na">jclouds</span><span class="o">.</span><span class="na">localhost</span><span class="o">.</span><span class="na">private</span><span class="o">-</span><span class="n">key</span><span class="o">-</span><span class="n">file</span><span class="o">=~/.</span><span class="na">ssh</span><span class="o">/</span><span class="n">id_rsa</span>   
+    
+    <span class="err">#</span> <span class="n">AWS</span> <span class="n">credentials</span>
+    <span class="n">brooklyn</span><span class="o">.</span><span class="na">jclouds</span><span class="o">.</span><span class="na">aws</span><span class="o">-</span><span class="n">ec2</span><span class="o">.</span><span class="na">identity</span><span class="o">=</span><span class="n">ABCDEFGHIJKLMNOPQRST</span>      
+    <span class="n">brooklyn</span><span class="o">.</span><span class="na">jclouds</span><span class="o">.</span><span class="na">aws</span><span class="o">-</span><span class="n">ec2</span><span class="o">.</span><span class="na">credential</span><span class="o">=</span><span class="n">s3cr3tsq1rr3ls3cr3tsq1rr3ls3cr3tsq1rr3l</span>
+    
+    <span class="err">#</span> <span class="n">credentials</span> <span class="k">for</span> <span class="err">&#39;</span><span class="n">geoscaling</span><span class="err">&#39;</span> <span class="n">service</span>
+    <span class="n">brooklyn</span><span class="o">.</span><span class="na">geoscaling</span><span class="o">.</span><span class="na">username</span><span class="o">=</span><span class="n">cloudsoft</span>                      
+    <span class="n">brooklyn</span><span class="o">.</span><span class="na">geoscaling</span><span class="o">.</span><span class="na">password</span><span class="o">=</span><span class="n">xxx</span>
+</code></pre>
+</div>
+
+
+<p>These can also be set as environment variables (in the shell) or system properties (java command line).
+(There are also <code>BROOKLYN_JCLOUDS_PRIVATE_KEY_FILE</code> variants accepted.)</p>
+
+<p>For any provider you will typically need to set <code>identity</code> and <code>credential</code>
+in the <code>brooklyn.jclouds.provider</code> namespace.
+Other fields may be available (from brooklyn or jclouds).</p>
+
+<p><code>brooklyn.jclouds.public-key-file</code> can also be specied but can usually be omitted
+(it will be inferred by adding the suffix <code>.pub</code> to the private key).
+There should be no passphrases on the key files.</p>
+
+      </div>
+
+      <div id="page_toc">
+        <!-- Sidebar -->
+        
+<div id="sidebar_image"><img width="204" src="/style/brooklyn-bridge-v2.png"/></div>
+<br/>
+
+
+  
+
+
+
+
+
+
+<div id="sidebar_toc">
+
+    
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/start/index.html"><div class="toc-1-item">Start</div></a>
+  
+      </div>
+
+    
+    
+    
+    
+	  <div class="toc-1 toc-active">
+  
+	    <a href="/use/guide/index.html"><div class="toc-1-item toc-1-header ">User Guide</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/guide/quickstart/index.html"><div class="toc-2-item">Quick Start</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 toc-active">
+      
+	        <a href="/use/guide/defining-applications/basic-concepts.html"><div class="toc-2-item toc-2-header">Defining Applications</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/defining-applications/basic-concepts.html"><div class="toc-3-item">Basic Concepts</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/defining-applications/advanced-concepts.html"><div class="toc-3-item">Advanced Concepts</div></a>
+              </div>
+        
+            
+              <div class="toc-3 toc-active">
+	            <a href="/use/guide/defining-applications/common-usage.html"><div class="toc-3-item toc-active">Common Usage</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/guide/management/index.html"><div class="toc-2-item toc-2-header">Management</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#introduction"><div class="toc-3-item">Introduction</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#startup-config"><div class="toc-3-item">Startup Configuration</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#console"><div class="toc-3-item">Management Web Console</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#observation-other"><div class="toc-3-item">Observation APIs</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#distributed-management"><div class="toc-3-item">Distributed Management</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#resilience"><div class="toc-3-item">Resilience</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#key-apis"><div class="toc-3-item">Key APIs</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#sensors-and-effectors"><div class="toc-3-item">Sensors and Effectors</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/guide/policies/index.html"><div class="toc-2-item toc-2-header">Policies</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/policies/index.html#introduction"><div class="toc-3-item">Introduction</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/policies/index.html#writing-policies"><div class="toc-3-item">Writing Policies</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/policies/index.html#off-the-shelf-policies"><div class="toc-3-item">Off-the-Shelf Policies</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/policies/index.html#implementing-policies"><div class="toc-3-item">Implementing Policies</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/guide/entities/index.html"><div class="toc-2-item toc-2-header">Custom Entities</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/entities/index.html#entity-lifestyle"><div class="toc-3-item">Entity Lifecycle</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/entities/index.html#implementation-classes"><div class="toc-3-item">What to Extend</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/entities/index.html#configuration"><div class="toc-3-item">Configuration</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/entities/index.html#implementing-sensors"><div class="toc-3-item">Implementing Sensors</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/entities/index.html#implementing-effectors"><div class="toc-3-item">Implementing Effectors</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/entities/index.html#testing"><div class="toc-3-item">Testing</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/guide/extras/index.html"><div class="toc-2-item toc-2-header">Extras</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/extras/index.html#web"><div class="toc-3-item">Web</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/extras/index.html#database"><div class="toc-3-item">Database</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/extras/index.html#nosql"><div class="toc-3-item">NoSQL</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/extras/index.html#messaging"><div class="toc-3-item">Messaging</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/start/index.html"><div class="toc-1-item toc-1-header ">Elsewhere</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/examples/index.html"><div class="toc-2-item toc-2-header">Examples</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/webcluster/index.html"><div class="toc-3-item">Elastic Web Cluster</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/whirrhadoop/index.html"><div class="toc-3-item">Whirr Hadoop Cluster</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/api/index.html"><div class="toc-2-item">API Reference</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/dev/code/index.html"><div class="toc-2-item toc-2-header">Contributing</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/code/index.html"><div class="toc-3-item">The Code</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/build/index.html"><div class="toc-3-item">Build and Test</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/tips/index.html"><div class="toc-3-item">Tips and Tricks</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/wishlist.html"><div class="toc-3-item">Wishlist</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/links.html"><div class="toc-3-item">Links</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/how-to-contrib.html"><div class="toc-3-item">How to Contribute</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/license/index.html"><div class="toc-2-item">License</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+ 
+</div>
+<br/>
+
+      </div>
+
+    </div>
+
+    <div class="page_row"/>
+
+<hr/>
+
+    <div id="page_footer" class="page_row">
+      <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
+      brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
+      &copy; 2012 Cloudsoft Corporation.
+    </div>
+
+  </div>
+
+</body>
+</html>
