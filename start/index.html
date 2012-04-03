@@ -5,26 +5,87 @@
   <title>Overview</title>
   <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 
-  <link rel="stylesheet" type="text/css" href="/style/main.css" />
-  <link rel="stylesheet" type="text/css" href="/style/page.css" />
-  <link rel="stylesheet" type="text/css" href="/style/toc.css" />
-  <link rel="stylesheet" type="text/css" href="/style/docs/code.css" />
+  <link rel="stylesheet" href="/style/style.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/style/toc.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/style/docs/code.css" type="text/css" media="screen" />
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   
 	<!-- Sidebar/ToC Scripts and CSS -->
 	<script src="/style/js/jquery/jquery-1.7.1.min.js"></script>
 	<script src="/style/js/jquery/jquery-ui-1.8.18.custom.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="/style/js/jquery/smoothness/jquery-ui-1.8.18.custom.css" />
+	
+	<script type="text/javascript" src="/style/js/superfish.js"></script>
+	
+<!-- Clipboard support -->
+<script src="/style/js/zeroclipboard/ZeroClipboard.js"></script>
+<style type="text/css">
+.clipboard_container { float: right; padding: 8px; }
+.clipboard_button {
+    background-image: url("/style/icons/clipboard-green-normal.png");
+    background-size: 18px 21px;
+    width: 18px; height: 21px;
+}
+.clipboard_button.hover  { background-image: url("/style/icons/clipboard-green-hover.png"); }
+.clipboard_button.active  { background-image: url("/style/icons/clipboard-green-click.png"); }'
+</style>
+<script type="text/javascript"> <!-- clipboard -->
+ZeroClipboard.setMoviePath( '/style/js/zeroclipboard/ZeroClipboard.swf' );
+</script>
+<script type="text/javascript"> <!-- clipboard positioning -->
+$(document).ready(function() {
+  $('<div class="clipboard_container" title="Copy to Clipboard">'+
+    '<div class="clipboard_button"/>'+
+  '</div>').insertBefore($('div.highlight'))
+  $('div.clipboard_container').each(function(index) {
+    var clipboard = new ZeroClipboard.Client();
+    clipboard.glue( $(this).find(":first")[0], $(this)[0] );
+    var target = $(this).next();
+    var txt = target.text().trim();
+    if (target.find('code.bash')) {
+      txt = txt.replace(/^[^%$]*[%$] /, "").replace(new RegExp('\n[^%$]*[%$] ','g'), "\n");
+    }
+    clipboard.setText(txt);
+  });
+});
+</script>
 
-	<script>
+    <script type="text/javascript">
+        // initialise menu delay
+        jQuery(function(){
+            jQuery('ul#mainmenu').superfish({ 
+                autoArrows:  false,  // disable generation of arrow mark-up 
+                dropShadows: false,  // disable drop shadows 
+                disableHI:   true,   // set to true to disable hoverIntent detection 
+                delay:       500,    // the delay in milliseconds that the mouse can remain outside a submenu without it closing 
+                speed:       'fast', 
+            });
+        });
+    </script>
+
+<script type="text/javascript"> <!-- search -->
 	$(function() {
-		$('#simple_google').submit(function() {
-      		$('input[name="q"]').val("site:" + document.location.hostname + " " + $('input[name="qfront"]').val());
-        return true;
-		});
+		$('#simple_google')
+			.submit(function() {
+				$('input[name="q"]').val("site:" + document.location.hostname + " " + $('input[name="brooklyn-search"]').val());
+			return true;
+			});
+		$('input[name="brooklyn-search"]').focus(function() {
+				if ($(this).val() === $(this).attr('placeholder')) {
+					$(this).val('');
+				}
+			})
+			.blur(function() {
+				if ($(this).val() === '') {
+					$(this).val($(this).attr('placeholder'));
+				}
+			})
+			.blur();
     });
-	</script>
+</script>
 
-<script type="text/javascript">
+<script type="text/javascript"> <!-- analytics -->
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-30530918-1']);
 _gaq.push(['_trackPageview']);
@@ -39,73 +100,80 @@ _gaq.push(['_trackPageview']);
 </head>
 
 <body>
-  <div id="all">
 
-    <div id="page_header" class="page_row">
-     <table width="100%"><tr><td rowspan="2">
-      <div id="header_logo">
-        <a href = "/"><img height="68" width="220" border='0' src="/style/brooklyn-logo.png"/></a>
-      </div>
-     </td><td align="right" valign="top" width="100%">
-        <div id="top-right-quick-links">
-            <a href="/meta/contact.html">Contact</a> &nbsp;|&nbsp;
-            <a href="/start/download.html">Download</a> &nbsp;|&nbsp;
-            <a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a>
+    <ul id="shortcuts" title="Accessibility shortcuts menu">
+        <li><a href="#maincontent">Skip to main content</a></li>
+    </ul>
+   
+
+<div id="container">
+
+    <div id="header">
+    
+        <div id="identity">
+            <a href="http://brooklyncentral.github.com/" rel="home">Brooklyn</a>
         </div>
-     </td></tr>
-     <tr><td valign="bottom">
-     </td></tr></table>
-    </div>
+        
+        <ul id="quicklinks">
+            <li><a href="/meta/versions.html">0.5.0-SNAPSHOT</a></li>
+            <li><a href="/start/download.html">Download</a></li>
+            <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
+            <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
+            <li><a href="/meta/contact.html">Contact</a></li>
+        </ul>
 
-    
+        <div id="menubar">  
 
 
 
 
 
-<div id="topbar">
-<table height="100%"><tr style="vertical-align: middle;"><td width="100%" align="left" style="padding-bottom: 12px; padding-left: 18px;">
+
+
+<ul id="mainmenu"><!-- INSERT LINKS -->
+            
 
   
   
-  <a class="topbar-item " href="/index.html">Overview</a>
+  <li class=""><a href="/index.html">Overview</a></li>
 
   
   
-  <a class="topbar-item " href="/start/download.html">Download</a>
+  <li class=""><a href="/start/download.html">Download</a></li>
 
   
   
-  <a class="topbar-item " href="/start/walkthrough/index.html">Walkthrough</a>
+  <li class=""><a href="/start/walkthrough/index.html">Walkthrough</a></li>
 
   
   
-  <a class="topbar-item " href="/use/guide/index.html">Guide</a>
+  <li class=""><a href="/use/guide/index.html">Guide</a></li>
 
   
   
-  <a class="topbar-item " href="/use/examples/index.html">Examples</a>
+  <li class=""><a href="/use/examples/index.html">Examples</a></li>
 
   
   
-  <a class="topbar-item " href="/dev/code/index.html">Contributing</a>
-
-</td><td align="right" style="padding-top: 5px; padding-right: 18px;">
-      <div id="search_box">
-        <form id="simple_google" action="http://www.google.com/search" method="get">
-        <input name="q" type="hidden" />
-        <input name="qfront" type="text" placeholder='Search'/></p>
-        </form>
-      </div>
-</td></table>
-
-</div>
-
-    <div class="page_row">
+  <li class=""><a href="/dev/code/index.html">Contributing</a></li>
 
 
-      <div id="page_content">
-        
+</ul>                    
+
+            <form method="get" id="simple_google" class="searchform" action="http://www.google.com/search" method="get">
+                <input type="text" class="searchinput" name="brooklyn-search" placeholder="Search: type &amp; hit enter" />
+                <input type="hidden" name="q" value="" />
+            </form>
+            
+        </div>
+                
+    </div><!--header-->
+    
+    <div id="contentcontainer">
+    
+        <div id="maincontent">
+
+
   
 
 
@@ -155,6 +223,12 @@ _gaq.push(['_trackPageview']);
         
             
         
+            
+        
+            
+        
+            
+        
     
         
         
@@ -247,27 +321,16 @@ _gaq.push(['_trackPageview']);
 
 
 
-
-<div class="breadcrumbs">
-    <span class="breadcrumb-item bc1"><a class='breadcrumb bc1' href="/start/index.html">Start</a></span>
+            
+<p id="breadcrumb">
+    <a href="/start/index.html">Start</a>
     
-</div>
+</p>
 
-<!-- FIND HIERARCHY IN TOC AND USE THAT
-        
-        
-        <span class="breadcrumb-item"><a class='breadcrumb' href="/">Home</a></span>
-        
-        <span class="bcsep">&raquo;</span> <span class="breadcrumb-item"><a class='breadcrumb' href="/start">start</a></span>
-        
-        
- -->
- 
-		
-		<h1 id="header_title">Overview</h1>
-		<hr/>
 
-		<h2>What is Brooklyn?</h2>
+<h1 id="header_title">Overview</h1>
+    
+<h2>What is Brooklyn?</h2>
 
 
 
@@ -296,9 +359,9 @@ to deploy well-known services such as Hadoop and elasticsearch
 
 
 <p>Brooklyn makes roll-out an integral part of the DevOps chain,
-as code which can be version-controlled and automatically tested,
+as code which can be version-controlled and programmatically tested,
 and portable across many clouds or fixed IP machines,
-using <a href="http://jclouds.org">jclouds</a>,
+using <a href="http://jclouds.org">jclouds</a> --
 or just hitting <code>localhost</code> for quick dev/test.</p>
 
 
@@ -306,18 +369,19 @@ or just hitting <code>localhost</code> for quick dev/test.</p>
 
 <p>Brooklyn's main emphasis is post-deployment, <strong>managing</strong> an application once it is live:
 management policies are an integral part of the deployment descriptor,
-and at runtime have access to all aspects of the deployment.
-They are aware of the deployment topology (hierarchical) and locations (machines, PaaSes, and jurisdictions),
-as well as launch mechanisms, instrumentation from managed entities or third-party systems,
-and operational goals and constraints.
-This means they're all set, once the application is launched, to keep the application running optimally,
-based on whatever <em>optimally</em> means for a particular application.</p>
+and at runtime policies have access to all aspects of the deployment.
+They are aware of the deployment topology (hierarchical) and
+locations (machines, PaaSes, and jurisdictions),
+as well as scripts, instrumentation, and operational goals and constraints.
+This means they're all set, once the application is launched,
+to keep the application running optimally,
+based on whatever <em>optimally</em> means in that context.</p>
 
 
 
 
 <p>These deployment patterns and management policies are expressed as Java (and Groovy) classes,
-open-sourced here, and giving you full control over what you want to happen.
+open-sourced here and giving you full control over what you want to happen.
 More importantly, however, this code can be shared, improved, and extended.</p>
 
 
@@ -336,11 +400,12 @@ More importantly, however, this code can be shared, improved, and extended.</p>
 
 <ul>
 <li>See the <a href="/start/walkthrough/index.html">developer's walkthrough</a> for a quick tour</li>
-<li>Dive in to the <a href="/use/guide/">user guide</a> describing the
+<li>Check out the <a href="/use/examples/">examples</a>, from a global web fabric with geo-DNS to a movable PaaS target</li>
+<li>Jump in to the <a href="/use/guide/">user guide</a> describing the
 <a href="/use/guide/defining-applications/basic-concepts.html">concepts</a>
-and including a <a href="/use/guide/quickstart/">tutorial</a>.</li>
-<li>Or jump straight in to the <a href="/dev/code/">code</a>,
-including <a href="/use/examples/">examples</a>, or other <a href="/start/docs-summary.html">documentation</a>.</li>
+and including a <a href="/use/guide/quickstart/">tutorial</a></li>
+<li>Or dive straight in to the code, either <a href="/dev/code/">reading</a> about it
+or <a href="http://github.com/brooklyncentral/brooklyn/">gitting</a> it</li>
 </ul>
 
 
@@ -352,13 +417,11 @@ including <a href="/use/examples/">examples</a>, or other <a href="/start/docs-s
 
 
 
-      </div>
 
-      <div id="page_toc">
-        <!-- Sidebar -->
+        </div><!--maincontent-->
         
-<div id="sidebar_image"><img width="204" src="/style/brooklyn-bridge-v2.png"/></div>
-<br/>
+      <div id="sidebar">
+      
 
 
   
@@ -370,7 +433,6 @@ including <a href="/use/examples/">examples</a>, or other <a href="/start/docs-s
 
 <div id="sidebar_toc">
 
-    
     
     
     
@@ -415,7 +477,6 @@ including <a href="/use/examples/">examples</a>, or other <a href="/start/docs-s
   
       </div>
 
-    
     
     
     
@@ -479,7 +540,22 @@ including <a href="/use/examples/">examples</a>, or other <a href="/start/docs-s
         
             
               <div class="toc-3 ">
+	            <a href="/use/examples/global-web-fabric/index.html"><div class="toc-3-item">Global Web Fabric</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
 	            <a href="/use/examples/whirrhadoop/index.html"><div class="toc-3-item">Whirr Hadoop Cluster</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/portable-cloudfoundry/index.html"><div class="toc-3-item">Portable Cloud Foundry</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/messaging/index.html"><div class="toc-3-item">Publish-Subscribe Messaging</div></a>
               </div>
         
             </div></div>
@@ -490,7 +566,7 @@ including <a href="/use/examples/">examples</a>, or other <a href="/start/docs-s
         
 	      <div class="toc-2 ">
       
-	        <a href="/use/api/index.html"><div class="toc-2-item">API Reference</div></a>
+	        <a href="/use/api/index.html"><div class="toc-2-item">API Reference (javadoc)</div></a>
       
           </div>
     
@@ -506,7 +582,6 @@ including <a href="/use/examples/">examples</a>, or other <a href="/start/docs-s
   
       </div>
 
-    
     
     
     
@@ -539,7 +614,7 @@ including <a href="/use/examples/">examples</a>, or other <a href="/start/docs-s
         
             
               <div class="toc-3 ">
-	            <a href="http://github.com/brooklyncentral"><div class="toc-3-item">Git Repository (github)</div></a>
+	            <a href="http://github.com/brooklyncentral/brooklyn"><div class="toc-3-item">brooklyn.git (github)</div></a>
               </div>
         
             </div></div>
@@ -620,7 +695,7 @@ including <a href="/use/examples/">examples</a>, or other <a href="/start/docs-s
         
             
               <div class="toc-3 ">
-	            <a href="https://github.com/brooklyncentral/brooklyn"><div class="toc-3-item">Github code</div></a>
+	            <a href="https://github.com/brooklyncentral/"><div class="toc-3-item">Github repo</div></a>
               </div>
         
             
@@ -649,7 +724,6 @@ including <a href="/use/examples/">examples</a>, or other <a href="/start/docs-s
   
       </div>
 
-    
     
     
     
@@ -714,17 +788,16 @@ including <a href="/use/examples/">examples</a>, or other <a href="/start/docs-s
     
     
     
-    
 	  <div class="toc-1 ">
   
-	    <a href="/meta/governance.html"><div class="toc-1-item toc-1-header ">Meta</div></a>
+	    <a href="/meta/versions.html"><div class="toc-1-item toc-1-header ">Meta</div></a>
         <div class="toc-1-children">
     
         
         
 	      <div class="toc-2 ">
       
-	        <a href="/meta/governance.html"><div class="toc-2-item">Governance</div></a>
+	        <a href="/meta/versions.html"><div class="toc-2-item">Versions</div></a>
       
           </div>
     
@@ -732,7 +805,7 @@ including <a href="/use/examples/">examples</a>, or other <a href="/start/docs-s
         
 	      <div class="toc-2 ">
       
-	        <a href="/meta/versions.html"><div class="toc-2-item">Versions</div></a>
+	        <a href="/meta/governance.html"><div class="toc-2-item">Governance</div></a>
       
           </div>
     
@@ -751,21 +824,20 @@ including <a href="/use/examples/">examples</a>, or other <a href="/start/docs-s
 </div>
 <br/>
 
+
       </div>
 
-    </div>
+    </div><!--contentcontainer-->
+        
+    <div id="footer">
+        <p id="copyright">
+            <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
+            brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
+            &copy; 2012 Cloudsoft Corporation.
+        </p>
+    </div><!--footer -->
 
-    <div class="page_row"/>
-
-<hr/>
-
-    <div id="page_footer" class="page_row">
-      <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
-      brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
-      &copy; 2012 Cloudsoft Corporation.
-    </div>
-
-  </div>
+</div><!--container-->
 
 </body>
 </html>

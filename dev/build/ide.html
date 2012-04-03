@@ -5,26 +5,87 @@
   <title>IDE Setup</title>
   <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 
-  <link rel="stylesheet" type="text/css" href="/style/main.css" />
-  <link rel="stylesheet" type="text/css" href="/style/page.css" />
-  <link rel="stylesheet" type="text/css" href="/style/toc.css" />
-  <link rel="stylesheet" type="text/css" href="/style/docs/code.css" />
+  <link rel="stylesheet" href="/style/style.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/style/toc.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/style/docs/code.css" type="text/css" media="screen" />
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   
 	<!-- Sidebar/ToC Scripts and CSS -->
 	<script src="/style/js/jquery/jquery-1.7.1.min.js"></script>
 	<script src="/style/js/jquery/jquery-ui-1.8.18.custom.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="/style/js/jquery/smoothness/jquery-ui-1.8.18.custom.css" />
+	
+	<script type="text/javascript" src="/style/js/superfish.js"></script>
+	
+<!-- Clipboard support -->
+<script src="/style/js/zeroclipboard/ZeroClipboard.js"></script>
+<style type="text/css">
+.clipboard_container { float: right; padding: 8px; }
+.clipboard_button {
+    background-image: url("/style/icons/clipboard-green-normal.png");
+    background-size: 18px 21px;
+    width: 18px; height: 21px;
+}
+.clipboard_button.hover  { background-image: url("/style/icons/clipboard-green-hover.png"); }
+.clipboard_button.active  { background-image: url("/style/icons/clipboard-green-click.png"); }'
+</style>
+<script type="text/javascript"> <!-- clipboard -->
+ZeroClipboard.setMoviePath( '/style/js/zeroclipboard/ZeroClipboard.swf' );
+</script>
+<script type="text/javascript"> <!-- clipboard positioning -->
+$(document).ready(function() {
+  $('<div class="clipboard_container" title="Copy to Clipboard">'+
+    '<div class="clipboard_button"/>'+
+  '</div>').insertBefore($('div.highlight'))
+  $('div.clipboard_container').each(function(index) {
+    var clipboard = new ZeroClipboard.Client();
+    clipboard.glue( $(this).find(":first")[0], $(this)[0] );
+    var target = $(this).next();
+    var txt = target.text().trim();
+    if (target.find('code.bash')) {
+      txt = txt.replace(/^[^%$]*[%$] /, "").replace(new RegExp('\n[^%$]*[%$] ','g'), "\n");
+    }
+    clipboard.setText(txt);
+  });
+});
+</script>
 
-	<script>
+    <script type="text/javascript">
+        // initialise menu delay
+        jQuery(function(){
+            jQuery('ul#mainmenu').superfish({ 
+                autoArrows:  false,  // disable generation of arrow mark-up 
+                dropShadows: false,  // disable drop shadows 
+                disableHI:   true,   // set to true to disable hoverIntent detection 
+                delay:       500,    // the delay in milliseconds that the mouse can remain outside a submenu without it closing 
+                speed:       'fast', 
+            });
+        });
+    </script>
+
+<script type="text/javascript"> <!-- search -->
 	$(function() {
-		$('#simple_google').submit(function() {
-      		$('input[name="q"]').val("site:" + document.location.hostname + " " + $('input[name="qfront"]').val());
-        return true;
-		});
+		$('#simple_google')
+			.submit(function() {
+				$('input[name="q"]').val("site:" + document.location.hostname + " " + $('input[name="brooklyn-search"]').val());
+			return true;
+			});
+		$('input[name="brooklyn-search"]').focus(function() {
+				if ($(this).val() === $(this).attr('placeholder')) {
+					$(this).val('');
+				}
+			})
+			.blur(function() {
+				if ($(this).val() === '') {
+					$(this).val($(this).attr('placeholder'));
+				}
+			})
+			.blur();
     });
-	</script>
+</script>
 
-<script type="text/javascript">
+<script type="text/javascript"> <!-- analytics -->
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-30530918-1']);
 _gaq.push(['_trackPageview']);
@@ -39,73 +100,80 @@ _gaq.push(['_trackPageview']);
 </head>
 
 <body>
-  <div id="all">
 
-    <div id="page_header" class="page_row">
-     <table width="100%"><tr><td rowspan="2">
-      <div id="header_logo">
-        <a href = "/"><img height="68" width="220" border='0' src="/style/brooklyn-logo.png"/></a>
-      </div>
-     </td><td align="right" valign="top" width="100%">
-        <div id="top-right-quick-links">
-            <a href="/meta/contact.html">Contact</a> &nbsp;|&nbsp;
-            <a href="/start/download.html">Download</a> &nbsp;|&nbsp;
-            <a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a>
+    <ul id="shortcuts" title="Accessibility shortcuts menu">
+        <li><a href="#maincontent">Skip to main content</a></li>
+    </ul>
+   
+
+<div id="container">
+
+    <div id="header">
+    
+        <div id="identity">
+            <a href="http://brooklyncentral.github.com/" rel="home">Brooklyn</a>
         </div>
-     </td></tr>
-     <tr><td valign="bottom">
-     </td></tr></table>
-    </div>
-
-    
-
-
-
-
-
-<div id="topbar">
-<table height="100%"><tr style="vertical-align: middle;"><td width="100%" align="left" style="padding-bottom: 12px; padding-left: 18px;">
-
-  
-  
-  <a class="topbar-item " href="/index.html">Overview</a>
-
-  
-  
-  <a class="topbar-item " href="/start/download.html">Download</a>
-
-  
-  
-  <a class="topbar-item " href="/start/walkthrough/index.html">Walkthrough</a>
-
-  
-  
-  <a class="topbar-item " href="/use/guide/index.html">Guide</a>
-
-  
-  
-  <a class="topbar-item " href="/use/examples/index.html">Examples</a>
-
-  
-  
-  <a class="topbar-item toc-active" href="/dev/code/index.html">Contributing</a>
-
-</td><td align="right" style="padding-top: 5px; padding-right: 18px;">
-      <div id="search_box">
-        <form id="simple_google" action="http://www.google.com/search" method="get">
-        <input name="q" type="hidden" />
-        <input name="qfront" type="text" placeholder='Search'/></p>
-        </form>
-      </div>
-</td></table>
-
-</div>
-
-    <div class="page_row">
-
-
-      <div id="page_content">
         
+        <ul id="quicklinks">
+            <li><a href="/meta/versions.html">0.5.0-SNAPSHOT</a></li>
+            <li><a href="/start/download.html">Download</a></li>
+            <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
+            <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
+            <li><a href="/meta/contact.html">Contact</a></li>
+        </ul>
+
+        <div id="menubar">  
+
+
+
+
+
+
+
+<ul id="mainmenu"><!-- INSERT LINKS -->
+            
+
+  
+  
+  <li class=""><a href="/index.html">Overview</a></li>
+
+  
+  
+  <li class=""><a href="/start/download.html">Download</a></li>
+
+  
+  
+  <li class=""><a href="/start/walkthrough/index.html">Walkthrough</a></li>
+
+  
+  
+  <li class=""><a href="/use/guide/index.html">Guide</a></li>
+
+  
+  
+  <li class=""><a href="/use/examples/index.html">Examples</a></li>
+
+  
+  
+  <li class="toc-active"><a href="/dev/code/index.html">Contributing</a></li>
+
+
+</ul>                    
+
+            <form method="get" id="simple_google" class="searchform" action="http://www.google.com/search" method="get">
+                <input type="text" class="searchinput" name="brooklyn-search" placeholder="Search: type &amp; hit enter" />
+                <input type="hidden" name="q" value="" />
+            </form>
+            
+        </div>
+                
+    </div><!--header-->
+    
+    <div id="contentcontainer">
+    
+        <div id="maincontent">
+
+
   
 
 
@@ -147,6 +215,12 @@ _gaq.push(['_trackPageview']);
         
     
         
+        
+            
+        
+            
+        
+            
         
             
         
@@ -251,30 +325,22 @@ _gaq.push(['_trackPageview']);
 
 
 
-
-<div class="breadcrumbs">
-    <span class="breadcrumb-item bc1"><a class='breadcrumb bc1' href="/dev/code/index.html">Contributing</a></span>
+            
+<p id="breadcrumb">
+    <a href="/dev/code/index.html">Contributing</a>
     
-        <span class="bcsep bc1">&raquo;</span> <span class="breadcrumb-item bc2"><a class='breadcrumb bc2' href="/dev/build/index.html">Build and Test</a></span>
+        &raquo; <a href="/dev/build/index.html">Build and Test</a>
         
-            <span class="bcsep bc2">&raquo;</span> <span class="breadcrumb-item bc2"><a class='breadcrumb bc3' href="/dev/build/ide.html">IDE</a></span>
+            &raquo; <a href="/dev/build/ide.html">IDE</a>
         
     
-</div>
+</p>
 
-<!-- FIND HIERARCHY IN TOC AND USE THAT
-        
-        
-        <span class="breadcrumb-item"><a class='breadcrumb' href="/">Home</a></span>
-        
- -->
- 
-		
-		<h1 id="header_title">IDE Setup</h1>
-		<hr/>
 
-		<p>Gone are the days when IDE integration just works...  Maven and Eclipse fight,
-neither quite gets along perfectly with Groovy (let alone Grails),
+<h1 id="header_title">IDE Setup</h1>
+    
+<p>Gone are the days when IDE integration always just works...  Maven and Eclipse fight,
+neither quite gets along perfectly with Groovy, let alone Grails,
 git branch switches (sooo nice) can be slow, etc etc.</p>
 
 <p>But with a bit of a dance the IDE can still be your friend,
@@ -296,44 +362,67 @@ Sometimes closing projects (so that it reads from your <code>~/.m2/repository</c
 
 <h2>Eclipse</h2>
 
-<p>If you're an Eclipse user, you'll probably want the Groovy, Maven, and Git plugins.
+<p>If you're an Eclipse user, you'll probably want the Groovy, Maven (m2e), Git, and TestNG plugins.
 Via Help -> Install New Software, or from the Eclipse Marketplace,
 we recommend:</p>
 
 <ul>
-<li><p>Groovy Plugin: GRECLIPSE from <a href="http://dist.springsource.org/release/GRECLIPSE/e3.7">dist.springsource.org/release/GRECLIPSE/e3.7</a></p></li>
-<li><p>Maven Plugin: m2e from <a href="http://download.eclipse.org/technology/m2e/releases">download.eclipse.org/technology/m2e/releases</a></p></li>
-<li><p>Git Plugin: egit <a href="http://download.eclipse.org/egit/updates">download.eclipse.org/egit/updates</a></p></li>
+<li><p>Maven Plugin: m2e from <a href="http://download.eclipse.org/technology/m2e/releases">download.eclipse.org/technology/m2e/releases</a>
+(typically availabile in the default Eclipse update site set)</p></li>
+<li><p>Git Plugin: egit from <a href="http://download.eclipse.org/egit/updates">download.eclipse.org/egit/updates</a>
+(typically availabile in the default Eclipse update site set)</p></li>
+<li><p>Groovy Plugin: GRECLIPSE from <a href="http://dist.springsource.org/release/GRECLIPSE/e4.2">dist.springsource.org/release/GRECLIPSE/e4.2</a>
+(or <a href="http://dist.springsource.org/release/GRECLIPSE/e3.7">for Eclipse 3.7</a>)
+You can even visit the <a href="http://groovy.codehaus.org/Eclipse+Plugin">groovy update site</a> for more details.</p></li>
+<li><p>TestNG Plugin: beust TestNG from <a href="http://beust.com/eclipse">beust.com/eclipse</a></p></li>
 </ul>
 
 
-<p>Once you've got the code imported, the following hints may be helpful:</p>
+<p>As of this writing, with Eclipse 4.2, m2e 1.1, and GrEclipse 2.7,
+the codebase has been imported (Import -> Existing Maven Projects)
+and successfully run with no errors.
+However this isn't always the case.</p>
+
+<p>If you encounter issues, the following hints may be helpful:</p>
 
 <ul>
+<li><p>If m2e reports import problems, it is usually okay (even good) to mark all to "Resolve All Later".
+The build-helper connector is useful if you're prompted for it, but
+do <em>not</em> install the Tycho OSGi configurator (this causes show-stopping IAE's, and we don't need Eclipse to make bundles anyway).
+You can manually mark as permanently ignored certain errors;
+this updates the pom.xml (and should be current).</p></li>
+<li><p>m2e likes to put <code>excluding="**"</code> on `resources<code>directories; if you're seeing funny missing files
+(things like not resolving jclouds/aws-ec2 locations or missing WARs), try building clean install
+from the command-line then doing Maven -&gt; Update Project (clean uses a maven-replacer-plugin to fix</code>.classpath``s).
+Alternatively you can go through and remove these manually in Eclipse (Build Path -> Configure)
+or the filesystem, or use
+the following command to remove these rogue blocks in the generated .classpath files:</p>
+
+<p><code>find . -name .classpath -exec sed -i.bak 's/[ ]*..cluding="[\*\/]*\(\.java\)*"//g' {} \;</code></p></li>
+<li><p>Getting the web console project to build nicely can be trickier.</p></li>
 <li><p>You may need to ensure <code>src/main/{java,resources}</code> is created in each project dir,
-and same for <code>src/test/{java,resources}</code> <em>if</em> there are tests (<code>src/test</code> exists):</p>
+if (older versions) complain about missing directories,
+and the same for <code>src/test/{java,resources}</code> <em>if</em> there are tests (<code>src/test</code> exists):</p>
 
 <p><code>find . \( -path "*/src/main" -or -path "*/src/test" \) -exec echo {} \; -exec mkdir -p {}/{java,resources} \;</code></p></li>
-<li><p>May need to add groovy nature (or even java nature) to projects;
-with some maven-eclipse plugins this works fine, but for others you
-may need to handcraft these (either right-click the project in the Package Explorer and choose Configure,
-or edit the <code>.project</code> manually adding it to the project properties (;
-the tips <a href="http://www.jclouds.org/documentation/devguides/using-eclipse">for jclouds maven-eclipse</a> might be helpful.</p></li>
-<li><p>Some maven integration sets up crazy filters in the generated <code>.classpath</code> files,
-excluding * or **
-You can go through and remove these manually in Eclipse (Build Path -> Configure)
-or the filesystem.
-The following command has been suggested to remove these rogue blocks in the generated .classpath files:</p>
-
-<p><code>find . -name .classpath -exec sed -i 's/excluding="[*\/]*" //' {} \;</code></p></li>
-<li><p>Getting the web console project to build nicely is much trickier; basically you build from the
-command-line, then add all the source folders, and <code>target/plugin-classes</code> as a class file folder.
-Much easier is to run "grails run-app" in the directory to launch it (plus that does dynamic restarts),
-although some jiggery-pokery may currently be needed to get Groovy 1.8 playing nicely with Grails 1.3.
-This may be easier with the Grails plug-in; and will hopefully get much easier if we
-upgrade to Grails 2.0 (see github issues).</p></li>
+<li><p>You may need to add the groovy nature (or even java nature) to projects;
+with some maven-eclipse plugins this works fine,
+but for others (older ones) you may need to handcraft these
+(either right-click the project in the Package Explorer and choose Configure,
+or edit the <code>.project</code> manually adding it to the project properties).
+The tips <a href="http://www.jclouds.org/documentation/devguides/using-eclipse">for jclouds maven-eclipse</a> might be helpful.</p></li>
+<li><p>Getting the web console project to build nicely can be trickier.
+If you're lucky it will just work...
+But you may find you have to first build from the command-line,
+then add all the source folders, and <code>target/plugin-classes</code> as a class file folder.
+Easier may be just to run "grails run-app" in the directory to launch it (plus that does dynamic restarts),
+and use the IDE as just a text editor (or use a different text editor for that project only).
+Note too that some jiggery-pokery may currently be needed to get Groovy 1.8 playing nicely with Grails 1.3.</p></li>
 </ul>
 
+
+<p>If the pain starts to be too much, come find us on IRC #brooklyncentral or <a href="/meta/contact.html">elsewhere</a> and we can hopefully share our pearls.
+(And if you have a tip we haven't mentioned please let us know that too!)</p>
 
 <h2>Intelli-J IDEA</h2>
 
@@ -343,13 +432,11 @@ upgrade to Grails 2.0 (see github issues).</p></li>
 
 <p>Tips from Netbeans users wanted!</p>
 
-      </div>
 
-      <div id="page_toc">
-        <!-- Sidebar -->
+        </div><!--maincontent-->
         
-<div id="sidebar_image"><img width="204" src="/style/brooklyn-bridge-v2.png"/></div>
-<br/>
+      <div id="sidebar">
+      
 
 
   
@@ -361,7 +448,6 @@ upgrade to Grails 2.0 (see github issues).</p></li>
 
 <div id="sidebar_toc">
 
-    
     
     
     
@@ -406,7 +492,6 @@ upgrade to Grails 2.0 (see github issues).</p></li>
   
       </div>
 
-    
     
     
     
@@ -470,7 +555,22 @@ upgrade to Grails 2.0 (see github issues).</p></li>
         
             
               <div class="toc-3 ">
+	            <a href="/use/examples/global-web-fabric/index.html"><div class="toc-3-item">Global Web Fabric</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
 	            <a href="/use/examples/whirrhadoop/index.html"><div class="toc-3-item">Whirr Hadoop Cluster</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/portable-cloudfoundry/index.html"><div class="toc-3-item">Portable Cloud Foundry</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/messaging/index.html"><div class="toc-3-item">Publish-Subscribe Messaging</div></a>
               </div>
         
             </div></div>
@@ -481,7 +581,7 @@ upgrade to Grails 2.0 (see github issues).</p></li>
         
 	      <div class="toc-2 ">
       
-	        <a href="/use/api/index.html"><div class="toc-2-item">API Reference</div></a>
+	        <a href="/use/api/index.html"><div class="toc-2-item">API Reference (javadoc)</div></a>
       
           </div>
     
@@ -497,7 +597,6 @@ upgrade to Grails 2.0 (see github issues).</p></li>
   
       </div>
 
-    
     
     
     
@@ -530,7 +629,7 @@ upgrade to Grails 2.0 (see github issues).</p></li>
         
             
               <div class="toc-3 ">
-	            <a href="http://github.com/brooklyncentral"><div class="toc-3-item">Git Repository (github)</div></a>
+	            <a href="http://github.com/brooklyncentral/brooklyn"><div class="toc-3-item">brooklyn.git (github)</div></a>
               </div>
         
             </div></div>
@@ -611,7 +710,7 @@ upgrade to Grails 2.0 (see github issues).</p></li>
         
             
               <div class="toc-3 ">
-	            <a href="https://github.com/brooklyncentral/brooklyn"><div class="toc-3-item">Github code</div></a>
+	            <a href="https://github.com/brooklyncentral/"><div class="toc-3-item">Github repo</div></a>
               </div>
         
             
@@ -640,7 +739,6 @@ upgrade to Grails 2.0 (see github issues).</p></li>
   
       </div>
 
-    
     
     
     
@@ -705,17 +803,16 @@ upgrade to Grails 2.0 (see github issues).</p></li>
     
     
     
-    
 	  <div class="toc-1 ">
   
-	    <a href="/meta/governance.html"><div class="toc-1-item toc-1-header ">Meta</div></a>
+	    <a href="/meta/versions.html"><div class="toc-1-item toc-1-header ">Meta</div></a>
         <div class="toc-1-children">
     
         
         
 	      <div class="toc-2 ">
       
-	        <a href="/meta/governance.html"><div class="toc-2-item">Governance</div></a>
+	        <a href="/meta/versions.html"><div class="toc-2-item">Versions</div></a>
       
           </div>
     
@@ -723,7 +820,7 @@ upgrade to Grails 2.0 (see github issues).</p></li>
         
 	      <div class="toc-2 ">
       
-	        <a href="/meta/versions.html"><div class="toc-2-item">Versions</div></a>
+	        <a href="/meta/governance.html"><div class="toc-2-item">Governance</div></a>
       
           </div>
     
@@ -742,21 +839,20 @@ upgrade to Grails 2.0 (see github issues).</p></li>
 </div>
 <br/>
 
+
       </div>
 
-    </div>
+    </div><!--contentcontainer-->
+        
+    <div id="footer">
+        <p id="copyright">
+            <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
+            brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
+            &copy; 2012 Cloudsoft Corporation.
+        </p>
+    </div><!--footer -->
 
-    <div class="page_row"/>
-
-<hr/>
-
-    <div id="page_footer" class="page_row">
-      <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
-      brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
-      &copy; 2012 Cloudsoft Corporation.
-    </div>
-
-  </div>
+</div><!--container-->
 
 </body>
 </html>

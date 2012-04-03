@@ -5,26 +5,87 @@
   <title>Basic Concepts</title>
   <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 
-  <link rel="stylesheet" type="text/css" href="/style/main.css" />
-  <link rel="stylesheet" type="text/css" href="/style/page.css" />
-  <link rel="stylesheet" type="text/css" href="/style/toc.css" />
-  <link rel="stylesheet" type="text/css" href="/style/docs/code.css" />
+  <link rel="stylesheet" href="/style/style.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/style/toc.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/style/docs/code.css" type="text/css" media="screen" />
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   
 	<!-- Sidebar/ToC Scripts and CSS -->
 	<script src="/style/js/jquery/jquery-1.7.1.min.js"></script>
 	<script src="/style/js/jquery/jquery-ui-1.8.18.custom.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="/style/js/jquery/smoothness/jquery-ui-1.8.18.custom.css" />
+	
+	<script type="text/javascript" src="/style/js/superfish.js"></script>
+	
+<!-- Clipboard support -->
+<script src="/style/js/zeroclipboard/ZeroClipboard.js"></script>
+<style type="text/css">
+.clipboard_container { float: right; padding: 8px; }
+.clipboard_button {
+    background-image: url("/style/icons/clipboard-green-normal.png");
+    background-size: 18px 21px;
+    width: 18px; height: 21px;
+}
+.clipboard_button.hover  { background-image: url("/style/icons/clipboard-green-hover.png"); }
+.clipboard_button.active  { background-image: url("/style/icons/clipboard-green-click.png"); }'
+</style>
+<script type="text/javascript"> <!-- clipboard -->
+ZeroClipboard.setMoviePath( '/style/js/zeroclipboard/ZeroClipboard.swf' );
+</script>
+<script type="text/javascript"> <!-- clipboard positioning -->
+$(document).ready(function() {
+  $('<div class="clipboard_container" title="Copy to Clipboard">'+
+    '<div class="clipboard_button"/>'+
+  '</div>').insertBefore($('div.highlight'))
+  $('div.clipboard_container').each(function(index) {
+    var clipboard = new ZeroClipboard.Client();
+    clipboard.glue( $(this).find(":first")[0], $(this)[0] );
+    var target = $(this).next();
+    var txt = target.text().trim();
+    if (target.find('code.bash')) {
+      txt = txt.replace(/^[^%$]*[%$] /, "").replace(new RegExp('\n[^%$]*[%$] ','g'), "\n");
+    }
+    clipboard.setText(txt);
+  });
+});
+</script>
 
-	<script>
+    <script type="text/javascript">
+        // initialise menu delay
+        jQuery(function(){
+            jQuery('ul#mainmenu').superfish({ 
+                autoArrows:  false,  // disable generation of arrow mark-up 
+                dropShadows: false,  // disable drop shadows 
+                disableHI:   true,   // set to true to disable hoverIntent detection 
+                delay:       500,    // the delay in milliseconds that the mouse can remain outside a submenu without it closing 
+                speed:       'fast', 
+            });
+        });
+    </script>
+
+<script type="text/javascript"> <!-- search -->
 	$(function() {
-		$('#simple_google').submit(function() {
-      		$('input[name="q"]').val("site:" + document.location.hostname + " " + $('input[name="qfront"]').val());
-        return true;
-		});
+		$('#simple_google')
+			.submit(function() {
+				$('input[name="q"]').val("site:" + document.location.hostname + " " + $('input[name="brooklyn-search"]').val());
+			return true;
+			});
+		$('input[name="brooklyn-search"]').focus(function() {
+				if ($(this).val() === $(this).attr('placeholder')) {
+					$(this).val('');
+				}
+			})
+			.blur(function() {
+				if ($(this).val() === '') {
+					$(this).val($(this).attr('placeholder'));
+				}
+			})
+			.blur();
     });
-	</script>
+</script>
 
-<script type="text/javascript">
+<script type="text/javascript"> <!-- analytics -->
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-30530918-1']);
 _gaq.push(['_trackPageview']);
@@ -39,73 +100,80 @@ _gaq.push(['_trackPageview']);
 </head>
 
 <body>
-  <div id="all">
 
-    <div id="page_header" class="page_row">
-     <table width="100%"><tr><td rowspan="2">
-      <div id="header_logo">
-        <a href = "/"><img height="68" width="220" border='0' src="/style/brooklyn-logo.png"/></a>
-      </div>
-     </td><td align="right" valign="top" width="100%">
-        <div id="top-right-quick-links">
-            <a href="/meta/contact.html">Contact</a> &nbsp;|&nbsp;
-            <a href="/start/download.html">Download</a> &nbsp;|&nbsp;
-            <a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a>
+    <ul id="shortcuts" title="Accessibility shortcuts menu">
+        <li><a href="#maincontent">Skip to main content</a></li>
+    </ul>
+   
+
+<div id="container">
+
+    <div id="header">
+    
+        <div id="identity">
+            <a href="http://brooklyncentral.github.com/" rel="home">Brooklyn</a>
         </div>
-     </td></tr>
-     <tr><td valign="bottom">
-     </td></tr></table>
-    </div>
-
-    
-
-
-
-
-
-<div id="topbar">
-<table height="100%"><tr style="vertical-align: middle;"><td width="100%" align="left" style="padding-bottom: 12px; padding-left: 18px;">
-
-  
-  
-  <a class="topbar-item " href="/index.html">Overview</a>
-
-  
-  
-  <a class="topbar-item " href="/start/download.html">Download</a>
-
-  
-  
-  <a class="topbar-item " href="/start/walkthrough/index.html">Walkthrough</a>
-
-  
-  
-  <a class="topbar-item toc-active" href="/use/guide/index.html">Guide</a>
-
-  
-  
-  <a class="topbar-item " href="/use/examples/index.html">Examples</a>
-
-  
-  
-  <a class="topbar-item " href="/dev/code/index.html">Contributing</a>
-
-</td><td align="right" style="padding-top: 5px; padding-right: 18px;">
-      <div id="search_box">
-        <form id="simple_google" action="http://www.google.com/search" method="get">
-        <input name="q" type="hidden" />
-        <input name="qfront" type="text" placeholder='Search'/></p>
-        </form>
-      </div>
-</td></table>
-
-</div>
-
-    <div class="page_row">
-
-
-      <div id="page_content">
         
+        <ul id="quicklinks">
+            <li><a href="/meta/versions.html">0.5.0-SNAPSHOT</a></li>
+            <li><a href="/start/download.html">Download</a></li>
+            <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
+            <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
+            <li><a href="/meta/contact.html">Contact</a></li>
+        </ul>
+
+        <div id="menubar">  
+
+
+
+
+
+
+
+<ul id="mainmenu"><!-- INSERT LINKS -->
+            
+
+  
+  
+  <li class=""><a href="/index.html">Overview</a></li>
+
+  
+  
+  <li class=""><a href="/start/download.html">Download</a></li>
+
+  
+  
+  <li class=""><a href="/start/walkthrough/index.html">Walkthrough</a></li>
+
+  
+  
+  <li class="toc-active"><a href="/use/guide/index.html">Guide</a></li>
+
+  
+  
+  <li class=""><a href="/use/examples/index.html">Examples</a></li>
+
+  
+  
+  <li class=""><a href="/dev/code/index.html">Contributing</a></li>
+
+
+</ul>                    
+
+            <form method="get" id="simple_google" class="searchform" action="http://www.google.com/search" method="get">
+                <input type="text" class="searchinput" name="brooklyn-search" placeholder="Search: type &amp; hit enter" />
+                <input type="hidden" name="q" value="" />
+            </form>
+            
+        </div>
+                
+    </div><!--header-->
+    
+    <div id="contentcontainer">
+    
+        <div id="maincontent">
+
+
   
 
 
@@ -161,15 +229,6 @@ _gaq.push(['_trackPageview']);
         
             
         
-    
-        
-        
-            
-        
-            
-        
-            
-        
             
         
     
@@ -182,34 +241,6 @@ _gaq.push(['_trackPageview']);
             
         
             
-        
-            
-        
-            
-        
-    
-        
-        
-            
-        
-            
-        
-            
-        
-            
-        
-    
-
-    
-    
-        
-        
-            
-        
-            
-        
-    
-        
         
     
         
@@ -228,43 +259,73 @@ _gaq.push(['_trackPageview']);
         
     
         
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
         
     
 
-
-
-
-<div class="breadcrumbs">
-    <span class="breadcrumb-item bc1"><a class='breadcrumb bc1' href="/use/guide/index.html">User Guide</a></span>
     
-        <span class="bcsep bc1">&raquo;</span> <span class="breadcrumb-item bc2"><a class='breadcrumb bc2' href="/use/guide/defining-applications/basic-concepts.html">Defining Applications</a></span>
+    
         
-            <span class="bcsep bc2">&raquo;</span> <span class="breadcrumb-item bc2"><a class='breadcrumb bc3' href="/use/guide/defining-applications/basic-concepts.html">Basic Concepts</a></span>
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
         
     
-</div>
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
 
-<!-- FIND HIERARCHY IN TOC AND USE THAT
-        
-        
-        <span class="breadcrumb-item"><a class='breadcrumb' href="/">Home</a></span>
-        
-        <span class="bcsep">&raquo;</span> <span class="breadcrumb-item"><a class='breadcrumb' href="/use">use</a></span>
-        
-        
-        <span class="bcsep">&raquo;</span> <span class="breadcrumb-item"><a class='breadcrumb' href="/use/guide">guide</a></span>
-        
-        
-        <span class="bcsep">&raquo;</span> <span class="breadcrumb-item"><a class='breadcrumb' href="/use/guide/defining-applications">defining-applications</a></span>
-        
-        
- -->
- 
-		
-		<h1 id="header_title">Basic Concepts</h1>
-		<hr/>
 
-		<p>This introduces brooklyn and describes how it simplifies the deployment and management of big applications. It is
+
+            
+<p id="breadcrumb">
+    <a href="/use/guide/index.html">User Guide</a>
+    
+        &raquo; <a href="/use/guide/defining-applications/basic-concepts.html">Defining Applications</a>
+        
+            &raquo; <a href="/use/guide/defining-applications/basic-concepts.html">Basic Concepts</a>
+        
+    
+</p>
+
+
+<h1 id="header_title">Basic Concepts</h1>
+    
+<p>This introduces brooklyn and describes how it simplifies the deployment and management of big applications. It is
 intended for people who are using brooklyn-supported application components (such as web/app servers, data stores)
 to be able to use brooklyn to easily start their application in multiple locations with off-the-shelf management
 policies.</p>
@@ -275,8 +336,8 @@ policies.</p>
 An entity represents a resource under management, either <em>base</em> entities (individual machines or software processes)
 or logical collections of these entities.</p>
 
-<p>Fundamental to the processing model is the capability of entities to <em>own</em> other entities (the mechanism by which collections are formed),
-with every entity owned by a unique other entity up to the privileged top-level <strong><em>application</em></strong> entity.</p>
+<p>Fundamental to the processing model is the capability of entities to be the <em>parent</em> of other entities (the mechanism by which collections are formed),
+with every entity having a single parent entity, up to the privileged top-level <strong><em>application</em></strong> entity.</p>
 
 <p>Entities are code, so they can be extended, overridden, and modified. Entities can have events, operations, and processing logic associated with them, and it is through this mechanism that the active management is delivered.</p>
 
@@ -291,26 +352,26 @@ with every entity owned by a unique other entity up to the privileged top-level 
 </ul>
 
 
-<h2>Application, Ownership and Membership</h2>
+<h2>Application, Parent and Membership</h2>
 
-<p>All entities have an <strong><em>owner</em></strong> entity, which creates and manages it, with one important exception, <em>applications</em>.
+<p>All entities have a <strong><em>parent</em></strong> entity, which creates and manages it, with one important exception: <em>applications</em>.
 Application entities are the top-level entities created and managed externally, manually or programmatically.</p>
 
 <p>Applications are typically defined in Brooklyn as an <strong><em>application descriptor</em></strong>.
 This is a Java class specifying the entities which make up the application,
 by extending the class <code>AbstractApplication</code>, and specifying how these entities should be configured and managed.</p>
 
-<p>All entities, including applications, can "own" other entities.
-This means that the "owned child" is typically started, configured, and managed by the owner.
-For example, an application may "own" a web cluster; that cluster in turn owns web server processes.
+<p>All entities, including applications, can be the parent of other entities.
+This means that the "child" is typically started, configured, and managed by the parent.
+For example, an application may be the parent of a web cluster; that cluster in turn is the parent of web server processes.
 In the management console, this is represented hierarchically in a tree view.</p>
 
-<p>A parallel concept is that of <strong><em>membership</em></strong>: in addition to one fixed owner,
+<p>A parallel concept is that of <strong><em>membership</em></strong>: in addition to one fixed parent,
 and entity may be a <strong><em>member</em></strong> of any number of special entities called <strong><em>groups</em></strong>.
 Membership of a group can be used for whatever purpose is required;
 for example, it can be used to manage a collection of entities together for one purpose
 (e.g. wide-area load-balancing between locations) even though they may have been
-created by different owners (e.g. a multi-tier stack within a location).</p>
+created by different parents (e.g. a multi-tier stack within a location).</p>
 
 <h2>Configuration, Sensors and Effectors</h2>
 
@@ -325,7 +386,7 @@ application level will make it available in all entities underneath unless it is
 to apply universally, and/or programmatically to a specific entity and its descendants using the <code>entity.setConfig(KEY, VALUE)</code>
 method.
 Additionally, many common configuration parameters are available as "flags" which can be supplied in the entity's constructor
-of the form <code>new MyEntity(owner, config1: "value1", config2: "value2")</code>.</p>
+of the form <code>new MyEntity(parent, config1: "value1", config2: "value2")</code>.</p>
 
 <p>Documentation of the flags available for individual constructors can normally be found in the javadocs,
 or by inspecting <code>@SetFromFlag</code> annotations on the <code>ConfigKey</code> static field definitions
@@ -335,9 +396,9 @@ in the class or its ancestors (often in interfaces).</p>
 
 <p><strong><em>Sensors</em></strong> (activity information and notifications) and <strong><em>effectors</em></strong> (operations that can be invoked on the entity) are defined by entities as static fields on the <code>Entity</code> subclass.</p>
 
-<p>Sensors can be updated by the entity or associated tasks, and sensors from an entity can be subscribed to by its owner or other entities to track changes in an entity's activity.</p>
+<p>Sensors can be updated by the entity or associated tasks, and sensors from an entity can be subscribed to by its parent or other entities to track changes in an entity's activity.</p>
 
-<p>Effectors can be invoked by an entity's owner remotely, and the invoker is able to track the execution of that effector. Effectors can be invoked by other entities, but use this functionality with care to prevent too many managers!</p>
+<p>Effectors can be invoked by an entity's parent remotely, and the invoker is able to track the execution of that effector. Effectors can be invoked by other entities, but use this functionality with care to prevent too many managers!</p>
 
 <p>Entities are Java classes and data can also be stored in internal fields.
 This data will not be inherited and will not be externally visible (and resilience is more limited), but the data will be moved when an entity's master location is changed.</p>
@@ -345,13 +406,11 @@ This data will not be inherited and will not be externally visible (and resilien
 <p>Next: <a href="/use/guide/defining-applications/advanced-concepts.html">Advanced Concepts</a>.
 See also: <a href="/use/guide/management/index.html#sensors-and-effectors">Management > Sensors and Effectors</a>.</p>
 
-      </div>
 
-      <div id="page_toc">
-        <!-- Sidebar -->
+        </div><!--maincontent-->
         
-<div id="sidebar_image"><img width="204" src="/style/brooklyn-bridge-v2.png"/></div>
-<br/>
+      <div id="sidebar">
+      
 
 
   
@@ -366,14 +425,12 @@ See also: <a href="/use/guide/management/index.html#sensors-and-effectors">Manag
     
     
     
-    
 	  <div class="toc-1 ">
   
 	    <a href="/start/index.html"><div class="toc-1-item">Start</div></a>
   
       </div>
 
-    
     
     
     
@@ -431,6 +488,11 @@ See also: <a href="/use/guide/management/index.html#sensors-and-effectors">Manag
             
               <div class="toc-3 ">
 	            <a href="/use/guide/management/index.html#startup-config"><div class="toc-3-item">Startup Configuration</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#cli"><div class="toc-3-item">Command Line Interface</div></a>
               </div>
         
             
@@ -566,6 +628,11 @@ See also: <a href="/use/guide/management/index.html#sensors-and-effectors">Manag
 	            <a href="/use/guide/extras/index.html#messaging"><div class="toc-3-item">Messaging</div></a>
               </div>
         
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/extras/index.html#provisioning"><div class="toc-3-item">Provisioning</div></a>
+              </div>
+        
             </div></div>
       
           </div>
@@ -574,7 +641,6 @@ See also: <a href="/use/guide/management/index.html#sensors-and-effectors">Manag
   
       </div>
 
-    
     
     
     
@@ -597,7 +663,22 @@ See also: <a href="/use/guide/management/index.html#sensors-and-effectors">Manag
         
             
               <div class="toc-3 ">
+	            <a href="/use/examples/global-web-fabric/index.html"><div class="toc-3-item">Global Web Fabric</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
 	            <a href="/use/examples/whirrhadoop/index.html"><div class="toc-3-item">Whirr Hadoop Cluster</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/portable-cloudfoundry/index.html"><div class="toc-3-item">Portable Cloud Foundry</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/messaging/index.html"><div class="toc-3-item">Publish-Subscribe Messaging</div></a>
               </div>
         
             </div></div>
@@ -668,21 +749,20 @@ See also: <a href="/use/guide/management/index.html#sensors-and-effectors">Manag
 </div>
 <br/>
 
+
       </div>
 
-    </div>
+    </div><!--contentcontainer-->
+        
+    <div id="footer">
+        <p id="copyright">
+            <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
+            brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
+            &copy; 2012 Cloudsoft Corporation.
+        </p>
+    </div><!--footer -->
 
-    <div class="page_row"/>
-
-<hr/>
-
-    <div id="page_footer" class="page_row">
-      <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
-      brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
-      &copy; 2012 Cloudsoft Corporation.
-    </div>
-
-  </div>
+</div><!--container-->
 
 </body>
 </html>

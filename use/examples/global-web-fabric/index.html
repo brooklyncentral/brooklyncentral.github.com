@@ -1,0 +1,1243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+  <title>Global Web Fabric</title>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+
+  <link rel="stylesheet" href="/style/style.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/style/toc.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/style/docs/code.css" type="text/css" media="screen" />
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  
+	<!-- Sidebar/ToC Scripts and CSS -->
+	<script src="/style/js/jquery/jquery-1.7.1.min.js"></script>
+	<script src="/style/js/jquery/jquery-ui-1.8.18.custom.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/style/js/jquery/smoothness/jquery-ui-1.8.18.custom.css" />
+	
+	<script type="text/javascript" src="/style/js/superfish.js"></script>
+	
+<!-- Clipboard support -->
+<script src="/style/js/zeroclipboard/ZeroClipboard.js"></script>
+<style type="text/css">
+.clipboard_container { float: right; padding: 8px; }
+.clipboard_button {
+    background-image: url("/style/icons/clipboard-green-normal.png");
+    background-size: 18px 21px;
+    width: 18px; height: 21px;
+}
+.clipboard_button.hover  { background-image: url("/style/icons/clipboard-green-hover.png"); }
+.clipboard_button.active  { background-image: url("/style/icons/clipboard-green-click.png"); }'
+</style>
+<script type="text/javascript"> <!-- clipboard -->
+ZeroClipboard.setMoviePath( '/style/js/zeroclipboard/ZeroClipboard.swf' );
+</script>
+<script type="text/javascript"> <!-- clipboard positioning -->
+$(document).ready(function() {
+  $('<div class="clipboard_container" title="Copy to Clipboard">'+
+    '<div class="clipboard_button"/>'+
+  '</div>').insertBefore($('div.highlight'))
+  $('div.clipboard_container').each(function(index) {
+    var clipboard = new ZeroClipboard.Client();
+    clipboard.glue( $(this).find(":first")[0], $(this)[0] );
+    var target = $(this).next();
+    var txt = target.text().trim();
+    if (target.find('code.bash')) {
+      txt = txt.replace(/^[^%$]*[%$] /, "").replace(new RegExp('\n[^%$]*[%$] ','g'), "\n");
+    }
+    clipboard.setText(txt);
+  });
+});
+</script>
+
+    <script type="text/javascript">
+        // initialise menu delay
+        jQuery(function(){
+            jQuery('ul#mainmenu').superfish({ 
+                autoArrows:  false,  // disable generation of arrow mark-up 
+                dropShadows: false,  // disable drop shadows 
+                disableHI:   true,   // set to true to disable hoverIntent detection 
+                delay:       500,    // the delay in milliseconds that the mouse can remain outside a submenu without it closing 
+                speed:       'fast', 
+            });
+        });
+    </script>
+
+<script type="text/javascript"> <!-- search -->
+	$(function() {
+		$('#simple_google')
+			.submit(function() {
+				$('input[name="q"]').val("site:" + document.location.hostname + " " + $('input[name="brooklyn-search"]').val());
+			return true;
+			});
+		$('input[name="brooklyn-search"]').focus(function() {
+				if ($(this).val() === $(this).attr('placeholder')) {
+					$(this).val('');
+				}
+			})
+			.blur(function() {
+				if ($(this).val() === '') {
+					$(this).val($(this).attr('placeholder'));
+				}
+			})
+			.blur();
+    });
+</script>
+
+<script type="text/javascript"> <!-- analytics -->
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-30530918-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+</head>
+
+<body>
+
+    <ul id="shortcuts" title="Accessibility shortcuts menu">
+        <li><a href="#maincontent">Skip to main content</a></li>
+    </ul>
+   
+
+<div id="container">
+
+    <div id="header">
+    
+        <div id="identity">
+            <a href="http://brooklyncentral.github.com/" rel="home">Brooklyn</a>
+        </div>
+        
+        <ul id="quicklinks">
+            <li><a href="/meta/versions.html">0.5.0-SNAPSHOT</a></li>
+            <li><a href="/start/download.html">Download</a></li>
+            <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
+            <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
+            <li><a href="/meta/contact.html">Contact</a></li>
+        </ul>
+
+        <div id="menubar">  
+
+
+
+
+
+
+
+<ul id="mainmenu"><!-- INSERT LINKS -->
+            
+
+  
+  
+  <li class=""><a href="/index.html">Overview</a></li>
+
+  
+  
+  <li class=""><a href="/start/download.html">Download</a></li>
+
+  
+  
+  <li class=""><a href="/start/walkthrough/index.html">Walkthrough</a></li>
+
+  
+  
+  <li class=""><a href="/use/guide/index.html">Guide</a></li>
+
+  
+  
+  <li class="toc-active"><a href="/use/examples/index.html">Examples</a></li>
+
+  
+  
+  <li class=""><a href="/dev/code/index.html">Contributing</a></li>
+
+
+</ul>                    
+
+            <form method="get" id="simple_google" class="searchform" action="http://www.google.com/search" method="get">
+                <input type="text" class="searchinput" name="brooklyn-search" placeholder="Search: type &amp; hit enter" />
+                <input type="hidden" name="q" value="" />
+            </form>
+            
+        </div>
+                
+    </div><!--header-->
+    
+    <div id="contentcontainer">
+    
+        <div id="maincontent">
+
+
+  
+
+
+
+
+
+
+
+    
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+
+    
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+                
+                
+                
+                
+                
+                
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+        
+        
+    
+
+    
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+
+    
+    
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+
+
+
+            
+<p id="breadcrumb">
+    <a href="/use/index.html">Using brooklyn</a>
+    
+        &raquo; <a href="/use/examples/index.html">Examples</a>
+        
+            &raquo; <a href="/use/examples/global-web-fabric/index.html">Global Web Fabric</a>
+        
+    
+</p>
+
+
+<h1 id="header_title">Global Web Fabric</h1>
+    
+<p>This example shows how to build a multi-site web application <em>fabric</em>
+with DNS configured on the front-end to combine the sites,
+routing users to the location closest to them.</p>
+
+<p>It can combine with the <a href="../webcluster">Simple Web Cluster</a> example
+or the <a href="../portable-cloudfoundry">Portable Cloud Foundry</a> example,
+but does not assume knowledge of either of these.</p>
+
+<h2>Before You Begin</h2>
+
+
+
+
+<p>To use the examples, you'll need <code>curl</code>, <code>git</code>, <code>java</code> (1.6+), and <code>maven</code> (v3) installed.</p>
+
+
+
+
+<!--- both snapshots and releases -->
+
+
+
+
+<!--- releases -->
+
+
+
+
+<p></p>
+
+
+
+
+<p>First, grab a copy of the Brooklyn snapshot distribution you wish to use from
+<a href="https://oss.sonatype.org/content/groups/public/io/brooklyn/brooklyn-dist/">the Sonatype snapshot repo</a>
+(or build it yourself following instructions <a href="/dev/build/">here</a>),
+unpack it to your favourite location (e.g. <code>$(pwd)</code>),
+and export <code>BROOKLYN_HOME</code>:</p>
+
+
+
+
+<div class="highlight"><pre><code class="bash">% curl -L -o brooklyn-dist-0.5.0-SNAPSHOT-dist.tar.gz 
+% tar xvzf brooklyn-dist-0.5.0-SNAPSHOT-dist.tar.gz
+% <span class="nb">export </span><span class="nv">BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/brooklyn-0.5.0-SNAPSHOT/
+</code></pre>
+</div>
+
+
+
+
+<p>Then, grab a copy of the brooklyn-examples source code and build with Maven:</p>
+
+
+
+
+<div class="highlight"><pre><code class="bash">% git clone https://github.com/brooklyncentral/brooklyn-examples.git
+% <span class="nb">cd </span>brooklyn-examples
+% mvn clean install
+</code></pre>
+</div>
+
+
+
+
+<p>Please note, these instructions are for a SNAPSHOT release of Brooklyn,
+so proceed with caution.
+For the latest stable version, go <a href="/meta/versions.html">here</a>.</p>
+
+
+
+
+<p>For more information on ways to download Brooklyn please
+see the <a href="/start/download.html">download page</a>.
+For more information on the Brooklyn CLI and launching apps,
+please visit <a href="/use/guide/management/index.html#cli">this section of the user guide</a>.</p>
+
+
+<p>Now, go to this particular example's directory:</p>
+
+<div class="highlight"><pre><code class="bash">% <span class="nb">cd </span>global-web-fabric
+</code></pre>
+</div>
+
+
+<p>The CLI needs to know where to find your compiled examples. You can set this up by exporting
+the <code>BROOKLYN_CLASSPATH</code> environment variable in the following way:</p>
+
+<div class="highlight"><pre><code class="bash">% <span class="nb">export </span><span class="nv">BROOKLYN_CLASSPATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/target/classes
+</code></pre>
+</div>
+
+
+<p>The project <code>global-web-fabric</code> contains the code used
+in this example under <code>src/main/java</code>.</p>
+
+<h3>Setting Up Geographic DNS</h3>
+
+<p>This example uses <a href="http://www.geoscaling.com">geoscaling.com</a> to provide <strong>free</strong> geographic-dependent DNS services.
+This will forward a domain name of your choice to various IPs depending on a script,
+e.g. computing the nearest IP based on latitude and longitude of the requester and the targets.
+Brooklyn will automatically generate and update this script, but you do need to
+create and configure a Geoscaling account:</p>
+
+<ol>
+<li>Create the free account <a href="https://www.geoscaling.com/dns2/?module=register">here</a>.</li>
+<li>Click the link in the email you receive.</li>
+<li>Enter the domain name you wish to use into geoscaling (see below).</li>
+</ol>
+
+
+<p>The simplest domain name to choose is something unique under <code>geopaas.org</code>, e.g. <code>yourname.geopaas.org</code>,
+which we have already configured for Geoscaling to manage.
+If you are using your own domain name,
+set its nameservers as advised by geoscaling (e.g. <code>ns{1,2,3,4}.geoscaling.com</code>).</p>
+
+<p>Next we need to supply this information to Brooklyn at runtime.
+The simplest way is to create or add the following fields to <code>~/.brooklyn/brooklyn.properties</code>:</p>
+
+<div class="highlight"><pre><code class="bash">brooklyn.geoscaling.username<span class="o">=</span>yourname
+brooklyn.geoscaling.password<span class="o">=</span>s3cr3t
+brooklyn.geoscaling.primaryDomain<span class="o">=</span>yourname.geopaas.org
+</code></pre>
+</div>
+
+
+<p>Replace the values of these fields as appropriate, of course!
+You can, if you prefer, supply (or override) these values in your Brooklyn application.</p>
+
+<h3>Setting Up the Locations Database</h3>
+
+<p>In order to generate the "closest-IP" script,
+Brooklyn needs a way to find out the latitude and longitude of the
+servers you are using.
+The simplest way to do this is do download the free GeoCityLite binary flatfile
+from <a href="http://www.maxmind.com/app/geolitecity">MaxMind</a>,
+unpack it, and copy it to <code>~/.brooklyn/MaxMind-GeoLiteCity.dat</code>.</p>
+
+<p>This will be picked up automatically if it is installed.
+You can instead specify to use an online lookup service, such as
+<a href="http://www.utrace.de">utrace.de</a> by specifying
+<code>-Dbrooklyn.location.geo.HostGeoLookup=brooklyn.location.geo.UtraceHostGeoLookup</code>;
+but note this has a cap of 100 per day.</p>
+
+<p>This information is also used to display locations on the map
+in the Brooklyn dashboard.
+Note however that these free services are not 100% accurate;
+they are handy for dev/test but in a production system
+you may wish to specify the geographical information manually in your application,
+or purchase a commercial locations-database subscription.</p>
+
+<h2>The Code</h2>
+
+<p>Now let's start writing our application.
+The heavy lifting will be done by off-the-shelf Brooklyn classes:</p>
+
+<ul>
+<li><code>DynamicFabric</code> will create the entity specified by <code>factory</code> in each location it is given</li>
+<li><code>GeoscalingDnsService</code> monitors children of a specified entity (the <code>DynamicFabric</code>)
+and adds them as DNS targets for the region they are in</li>
+</ul>
+
+
+<p>First, however, let's create the Groovy class -- call it <code>GlobalWebFabricExample</code>.
+This will extend the Brooklyn <code>AbstractApplication</code> and inheriting the default constructors:</p>
+
+<div class="highlight"><pre><code class="java"><span class="kn">package</span> <span class="n">brooklyn</span><span class="o">.</span><span class="na">demo</span>
+
+<span class="kn">import</span> <span class="nn">brooklyn.entity.basic.AbstractApplication</span>
+
+<span class="nd">@InheritConstructors</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">GlobalWebFabricExample</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
+
+    <span class="c1">// TODO create our app!</span>
+
+<span class="o">}</span>
+</code></pre>
+</div>
+
+
+<h3>The Fabric</h3>
+
+<p>The <code>DynamicFabric</code> by default has no knowledge of what it will build,
+other than the <code>factory</code> it is given to create an entity in each region.
+We'll use the class <code>ElasticJavaWebAppService.Factory</code> which creates
+an elastic Java Web App service,
+such as the <code>ControlledDynamicWebAppCluster</code> used in the
+<a href="../webcluster">Simple Web Cluster</a> example, if deploying to VMs,
+or perhaps a <code>CloudFoundryJavaWebAppCluster</code> if deploying to a Cloud Foundry location
+(see below).</p>
+
+<div class="highlight"><pre><code class="java">    <span class="n">DynamicFabric</span> <span class="n">webFabric</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DynamicFabric</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="nl">name:</span> <span class="s">&quot;Web Fabric&quot;</span><span class="o">,</span> 
+            <span class="nl">factory:</span> <span class="k">new</span> <span class="n">ElasticJavaWebAppService</span><span class="o">.</span><span class="na">Factory</span><span class="o">());</span>
+    <span class="o">{</span> 
+        <span class="c1">//specify the WAR file to use</span>
+        <span class="n">webFabric</span><span class="o">.</span><span class="na">setConfig</span><span class="o">(</span><span class="n">ElasticJavaWebAppService</span><span class="o">.</span><span class="na">ROOT_WAR</span><span class="o">,</span> <span class="n">WAR_PATH</span><span class="o">);</span>
+    <span class="o">}</span>
+</code></pre>
+</div>
+
+
+<p>Here we have specified the WAR to use with <code>setConfig</code>.
+The <code>war:</code> convenience flag used in the previous example is only available on web-aware entities;
+configuration specified with a named key can be done on any entity,
+and is inherited at runtime, so this provides a useful way to specify the WAR to use
+even though the web-aware entities are only constructed at runtime.</p>
+
+<h3>Stitching the Fabric together with DNS</h3>
+
+<p>To stitch these together seamlessly, another entity will run a policy
+which collects the public-facing IP address of each cluster created by the fabric,
+as it comes online, by watching for <code>SERVICE_UP</code> sensors.
+First, however, let's make sure any load-balancer proxies (e.g. nginx) in these clusters
+are listening on port 80:</p>
+
+<div class="highlight"><pre><code class="java">    <span class="o">{</span> 
+        <span class="c1">//load-balancer instances must run on 80 to work with GeoDNS (default is 8000)</span>
+        <span class="n">webFabric</span><span class="o">.</span><span class="na">setConfig</span><span class="o">(</span><span class="n">AbstractController</span><span class="o">.</span><span class="na">PROXY_HTTP_PORT</span><span class="o">,</span> <span class="mi">80</span><span class="o">);</span>
+    <span class="o">}</span>
+</code></pre>
+</div>
+
+
+<p>Let's now define the Geoscaling entity which does the stitching.
+We need to supply the username, password, and primaryDomainName for Geoscaling;
+we'll take this from the <code>brooklyn.properties</code> file mentioned above.
+We'll also specify a <code>smartSubdomainName</code>, to use Geoscaling's facility for
+lightweight sub-domains to prevent DNS caching and multiple instances of our application
+from confusing us -- e.g. <code>brooklyn-1234.yourname.geopaas.org</code>.</p>
+
+<div class="highlight"><pre><code class="java">    <span class="n">GeoscalingDnsService</span> <span class="n">geoDns</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GeoscalingDnsService</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="nl">name:</span> <span class="s">&quot;GeoScaling DNS&quot;</span><span class="o">,</span>
+            <span class="nl">username:</span> <span class="n">config</span><span class="o">.</span><span class="na">getFirst</span><span class="o">(</span><span class="s">&quot;brooklyn.geoscaling.username&quot;</span><span class="o">,</span> <span class="nl">failIfNone:</span><span class="kc">true</span><span class="o">),</span>
+            <span class="nl">password:</span> <span class="n">config</span><span class="o">.</span><span class="na">getFirst</span><span class="o">(</span><span class="s">&quot;brooklyn.geoscaling.password&quot;</span><span class="o">,</span> <span class="nl">failIfNone:</span><span class="kc">true</span><span class="o">),</span>
+            <span class="nl">primaryDomainName:</span> <span class="n">config</span><span class="o">.</span><span class="na">getFirst</span><span class="o">(</span><span class="s">&quot;brooklyn.geoscaling.primaryDomain&quot;</span><span class="o">,</span> <span class="nl">failIfNone:</span><span class="kc">true</span><span class="o">),</span> 
+            <span class="nl">smartSubdomainName:</span> <span class="err">&#39;</span><span class="n">brooklyn</span><span class="err">&#39;</span><span class="o">);</span>    
+</code></pre>
+</div>
+
+
+<p>Lastly we need to tell this instance what entity it should monitor
+for children to include as targets:</p>
+
+<div class="highlight"><pre><code class="java">    <span class="o">{</span>
+        <span class="n">geoDns</span><span class="o">.</span><span class="na">setTargetEntityProvider</span><span class="o">(</span><span class="n">webFabric</span><span class="o">);</span>
+    <span class="o">}</span>
+</code></pre>
+</div>
+
+
+<h3>Cloud Foundry and other PaaS Targets</h3>
+
+<p>At this point our core application is ready, and can be deployed to AWS or another VM cloud.
+This may take between 15 and 30 minutes to run,
+mainly spent downloading software
+(unless of course you specify a pre-configured <code>imageId</code> which contains the software).</p>
+
+<p>A quicker alternative is to deploy to a Java Web App platform-as-a-service
+such as Cloud Foundry.  A major advantage here is that they can provision very quickly,
+in a matter of seconds.</p>
+
+<p>However most of these services use a shared load-balancer, meaning that the
+hostname requested in the URL has to match what is set up at the PaaS.
+The hostname for geo-balancing is chosen at runtime by Geoscaling
+when we are using a <code>smartSubdomainName</code>, and we need to configure this in
+any target PaaS we are using.
+<em>At present the ability to configure URL's is disabled in <code>cloudfoundry.com</code> accounts.
+It has been tested and confirmed to work in AppFog's hosted Cloud Foundry.</em></p>
+
+<p>We will use the <code>DependentConfiguration.attributeWhenReady</code> convenience to
+listen for the <code>HOSTNAME</code> sensor on <code>geoDns</code> and set the relevant Cloud Foundry
+config parameter on the <code>webFabric</code>.
+Other PaaS targets may expose a similar config key.
+Please note that this command must be placed in your class
+<em>after</em> <code>webFabric</code> and <code>geoDns</code> are defined.</p>
+
+<div class="highlight"><pre><code class="java">    <span class="o">{</span>
+        <span class="n">webFabric</span><span class="o">.</span><span class="na">setConfig</span><span class="o">(</span><span class="n">CloudFoundryJavaWebAppCluster</span><span class="o">.</span><span class="na">HOSTNAME_TO_USE_FOR_URL</span><span class="o">,</span>
+            <span class="n">DependentConfiguration</span><span class="o">.</span><span class="na">attributeWhenReady</span><span class="o">(</span><span class="n">geoDns</span><span class="o">,</span> <span class="n">Attributes</span><span class="o">.</span><span class="na">HOSTNAME</span><span class="o">));</span>
+    <span class="o">}</span>
+</code></pre>
+</div>
+
+
+<p>This config key will only apply to Cloud Foundry targets,
+so it is safe to include in your class whether or not you are deploying there.</p>
+
+<h3>Statics</h3>
+
+<p>In the interest of readability above, we have omitted certain static constants we use,
+the <code>main</code> method, and the imports.  Your complete class will of course have to include these:</p>
+
+<p>The following static constants are assumed (most of these as in the <a href="../webcluster">Simple Web Cluster</a> example and others):</p>
+
+<ul>
+<li><code>config</code>, read from <code>~/.brooklyn/brooklyn.properties</code> (as well as from environment variables)
+to provide the login data for Geoscaling.</li>
+<li><code>log</code>, a logger</li>
+<li><code>WAR_PATH</code>, pointing to the webapp to deploy (a default supplied as part of the Brooklyn examples is used here)</li>
+<li><code>DEFAULT_LOCATIONS</code>, containing a string spec of the locations to deploy to if none are supplied on the command-line;
+for this example <code>localhost</code> will frequently not work unless Geoscaling can see it
+(i.e. it has a public IP and appropriate firewall settings)</li>
+</ul>
+
+
+<p>The code for these is as follows:</p>
+
+<div class="highlight"><pre><code class="java">    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Logger</span> <span class="n">log</span> <span class="o">=</span> <span class="n">LoggerFactory</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">GlobalWebFabricExample</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+    
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">WAR_PATH</span> <span class="o">=</span> <span class="s">&quot;classpath://hello-world-webapp.war&quot;</span><span class="o">;</span>
+    
+    <span class="kd">static</span> <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">DEFAULT_LOCATIONS</span> <span class="o">=</span> <span class="o">[</span>
+            <span class="s">&quot;aws-ec2:eu-west-1&quot;</span><span class="o">,</span>
+            <span class="s">&quot;aws-ec2:ap-southeast-1&quot;</span><span class="o">,</span>
+            <span class="s">&quot;aws-ec2:us-west-1&quot;</span><span class="o">,</span> 
+        <span class="o">];</span>
+        
+    <span class="kd">static</span> <span class="n">BrooklynProperties</span> <span class="n">config</span> <span class="o">=</span> <span class="n">BrooklynProperties</span><span class="o">.</span><span class="na">Factory</span><span class="o">.</span><span class="na">newDefault</span><span class="o">()</span>
+</code></pre>
+</div>
+
+
+<p>Our <code>main</code> method looks like this:</p>
+
+<div class="highlight"><pre><code class="java">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">argv</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">ArrayList</span> <span class="n">args</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">argv</span><span class="o">));</span>
+        <span class="kt">int</span> <span class="n">port</span> <span class="o">=</span> <span class="n">CommandLineUtil</span><span class="o">.</span><span class="na">getCommandLineOptionInt</span><span class="o">(</span><span class="n">args</span><span class="o">,</span> <span class="s">&quot;--port&quot;</span><span class="o">,</span> <span class="mi">8081</span><span class="o">);</span>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">Location</span><span class="o">&gt;</span> <span class="n">locations</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LocationRegistry</span><span class="o">().</span><span class="na">getLocationsById</span><span class="o">(</span><span class="n">args</span> <span class="o">?:</span> <span class="n">DEFAULT_LOCATIONS</span><span class="o">)</span>
+
+        <span class="n">GlobalWebFabricExample</span> <span class="n">app</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GlobalWebFabricExample</span><span class="o">(</span><span class="nl">name:</span> <span class="err">&#39;</span><span class="n">Brooklyn</span> <span class="n">Global</span> <span class="n">Web</span> <span class="n">Fabric</span> <span class="n">Example</span><span class="err">&#39;</span><span class="o">);</span>
+            
+        <span class="n">BrooklynLauncher</span><span class="o">.</span><span class="na">manage</span><span class="o">(</span><span class="n">app</span><span class="o">,</span> <span class="n">port</span><span class="o">)</span>
+        <span class="n">app</span><span class="o">.</span><span class="na">start</span><span class="o">(</span><span class="n">locations</span><span class="o">)</span>
+        <span class="n">Entities</span><span class="o">.</span><span class="na">dumpInfo</span><span class="o">(</span><span class="n">app</span><span class="o">)</span>
+    <span class="o">}</span>
+</code></pre>
+</div>
+
+
+<p>And finally, the imports are as follows:</p>
+
+<div class="highlight"><pre><code class="java"><span class="kn">import</span> <span class="nn">groovy.transform.InheritConstructors</span>
+
+<span class="kn">import</span> <span class="nn">org.slf4j.Logger</span>
+<span class="kn">import</span> <span class="nn">org.slf4j.LoggerFactory</span>
+
+<span class="kn">import</span> <span class="nn">brooklyn.config.BrooklynProperties</span>
+<span class="kn">import</span> <span class="nn">brooklyn.entity.basic.AbstractApplication</span>
+<span class="kn">import</span> <span class="nn">brooklyn.entity.basic.Attributes</span>
+<span class="kn">import</span> <span class="nn">brooklyn.entity.basic.Entities</span>
+<span class="kn">import</span> <span class="nn">brooklyn.entity.dns.geoscaling.GeoscalingDnsService</span>
+<span class="kn">import</span> <span class="nn">brooklyn.entity.group.AbstractController</span>
+<span class="kn">import</span> <span class="nn">brooklyn.entity.group.DynamicFabric</span>
+<span class="kn">import</span> <span class="nn">brooklyn.entity.webapp.ElasticJavaWebAppService</span>
+<span class="kn">import</span> <span class="nn">brooklyn.event.basic.DependentConfiguration</span>
+<span class="kn">import</span> <span class="nn">brooklyn.extras.cloudfoundry.CloudFoundryJavaWebAppCluster</span>
+<span class="kn">import</span> <span class="nn">brooklyn.launcher.BrooklynLauncher</span>
+<span class="kn">import</span> <span class="nn">brooklyn.location.Location</span>
+<span class="kn">import</span> <span class="nn">brooklyn.location.basic.LocationRegistry</span>
+<span class="kn">import</span> <span class="nn">brooklyn.util.CommandLineUtil</span>
+</code></pre>
+</div>
+
+
+<h2>Running the Example</h2>
+
+<p>Now let's run this example.  You will need to specify increased heap size and memory limits,
+as well as the appropriate classpath.</p>
+
+<div class="highlight"><pre><code class="bash"><span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.demo.GlobalWebFabricExample <span class="se">\</span>
+--location locahost
+</code></pre>
+</div>
+
+
+<p>The management web console will start,
+followed by the web-app services in the locations specified
+(in <code>DEFAULT_LOCATIONS</code>, or as arguments on the command-line),
+creating the VM's as needed.
+Let's look at the management web console, on port 8081 (default credentials are admin/password):</p>
+
+<p><a href="console-map.png"><img src="console-map-w700.png" title="Web Console Map" alt="Web Console Map" /></a></p>
+
+<p>This shows the targets in Seattle (AppFog's Cloud Foundry), Ireland (AWS eu-west-1),
+and Singapore (AWS ap-southeast-1),
+as well as a few other places (wrong locations picked up for some AWS IP's!).
+This also shows the progress of the most recent tasks.</p>
+
+<p>Navigating to the details tab, we can view sensors, invoke effectors, control policies,
+and track activity,
+for instance if a cluster is slow to start and you want to find out what is going on
+(you'll find additional information in the <code>brooklyn.log</code> file).
+Let's drill down on the Geoscaling DNS entity's sensors:</p>
+
+<p><a href="console-geoscaling-details.png"><img src="console-geoscaling-details-w700.png" title="Web Console Geoscaling Details" alt="Web Console Geoscaling Details" /></a></p>
+
+<p>Here we see it has chosen <code>brooklyn-csgFCzTM.geopaas.org</code> as the geo-load-balanced domain name.
+(Your will be under <code>yourname.geopaas.org</code>, unless you chose a different domain earlier.)
+We can also see the hosts it is forwarding to, one for each cluster, corresponding to the
+children of the Web Fabric (propagated from the nginx hostnames, in the case of the ControlledDynamicWebAppCluster instances).</p>
+
+<h3>Checking the Web App</h3>
+
+<p>Once Geoscaling reports at least one target, you should be able to access it on the geo-load-balanced domain name:</p>
+
+<p><a href="geopaas-deployed-app.png"><img src="geopaas-deployed-app-w700.png" title="Our Deployed Application" alt="Our Deployed Application" /></a></p>
+
+<p>Under the covers you are being routed to one of the clusters that has been deployed --
+whichever one is closest to you.
+(Due to DNS caching, at your machine or your ISP, clusters which come online after your first lookup
+will not be picked up until TTL expires, typically 10m, although often more if DNS services don't respect TTL.)</p>
+
+<h3>Checking DNS Information</h3>
+
+<p>Let's find out exactly where we were routed:</p>
+
+<div class="highlight"><pre><code class="bash">% dig brooklyn-csgFCzTm.geopaas.org
+
+; &lt;&lt;&gt;&gt; DiG 9.4.3-P3 &lt;&lt;&gt;&gt; brooklyn-csgFCzTm.geopaas.org
+
+;; QUESTION SECTION:
+;brooklyn-csgFCzTm.geopaas.org. IN      A
+
+;; ANSWER SECTION:
+brooklyn-csgFCzTm.geopaas.org. 120 IN   CNAME   ec2-46-137-138-4.eu-west-1.compute.amazonaws.com.
+ec2-46-137-138-4.eu-west-1.compute.amazonaws.com. 215 IN A 46.137.138.4
+</code></pre>
+</div>
+
+
+<p>This was run from Scotland so it seems a sensible choice.
+(Some portions of the output from <code>dig</code> have been removed for readability.)</p>
+
+<p>We can get more information by looking at the TXT records:</p>
+
+<div class="highlight"><pre><code class="bash">% dig +trace @ns1.geoscaling.com TXT brooklyn-csgFCzTm.geopaas.org
+
+; &lt;&lt;&gt;&gt; DiG 9.4.3-P3 &lt;&lt;&gt;&gt; +trace @ns1.geoscaling.com TXT brooklyn-csgFCzTm.geopaas.org
+
+...
+
+geopaas.org.            86400   IN      NS      ns1.geoscaling.com.
+geopaas.org.            86400   IN      NS      ns2.geoscaling.com.
+geopaas.org.            86400   IN      NS      ns3.geoscaling.com.
+geopaas.org.            86400   IN      NS      ns4.geoscaling.com.
+;; Received 133 bytes from 199.249.112.1#53<span class="o">(</span>a2.org.afilias-nst.info<span class="o">)</span> in 45 ms
+
+brooklyn-csgFCzTm.geopaas.org. 300 IN   TXT     <span class="s2">&quot;Request from [54,-2]-(GB) directed to Ireland (IE)&quot;</span>
+brooklyn-csgFCzTm.geopaas.org. 300 IN   TXT     <span class="s2">&quot;GeoScaling config auto-updated by Brooklyn 2012-04-26 12:27:25 UTC&quot;</span>
+;; Received 189 bytes from 80.87.128.195#53<span class="o">(</span>ns3.geoscaling.com<span class="o">)</span> in 60 ms
+</code></pre>
+</div>
+
+
+<h2>Next Steps</h2>
+
+<p>This example has shown how to create a multi-region fabric, using the abstractions from
+<a href="http://jclouds.org">jclouds</a> under the covers to make it easy to access different hosting providers
+simultaneously, and using higher-level abstractions in Brooklyn to mix PaaS systems with
+bare-VM (or even bare-metal, if you specify fixed IPs).</p>
+
+<p>This is meant as just the beginning however.<br/>
+Here are some questions to think about and code challenges to give you a steer for what to explore next.</p>
+
+<ol>
+<li><p>The routines used at Geoscaling optimize for latency between the user and the location of the web-cluster.
+What other strategies might be used?  Cost?  Compliance?  How would you code these?</p></li>
+<li><p>This example ignores data, but you clearly can't do that in the real world.
+When big-data is involved, does this introduce other considerations for optimizing geo-location?</p></li>
+<li><p>Add a data tier to this system, such as MySQL or Mongo, or even Hadoop.
+You might start with a single instance or cluster,
+but the real fun starts with a fabric, and defining the synchronization/replication strategies
+between the different clusters.
+This isn't for the faint-hearted, but whatever you create will certainly be of interest
+to people in the Brooklyn community.
+Please <a href="/meta/contact.html">let us know</a> what you've built!</p></li>
+</ol>
+
+
+
+        </div><!--maincontent-->
+        
+      <div id="sidebar">
+      
+
+
+  
+
+
+
+
+
+
+<div id="sidebar_toc">
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/start/index.html"><div class="toc-1-item toc-1-header ">Start</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/index.html"><div class="toc-2-item">Overview</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/start/walkthrough/index.html"><div class="toc-2-item">Walkthrough</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/start/download.html"><div class="toc-2-item">Download</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/start/docs-summary.html"><div class="toc-2-item">Documentation</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 toc-active">
+  
+	    <a href="/use/index.html"><div class="toc-1-item toc-1-header ">Using brooklyn</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/guide/index.html"><div class="toc-2-item toc-2-header">User Guide</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/quickstart/index.html"><div class="toc-3-item">Quick Start</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/defining-applications/basic-concepts.html"><div class="toc-3-item">Defining Applications</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html"><div class="toc-3-item">Management</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/policies/index.html"><div class="toc-3-item">Policies</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/entities/index.html"><div class="toc-3-item">Custom Entities</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/extras/index.html"><div class="toc-3-item">Extras</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 toc-active">
+      
+	        <a href="/use/examples/index.html"><div class="toc-2-item toc-2-header">Examples</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/webcluster/index.html"><div class="toc-3-item">Elastic Web Cluster</div></a>
+              </div>
+        
+            
+              <div class="toc-3 toc-active">
+	            <a href="/use/examples/global-web-fabric/index.html"><div class="toc-3-item toc-active">Global Web Fabric</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/whirrhadoop/index.html"><div class="toc-3-item">Whirr Hadoop Cluster</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/portable-cloudfoundry/index.html"><div class="toc-3-item">Portable Cloud Foundry</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/messaging/index.html"><div class="toc-3-item">Publish-Subscribe Messaging</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/api/index.html"><div class="toc-2-item">API Reference (javadoc)</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/contact.html"><div class="toc-2-item">Discuss</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/dev/code/index.html"><div class="toc-1-item toc-1-header ">Contributing</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/dev/code/index.html"><div class="toc-2-item toc-2-header">The Code</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/code/index.html"><div class="toc-3-item">Structure</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/code/entity.html"><div class="toc-3-item">Writing an Entity</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/code/policy.html"><div class="toc-3-item">Writing a Policy</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="http://github.com/brooklyncentral/brooklyn"><div class="toc-3-item">brooklyn.git (github)</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/dev/build/index.html"><div class="toc-2-item toc-2-header">Build and Test</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/build/index.html"><div class="toc-3-item">Maven</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/build/ide.html"><div class="toc-3-item">IDE</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/build/tests.html"><div class="toc-3-item">Tests</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/dev/tips/index.html"><div class="toc-2-item toc-2-header">Tips and Tricks</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/tips/index.html"><div class="toc-3-item">Miscellany</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/tips/logging.html"><div class="toc-3-item">Logging</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/tips/standards.html"><div class="toc-3-item">Code Standards</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/tips/update-docs.html"><div class="toc-3-item">Updating Docs</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/dev/wishlist.html"><div class="toc-2-item">Wishlist</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/dev/links.html"><div class="toc-2-item toc-2-header">Links</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="https://github.com/brooklyncentral/"><div class="toc-3-item">Github repo</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="https://github.com/brooklyncentral/brooklyn/issues"><div class="toc-3-item">Github issues</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="http://ccweb.cloudsoftcorp.com/maven/libs-snapshot-local/io/brooklyn/"><div class="toc-3-item">Maven snapshots</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/dev/how-to-contrib.html"><div class="toc-2-item">How to Contribute</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/license/index.html"><div class="toc-1-item toc-1-header ">License</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/license/license.html"><div class="toc-2-item">Apache License v2.0</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/license/contributor-agreements/index.html"><div class="toc-2-item toc-2-header">Contributor Agreements</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/license/contributor-agreements/index.html"><div class="toc-3-item">Instructions</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/license/contributor-agreements/individual.html"><div class="toc-3-item">Individual CLA (echosign)</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/license/contributor-agreements/corporate.html"><div class="toc-3-item">Corporate CLA (echosign)</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/license/contributor-agreements/corporate-update-schedule.html"><div class="toc-3-item">CCLA Schedule A Update (echosign)</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/license/contributor-agreements/brooklyn-icla.txt"><div class="toc-3-item">Individual CLA (raw text)</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/license/contributor-agreements/brooklyn-ccla.txt"><div class="toc-3-item">Corporate CLA (raw text)</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/meta/versions.html"><div class="toc-1-item toc-1-header ">Meta</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/meta/versions.html"><div class="toc-2-item">Versions</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/meta/governance.html"><div class="toc-2-item">Governance</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/meta/contact.html"><div class="toc-2-item">Contact</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+ 
+</div>
+<br/>
+
+
+      </div>
+
+    </div><!--contentcontainer-->
+        
+    <div id="footer">
+        <p id="copyright">
+            <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
+            brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
+            &copy; 2012 Cloudsoft Corporation.
+        </p>
+    </div><!--footer -->
+
+</div><!--container-->
+
+</body>
+</html>

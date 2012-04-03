@@ -1,0 +1,914 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+  <title>Examples</title>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+
+  <link rel="stylesheet" href="/v/0.5.0-SNAPSHOT/style/style.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/v/0.5.0-SNAPSHOT/style/toc.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/v/0.5.0-SNAPSHOT/style/docs/code.css" type="text/css" media="screen" />
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  
+	<!-- Sidebar/ToC Scripts and CSS -->
+	<script src="/v/0.5.0-SNAPSHOT/style/js/jquery/jquery-1.7.1.min.js"></script>
+	<script src="/v/0.5.0-SNAPSHOT/style/js/jquery/jquery-ui-1.8.18.custom.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/v/0.5.0-SNAPSHOT/style/js/jquery/smoothness/jquery-ui-1.8.18.custom.css" />
+	
+	<script type="text/javascript" src="/v/0.5.0-SNAPSHOT/style/js/superfish.js"></script>
+	
+<!-- Clipboard support -->
+<script src="/v/0.5.0-SNAPSHOT/style/js/zeroclipboard/ZeroClipboard.js"></script>
+<style type="text/css">
+.clipboard_container { float: right; padding: 8px; }
+.clipboard_button {
+    background-image: url("/v/0.5.0-SNAPSHOT/style/icons/clipboard-green-normal.png");
+    background-size: 18px 21px;
+    width: 18px; height: 21px;
+}
+.clipboard_button.hover  { background-image: url("/v/0.5.0-SNAPSHOT/style/icons/clipboard-green-hover.png"); }
+.clipboard_button.active  { background-image: url("/v/0.5.0-SNAPSHOT/style/icons/clipboard-green-click.png"); }'
+</style>
+<script type="text/javascript"> <!-- clipboard -->
+ZeroClipboard.setMoviePath( '/v/0.5.0-SNAPSHOT/style/js/zeroclipboard/ZeroClipboard.swf' );
+</script>
+<script type="text/javascript"> <!-- clipboard positioning -->
+$(document).ready(function() {
+  $('<div class="clipboard_container" title="Copy to Clipboard">'+
+    '<div class="clipboard_button"/>'+
+  '</div>').insertBefore($('div.highlight'))
+  $('div.clipboard_container').each(function(index) {
+    var clipboard = new ZeroClipboard.Client();
+    clipboard.glue( $(this).find(":first")[0], $(this)[0] );
+    var target = $(this).next();
+    var txt = target.text().trim();
+    if (target.find('code.bash')) {
+      txt = txt.replace(/^[^%$]*[%$] /, "").replace(new RegExp('\n[^%$]*[%$] ','g'), "\n");
+    }
+    clipboard.setText(txt);
+  });
+});
+</script>
+
+    <script type="text/javascript">
+        // initialise menu delay
+        jQuery(function(){
+            jQuery('ul#mainmenu').superfish({ 
+                autoArrows:  false,  // disable generation of arrow mark-up 
+                dropShadows: false,  // disable drop shadows 
+                disableHI:   true,   // set to true to disable hoverIntent detection 
+                delay:       500,    // the delay in milliseconds that the mouse can remain outside a submenu without it closing 
+                speed:       'fast', 
+            });
+        });
+    </script>
+
+<script type="text/javascript"> <!-- search -->
+	$(function() {
+		$('#simple_google')
+			.submit(function() {
+				$('input[name="q"]').val("site:" + document.location.hostname + " " + $('input[name="brooklyn-search"]').val());
+			return true;
+			});
+		$('input[name="brooklyn-search"]').focus(function() {
+				if ($(this).val() === $(this).attr('placeholder')) {
+					$(this).val('');
+				}
+			})
+			.blur(function() {
+				if ($(this).val() === '') {
+					$(this).val($(this).attr('placeholder'));
+				}
+			})
+			.blur();
+    });
+</script>
+
+<script type="text/javascript"> <!-- analytics -->
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-30530918-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+</head>
+
+<body>
+
+    <ul id="shortcuts" title="Accessibility shortcuts menu">
+        <li><a href="#maincontent">Skip to main content</a></li>
+    </ul>
+   
+
+<div id="container">
+
+    <div id="header">
+    
+        <div id="identity">
+            <a href="http://brooklyncentral.github.com/" rel="home">Brooklyn</a>
+        </div>
+        
+        <ul id="quicklinks">
+            <li><a href="/v/0.5.0-SNAPSHOT/meta/versions.html">0.5.0-SNAPSHOT</a></li>
+            <li><a href="/v/0.5.0-SNAPSHOT/start/download.html">Download</a></li>
+            <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
+            <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
+            <li><a href="/v/0.5.0-SNAPSHOT/meta/contact.html">Contact</a></li>
+        </ul>
+
+        <div id="menubar">  
+
+
+
+
+
+
+
+<ul id="mainmenu"><!-- INSERT LINKS -->
+            
+
+  
+  
+  <li class=""><a href="/v/0.5.0-SNAPSHOT/index.html">Overview</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.5.0-SNAPSHOT/start/download.html">Download</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.5.0-SNAPSHOT/start/walkthrough/index.html">Walkthrough</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.5.0-SNAPSHOT/use/guide/index.html">Guide</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.5.0-SNAPSHOT/use/examples/index.html">Examples</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.5.0-SNAPSHOT/dev/code/index.html">Contributing</a></li>
+
+
+</ul>                    
+
+            <form method="get" id="simple_google" class="searchform" action="http://www.google.com/search" method="get">
+                <input type="text" class="searchinput" name="brooklyn-search" placeholder="Search: type &amp; hit enter" />
+                <input type="hidden" name="q" value="" />
+            </form>
+            
+        </div>
+                
+    </div><!--header-->
+    
+    <div id="contentcontainer">
+    
+        <div id="maincontent">
+
+
+  
+
+
+
+
+
+
+
+    
+    
+
+    
+    
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+
+
+
+    
+    
+    
+    
+
+            
+<p id="breadcrumb">
+    <a href="/v/0.5.0-SNAPSHOT">Home</a>
+    
+        &raquo; <a href="/v/0.5.0-SNAPSHOT/use/guide/defining-applications/examples.html">Examples</a>
+        
+    
+</p>
+
+
+<h1 id="header_title">Examples</h1>
+    
+<p><strong> TODO: this examples page is deprecated;
+code is out-of-date, and better examples are described on the web site.
+need to figure out if this page should be kept at all
+(indeed if the "guide" is even still relevant)</strong></p>
+
+<h3>Integrating with a Maven project</h3>
+
+<p>If you have a Maven-based project, integrate this XML fragment with your pom.xml:</p>
+
+<!-- TODO this should import from the downloads page -->
+
+
+
+
+<div class="highlight"><pre><code class="xml"><span class="nt">&lt;dependencies&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>io.brooklyn<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>brooklyn-all<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>0.5.0-SNAPSHOT<span class="nt">&lt;/version&gt;</span>  <span class="c">&lt;!-- BROOKLYN_VERSION --&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+<span class="nt">&lt;/dependencies&gt;</span>
+ 
+<span class="nt">&lt;repository&gt;</span>
+    <span class="nt">&lt;id&gt;</span>cloudsoft-releases<span class="nt">&lt;/id&gt;</span>
+    <span class="nt">&lt;url&gt;</span>http://developers.cloudsoftcorp.com/download/maven2/<span class="nt">&lt;/url&gt;</span>
+<span class="nt">&lt;/repository&gt;</span>
+<span class="nt">&lt;repository&gt;</span>
+    <span class="nt">&lt;id&gt;</span>libs-snapshot-local<span class="nt">&lt;/id&gt;</span>
+    <span class="nt">&lt;url&gt;</span>http://ccweb.cloudsoftcorp.com/maven/libs-snapshot-local/<span class="nt">&lt;/url&gt;</span>
+    <span class="nt">&lt;snapshots&gt;</span>
+        <span class="nt">&lt;enabled&gt;</span>true<span class="nt">&lt;/enabled&gt;</span>
+        <span class="nt">&lt;updatePolicy&gt;</span>never<span class="nt">&lt;/updatePolicy&gt;</span>
+        <span class="nt">&lt;checksumPolicy&gt;</span>fail<span class="nt">&lt;/checksumPolicy&gt;</span>
+    <span class="nt">&lt;/snapshots&gt;</span>
+<span class="nt">&lt;/repository&gt;</span>
+</code></pre>
+</div>
+
+
+<h3>Starting a Tomcat Server</h3>
+
+<p>The code below starts a Tomcat server on the local machine.</p>
+
+<p>The <code>main</code> method defines the application, and passes it to the <code>BrooklynLauncher</code> to be managed.
+It is then started in a localhost location (other locations are shown in the next section).</p>
+
+<p>The Tomcat's configuration indicates that the given WAR should be deployed to the Tomcat server when it is started.</p>
+
+<div class="highlight"><pre><code class="java"><span class="kd">class</span> <span class="nc">TomcatServerApp</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
+
+    <span class="n">def</span> <span class="n">tomcat</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TomcatServer</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> 
+            <span class="nl">httpPort:</span> <span class="mi">8080</span><span class="o">,</span>
+            <span class="nl">war:</span> <span class="s">&quot;/path/to/booking-mvc.war&quot;</span><span class="o">)</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">...</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">TomcatServerApp</span> <span class="n">demo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TomcatServerApp</span><span class="o">(</span>
+                <span class="n">displayName</span> <span class="o">:</span> <span class="s">&quot;tomcat server example&quot;</span><span class="o">)</span>
+
+        <span class="n">BrooklynLauncher</span><span class="o">.</span><span class="na">manage</span><span class="o">(</span><span class="n">demo</span><span class="o">)</span>
+        <span class="n">demo</span><span class="o">.</span><span class="na">start</span><span class="o">([</span><span class="k">new</span> <span class="n">LocalhostMachineProvisioningLocation</span><span class="o">()])</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+
+<p>While this is written in Groovy, the code can be written in pure Java if preferred,
+using the long-hand syntax of <code>tomcat.setConfig(TomcatServer.HTTP_PORT, 80)</code>
+in lieu of the flags (named arguments in <code>flagKey: value</code> notation).</p>
+
+<p>The <code>wars</code> flag is also supported (with config keys <code>ROOT_WAR</code> and <code>NAMED_WARS</code> the long-hand syntax);
+they accept EARs and other common archives, and can be described as files or as URLs (as Strings),
+with URLs supporting an optional <code>classpath://org/acme/resources/xxx.war</code> syntax.</p>
+
+<h3>Starting a Tomcat Cluster in Amazon EC2</h3>
+
+<p>The code below starts a tomcat cluster in Amazon EC2:</p>
+
+<p><em>In this release, the following snippet should be considered pseudo code.</em></p>
+
+<div class="highlight"><pre><code class="java"><span class="kd">class</span> <span class="nc">TomcatClusterApp</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
+    <span class="n">DynamicWebAppCluster</span> <span class="n">cluster</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DynamicWebAppCluster</span><span class="o">(</span><span class="k">this</span>
+        <span class="nl">initialSize:</span> <span class="mi">2</span><span class="o">,</span>
+        <span class="nl">factory:</span> <span class="o">{</span> <span class="n">properties</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="n">TomcatServer</span><span class="o">(</span><span class="n">properties</span><span class="o">)</span> <span class="o">},</span>
+        <span class="nl">httpPort:</span> <span class="mi">8080</span><span class="o">,</span> 
+        <span class="nl">war:</span> <span class="s">&quot;/path/to/booking-mvc.war&quot;</span><span class="o">)</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">argv</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">TomcatClusterApp</span> <span class="n">demo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TomcatClusterApp</span><span class="o">(</span>
+            <span class="n">displayName</span> <span class="o">:</span> <span class="s">&quot;tomcat cluster example&quot;</span><span class="o">)</span>
+        <span class="n">BrooklynLauncher</span><span class="o">.</span><span class="na">manage</span><span class="o">(</span><span class="n">demo</span><span class="o">)</span>
+
+        <span class="n">JcloudsLocationFactory</span> <span class="n">locFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JcloudsLocationFactory</span><span class="o">([</span>
+            <span class="n">provider</span> <span class="o">:</span> <span class="s">&quot;aws-ec2&quot;</span><span class="o">,</span>
+            <span class="n">identity</span> <span class="o">:</span> <span class="s">&quot;xxxxxxxxxxxxxxxxxxxxxxxxxxx&quot;</span><span class="o">,</span>
+            <span class="n">credential</span> <span class="o">:</span> <span class="s">&quot;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&quot;</span><span class="o">,</span>
+            <span class="n">sshPrivateKey</span> <span class="o">:</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&quot;/home/bob/.ssh/id_rsa.private&quot;</span><span class="o">),</span>
+            <span class="n">sshPublicKey</span> <span class="o">:</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&quot;/home/bob/.ssh/id_rsa.pub&quot;</span><span class="o">),</span>
+            <span class="nl">securityGroups:</span><span class="o">[</span><span class="s">&quot;my-security-group&quot;</span><span class="o">]</span>
+        <span class="o">])</span>
+
+        <span class="n">JcloudsLocation</span> <span class="n">loc</span> <span class="o">=</span> <span class="n">locFactory</span><span class="o">.</span><span class="na">newLocation</span><span class="o">(</span><span class="s">&quot;us-west-1&quot;</span><span class="o">)</span>
+        <span class="n">demo</span><span class="o">.</span><span class="na">start</span><span class="o">([</span><span class="n">loc</span><span class="o">])</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+
+<p>The <code>newEntity</code> flag in the cluster constructor indicates how new entities should be created. The WAR configuration set on the cluster is inherited by each of the TomcatServer contained by (i.e. "children of") the cluster.</p>
+
+<p>The <code>DynamicWebAppCluster</code> is dynamic in that it supports resizing the cluster, adding and removing servers, as managed either manually or by policies embedded in the entity.</p>
+
+<p>The main method creates a <code>JcloudsLocationFactory</code> with appropriate credentials for the AWS account, along with the
+RSA key to used for subsequently logging into the VM. It also specifies the relevant security group which should enable
+the 8080 port configured above. Finally, a JcloudsLocation allows to select the Amazon region the cluster will run in.</p>
+
+<h3>Starting a Tomcat Cluster with Nginx</h3>
+
+<p>The code below starts a Tomcat cluster along with an Nginx instance, where each Tomcat server in the cluster is registered with the Nginx instance.</p>
+
+<div class="highlight"><pre><code class="java"><span class="kd">class</span> <span class="nc">TomcatClusterWithNginxApp</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
+    <span class="n">NginxController</span> <span class="n">nginxController</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NginxController</span><span class="o">(</span>
+        <span class="n">domain</span> <span class="o">:</span> <span class="s">&quot;brooklyn.geopaas.org&quot;</span><span class="o">,</span>
+        <span class="n">port</span> <span class="o">:</span> <span class="mi">8000</span><span class="o">,</span>
+        <span class="n">portNumberSensor</span> <span class="o">:</span> <span class="n">Attributes</span><span class="o">.</span><span class="na">HTTP_PORT</span><span class="o">)</span>
+
+    <span class="n">ControlledDynamicWebAppCluster</span> <span class="n">cluster</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ControlledDynamicWebAppCluster</span><span class="o">(</span>
+        <span class="n">parent</span> <span class="o">:</span> <span class="k">this</span><span class="o">,</span>
+        <span class="n">controller</span> <span class="o">:</span> <span class="n">nginxController</span><span class="o">,</span>
+        <span class="n">webServerFactory</span> <span class="o">:</span> <span class="o">{</span> <span class="n">properties</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="n">TomcatServer</span><span class="o">(</span><span class="n">properties</span><span class="o">)</span> <span class="o">},</span>
+        <span class="nl">initialSize:</span> <span class="mi">2</span><span class="o">,</span>
+        <span class="nl">httpPort:</span> <span class="mi">8080</span><span class="o">,</span> <span class="nl">war:</span> <span class="s">&quot;/path/to/booking-mvc.war&quot;</span><span class="o">)</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">argv</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">TomcatClusterWithNginxApp</span> <span class="n">demo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TomcatClusterWithNginxApp</span><span class="o">(</span>
+            <span class="n">displayName</span> <span class="o">:</span> <span class="s">&quot;tomcat cluster with nginx example&quot;</span><span class="o">)</span>
+        <span class="n">BrooklynLauncher</span><span class="o">.</span><span class="na">manage</span><span class="o">(</span><span class="n">demo</span><span class="o">)</span>
+        
+        <span class="n">JcloudsLocationFactory</span> <span class="n">locFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JcloudsLocationFactory</span><span class="o">([</span>
+            <span class="n">provider</span> <span class="o">:</span> <span class="s">&quot;aws-ec2&quot;</span><span class="o">,</span>
+            <span class="n">identity</span> <span class="o">:</span> <span class="s">&quot;xxxxxxxxxxxxxxxxxxxxxxxxxxx&quot;</span><span class="o">,</span>
+            <span class="n">credential</span> <span class="o">:</span> <span class="s">&quot;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&quot;</span><span class="o">,</span>
+            <span class="n">sshPrivateKey</span> <span class="o">:</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&quot;/home/bob/.ssh/id_rsa.private&quot;</span><span class="o">),</span>
+            <span class="n">sshPublicKey</span> <span class="o">:</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&quot;/home/bob/.ssh/id_rsa.pub&quot;</span><span class="o">),</span>
+            <span class="nl">securityGroups:</span><span class="o">[</span><span class="s">&quot;my-security-group&quot;</span><span class="o">]</span>
+        <span class="o">])</span>
+
+        <span class="n">JcloudsLocation</span> <span class="n">loc</span> <span class="o">=</span> <span class="n">locFactory</span><span class="o">.</span><span class="na">newLocation</span><span class="o">(</span><span class="s">&quot;us-west-1&quot;</span><span class="o">)</span>
+
+        <span class="n">demo</span><span class="o">.</span><span class="na">start</span><span class="o">([</span><span class="n">loc</span><span class="o">])</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+
+<p>This creates a cluster that of Tomcat servers, along with an Nginx instance. The <code>NginxController</code> instance
+is notified whenever a member of the cluster joins or leaves; the entity is configured to look at the <code>HTTP_PORT</code>
+attribute of that instance so that the Nginx configuration can be updated with the ip:port of the cluster member.</p>
+
+<p>The beauty of OO programming is that classes can be re-used.  The compound entity created above is
+available off-the-shelf as the <code>LoadBalancedWebCluster</code> entity, as used in the following example.</p>
+
+<!---
+TODO things may need tidying (paragraphs, and/or eliminating any extra setConfig calls, though looks like these have gone)
+-->
+
+
+<h2>Starting a Multi-location Tomcat Fabric</h2>
+
+<!---
+TODO this example should use several cloud providers, including Openshift, and use GeoDNS, 
+and maybe a data store and/or messaging service; it is the last "most advanced" example
+-->
+
+
+
+
+<!---
+FIXME Discuss above comment with Aled/Alex as it is contentious
+-->
+
+
+
+
+<div class="highlight"><pre><code class="java"><span class="kd">class</span> <span class="nc">TomcatFabricApp</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
+    <span class="n">Closure</span> <span class="n">webClusterFactory</span> <span class="o">=</span> <span class="o">{</span> <span class="n">Map</span> <span class="n">flags</span><span class="o">,</span> <span class="n">Entity</span> <span class="n">parent</span> <span class="o">-&gt;</span>
+        <span class="n">Map</span> <span class="n">clusterFlags</span> <span class="o">=</span> <span class="n">flags</span> <span class="o">+</span> 
+            <span class="o">[</span><span class="nl">factory:</span> <span class="o">{</span> <span class="n">properties</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="n">TomcatServer</span><span class="o">(</span><span class="n">properties</span><span class="o">)</span> <span class="o">}]</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">DynamicWebAppCluster</span><span class="o">(</span><span class="n">clusterFlags</span><span class="o">,</span> <span class="n">parent</span><span class="o">)</span>
+    <span class="o">}</span>
+
+    <span class="n">DynamicFabric</span> <span class="n">fabric</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DynamicFabric</span><span class="o">(</span>
+            <span class="n">parent</span> <span class="o">:</span> <span class="k">this</span><span class="o">,</span>
+            <span class="n">displayName</span> <span class="o">:</span> <span class="s">&quot;WebFabric&quot;</span><span class="o">,</span>
+            <span class="n">displayNamePrefix</span> <span class="o">:</span> <span class="s">&quot;&quot;</span><span class="o">,</span>
+            <span class="n">displayNameSuffix</span> <span class="o">:</span> <span class="s">&quot; web cluster&quot;</span><span class="o">,</span>
+            <span class="n">initialSize</span> <span class="o">:</span> <span class="mi">2</span><span class="o">,</span>
+            <span class="n">factory</span> <span class="o">:</span> <span class="n">webClusterFactory</span><span class="o">,</span>
+            <span class="n">httpPort</span> <span class="o">:</span> <span class="mi">8080</span><span class="o">,</span> 
+            <span class="nl">war:</span> <span class="s">&quot;/path/to/booking-mvc.war&quot;</span><span class="o">)</span>
+    
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">argv</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">TomcatFabricApp</span> <span class="n">demo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TomcatFabricApp</span><span class="o">(</span><span class="n">displayName</span> <span class="o">:</span> <span class="s">&quot;tomcat example&quot;</span><span class="o">)</span>
+        <span class="n">BrooklynLauncher</span><span class="o">.</span><span class="na">manage</span><span class="o">(</span><span class="n">demo</span><span class="o">)</span>
+        
+        <span class="n">JcloudsLocationFactory</span> <span class="n">locFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JcloudsLocationFactory</span><span class="o">([</span>
+            <span class="n">provider</span> <span class="o">:</span> <span class="s">&quot;aws-ec2&quot;</span><span class="o">,</span>
+            <span class="n">identity</span> <span class="o">:</span> <span class="s">&quot;xxxxxxxxxxxxxxxxxxxxxxxxxxx&quot;</span><span class="o">,</span>
+            <span class="n">credential</span> <span class="o">:</span> <span class="s">&quot;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&quot;</span><span class="o">,</span>
+            <span class="n">sshPrivateKey</span> <span class="o">:</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&quot;/home/bob/.ssh/id_rsa.private&quot;</span><span class="o">),</span>
+            <span class="n">sshPublicKey</span> <span class="o">:</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&quot;/home/bob/.ssh/id_rsa.pub&quot;</span><span class="o">),</span>
+            <span class="nl">securityGroups:</span><span class="o">[</span><span class="s">&quot;my-security-group&quot;</span><span class="o">]</span>
+        <span class="o">])</span>
+
+        <span class="n">JcloudsLocation</span> <span class="n">loc</span> <span class="o">=</span> <span class="n">locFactory</span><span class="o">.</span><span class="na">newLocation</span><span class="o">(</span><span class="s">&quot;us-west-1&quot;</span><span class="o">)</span>
+        <span class="n">JcloudsLocation</span> <span class="n">loc2</span> <span class="o">=</span> <span class="n">locFactory</span><span class="o">.</span><span class="na">newLocation</span><span class="o">(</span><span class="s">&quot;eu-west-1&quot;</span><span class="o">)</span>
+        <span class="n">demo</span><span class="o">.</span><span class="na">start</span><span class="o">([</span><span class="n">loc</span><span class="o">,</span> <span class="n">loc2</span><span class="o">])</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+
+<p>This creates a web-fabric. When started, this creates a web-cluster in each location supplied.</p>
+
+<h2>Examples Source</h2>
+
+<p>The source code for these examples is available for download from GitHub. To retrieve the source, execute the following command:</p>
+
+<pre><code>git clone git@github.com:brooklyncentral/brooklyn-examples.git
+</code></pre>
+
+<p>You can also <a href="https://github.com/brooklyncentral/brooklyn-examples">browse the code</a> on the web.</p>
+
+
+        </div><!--maincontent-->
+        
+      <div id="sidebar">
+      
+
+
+  
+
+
+
+
+
+
+<div id="sidebar_toc">
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/v/0.5.0-SNAPSHOT/start/index.html"><div class="toc-1-item">Start</div></a>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/v/0.5.0-SNAPSHOT/use/guide/index.html"><div class="toc-1-item toc-1-header ">User Guide</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-SNAPSHOT/use/guide/quickstart/index.html"><div class="toc-2-item">Quick Start</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-SNAPSHOT/use/guide/defining-applications/basic-concepts.html"><div class="toc-2-item toc-2-header">Defining Applications</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/use/guide/defining-applications/basic-concepts.html"><div class="toc-3-item">Basic Concepts</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/use/guide/defining-applications/advanced-concepts.html"><div class="toc-3-item">Advanced Concepts</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/use/guide/defining-applications/common-usage.html"><div class="toc-3-item">Common Usage</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-SNAPSHOT/use/guide/management/index.html"><div class="toc-2-item toc-2-header">Management</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/use/guide/management/index.html#introduction"><div class="toc-3-item">Introduction</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/use/guide/management/index.html#startup-config"><div class="toc-3-item">Startup Configuration</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/use/guide/management/index.html#cli"><div class="toc-3-item">Command Line Interface</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/use/guide/management/index.html#console"><div class="toc-3-item">Management Web Console</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/use/guide/management/index.html#observation-other"><div class="toc-3-item">Observation APIs</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/use/guide/management/index.html#distributed-management"><div class="toc-3-item">Distributed Management</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/use/guide/management/index.html#resilience"><div class="toc-3-item">Resilience</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/use/guide/management/index.html#key-apis"><div class="toc-3-item">Key APIs</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/use/guide/management/index.html#sensors-and-effectors"><div class="toc-3-item">Sensors and Effectors</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-SNAPSHOT/use/guide/policies/index.html"><div class="toc-2-item toc-2-header">Policies</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/use/guide/policies/index.html#introduction"><div class="toc-3-item">Introduction</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/use/guide/policies/index.html#writing-policies"><div class="toc-3-item">Writing Policies</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/use/guide/policies/index.html#off-the-shelf-policies"><div class="toc-3-item">Off-the-Shelf Policies</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/use/guide/policies/index.html#implementing-policies"><div class="toc-3-item">Implementing Policies</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-SNAPSHOT/use/guide/entities/index.html"><div class="toc-2-item toc-2-header">Custom Entities</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/use/guide/entities/index.html#entity-lifestyle"><div class="toc-3-item">Entity Lifecycle</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/use/guide/entities/index.html#implementation-classes"><div class="toc-3-item">What to Extend</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/use/guide/entities/index.html#configuration"><div class="toc-3-item">Configuration</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/use/guide/entities/index.html#implementing-sensors"><div class="toc-3-item">Implementing Sensors</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/use/guide/entities/index.html#implementing-effectors"><div class="toc-3-item">Implementing Effectors</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/use/guide/entities/index.html#testing"><div class="toc-3-item">Testing</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-SNAPSHOT/use/guide/extras/index.html"><div class="toc-2-item toc-2-header">Extras</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/use/guide/extras/index.html#web"><div class="toc-3-item">Web</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/use/guide/extras/index.html#database"><div class="toc-3-item">Database</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/use/guide/extras/index.html#nosql"><div class="toc-3-item">NoSQL</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/use/guide/extras/index.html#messaging"><div class="toc-3-item">Messaging</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/use/guide/extras/index.html#provisioning"><div class="toc-3-item">Provisioning</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/v/0.5.0-SNAPSHOT/start/index.html"><div class="toc-1-item toc-1-header ">Elsewhere</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-SNAPSHOT/use/examples/index.html"><div class="toc-2-item toc-2-header">Examples</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/use/examples/webcluster/index.html"><div class="toc-3-item">Elastic Web Cluster</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/use/examples/global-web-fabric/index.html"><div class="toc-3-item">Global Web Fabric</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/use/examples/whirrhadoop/index.html"><div class="toc-3-item">Whirr Hadoop Cluster</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/use/examples/portable-cloudfoundry/index.html"><div class="toc-3-item">Portable Cloud Foundry</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/use/examples/messaging/index.html"><div class="toc-3-item">Publish-Subscribe Messaging</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-SNAPSHOT/use/api/index.html"><div class="toc-2-item">API Reference</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-SNAPSHOT/dev/code/index.html"><div class="toc-2-item toc-2-header">Contributing</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/dev/code/index.html"><div class="toc-3-item">The Code</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/dev/build/index.html"><div class="toc-3-item">Build and Test</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/dev/tips/index.html"><div class="toc-3-item">Tips and Tricks</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/dev/wishlist.html"><div class="toc-3-item">Wishlist</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/dev/links.html"><div class="toc-3-item">Links</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-SNAPSHOT/dev/how-to-contrib.html"><div class="toc-3-item">How to Contribute</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-SNAPSHOT/license/index.html"><div class="toc-2-item">License</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+ 
+</div>
+<br/>
+
+
+      </div>
+
+    </div><!--contentcontainer-->
+        
+    <div id="footer">
+        <p id="copyright">
+            <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
+            brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
+            &copy; 2012 Cloudsoft Corporation.
+        </p>
+    </div><!--footer -->
+
+</div><!--container-->
+
+</body>
+</html>

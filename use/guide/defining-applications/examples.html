@@ -5,26 +5,87 @@
   <title>Examples</title>
   <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 
-  <link rel="stylesheet" type="text/css" href="/style/main.css" />
-  <link rel="stylesheet" type="text/css" href="/style/page.css" />
-  <link rel="stylesheet" type="text/css" href="/style/toc.css" />
-  <link rel="stylesheet" type="text/css" href="/style/docs/code.css" />
+  <link rel="stylesheet" href="/style/style.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/style/toc.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/style/docs/code.css" type="text/css" media="screen" />
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   
 	<!-- Sidebar/ToC Scripts and CSS -->
 	<script src="/style/js/jquery/jquery-1.7.1.min.js"></script>
 	<script src="/style/js/jquery/jquery-ui-1.8.18.custom.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="/style/js/jquery/smoothness/jquery-ui-1.8.18.custom.css" />
+	
+	<script type="text/javascript" src="/style/js/superfish.js"></script>
+	
+<!-- Clipboard support -->
+<script src="/style/js/zeroclipboard/ZeroClipboard.js"></script>
+<style type="text/css">
+.clipboard_container { float: right; padding: 8px; }
+.clipboard_button {
+    background-image: url("/style/icons/clipboard-green-normal.png");
+    background-size: 18px 21px;
+    width: 18px; height: 21px;
+}
+.clipboard_button.hover  { background-image: url("/style/icons/clipboard-green-hover.png"); }
+.clipboard_button.active  { background-image: url("/style/icons/clipboard-green-click.png"); }'
+</style>
+<script type="text/javascript"> <!-- clipboard -->
+ZeroClipboard.setMoviePath( '/style/js/zeroclipboard/ZeroClipboard.swf' );
+</script>
+<script type="text/javascript"> <!-- clipboard positioning -->
+$(document).ready(function() {
+  $('<div class="clipboard_container" title="Copy to Clipboard">'+
+    '<div class="clipboard_button"/>'+
+  '</div>').insertBefore($('div.highlight'))
+  $('div.clipboard_container').each(function(index) {
+    var clipboard = new ZeroClipboard.Client();
+    clipboard.glue( $(this).find(":first")[0], $(this)[0] );
+    var target = $(this).next();
+    var txt = target.text().trim();
+    if (target.find('code.bash')) {
+      txt = txt.replace(/^[^%$]*[%$] /, "").replace(new RegExp('\n[^%$]*[%$] ','g'), "\n");
+    }
+    clipboard.setText(txt);
+  });
+});
+</script>
 
-	<script>
+    <script type="text/javascript">
+        // initialise menu delay
+        jQuery(function(){
+            jQuery('ul#mainmenu').superfish({ 
+                autoArrows:  false,  // disable generation of arrow mark-up 
+                dropShadows: false,  // disable drop shadows 
+                disableHI:   true,   // set to true to disable hoverIntent detection 
+                delay:       500,    // the delay in milliseconds that the mouse can remain outside a submenu without it closing 
+                speed:       'fast', 
+            });
+        });
+    </script>
+
+<script type="text/javascript"> <!-- search -->
 	$(function() {
-		$('#simple_google').submit(function() {
-      		$('input[name="q"]').val("site:" + document.location.hostname + " " + $('input[name="qfront"]').val());
-        return true;
-		});
+		$('#simple_google')
+			.submit(function() {
+				$('input[name="q"]').val("site:" + document.location.hostname + " " + $('input[name="brooklyn-search"]').val());
+			return true;
+			});
+		$('input[name="brooklyn-search"]').focus(function() {
+				if ($(this).val() === $(this).attr('placeholder')) {
+					$(this).val('');
+				}
+			})
+			.blur(function() {
+				if ($(this).val() === '') {
+					$(this).val($(this).attr('placeholder'));
+				}
+			})
+			.blur();
     });
-	</script>
+</script>
 
-<script type="text/javascript">
+<script type="text/javascript"> <!-- analytics -->
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-30530918-1']);
 _gaq.push(['_trackPageview']);
@@ -39,73 +100,80 @@ _gaq.push(['_trackPageview']);
 </head>
 
 <body>
-  <div id="all">
 
-    <div id="page_header" class="page_row">
-     <table width="100%"><tr><td rowspan="2">
-      <div id="header_logo">
-        <a href = "/"><img height="68" width="220" border='0' src="/style/brooklyn-logo.png"/></a>
-      </div>
-     </td><td align="right" valign="top" width="100%">
-        <div id="top-right-quick-links">
-            <a href="/meta/contact.html">Contact</a> &nbsp;|&nbsp;
-            <a href="/start/download.html">Download</a> &nbsp;|&nbsp;
-            <a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a>
+    <ul id="shortcuts" title="Accessibility shortcuts menu">
+        <li><a href="#maincontent">Skip to main content</a></li>
+    </ul>
+   
+
+<div id="container">
+
+    <div id="header">
+    
+        <div id="identity">
+            <a href="http://brooklyncentral.github.com/" rel="home">Brooklyn</a>
         </div>
-     </td></tr>
-     <tr><td valign="bottom">
-     </td></tr></table>
-    </div>
+        
+        <ul id="quicklinks">
+            <li><a href="/meta/versions.html">0.5.0-SNAPSHOT</a></li>
+            <li><a href="/start/download.html">Download</a></li>
+            <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
+            <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
+            <li><a href="/meta/contact.html">Contact</a></li>
+        </ul>
 
-    
+        <div id="menubar">  
 
 
 
 
 
-<div id="topbar">
-<table height="100%"><tr style="vertical-align: middle;"><td width="100%" align="left" style="padding-bottom: 12px; padding-left: 18px;">
 
-  
-  
-  <a class="topbar-item " href="/index.html">Overview</a>
 
-  
-  
-  <a class="topbar-item " href="/start/download.html">Download</a>
+<ul id="mainmenu"><!-- INSERT LINKS -->
+            
 
   
   
-  <a class="topbar-item " href="/start/walkthrough/index.html">Walkthrough</a>
+  <li class=""><a href="/index.html">Overview</a></li>
 
   
   
-  <a class="topbar-item " href="/use/guide/index.html">Guide</a>
+  <li class=""><a href="/start/download.html">Download</a></li>
 
   
   
-  <a class="topbar-item " href="/use/examples/index.html">Examples</a>
+  <li class=""><a href="/start/walkthrough/index.html">Walkthrough</a></li>
 
   
   
-  <a class="topbar-item " href="/dev/code/index.html">Contributing</a>
+  <li class=""><a href="/use/guide/index.html">Guide</a></li>
 
-</td><td align="right" style="padding-top: 5px; padding-right: 18px;">
-      <div id="search_box">
-        <form id="simple_google" action="http://www.google.com/search" method="get">
-        <input name="q" type="hidden" />
-        <input name="qfront" type="text" placeholder='Search'/></p>
-        </form>
-      </div>
-</td></table>
+  
+  
+  <li class=""><a href="/use/examples/index.html">Examples</a></li>
 
-</div>
-
-    <div class="page_row">
+  
+  
+  <li class=""><a href="/dev/code/index.html">Contributing</a></li>
 
 
-      <div id="page_content">
-        
+</ul>                    
+
+            <form method="get" id="simple_google" class="searchform" action="http://www.google.com/search" method="get">
+                <input type="text" class="searchinput" name="brooklyn-search" placeholder="Search: type &amp; hit enter" />
+                <input type="hidden" name="q" value="" />
+            </form>
+            
+        </div>
+                
+    </div><!--header-->
+    
+    <div id="contentcontainer">
+    
+        <div id="maincontent">
+
+
   
 
 
@@ -149,15 +217,6 @@ _gaq.push(['_trackPageview']);
         
             
         
-    
-        
-        
-            
-        
-            
-        
-            
-        
             
         
     
@@ -170,34 +229,6 @@ _gaq.push(['_trackPageview']);
             
         
             
-        
-            
-        
-            
-        
-    
-        
-        
-            
-        
-            
-        
-            
-        
-            
-        
-    
-
-    
-    
-        
-        
-            
-        
-            
-        
-    
-        
         
     
         
@@ -216,9 +247,56 @@ _gaq.push(['_trackPageview']);
         
     
         
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
         
     
 
+    
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+
 
 
     
@@ -226,36 +304,19 @@ _gaq.push(['_trackPageview']);
     
     
 
-
-<div class="breadcrumbs">
-    <span class="breadcrumb-item bc1"><a class='breadcrumb bc1' href="">Home</a></span>
+            
+<p id="breadcrumb">
+    <a href="">Home</a>
     
-        <span class="bcsep bc1">&raquo;</span> <span class="breadcrumb-item bc2"><a class='breadcrumb bc2' href="/use/guide/defining-applications/examples.html">Examples</a></span>
+        &raquo; <a href="/use/guide/defining-applications/examples.html">Examples</a>
         
     
-</div>
+</p>
 
-<!-- FIND HIERARCHY IN TOC AND USE THAT
-        
-        
-        <span class="breadcrumb-item"><a class='breadcrumb' href="/">Home</a></span>
-        
-        <span class="bcsep">&raquo;</span> <span class="breadcrumb-item"><a class='breadcrumb' href="/use">use</a></span>
-        
-        
-        <span class="bcsep">&raquo;</span> <span class="breadcrumb-item"><a class='breadcrumb' href="/use/guide">guide</a></span>
-        
-        
-        <span class="bcsep">&raquo;</span> <span class="breadcrumb-item"><a class='breadcrumb' href="/use/guide/defining-applications">defining-applications</a></span>
-        
-        
- -->
- 
-		
-		<h1 id="header_title">Examples</h1>
-		<hr/>
 
-		<p><strong> TODO: this examples page is deprecated;
+<h1 id="header_title">Examples</h1>
+    
+<p><strong> TODO: this examples page is deprecated;
 code is out-of-date, and better examples are described on the web site.
 need to figure out if this page should be kept at all
 (indeed if the "guide" is even still relevant)</strong></p>
@@ -273,7 +334,7 @@ need to figure out if this page should be kept at all
     <span class="nt">&lt;dependency&gt;</span>
         <span class="nt">&lt;groupId&gt;</span>io.brooklyn<span class="nt">&lt;/groupId&gt;</span>
         <span class="nt">&lt;artifactId&gt;</span>brooklyn-all<span class="nt">&lt;/artifactId&gt;</span>
-        <span class="nt">&lt;version&gt;</span>0.4.0-SNAPSHOT<span class="nt">&lt;/version&gt;</span>  <span class="c">&lt;!-- BROOKLYN_VERSION --&gt;</span>
+        <span class="nt">&lt;version&gt;</span>0.5.0-SNAPSHOT<span class="nt">&lt;/version&gt;</span>  <span class="c">&lt;!-- BROOKLYN_VERSION --&gt;</span>
     <span class="nt">&lt;/dependency&gt;</span>
 <span class="nt">&lt;/dependencies&gt;</span>
  
@@ -364,7 +425,7 @@ with URLs supporting an optional <code>classpath://org/acme/resources/xxx.war</c
 </div>
 
 
-<p>The <code>newEntity</code> flag in the cluster constructor indicates how new entities should be created. The WAR configuration set on the cluster is inherited by each of the TomcatServer contained (i.e. "owned") by the cluster.</p>
+<p>The <code>newEntity</code> flag in the cluster constructor indicates how new entities should be created. The WAR configuration set on the cluster is inherited by each of the TomcatServer contained by (i.e. "children of") the cluster.</p>
 
 <p>The <code>DynamicWebAppCluster</code> is dynamic in that it supports resizing the cluster, adding and removing servers, as managed either manually or by policies embedded in the entity.</p>
 
@@ -383,7 +444,7 @@ the 8080 port configured above. Finally, a JcloudsLocation allows to select the 
         <span class="n">portNumberSensor</span> <span class="o">:</span> <span class="n">Attributes</span><span class="o">.</span><span class="na">HTTP_PORT</span><span class="o">)</span>
 
     <span class="n">ControlledDynamicWebAppCluster</span> <span class="n">cluster</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ControlledDynamicWebAppCluster</span><span class="o">(</span>
-        <span class="n">owner</span> <span class="o">:</span> <span class="k">this</span><span class="o">,</span>
+        <span class="n">parent</span> <span class="o">:</span> <span class="k">this</span><span class="o">,</span>
         <span class="n">controller</span> <span class="o">:</span> <span class="n">nginxController</span><span class="o">,</span>
         <span class="n">webServerFactory</span> <span class="o">:</span> <span class="o">{</span> <span class="n">properties</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="n">TomcatServer</span><span class="o">(</span><span class="n">properties</span><span class="o">)</span> <span class="o">},</span>
         <span class="nl">initialSize:</span> <span class="mi">2</span><span class="o">,</span>
@@ -442,14 +503,14 @@ FIXME Discuss above comment with Aled/Alex as it is contentious
 
 
 <div class="highlight"><pre><code class="java"><span class="kd">class</span> <span class="nc">TomcatFabricApp</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
-    <span class="n">Closure</span> <span class="n">webClusterFactory</span> <span class="o">=</span> <span class="o">{</span> <span class="n">Map</span> <span class="n">flags</span><span class="o">,</span> <span class="n">Entity</span> <span class="n">owner</span> <span class="o">-&gt;</span>
+    <span class="n">Closure</span> <span class="n">webClusterFactory</span> <span class="o">=</span> <span class="o">{</span> <span class="n">Map</span> <span class="n">flags</span><span class="o">,</span> <span class="n">Entity</span> <span class="n">parent</span> <span class="o">-&gt;</span>
         <span class="n">Map</span> <span class="n">clusterFlags</span> <span class="o">=</span> <span class="n">flags</span> <span class="o">+</span> 
             <span class="o">[</span><span class="nl">factory:</span> <span class="o">{</span> <span class="n">properties</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="n">TomcatServer</span><span class="o">(</span><span class="n">properties</span><span class="o">)</span> <span class="o">}]</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nf">DynamicWebAppCluster</span><span class="o">(</span><span class="n">clusterFlags</span><span class="o">,</span> <span class="n">owner</span><span class="o">)</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">DynamicWebAppCluster</span><span class="o">(</span><span class="n">clusterFlags</span><span class="o">,</span> <span class="n">parent</span><span class="o">)</span>
     <span class="o">}</span>
 
     <span class="n">DynamicFabric</span> <span class="n">fabric</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DynamicFabric</span><span class="o">(</span>
-            <span class="n">owner</span> <span class="o">:</span> <span class="k">this</span><span class="o">,</span>
+            <span class="n">parent</span> <span class="o">:</span> <span class="k">this</span><span class="o">,</span>
             <span class="n">displayName</span> <span class="o">:</span> <span class="s">&quot;WebFabric&quot;</span><span class="o">,</span>
             <span class="n">displayNamePrefix</span> <span class="o">:</span> <span class="s">&quot;&quot;</span><span class="o">,</span>
             <span class="n">displayNameSuffix</span> <span class="o">:</span> <span class="s">&quot; web cluster&quot;</span><span class="o">,</span>
@@ -491,13 +552,11 @@ FIXME Discuss above comment with Aled/Alex as it is contentious
 
 <p>You can also <a href="https://github.com/brooklyncentral/brooklyn-examples">browse the code</a> on the web.</p>
 
-      </div>
 
-      <div id="page_toc">
-        <!-- Sidebar -->
+        </div><!--maincontent-->
         
-<div id="sidebar_image"><img width="204" src="/style/brooklyn-bridge-v2.png"/></div>
-<br/>
+      <div id="sidebar">
+      
 
 
   
@@ -512,14 +571,12 @@ FIXME Discuss above comment with Aled/Alex as it is contentious
     
     
     
-    
 	  <div class="toc-1 ">
   
 	    <a href="/start/index.html"><div class="toc-1-item">Start</div></a>
   
       </div>
 
-    
     
     
     
@@ -577,6 +634,11 @@ FIXME Discuss above comment with Aled/Alex as it is contentious
             
               <div class="toc-3 ">
 	            <a href="/use/guide/management/index.html#startup-config"><div class="toc-3-item">Startup Configuration</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#cli"><div class="toc-3-item">Command Line Interface</div></a>
               </div>
         
             
@@ -712,6 +774,11 @@ FIXME Discuss above comment with Aled/Alex as it is contentious
 	            <a href="/use/guide/extras/index.html#messaging"><div class="toc-3-item">Messaging</div></a>
               </div>
         
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/extras/index.html#provisioning"><div class="toc-3-item">Provisioning</div></a>
+              </div>
+        
             </div></div>
       
           </div>
@@ -720,7 +787,6 @@ FIXME Discuss above comment with Aled/Alex as it is contentious
   
       </div>
 
-    
     
     
     
@@ -743,7 +809,22 @@ FIXME Discuss above comment with Aled/Alex as it is contentious
         
             
               <div class="toc-3 ">
+	            <a href="/use/examples/global-web-fabric/index.html"><div class="toc-3-item">Global Web Fabric</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
 	            <a href="/use/examples/whirrhadoop/index.html"><div class="toc-3-item">Whirr Hadoop Cluster</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/portable-cloudfoundry/index.html"><div class="toc-3-item">Portable Cloud Foundry</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/messaging/index.html"><div class="toc-3-item">Publish-Subscribe Messaging</div></a>
               </div>
         
             </div></div>
@@ -814,21 +895,20 @@ FIXME Discuss above comment with Aled/Alex as it is contentious
 </div>
 <br/>
 
+
       </div>
 
-    </div>
+    </div><!--contentcontainer-->
+        
+    <div id="footer">
+        <p id="copyright">
+            <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
+            brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
+            &copy; 2012 Cloudsoft Corporation.
+        </p>
+    </div><!--footer -->
 
-    <div class="page_row"/>
-
-<hr/>
-
-    <div id="page_footer" class="page_row">
-      <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
-      brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
-      &copy; 2012 Cloudsoft Corporation.
-    </div>
-
-  </div>
+</div><!--container-->
 
 </body>
 </html>

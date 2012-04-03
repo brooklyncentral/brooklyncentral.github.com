@@ -5,26 +5,87 @@
   <title>Whirr Hadoop Cluster</title>
   <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 
-  <link rel="stylesheet" type="text/css" href="/style/main.css" />
-  <link rel="stylesheet" type="text/css" href="/style/page.css" />
-  <link rel="stylesheet" type="text/css" href="/style/toc.css" />
-  <link rel="stylesheet" type="text/css" href="/style/docs/code.css" />
+  <link rel="stylesheet" href="/style/style.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/style/toc.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/style/docs/code.css" type="text/css" media="screen" />
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   
 	<!-- Sidebar/ToC Scripts and CSS -->
 	<script src="/style/js/jquery/jquery-1.7.1.min.js"></script>
 	<script src="/style/js/jquery/jquery-ui-1.8.18.custom.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="/style/js/jquery/smoothness/jquery-ui-1.8.18.custom.css" />
+	
+	<script type="text/javascript" src="/style/js/superfish.js"></script>
+	
+<!-- Clipboard support -->
+<script src="/style/js/zeroclipboard/ZeroClipboard.js"></script>
+<style type="text/css">
+.clipboard_container { float: right; padding: 8px; }
+.clipboard_button {
+    background-image: url("/style/icons/clipboard-green-normal.png");
+    background-size: 18px 21px;
+    width: 18px; height: 21px;
+}
+.clipboard_button.hover  { background-image: url("/style/icons/clipboard-green-hover.png"); }
+.clipboard_button.active  { background-image: url("/style/icons/clipboard-green-click.png"); }'
+</style>
+<script type="text/javascript"> <!-- clipboard -->
+ZeroClipboard.setMoviePath( '/style/js/zeroclipboard/ZeroClipboard.swf' );
+</script>
+<script type="text/javascript"> <!-- clipboard positioning -->
+$(document).ready(function() {
+  $('<div class="clipboard_container" title="Copy to Clipboard">'+
+    '<div class="clipboard_button"/>'+
+  '</div>').insertBefore($('div.highlight'))
+  $('div.clipboard_container').each(function(index) {
+    var clipboard = new ZeroClipboard.Client();
+    clipboard.glue( $(this).find(":first")[0], $(this)[0] );
+    var target = $(this).next();
+    var txt = target.text().trim();
+    if (target.find('code.bash')) {
+      txt = txt.replace(/^[^%$]*[%$] /, "").replace(new RegExp('\n[^%$]*[%$] ','g'), "\n");
+    }
+    clipboard.setText(txt);
+  });
+});
+</script>
 
-	<script>
+    <script type="text/javascript">
+        // initialise menu delay
+        jQuery(function(){
+            jQuery('ul#mainmenu').superfish({ 
+                autoArrows:  false,  // disable generation of arrow mark-up 
+                dropShadows: false,  // disable drop shadows 
+                disableHI:   true,   // set to true to disable hoverIntent detection 
+                delay:       500,    // the delay in milliseconds that the mouse can remain outside a submenu without it closing 
+                speed:       'fast', 
+            });
+        });
+    </script>
+
+<script type="text/javascript"> <!-- search -->
 	$(function() {
-		$('#simple_google').submit(function() {
-      		$('input[name="q"]').val("site:" + document.location.hostname + " " + $('input[name="qfront"]').val());
-        return true;
-		});
+		$('#simple_google')
+			.submit(function() {
+				$('input[name="q"]').val("site:" + document.location.hostname + " " + $('input[name="brooklyn-search"]').val());
+			return true;
+			});
+		$('input[name="brooklyn-search"]').focus(function() {
+				if ($(this).val() === $(this).attr('placeholder')) {
+					$(this).val('');
+				}
+			})
+			.blur(function() {
+				if ($(this).val() === '') {
+					$(this).val($(this).attr('placeholder'));
+				}
+			})
+			.blur();
     });
-	</script>
+</script>
 
-<script type="text/javascript">
+<script type="text/javascript"> <!-- analytics -->
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-30530918-1']);
 _gaq.push(['_trackPageview']);
@@ -39,248 +100,289 @@ _gaq.push(['_trackPageview']);
 </head>
 
 <body>
-  <div id="all">
 
-    <div id="page_header" class="page_row">
-     <table width="100%"><tr><td rowspan="2">
-      <div id="header_logo">
-        <a href = "/"><img height="68" width="220" border='0' src="/style/brooklyn-logo.png"/></a>
-      </div>
-     </td><td align="right" valign="top" width="100%">
-        <div id="top-right-quick-links">
-            <a href="/meta/contact.html">Contact</a> &nbsp;|&nbsp;
-            <a href="/start/download.html">Download</a> &nbsp;|&nbsp;
-            <a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a>
+    <ul id="shortcuts" title="Accessibility shortcuts menu">
+        <li><a href="#maincontent">Skip to main content</a></li>
+    </ul>
+   
+
+<div id="container">
+
+    <div id="header">
+    
+        <div id="identity">
+            <a href="http://brooklyncentral.github.com/" rel="home">Brooklyn</a>
         </div>
-     </td></tr>
-     <tr><td valign="bottom">
-     </td></tr></table>
-    </div>
+        
+        <ul id="quicklinks">
+            <li><a href="/meta/versions.html">0.5.0-SNAPSHOT</a></li>
+            <li><a href="/start/download.html">Download</a></li>
+            <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
+            <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
+            <li><a href="/meta/contact.html">Contact</a></li>
+        </ul>
 
+        <div id="menubar">  
+
+
+
+
+
+
+
+<ul id="mainmenu"><!-- INSERT LINKS -->
+            
+
+  
+  
+  <li class=""><a href="/index.html">Overview</a></li>
+
+  
+  
+  <li class=""><a href="/start/download.html">Download</a></li>
+
+  
+  
+  <li class=""><a href="/start/walkthrough/index.html">Walkthrough</a></li>
+
+  
+  
+  <li class=""><a href="/use/guide/index.html">Guide</a></li>
+
+  
+  
+  <li class="toc-active"><a href="/use/examples/index.html">Examples</a></li>
+
+  
+  
+  <li class=""><a href="/dev/code/index.html">Contributing</a></li>
+
+
+</ul>                    
+
+            <form method="get" id="simple_google" class="searchform" action="http://www.google.com/search" method="get">
+                <input type="text" class="searchinput" name="brooklyn-search" placeholder="Search: type &amp; hit enter" />
+                <input type="hidden" name="q" value="" />
+            </form>
+            
+        </div>
+                
+    </div><!--header-->
+    
+    <div id="contentcontainer">
+    
+        <div id="maincontent">
+
+
+  
+
+
+
+
+
+
+
+    
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+
+    
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+                
+                
+                
+                
+                
+                
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+        
+        
+    
+
+    
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+
+    
+    
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+        
+    
+        
+        
+    
+        
+        
     
 
 
 
+            
+<p id="breadcrumb">
+    <a href="/use/index.html">Using brooklyn</a>
+    
+        &raquo; <a href="/use/examples/index.html">Examples</a>
+        
+            &raquo; <a href="/use/examples/whirrhadoop/index.html">Whirr Hadoop Cluster</a>
+        
+    
+</p>
 
 
-<div id="topbar">
-<table height="100%"><tr style="vertical-align: middle;"><td width="100%" align="left" style="padding-bottom: 12px; padding-left: 18px;">
+<h1 id="header_title">Whirr Hadoop Cluster</h1>
+    
+<h2>Before You Begin</h2>
 
-  
-  
-  <a class="topbar-item " href="/index.html">Overview</a>
 
-  
-  
-  <a class="topbar-item " href="/start/download.html">Download</a>
 
-  
-  
-  <a class="topbar-item " href="/start/walkthrough/index.html">Walkthrough</a>
 
-  
-  
-  <a class="topbar-item " href="/use/guide/index.html">Guide</a>
+<p>To use the examples, you'll need <code>curl</code>, <code>git</code>, <code>java</code> (1.6+), and <code>maven</code> (v3) installed.</p>
 
-  
-  
-  <a class="topbar-item toc-active" href="/use/examples/index.html">Examples</a>
 
-  
-  
-  <a class="topbar-item " href="/dev/code/index.html">Contributing</a>
 
-</td><td align="right" style="padding-top: 5px; padding-right: 18px;">
-      <div id="search_box">
-        <form id="simple_google" action="http://www.google.com/search" method="get">
-        <input name="q" type="hidden" />
-        <input name="qfront" type="text" placeholder='Search'/></p>
-        </form>
-      </div>
-</td></table>
 
+<!--- both snapshots and releases -->
+
+
+
+
+<!--- releases -->
+
+
+
+
+<p></p>
+
+
+
+
+<p>First, grab a copy of the Brooklyn snapshot distribution you wish to use from
+<a href="https://oss.sonatype.org/content/groups/public/io/brooklyn/brooklyn-dist/">the Sonatype snapshot repo</a>
+(or build it yourself following instructions <a href="/dev/build/">here</a>),
+unpack it to your favourite location (e.g. <code>$(pwd)</code>),
+and export <code>BROOKLYN_HOME</code>:</p>
+
+
+
+
+<div class="highlight"><pre><code class="bash">% curl -L -o brooklyn-dist-0.5.0-SNAPSHOT-dist.tar.gz 
+% tar xvzf brooklyn-dist-0.5.0-SNAPSHOT-dist.tar.gz
+% <span class="nb">export </span><span class="nv">BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/brooklyn-0.5.0-SNAPSHOT/
+</code></pre>
 </div>
 
-    <div class="page_row">
-
-
-      <div id="page_content">
-        
-  
 
 
 
-
-
-
-
-    
-    
-        
-        
-    
-        
-        
-    
-        
-        
-    
-        
-        
-    
-
-    
-    
-        
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-    
-        
-        
-            
-        
-            
-                
-                
-                
-                
-                
-                
-            
-        
-    
-        
-        
-    
-        
-        
-    
-
-    
-    
-        
-        
-            
-        
-            
-        
-            
-        
-            
-        
-    
-        
-        
-            
-        
-            
-        
-            
-        
-    
-        
-        
-            
-        
-            
-        
-            
-        
-            
-        
-    
-        
-        
-    
-        
-        
-            
-        
-            
-        
-            
-        
-    
-        
-        
-    
-
-    
-    
-        
-        
-    
-        
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-    
-
-    
-    
-        
-        
-    
-        
-        
-    
-        
-        
-    
-
-
-
-
-<div class="breadcrumbs">
-    <span class="breadcrumb-item bc1"><a class='breadcrumb bc1' href="/use/index.html">Using brooklyn</a></span>
-    
-        <span class="bcsep bc1">&raquo;</span> <span class="breadcrumb-item bc2"><a class='breadcrumb bc2' href="/use/examples/index.html">Examples</a></span>
-        
-            <span class="bcsep bc2">&raquo;</span> <span class="breadcrumb-item bc2"><a class='breadcrumb bc3' href="/use/examples/whirrhadoop/index.html">Whirr Hadoop Cluster</a></span>
-        
-    
-</div>
-
-<!-- FIND HIERARCHY IN TOC AND USE THAT
-        
-        
-        <span class="breadcrumb-item"><a class='breadcrumb' href="/">Home</a></span>
-        
- -->
- 
-		
-		<h1 id="header_title">Whirr Hadoop Cluster</h1>
-		<hr/>
-
-		<h2>Before You Begin</h2>
-
-
-
-
-<p>To use the examples, you'll need <code>git</code>, <code>java</code>, and <code>maven</code> (v3) installed.
-Then check them out from <a href="https://github.com/brooklyncentral/brooklyn-examples">github.com/brooklyncentral/brooklyn-examples</a>,
-build, and run:</p>
+<p>Then, grab a copy of the brooklyn-examples source code and build with Maven:</p>
 
 
 
@@ -294,14 +396,47 @@ build, and run:</p>
 
 
 
-<p>If you hit any issues with the above, see the tips
-for <a href="/dev/build/index.html">Maven</a> and
-<a href="/dev/build/ide.html">IDEs</a>.</p>
+<p>Please note, these instructions are for a SNAPSHOT release of Brooklyn,
+so proceed with caution.
+For the latest stable version, go <a href="/meta/versions.html">here</a>.</p>
 
 
 
 
-<p>The project <code>examples/hadoop-and-whirr</code> includes deployment descriptors
+<p>For more information on ways to download Brooklyn please
+see the <a href="/start/download.html">download page</a>.
+For more information on the Brooklyn CLI and launching apps,
+please visit <a href="/use/guide/management/index.html#cli">this section of the user guide</a>.</p>
+
+
+
+
+<p>Now, go to this particular example's directory:</p>
+
+
+
+
+<div class="highlight"><pre><code class="bash">% <span class="nb">cd </span>hadoop-and-whirr
+</code></pre>
+</div>
+
+
+
+
+<p>The CLI needs to know where to find your compiled examples. You can set this up by exporting
+the <code>BROOKLYN_CLASSPATH</code> environment variable in the following way:</p>
+
+
+
+
+<div class="highlight"><pre><code class="bash">% <span class="nb">export </span><span class="nv">BROOKLYN_CLASSPATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/target/classes
+</code></pre>
+</div>
+
+
+
+
+<p>The project <code>hadoop-and-whirr</code> includes deployment descriptors
 showing how to provision Whirr-based clusters from Brooklyn,
 including setting up a Hadoop recipe.</p>
 
@@ -343,8 +478,19 @@ with an arbitrary size, with one line using the <code>WhirrHadoopCluster</code> 
 
 
 
-<p>You can run this by running <code>./demo-hadoop.sh</code>.
-This by default targets <code>aws-ec2:eu-west-1</code>,
+<p>You can run this by running:</p>
+
+
+
+
+<div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.extras.whirr.WhirrHadoopExample --stopOnKeyPress --location aws-ec2:eu-west-1
+</code></pre>
+</div>
+
+
+
+
+<p>This targets <code>aws-ec2:eu-west-1</code>,
 so you will need to set your AWS credentials as described <a href="/use/guide/management/index.html#startup-config">here</a>.</p>
 
 
@@ -358,6 +504,11 @@ so you will need to set your AWS credentials as described <a href="/use/guide/ma
 <p>Once it is running, navigate to the Brooklyn web console to see the <code>NAME_NODE_URL</code> sensor.
 (And not that using <a href="/use/guide/defining-applications/advanced-concepts.html#dependent"><code>attributeWhenReady</code></a>,
 you can easily configure a larger application to use its own dedicated Hadoop cluster.)</p>
+
+
+
+
+<p><a name="custom-whirr-recipe"></a></p>
 
 
 
@@ -386,8 +537,38 @@ can be run from within Brooklyn:</p>
 
 
 
-<p>This can be launched with the script <code>./demo-whirr-recipe.sh</code>.
-Feel free to experiment with the instance template parameter,
+<p>This can be launched by running:</p>
+
+
+
+
+<div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.extras.whirr.WhirrExample --stopOnKeyPress --location aws-ec2:eu-west-1
+</code></pre>
+</div>
+
+
+
+
+<p>In the provided example this will deploy to AWS.</p>
+
+
+
+
+<p>If you would like to deploy to localhost, you can do this by running the same command and replacing <code>aws-ec2:eu-west-1</code> with <code>localhost</code>. However, please note that currently there are some limitations when deploying to localhost:</p>
+
+
+
+
+<ul>
+<li>You can not deploy more than one server (noop doesn't count in the above case).</li>
+<li>This has only been tested on Ubuntu 10.04 and might cause problems on other operating systems.</li>
+<li>Your user will need to be configured for <a href="http://docs.outerthought.org/lilyenterprise-docs-trunk/539-lily/541-lily.html">passwordless ssh and passwordless sudo</a> on localhost.</li>
+</ul>
+
+
+
+
+<p>Feel free to experiment with the instance template parameter,
 trying out other recipes from Whirr.</p>
 
 
@@ -399,18 +580,32 @@ Chef and Puppet scripts you may wish to use.
 The Whirr state is loaded into Brooklyn, as well as saved to disk in the usual Whirr way.
 This means it is available for programmatic extensions (as is used for Hadoop),
 including defining sensors and effectors and applying policy:
-stop is available, with <a href="https://issues.apache.org/jira/browse/WHIRR-214">resize</a> expected soon.</p>
+stop is available, with <a href="https://issues.apache.org/jira/browse/WHIRR-214">resize</a> expected soon
+(making it easy -- or at least much easier -- to write custom <strong>elasticity policies</strong>).</p>
 
 
 
 
-      </div>
+<h2>Integrating with Other Entities</h2>
 
-      <div id="page_toc">
-        <!-- Sidebar -->
+
+
+
+<p>The real interest of Brooklyn working with Whirr, of course, is to combine systems such as Hadoop
+with your custom applications which use these systems.
+One example, combining the <a href="/use/examples/global-web-fabric">Global Web Fabric example</a>
+with the Whirr Hadoop entity, is included in this example project.
+A Hadoop-based chatroom web app, performing map-reduce (and a few necessary contortions to work with private subnets)
+is in <code>WebFabrixWithHadoopExample</code>.</p>
+
+
+
+
+
+        </div><!--maincontent-->
         
-<div id="sidebar_image"><img width="204" src="/style/brooklyn-bridge-v2.png"/></div>
-<br/>
+      <div id="sidebar">
+      
 
 
   
@@ -422,7 +617,6 @@ stop is available, with <a href="https://issues.apache.org/jira/browse/WHIRR-214
 
 <div id="sidebar_toc">
 
-    
     
     
     
@@ -467,7 +661,6 @@ stop is available, with <a href="https://issues.apache.org/jira/browse/WHIRR-214
   
       </div>
 
-    
     
     
     
@@ -530,8 +723,23 @@ stop is available, with <a href="https://issues.apache.org/jira/browse/WHIRR-214
               </div>
         
             
+              <div class="toc-3 ">
+	            <a href="/use/examples/global-web-fabric/index.html"><div class="toc-3-item">Global Web Fabric</div></a>
+              </div>
+        
+            
               <div class="toc-3 toc-active">
 	            <a href="/use/examples/whirrhadoop/index.html"><div class="toc-3-item toc-active">Whirr Hadoop Cluster</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/portable-cloudfoundry/index.html"><div class="toc-3-item">Portable Cloud Foundry</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/messaging/index.html"><div class="toc-3-item">Publish-Subscribe Messaging</div></a>
               </div>
         
             </div></div>
@@ -542,7 +750,7 @@ stop is available, with <a href="https://issues.apache.org/jira/browse/WHIRR-214
         
 	      <div class="toc-2 ">
       
-	        <a href="/use/api/index.html"><div class="toc-2-item">API Reference</div></a>
+	        <a href="/use/api/index.html"><div class="toc-2-item">API Reference (javadoc)</div></a>
       
           </div>
     
@@ -558,7 +766,6 @@ stop is available, with <a href="https://issues.apache.org/jira/browse/WHIRR-214
   
       </div>
 
-    
     
     
     
@@ -591,7 +798,7 @@ stop is available, with <a href="https://issues.apache.org/jira/browse/WHIRR-214
         
             
               <div class="toc-3 ">
-	            <a href="http://github.com/brooklyncentral"><div class="toc-3-item">Git Repository (github)</div></a>
+	            <a href="http://github.com/brooklyncentral/brooklyn"><div class="toc-3-item">brooklyn.git (github)</div></a>
               </div>
         
             </div></div>
@@ -672,7 +879,7 @@ stop is available, with <a href="https://issues.apache.org/jira/browse/WHIRR-214
         
             
               <div class="toc-3 ">
-	            <a href="https://github.com/brooklyncentral/brooklyn"><div class="toc-3-item">Github code</div></a>
+	            <a href="https://github.com/brooklyncentral/"><div class="toc-3-item">Github repo</div></a>
               </div>
         
             
@@ -701,7 +908,6 @@ stop is available, with <a href="https://issues.apache.org/jira/browse/WHIRR-214
   
       </div>
 
-    
     
     
     
@@ -766,17 +972,16 @@ stop is available, with <a href="https://issues.apache.org/jira/browse/WHIRR-214
     
     
     
-    
 	  <div class="toc-1 ">
   
-	    <a href="/meta/governance.html"><div class="toc-1-item toc-1-header ">Meta</div></a>
+	    <a href="/meta/versions.html"><div class="toc-1-item toc-1-header ">Meta</div></a>
         <div class="toc-1-children">
     
         
         
 	      <div class="toc-2 ">
       
-	        <a href="/meta/governance.html"><div class="toc-2-item">Governance</div></a>
+	        <a href="/meta/versions.html"><div class="toc-2-item">Versions</div></a>
       
           </div>
     
@@ -784,7 +989,7 @@ stop is available, with <a href="https://issues.apache.org/jira/browse/WHIRR-214
         
 	      <div class="toc-2 ">
       
-	        <a href="/meta/versions.html"><div class="toc-2-item">Versions</div></a>
+	        <a href="/meta/governance.html"><div class="toc-2-item">Governance</div></a>
       
           </div>
     
@@ -803,21 +1008,20 @@ stop is available, with <a href="https://issues.apache.org/jira/browse/WHIRR-214
 </div>
 <br/>
 
+
       </div>
 
-    </div>
+    </div><!--contentcontainer-->
+        
+    <div id="footer">
+        <p id="copyright">
+            <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
+            brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
+            &copy; 2012 Cloudsoft Corporation.
+        </p>
+    </div><!--footer -->
 
-    <div class="page_row"/>
-
-<hr/>
-
-    <div id="page_footer" class="page_row">
-      <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
-      brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
-      &copy; 2012 Cloudsoft Corporation.
-    </div>
-
-  </div>
+</div><!--container-->
 
 </body>
 </html>
