@@ -87,6 +87,8 @@ brooklyn.util.flags
 brooklyn.util.internal
 brooklyn.util.internal.duplicates
 brooklyn.util.internal.ssh
+brooklyn.util.internal.ssh.cli
+brooklyn.util.internal.ssh.sshj
 brooklyn.util.javalang
 brooklyn.util.jmx.jmxmp
 brooklyn.util.logging

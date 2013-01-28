@@ -115,7 +115,7 @@ _gaq.push(['_trackPageview']);
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.5.0-SNAPSHOT</a></li>
+            <li><a href="/meta/versions.html">0.5.0-M1</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -375,18 +375,19 @@ than defining an application. On the plus side, entities are much easier to re-u
 
 
 
-<p>First, grab a copy of the Brooklyn snapshot distribution you wish to use from
-<a href="https://oss.sonatype.org/content/groups/public/io/brooklyn/brooklyn-dist/">the Sonatype snapshot repo</a>
-(or build it yourself following instructions <a href="/dev/build/">here</a>),
-unpack it to your favourite location (e.g. <code>$(pwd)</code>),
-and export <code>BROOKLYN_HOME</code>:</p>
+<!--- RELEASE -->
 
 
 
 
-<div class="highlight"><pre><code class="bash">% curl -L -o brooklyn-dist-0.5.0-SNAPSHOT-dist.tar.gz 
-% tar xvzf brooklyn-dist-0.5.0-SNAPSHOT-dist.tar.gz
-% <span class="nb">export </span><span class="nv">BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/brooklyn-0.5.0-SNAPSHOT/
+<p>First, grab a copy of the Brooklyn distribution and set up <code>BROOKLYN_HOME</code>:</p>
+
+
+
+
+<div class="highlight"><pre><code class="bash">% curl -LO http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.5.0-M1/brooklyn-dist-0.5.0-M1-dist.tar.gz
+% tar xvzf brooklyn-dist-0.5.0-M1-dist.tar.gz
+% <span class="nb">export </span><span class="nv">BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/brooklyn-0.5.0-M1/
 </code></pre>
 </div>
 
@@ -400,16 +401,10 @@ and export <code>BROOKLYN_HOME</code>:</p>
 
 <div class="highlight"><pre><code class="bash">% git clone https://github.com/brooklyncentral/brooklyn-examples.git
 % <span class="nb">cd </span>brooklyn-examples
+% git checkout 0.5.0-M1
 % mvn clean install
 </code></pre>
 </div>
-
-
-
-
-<p>Please note, these instructions are for a SNAPSHOT release of Brooklyn,
-so proceed with caution.
-For the latest stable version, go <a href="/meta/versions.html">here</a>.</p>
 
 
 

@@ -115,7 +115,7 @@ _gaq.push(['_trackPageview']);
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.5.0-SNAPSHOT</a></li>
+            <li><a href="/meta/versions.html">0.5.0-M1</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -360,16 +360,19 @@ _gaq.push(['_trackPageview']);
 
 <p></p>
 
+<!--- RELEASE -->
+
+
 <p>Distribution archives containing Brooklyn as a standalone executable package
 are available in the following formats and locations:</p>
 
 <ul>
-<li><strong>v0.5.0-SNAPSHOT</strong> at
-<a href="https://oss.sonatype.org/index.html#nexus-search;gav~io.brooklyn~brooklyn-dist~0.5.0-SNAPSHOT~~">Sonatype</a>
+<li><strong>v0.5.0-M1</strong> at
+<a href="http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22io.brooklyn%22%20AND%20a%3A%22brooklyn-dist%22%20AND%20v%3A%220.5.0-M1%22">Maven Central</a>
 :
-<strong><a href="https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&amp;g=io.brooklyn&amp;v=0.5.0-SNAPSHOT&amp;a=brooklyn-dist&amp;c=dist&amp;e=zip">zip</a></strong>
-<strong><a href="https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&amp;g=io.brooklyn&amp;v=0.5.0-SNAPSHOT&amp;a=brooklyn-dist&amp;c=dist&amp;e=tar.gz">tgz</a></strong>
-<strong><a href="https://oss.sonatype.org/content/groups/public/io/brooklyn/brooklyn-dist/0.5.0-SNAPSHOT/">dir</a></strong></li>
+<strong><a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.5.0-M1/brooklyn-dist-0.5.0-M1-dist.zip">zip</a></strong>
+<strong><a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.5.0-M1/brooklyn-dist-0.5.0-M1-dist.tar.gz">tgz</a></strong>
+<strong><a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.5.0-M1/">dir</a></strong></li>
 <li><strong>all stable versions</strong>:
 at <a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/">Maven Central</a>
 and <a href="http://developers.cloudsoftcorp.com/maven/releases/io/brooklyn/brooklyn-dist/">Cloudsoft</a></li>
@@ -381,9 +384,6 @@ and <a href="http://developers.cloudsoftcorp.com/maven/snapshots/io/brooklyn/bro
 
 <p>Just download your preferred flavour and unpack.</p>
 
-<p><strong>Please note</strong>: You are reading the documentation for a snapshot version of Brooklyn.
-You should always confirm that the source and date for snapshot artifacts.</p>
-
 <p><a name="alljar"></a></p>
 
 <h2>The All Jar</h2>
@@ -392,11 +392,11 @@ You should always confirm that the source and date for snapshot artifacts.</p>
 here:</p>
 
 <ul>
-<li><strong>v0.5.0-SNAPSHOT</strong> at
-<a href="https://oss.sonatype.org/index.html#nexus-search;gav~io.brooklyn~brooklyn-dist~0.5.0-SNAPSHOT~~">Sonatype</a>
+<li><strong>v0.5.0-M1</strong> at
+<a href="http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22io.brooklyn%22%20AND%20a%3A%22brooklyn-all%22%20AND%20v%3A%220.5.0-M1%22">Maven Central</a>
 :
-<strong><a href="https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&amp;g=io.brooklyn&amp;v=0.5.0-SNAPSHOT&amp;a=brooklyn-all&amp;c=with-dependencies&amp;e=jar">jar</a></strong>
-<strong><a href="https://oss.sonatype.org/content/groups/public/io/brooklyn/brooklyn-all/0.5.0-SNAPSHOT/">dir</a></strong></li>
+<strong><a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-all/0.5.0-M1/brooklyn-all-0.5.0-M1-with-dependencies.jar">jar</a></strong>
+<strong><a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-all/0.5.0-M1/">dir</a></strong></li>
 <li><strong>all stable versions</strong>:
 at <a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-all/">Maven Central</a>
 and <a href="http://developers.cloudsoftcorp.com/maven/releases//io/brooklyn/brooklyn-all/">Cloudsoft</a></li>
@@ -406,8 +406,7 @@ and <a href="http://developers.cloudsoftcorp.com/maven/snapshots/io/brooklyn/bro
 </ul>
 
 
-<p>Just download your preferred flavour and add it to your classpath
-(but again, check the source and date for snapshot JARs).</p>
+<p>Just download your preferred flavour and add it to your classpath.</p>
 
 <p><a name="examples"></a></p>
 
@@ -415,30 +414,26 @@ and <a href="http://developers.cloudsoftcorp.com/maven/snapshots/io/brooklyn/bro
 
 <p>You can checkout the examples from the <a href="http://github.com/brooklyncentral/brooklyn-examples">brooklyn-examples git repository</a>.
 Maven (v3) is required to build them, as described <a href="/dev/build/">here</a>.
-The examples for this version (0.5.0-SNAPSHOT) are in the branch
-<code>master</code>,
+The examples for this version (0.5.0-M1) are in the branch
+<code>0.5.0-M1</code>,
 so if you have <code>git</code> and <code>mvn</code> already, you can simply:</p>
 
 <div class="highlight"><pre><code class="bash">% git clone https://github.com/brooklyncentral/brooklyn-examples.git
 % <span class="nb">cd </span>brooklyn-examples
+% git checkout 0.5.0-M1
 % mvn clean install
 </code></pre>
 </div>
 
 
-<p><strong>Please note</strong>: for snapshot versions of Brooklyn,
-the examples in this repository may not be automatically synched.
-It is recommended that you use the code for the examples included
-in the main Brooklyn codebase, or use a released version.</p>
-
 <p>If you don't use <code>git</code>, you can download the projects as a tarball instead
-from <a href="https://github.com/brooklyncentral/brooklyn-examples/tarball/master">this link</a>.
+from <a href="https://github.com/brooklyncentral/brooklyn-examples/tarball/0.5.0-M1">this link</a>.
 These commands should do the trick:</p>
 
-<div class="highlight"><pre><code class="bash">% curl -L -o brooklyn-examples-master.tgz <span class="se">\</span>
-     https://github.com/brooklyncentral/brooklyn-examples/tarball/master
-% tar xvfz brooklyn-examples-master.tgz
-% mv brooklyncentral-brooklyn-examples-* brooklyn-examples-master <span class="se">\</span>
+<div class="highlight"><pre><code class="bash">% curl -L -o brooklyn-examples-0.5.0-M1.tgz <span class="se">\</span>
+     https://github.com/brooklyncentral/brooklyn-examples/tarball/0.5.0-M1
+% tar xvfz brooklyn-examples-0.5.0-M1.tgz
+% mv brooklyncentral-brooklyn-examples-* brooklyn-examples-0.5.0-M1 <span class="se">\</span>
      <span class="c"># change the strange name which github assigns in the tarball</span>
 % mvn clean install
 </code></pre>
@@ -457,7 +452,7 @@ These commands should do the trick:</p>
         <span class="nt">&lt;dependency&gt;</span>
             <span class="nt">&lt;groupId&gt;</span>io.brooklyn<span class="nt">&lt;/groupId&gt;</span>
             <span class="nt">&lt;artifactId&gt;</span>brooklyn-all<span class="nt">&lt;/artifactId&gt;</span>
-            <span class="nt">&lt;version&gt;</span>0.5.0-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;version&gt;</span>0.5.0-M1<span class="nt">&lt;/version&gt;</span>
         <span class="nt">&lt;/dependency&gt;</span>
     <span class="nt">&lt;/dependencies&gt;</span>
 </code></pre>
@@ -467,7 +462,7 @@ These commands should do the trick:</p>
 <p><code>brooklyn-all</code> (used above) brings in all dependencies, including jclouds and Apache Whirr.
 If you prefer a smaller repo you might want just <code>brooklyn-core</code>,  <code>brooklyn-policies</code>,
 and some of <code>brooklyn-software-webapp</code>,  <code>brooklyn-software-database</code>, <code>brooklyn-software-messaging</code>, or others
-(browse the full list <a href="https://oss.sonatype.org/index.html#nexus-search;gav~io.brooklyn~~0.5.0-SNAPSHOT~~">here</a>).</p>
+(browse the full list <a href="http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22io.brooklyn%22%20AND%20AND%20v%3A%220.5.0-M1%22">here</a>).</p>
 
 <p>If you wish to use the Sonatype and/or Cloudsoft repositories (particularly for snapshots),
 you can add some of the following sections:</p>
@@ -498,9 +493,6 @@ you can add some of the following sections:</p>
 </code></pre>
 </div>
 
-
-<p><strong>Please note</strong>: to use a snapshot version of Brooklyn, you must either have Brooklyn built locally
-or one of the additional snapshot repositories above.</p>
 
 <p><a name="source"></a></p>
 
