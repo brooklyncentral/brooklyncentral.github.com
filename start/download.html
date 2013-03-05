@@ -347,6 +347,11 @@ _gaq.push(['_trackPageview']);
 
 
 <p><a name="distro"></a></p>
+<p>&nbsp;</p>
+<div class="warning">
+	<p>There is a known issue affecting this version of Brooklyn, which blocks installation of
+	MySQL. Please review the <a href="#known-issues">known issues</a> section. A fix will be released shortly.</p>
+</div>
 
 <h2>The Distro</h2>
 
@@ -407,6 +412,41 @@ and <a href="http://developers.cloudsoftcorp.com/maven/snapshots/io/brooklyn/bro
 
 
 <p>Just download your preferred flavour and add it to your classpath.</p>
+
+<p><a name="known-issues"></a></p>
+<h2>Known Issues</h2>
+
+Brooklyn v0.5.0-M1 suffers from a bug which blocks installation of MySQL, and potentially may affect other packages. A workaround is detailed below. This issue has been fixed in version M2, which is in preparation for release.
+
+<h3>Symptom</h3>
+
+<p>Installation of the MySQL entity, or an application which uses it, will fail. The console displays:</p>
+
+<code>WARN Error while running task Task[start [EFFECTOR, MySqlNode{id=FC3OlfaG, name=MySqlNode:FC3O}]; RO++ru1cmC] (rethrowing): Execution failed, invalid result 1 for installing MySqlNode{id=FC3OlfaG, name=MySqlNode:FC3O}</code>
+<p>brooklyn.log shows something similar to:</p>
+
+<code>&lt;timestamp&gt; DEBUG brooklyn.SSH [Thread-15]: [FC3OlfaG@127.0.0.1:stderr] tar: Unrecognized archive format</code><br />
+<code>&lt;timestamp&gt; DEBUG brooklyn.SSH [Thread-15]: [FC3OlfaG@127.0.0.1:stderr] tar: Error exit delayed from previous errors.</code>
+
+<h3>Explanation</h3>
+
+<p>When installing entities, Brooklyn retrieves artifacts from their official public web-sites. Versions are set explicitly in Brooklyn entity's configuration.</p>
+
+</p>For some entities, such as MySQL, the official site only keeps the last couple of versions available for download. MySQL 5.5.28 is no longer available from source or mirrors.</p>
+
+<p>Rather than the correct MySQL artifact, Brooklyn recieves an html 404 error page (saving as a .tar.gz), resulting in the "tar: Unrecognized archive format" error.</p>
+
+<h3>Solution</h3>
+
+<p>There are three workarounds available:</p>
+<ul>
+<li>Download the appropriate artifact from<br />
+<a href="http://downloads.cloudsoftcorp.com/brooklyn/repository/MySqlNode/5.5.28">downloads.cloudsoftcorp.com/brooklyn/repository/MySqlNode/5.5.28</a><br />
+and save it (on the machine that will run MySql) at ~/.brooklyn/repository/MySqlNode/5.5.28/.</li>
+<li>Modify the application code (e.g the examples) to specify a different version, re-compile, and re-run.<br />
+For example, by adding: <code>mysql.setConfig(MySqlNode.SUGGESTED_VERSION, "5.5.30");</code></li>
+<li>Upgrade to brooklyn 0.5.0-M2 when available, or switch to 0.5.0-SNAPSHOT</li>
+</ul>
 
 <p><a name="examples"></a></p>
 
