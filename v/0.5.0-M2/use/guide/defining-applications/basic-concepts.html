@@ -1,0 +1,772 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+  <title>Basic Concepts</title>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+
+  <link rel="stylesheet" href="/v/0.5.0-M2/style/style.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/v/0.5.0-M2/style/toc.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/v/0.5.0-M2/style/docs/code.css" type="text/css" media="screen" />
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  
+	<!-- Sidebar/ToC Scripts and CSS -->
+	<script src="/v/0.5.0-M2/style/js/jquery/jquery-1.7.1.min.js"></script>
+	<script src="/v/0.5.0-M2/style/js/jquery/jquery-ui-1.8.18.custom.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/v/0.5.0-M2/style/js/jquery/smoothness/jquery-ui-1.8.18.custom.css" />
+	
+	<script type="text/javascript" src="/v/0.5.0-M2/style/js/superfish.js"></script>
+	
+<!-- Clipboard support -->
+<script src="/v/0.5.0-M2/style/js/zeroclipboard/ZeroClipboard.js"></script>
+<style type="text/css">
+.clipboard_container { float: right; padding: 8px; }
+.clipboard_button {
+    background-image: url("/v/0.5.0-M2/style/icons/clipboard-green-normal.png");
+    background-size: 18px 21px;
+    width: 18px; height: 21px;
+}
+.clipboard_button.hover  { background-image: url("/v/0.5.0-M2/style/icons/clipboard-green-hover.png"); }
+.clipboard_button.active  { background-image: url("/v/0.5.0-M2/style/icons/clipboard-green-click.png"); }'
+</style>
+<script type="text/javascript"> <!-- clipboard -->
+ZeroClipboard.setMoviePath( '/v/0.5.0-M2/style/js/zeroclipboard/ZeroClipboard.swf' );
+</script>
+<script type="text/javascript"> <!-- clipboard positioning -->
+$(document).ready(function() {
+  $('<div class="clipboard_container" title="Copy to Clipboard">'+
+    '<div class="clipboard_button"/>'+
+  '</div>').insertBefore($('div.highlight'))
+  $('div.clipboard_container').each(function(index) {
+    var clipboard = new ZeroClipboard.Client();
+    clipboard.glue( $(this).find(":first")[0], $(this)[0] );
+    var target = $(this).next();
+    var txt = target.text().trim();
+    if (target.find('code.bash')) {
+      txt = txt.replace(/^[^%$]*[%$] /, "").replace(new RegExp('\n[^%$]*[%$] ','g'), "\n");
+    }
+    clipboard.setText(txt);
+  });
+});
+</script>
+
+    <script type="text/javascript">
+        // initialise menu delay
+        jQuery(function(){
+            jQuery('ul#mainmenu').superfish({ 
+                autoArrows:  false,  // disable generation of arrow mark-up 
+                dropShadows: false,  // disable drop shadows 
+                disableHI:   true,   // set to true to disable hoverIntent detection 
+                delay:       500,    // the delay in milliseconds that the mouse can remain outside a submenu without it closing 
+                speed:       'fast', 
+            });
+        });
+    </script>
+
+<script type="text/javascript"> <!-- search -->
+	$(function() {
+		$('#simple_google')
+			.submit(function() {
+				$('input[name="q"]').val("site:" + document.location.hostname + " " + $('input[name="brooklyn-search"]').val());
+			return true;
+			});
+		$('input[name="brooklyn-search"]').focus(function() {
+				if ($(this).val() === $(this).attr('placeholder')) {
+					$(this).val('');
+				}
+			})
+			.blur(function() {
+				if ($(this).val() === '') {
+					$(this).val($(this).attr('placeholder'));
+				}
+			})
+			.blur();
+    });
+</script>
+
+<script type="text/javascript"> <!-- analytics -->
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-30530918-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+</head>
+
+<body>
+
+    <ul id="shortcuts" title="Accessibility shortcuts menu">
+        <li><a href="#maincontent">Skip to main content</a></li>
+    </ul>
+   
+
+<div id="container">
+
+    <div id="header">
+    
+        <div id="identity">
+            <a href="http://brooklyncentral.github.com/" rel="home">Brooklyn</a>
+        </div>
+        
+        <ul id="quicklinks">
+            <li><a href="/v/0.5.0-M2/meta/versions.html">0.5.0-M2</a></li>
+            <li><a href="/v/0.5.0-M2/start/download.html">Download</a></li>
+            <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
+            <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
+            <li><a href="/v/0.5.0-M2/meta/contact.html">Contact</a></li>
+        </ul>
+
+        <div id="menubar">  
+
+
+
+
+
+
+
+<ul id="mainmenu"><!-- INSERT LINKS -->
+            
+
+  
+  
+  <li class=""><a href="/v/0.5.0-M2/index.html">Overview</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.5.0-M2/start/download.html">Download</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.5.0-M2/start/walkthrough/index.html">Walkthrough</a></li>
+
+  
+  
+  <li class="toc-active"><a href="/v/0.5.0-M2/use/guide/index.html">Guide</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.5.0-M2/use/examples/index.html">Examples</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.5.0-M2/dev/code/index.html">Contributing</a></li>
+
+
+</ul>                    
+
+            <form method="get" id="simple_google" class="searchform" action="http://www.google.com/search" method="get">
+                <input type="text" class="searchinput" name="brooklyn-search" placeholder="Search: type &amp; hit enter" />
+                <input type="hidden" name="q" value="" />
+            </form>
+            
+        </div>
+                
+    </div><!--header-->
+    
+    <div id="contentcontainer">
+    
+        <div id="maincontent">
+
+
+  
+
+
+
+
+
+
+
+    
+    
+
+    
+    
+        
+        
+    
+        
+            
+            
+            
+            
+        
+        
+            
+                
+                
+                
+                
+                
+                
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+
+
+
+            
+<p id="breadcrumb">
+    <a href="/v/0.5.0-M2/use/guide/index.html">User Guide</a>
+    
+        &raquo; <a href="/v/0.5.0-M2/use/guide/defining-applications/basic-concepts.html">Defining Applications</a>
+        
+            &raquo; <a href="/v/0.5.0-M2/use/guide/defining-applications/basic-concepts.html">Basic Concepts</a>
+        
+    
+</p>
+
+
+<h1 id="header_title">Basic Concepts</h1>
+    
+<p>This introduces brooklyn and describes how it simplifies the deployment and management of big applications. It is
+intended for people who are using brooklyn-supported application components (such as web/app servers, data stores)
+to be able to use brooklyn to easily start their application in multiple locations with off-the-shelf management
+policies.</p>
+
+<h2>Entities</h2>
+
+<p>The central concept in a Brooklyn deployment is that of an <strong><em>entity</em></strong>.
+An entity represents a resource under management, either <em>base</em> entities (individual machines or software processes)
+or logical collections of these entities.</p>
+
+<p>Fundamental to the processing model is the capability of entities to be the <em>parent</em> of other entities (the mechanism by which collections are formed),
+with every entity having a single parent entity, up to the privileged top-level <strong><em>application</em></strong> entity.</p>
+
+<p>Entities are code, so they can be extended, overridden, and modified. Entities can have events, operations, and processing logic associated with them, and it is through this mechanism that the active management is delivered.</p>
+
+<p>The main responsibilities of an entity are:</p>
+
+<ul>
+<li>Provisioning the entity in the given location or locations</li>
+<li>Holding configuration and state (attributes) for the entity</li>
+<li>Reporting monitoring data (sensors) about the status of the entity</li>
+<li>Exposing operations (effectors) that can be performed on the entity</li>
+<li>Hosting management policies and tasks related to the entity</li>
+</ul>
+
+
+<h2>Application, Parent and Membership</h2>
+
+<p>All entities have a <strong><em>parent</em></strong> entity, which creates and manages it, with one important exception: <em>applications</em>.
+Application entities are the top-level entities created and managed externally, manually or programmatically.</p>
+
+<p>Applications are typically defined in Brooklyn as an <strong><em>application descriptor</em></strong>.
+This is a Java class specifying the entities which make up the application,
+by extending the class <code>ApplicationBuilder</code>, and specifying how these entities should be configured and managed.</p>
+
+<p>All entities, including applications, can be the parent of other entities.
+This means that the "child" is typically started, configured, and managed by the parent.
+For example, an application may be the parent of a web cluster; that cluster in turn is the parent of web server processes.
+In the management console, this is represented hierarchically in a tree view.</p>
+
+<p>A parallel concept is that of <strong><em>membership</em></strong>: in addition to one fixed parent,
+and entity may be a <strong><em>member</em></strong> of any number of special entities called <strong><em>groups</em></strong>.
+Membership of a group can be used for whatever purpose is required;
+for example, it can be used to manage a collection of entities together for one purpose
+(e.g. wide-area load-balancing between locations) even though they may have been
+created by different parents (e.g. a multi-tier stack within a location).</p>
+
+<h2>Configuration, Sensors and Effectors</h2>
+
+<h3>Configuration</h3>
+
+<p>All entities contain a map of config information. This can contain arbitrary values, typically keyed under static <code>ConfigKey</code> fields on the <code>Entity</code> sub-class. These values are inherited, so setting a configuration value at the
+application level will make it available in all entities underneath unless it is overridden.</p>
+
+<p>Configuration is propagated when an application "goes live" (i.e. it becomes "managed", either explicitly or when its <code>start()</code> method is invoked), so config values must be set before this occurs.</p>
+
+<p>Configuration values can be specified in a configuration file (<code>~/.brooklyn/brooklyn.properties</code>)
+to apply universally, and/or programmatically to a specific entity and its descendants
+by calling <code>.configure(KEY, VALUE)</code> in the entity spec when creating it.
+There is also an <code>entity.setConfig(KEY, VALUE)</code> method.</p>
+
+<p>Additionally, many common configuration parameters are available as "flags" which can be supplied as Strings when constructing
+then entity, in the form
+<code>BasicEntitySpec.newInstance(MyEntity.class).configure("config1", "value1").configure("config2", "value2")</code>.</p>
+
+<p>Documentation of the flags available for individual entities can normally be found in the javadocs.
+The <code>@SetFromFlag</code> annotations on <code>ConfigKey</code> static field definitions
+in the entity's interface is the recommended mechanism for exposing configuration options.</p>
+
+<h3>Sensors and Effectors</h3>
+
+<p><strong><em>Sensors</em></strong> (activity information and notifications) and <strong><em>effectors</em></strong> (operations that can be invoked on the entity) are defined by entities as static fields on the <code>Entity</code> subclass.</p>
+
+<p>Sensors can be updated by the entity or associated tasks, and sensors from an entity can be subscribed to by its parent or other entities to track changes in an entity's activity.</p>
+
+<p>Effectors can be invoked by an entity's parent remotely, and the invoker is able to track the execution of that effector. Effectors can be invoked by other entities, but use this functionality with care to prevent too many managers!</p>
+
+<p>An entity consists of a Java interface (used when interacting with the entity) and a Java class. For resilience. it is recommended to store
+the entity's state in attributes (see `getAttribute(AttributeKey)``). If internal fields can be used then the data will be lost on brooklyn
+restart, and may cause problems if the entity is to be moved to a different brooklyn management node.</p>
+
+<p>Next: <a href="/v/0.5.0-M2/use/guide/defining-applications/advanced-concepts.html">Advanced Concepts</a>.
+See also: <a href="/v/0.5.0-M2/use/guide/management/index.html#sensors-and-effectors">Management > Sensors and Effectors</a>.</p>
+
+
+        </div><!--maincontent-->
+        
+      <div id="sidebar">
+      
+
+
+  
+
+
+
+
+
+
+<div id="sidebar_toc">
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/v/0.5.0-M2/start/index.html"><div class="toc-1-item">Start</div></a>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 toc-active">
+  
+	    <a href="/v/0.5.0-M2/use/guide/index.html"><div class="toc-1-item toc-1-header ">User Guide</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/use/guide/quickstart/index.html"><div class="toc-2-item">Quick Start</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 toc-active">
+      
+	        <a href="/v/0.5.0-M2/use/guide/defining-applications/basic-concepts.html"><div class="toc-2-item toc-2-header toc-active">Defining Applications</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 toc-active">
+	            <a href="/v/0.5.0-M2/use/guide/defining-applications/basic-concepts.html"><div class="toc-3-item toc-active">Basic Concepts</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/defining-applications/advanced-concepts.html"><div class="toc-3-item">Advanced Concepts</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/defining-applications/common-usage.html"><div class="toc-3-item">Common Usage</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/use/guide/management/index.html"><div class="toc-2-item toc-2-header">Management</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/management/index.html#introduction"><div class="toc-3-item">Introduction</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/management/index.html#startup-config"><div class="toc-3-item">Startup Configuration</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/management/index.html#cli"><div class="toc-3-item">Command Line Interface</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/management/index.html#console"><div class="toc-3-item">Management Web Console</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/management/index.html#observation-other"><div class="toc-3-item">Observation APIs</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/management/index.html#distributed-management"><div class="toc-3-item">Distributed Management</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/management/index.html#resilience"><div class="toc-3-item">Resilience</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/management/index.html#key-apis"><div class="toc-3-item">Key APIs</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/management/index.html#sensors-and-effectors"><div class="toc-3-item">Sensors and Effectors</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/use/guide/policies/index.html"><div class="toc-2-item toc-2-header">Policies</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/policies/index.html#introduction"><div class="toc-3-item">Introduction</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/policies/index.html#writing-policies"><div class="toc-3-item">Writing Policies</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/policies/index.html#off-the-shelf-policies"><div class="toc-3-item">Off-the-Shelf Policies</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/policies/index.html#implementing-policies"><div class="toc-3-item">Implementing Policies</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/use/guide/entities/index.html"><div class="toc-2-item toc-2-header">Custom Entities</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/entities/index.html#entity-lifestyle"><div class="toc-3-item">Entity Lifecycle</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/entities/index.html#implementation-classes"><div class="toc-3-item">What to Extend</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/entities/index.html#configuration"><div class="toc-3-item">Configuration</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/entities/index.html#implementing-sensors"><div class="toc-3-item">Implementing Sensors</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/entities/index.html#implementing-effectors"><div class="toc-3-item">Implementing Effectors</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/entities/index.html#testing"><div class="toc-3-item">Testing</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/use/guide/extras/index.html"><div class="toc-2-item toc-2-header">Extras</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/extras/index.html#web"><div class="toc-3-item">Web</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/extras/index.html#database"><div class="toc-3-item">Database</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/extras/index.html#nosql"><div class="toc-3-item">NoSQL</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/extras/index.html#messaging"><div class="toc-3-item">Messaging</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/extras/index.html#provisioning"><div class="toc-3-item">Provisioning</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/v/0.5.0-M2/start/index.html"><div class="toc-1-item toc-1-header ">Elsewhere</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/use/examples/index.html"><div class="toc-2-item toc-2-header">Examples</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/examples/webcluster/index.html"><div class="toc-3-item">Elastic Web Cluster</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/examples/global-web-fabric/index.html"><div class="toc-3-item">Global Web Fabric</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/examples/whirrhadoop/index.html"><div class="toc-3-item">Whirr Hadoop Cluster</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/examples/portable-cloudfoundry/index.html"><div class="toc-3-item">Portable Cloud Foundry</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/examples/messaging/index.html"><div class="toc-3-item">Publish-Subscribe Messaging</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/use/api/index.html"><div class="toc-2-item">API Reference</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/dev/code/index.html"><div class="toc-2-item toc-2-header">Contributing</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/dev/code/index.html"><div class="toc-3-item">The Code</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/dev/build/index.html"><div class="toc-3-item">Build and Test</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/dev/tips/index.html"><div class="toc-3-item">Tips and Tricks</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/dev/wishlist.html"><div class="toc-3-item">Wishlist</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/dev/links.html"><div class="toc-3-item">Links</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/dev/how-to-contrib.html"><div class="toc-3-item">How to Contribute</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/license/index.html"><div class="toc-2-item">License</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+ 
+</div>
+<br/>
+
+
+      </div>
+
+    </div><!--contentcontainer-->
+        
+    <div id="footer">
+        <p id="copyright">
+            <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
+            brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
+            &copy; 2012 Cloudsoft Corporation.
+        </p>
+    </div><!--footer -->
+
+</div><!--container-->
+
+</body>
+</html>

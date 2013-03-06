@@ -1,0 +1,840 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+  <title>Getting Started</title>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+
+  <link rel="stylesheet" href="/v/0.5.0-M2/style/style.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/v/0.5.0-M2/style/toc.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/v/0.5.0-M2/style/docs/code.css" type="text/css" media="screen" />
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  
+	<!-- Sidebar/ToC Scripts and CSS -->
+	<script src="/v/0.5.0-M2/style/js/jquery/jquery-1.7.1.min.js"></script>
+	<script src="/v/0.5.0-M2/style/js/jquery/jquery-ui-1.8.18.custom.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/v/0.5.0-M2/style/js/jquery/smoothness/jquery-ui-1.8.18.custom.css" />
+	
+	<script type="text/javascript" src="/v/0.5.0-M2/style/js/superfish.js"></script>
+	
+<!-- Clipboard support -->
+<script src="/v/0.5.0-M2/style/js/zeroclipboard/ZeroClipboard.js"></script>
+<style type="text/css">
+.clipboard_container { float: right; padding: 8px; }
+.clipboard_button {
+    background-image: url("/v/0.5.0-M2/style/icons/clipboard-green-normal.png");
+    background-size: 18px 21px;
+    width: 18px; height: 21px;
+}
+.clipboard_button.hover  { background-image: url("/v/0.5.0-M2/style/icons/clipboard-green-hover.png"); }
+.clipboard_button.active  { background-image: url("/v/0.5.0-M2/style/icons/clipboard-green-click.png"); }'
+</style>
+<script type="text/javascript"> <!-- clipboard -->
+ZeroClipboard.setMoviePath( '/v/0.5.0-M2/style/js/zeroclipboard/ZeroClipboard.swf' );
+</script>
+<script type="text/javascript"> <!-- clipboard positioning -->
+$(document).ready(function() {
+  $('<div class="clipboard_container" title="Copy to Clipboard">'+
+    '<div class="clipboard_button"/>'+
+  '</div>').insertBefore($('div.highlight'))
+  $('div.clipboard_container').each(function(index) {
+    var clipboard = new ZeroClipboard.Client();
+    clipboard.glue( $(this).find(":first")[0], $(this)[0] );
+    var target = $(this).next();
+    var txt = target.text().trim();
+    if (target.find('code.bash')) {
+      txt = txt.replace(/^[^%$]*[%$] /, "").replace(new RegExp('\n[^%$]*[%$] ','g'), "\n");
+    }
+    clipboard.setText(txt);
+  });
+});
+</script>
+
+    <script type="text/javascript">
+        // initialise menu delay
+        jQuery(function(){
+            jQuery('ul#mainmenu').superfish({ 
+                autoArrows:  false,  // disable generation of arrow mark-up 
+                dropShadows: false,  // disable drop shadows 
+                disableHI:   true,   // set to true to disable hoverIntent detection 
+                delay:       500,    // the delay in milliseconds that the mouse can remain outside a submenu without it closing 
+                speed:       'fast', 
+            });
+        });
+    </script>
+
+<script type="text/javascript"> <!-- search -->
+	$(function() {
+		$('#simple_google')
+			.submit(function() {
+				$('input[name="q"]').val("site:" + document.location.hostname + " " + $('input[name="brooklyn-search"]').val());
+			return true;
+			});
+		$('input[name="brooklyn-search"]').focus(function() {
+				if ($(this).val() === $(this).attr('placeholder')) {
+					$(this).val('');
+				}
+			})
+			.blur(function() {
+				if ($(this).val() === '') {
+					$(this).val($(this).attr('placeholder'));
+				}
+			})
+			.blur();
+    });
+</script>
+
+<script type="text/javascript"> <!-- analytics -->
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-30530918-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+</head>
+
+<body>
+
+    <ul id="shortcuts" title="Accessibility shortcuts menu">
+        <li><a href="#maincontent">Skip to main content</a></li>
+    </ul>
+   
+
+<div id="container">
+
+    <div id="header">
+    
+        <div id="identity">
+            <a href="http://brooklyncentral.github.com/" rel="home">Brooklyn</a>
+        </div>
+        
+        <ul id="quicklinks">
+            <li><a href="/v/0.5.0-M2/meta/versions.html">0.5.0-M2</a></li>
+            <li><a href="/v/0.5.0-M2/start/download.html">Download</a></li>
+            <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
+            <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
+            <li><a href="/v/0.5.0-M2/meta/contact.html">Contact</a></li>
+        </ul>
+
+        <div id="menubar">  
+
+
+
+
+
+
+
+<ul id="mainmenu"><!-- INSERT LINKS -->
+            
+
+  
+  
+  <li class=""><a href="/v/0.5.0-M2/index.html">Overview</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.5.0-M2/start/download.html">Download</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.5.0-M2/start/walkthrough/index.html">Walkthrough</a></li>
+
+  
+  
+  <li class="toc-active"><a href="/v/0.5.0-M2/use/guide/index.html">Guide</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.5.0-M2/use/examples/index.html">Examples</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.5.0-M2/dev/code/index.html">Contributing</a></li>
+
+
+</ul>                    
+
+            <form method="get" id="simple_google" class="searchform" action="http://www.google.com/search" method="get">
+                <input type="text" class="searchinput" name="brooklyn-search" placeholder="Search: type &amp; hit enter" />
+                <input type="hidden" name="q" value="" />
+            </form>
+            
+        </div>
+                
+    </div><!--header-->
+    
+    <div id="contentcontainer">
+    
+        <div id="maincontent">
+
+
+  
+
+
+
+
+
+
+
+    
+    
+
+    
+    
+        
+            
+            
+            
+            
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+
+
+
+            
+<p id="breadcrumb">
+    <a href="/v/0.5.0-M2/use/guide/index.html">User Guide</a>
+    
+        &raquo; <a href="/v/0.5.0-M2/use/guide/quickstart/index.html">Quick Start</a>
+        
+    
+</p>
+
+
+<h1 id="header_title">Getting Started</h1>
+    
+<p>This guide will get you up and running with Brooklyn quickly. You will become familiar with launching Brooklyn from the command line, using the web interface and deploying an application (to a public cloud).</p>
+
+<h3>Before We Start</h3>
+
+<p>You are going to need some basic tools (that are normally installed by default). You will need <code>curl</code>, <code>wget</code>, <code>tar</code>, <code>ssh</code> and <code>ssh-keygen</code>.</p>
+
+<h3>Download Brooklyn</h3>
+
+<p>Download the Brooklyn distribution. This contains Brooklyn, ready to run.</p>
+
+<p><a href="/v/0.5.0-M2/start/download.html#distro">Download Page</a> (Get the Distro as a tgz.)</p>
+
+<p>Save the Distro tgz file to your home directory <code>~/</code>, or a location of your choice.</p>
+
+<p>Untar the tgz. Each Distro is timestamped, so your filename will be different.</p>
+
+<pre><code>$ tar -zxf brooklyn-dist-&lt;version&gt;-&lt;timestamp&gt;-dist.tar.tar.gz
+</code></pre>
+
+<p>This will create a brooklyn-&lt;version> folder. At the time of writing this was <code>brooklyn-0.5.0-SNAPSHOT</code>.</p>
+
+<p>Let's setup some paths for easy commands.</p>
+
+<pre><code>$ cd brooklyn-&lt;version&gt;
+$ BROOKLYN_HOME=$(pwd)
+$ export PATH=$PATH:$BROOKLYN_HOME/bin/
+</code></pre>
+
+<h3>A Quick Test Drive</h3>
+
+<p>Running Brooklyn now will launch the web interface, but there will be little to do, as we haven't configured any deployment locations or added a service catalog. Check your progress by running:</p>
+
+<pre><code>$ brooklyn launch
+</code></pre>
+
+<p>Brooklyn will output the address of the management interface:</p>
+
+<p><code>... Started Brooklyn console at http://127.0.0.1:8081/</code> <a href="http://127.0.0.1:8081/">link</a></p>
+
+<p>Login with default credentials: <code>admin:password</code></p>
+
+<p>Stop Brooklyn with ctrl-c.</p>
+
+<h3>Setting up Locations and Applications</h3>
+
+<p>Brooklyn loads  configuration parameters from <code>~/.brooklyn/brooklyn.properties</code> and a service catalog from <code>~/.brooklyn/catalog.xml</code>.</p>
+
+<p>Create a .brooklyn folder:</p>
+
+<pre><code>$ mkdir ~/.brooklyn
+</code></pre>
+
+<p>Then download the following default/template files.</p>
+
+<h3>brooklyn.properties</h3>
+
+<p>Download the <a href="brooklyn.properties">brooklyn.properties example</a> (to <code>~/.brooklyn</code>).</p>
+
+<p>brooklyn.properties is a standard java .properties file.</p>
+
+<p>Edit this file (in any text editor) to add credentials for your favorite cloud.</p>
+
+<h3>catalog.xml</h3>
+
+<p>Download the <a href="catalog.xml">catalog.xml example</a> (to <code>~/.brooklyn</code>).</p>
+
+<p>catalog.xml is catalog of application or service blueprints. The example file contains two demos which will be automatically downloaded from the web if you run them.</p>
+
+<p>Edit this file (text editor) and check that the links to the demo applications' .jars are valid. At the time of writing these were for version <code>0.5.0-SNAPSHOT</code>, but if this has changed you may need to update the links.</p>
+
+<h3>SSH Keys</h3>
+
+<p>If this is a new machine, or you haven't used SSH before, you will need to create keys for Brooklyn to use.</p>
+
+<pre><code>$ ssh-keygen -t rsa
+$ ssh-keygen -t dsa
+</code></pre>
+
+<p>These commands will setup keys in the default directories, and Brooklyn will find them.</p>
+
+<h3>3-2-1 Go!</h3>
+
+<p>Now when we launch Brooklyn:</p>
+
+<pre><code>$ brooklyn launch
+</code></pre>
+
+<p>Brooklyn will use the <code>brooklyn.properties</code> and <code>catalog.xml</code> files. There will be more locations available in the management interface at <a href="http://localhost:8081">localhost:8081</a>, and the blueprints from the service catalog will be available for deployment.</p>
+
+<p>Click "add application". The Create Application dialog will appear.</p>
+
+<p>Select the "Demo Web Cluster with DB", then "Next".</p>
+
+<p>For the time being we'll use "localhost" as our deployment location. Click "Finish" and the Create Application dialog will close.</p>
+
+<p>You will see Brooklyn create an Application with status "STARTING".</p>
+
+<p>It make take some time for Brooklyn to download everything and configure the application's initial topography, so lets have a look at the web interface while we wait.</p>
+
+<h3>Exploring the Hierarchy of Web Cluster with DB</h3>
+
+<p>Clicking on an application listed on the home page, or the Applications tab, will show you the management hierarchy.</p>
+
+<p>Exploring the hierarchy tree, you will see that the Demo Web Cluster with DB is a classic three tier web application, consisting of a <code>ControlledDynamicWebAppCluster</code> and a <code>MySqlNode</code>. The <code>ControlledDynamicWebAppCluster</code> contains an nginx software loadbalancer (<code>NginxController</code>) and as many <code>JBoss7Servers</code> as required (it autoscales).</p>
+
+<p>Clicking on the <code>ControlledDynamicWebAppCluster</code> and then the Sensor tab will show if the cluster is ready to serve and, when ready, will provide a web address for the front of the loadbalancer.</p>
+
+<p>If the <code>service.isUp</code>, you can view the demo web application in your browser at the <code>webapp.url.</code></p>
+
+<h3>Testing the Policies</h3>
+
+<p>Brooklyn at its heart is a policy driven management plane. After codifying your technical and business policies, Brooklyn can implement them automatically.</p>
+
+<p>Brooklyn's policies work autonomically: they are like a nervous system. The need for action, and the correct action to take, are  observed, decided and implemented as low down the management hierarchy (as close to the 'problem') as possible.</p>
+
+<p>The Web Cluster with DB demo comes pre-configured with an <code>AutoScalerPolicy</code>, attached to the cluster of JBoss7 servers and a <code>targets</code> policy attached to the loadbalancer. You can observe policies this in the management console using the Policy tab of the relevant entity (e.g. <code>DynamicWebAppCluster</code> shows the <code>AutoScalerPolicy</code>.</p>
+
+<p>The cluster autoscaler policy will automatically scale the cluster up or down to be the right size for the current load. ('One server' is the minimum size allowed by the policy.)
+The loadbalancer will automatically be updated by the targets policy as the cluster size changes.</p>
+
+<p>Sitting idle, your cluster will only contain one server, but you can check that the policy works  using a tool like <a href="http://jmeter.apache.org/">jmeter</a> pointed at the nginx endpoint to create load on the cluster.</p>
+
+<p>Brooklyn's policies are configurable, customizable, and can be completely bespoke to your needs. As an example, the <code>AutoScalerPolicy</code> is tunable, can be applied to any relevant metric (here, average requests per second), and is a sufficiently complex piece of math that it understand hysteresis and prevents thrashing.</p>
+
+<h3>REST API Browser</h3>
+
+<p>Click on the Script tab at the top of the web interface and select REST API. Brooklyn supports a REST, JSON and Java API to allow you to integrate it with (pretty much) anything.</p>
+
+<p>The Script tab allows you to explore the API.</p>
+
+<p>Try: Locations > GET:/v1/locations > Try it out!</p>
+
+<p>You will be presented with a json response of the currently configured locations.</p>
+
+<h3>Stopping the Web Cluster with DB</h3>
+
+<p>By now the Web Cluster with DB should have started, and you will have been able to view the application in your browser.</p>
+
+<p>Returning to the "Applications" tab, and selecting the <code>WebClusterDatabaseExample</code>'s Effectors, we can Invoke the Stop Effector. This will cleanly shutdown the Web Cluster with DB example.</p>
+
+<h3>Deploying to Cloud</h3>
+
+<p>The user experience of using the service catalog to deploy an application to a cloud is exactly the same as deploying to localhost. Brooklyn transparently handles the differences between locations and environments.</p>
+
+<p>Return to the Create Application dialog, reselect the Web Cluster with DB Demo, and select your public cloud of choice.</p>
+
+<p>(If you have added credentials to your brooklyn.properties file,) Brooklyn will request VMs in the public cloud, provision the application components, and wire them together, returning a cloud IP from which the demo application will be available.</p>
+
+<p>Remember to invoke the stop method when you are finished.</p>
+
+<h3>Closing Thoughts</h3>
+
+<p>This guide has shown two aspects of Brooklyn in action: policy driven management capability, and the service catalog/web interface. Additionally, we briefly explored Brooklyn's API.</p>
+
+<p>It is worth noting that Brooklyn could be included as a library in your own applications (no command line required), or it could be used just as a management plane (without a service catalog).</p>
+
+<p>During this guide we have been using Brooklyn's web interface, but Brooklyn's APIs are extensive and powerful. Brooklyn can be used with (controlled by and make data available to) your existing management UI. Brooklyn is intended to complement (not replace) your existing technologies and tooling.</p>
+
+<h3>Next</h3>
+
+<p>The <a href="/v/0.5.0-M2/use/examples/webcluster/index.html">Elastic Web Cluster Example</a> page details how to build the demo application from scratch. It shows how Brooklyn can complement your application with policy driven management, and how an application can be run without using the service catalog.</p>
+
+
+        </div><!--maincontent-->
+        
+      <div id="sidebar">
+      
+
+
+  
+
+
+
+
+
+
+<div id="sidebar_toc">
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/v/0.5.0-M2/start/index.html"><div class="toc-1-item">Start</div></a>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 toc-active">
+  
+	    <a href="/v/0.5.0-M2/use/guide/index.html"><div class="toc-1-item toc-1-header ">User Guide</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 toc-active">
+      
+	        <a href="/v/0.5.0-M2/use/guide/quickstart/index.html"><div class="toc-2-item toc-active">Quick Start</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/use/guide/defining-applications/basic-concepts.html"><div class="toc-2-item toc-2-header">Defining Applications</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/defining-applications/basic-concepts.html"><div class="toc-3-item">Basic Concepts</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/defining-applications/advanced-concepts.html"><div class="toc-3-item">Advanced Concepts</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/defining-applications/common-usage.html"><div class="toc-3-item">Common Usage</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/use/guide/management/index.html"><div class="toc-2-item toc-2-header">Management</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/management/index.html#introduction"><div class="toc-3-item">Introduction</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/management/index.html#startup-config"><div class="toc-3-item">Startup Configuration</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/management/index.html#cli"><div class="toc-3-item">Command Line Interface</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/management/index.html#console"><div class="toc-3-item">Management Web Console</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/management/index.html#observation-other"><div class="toc-3-item">Observation APIs</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/management/index.html#distributed-management"><div class="toc-3-item">Distributed Management</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/management/index.html#resilience"><div class="toc-3-item">Resilience</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/management/index.html#key-apis"><div class="toc-3-item">Key APIs</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/management/index.html#sensors-and-effectors"><div class="toc-3-item">Sensors and Effectors</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/use/guide/policies/index.html"><div class="toc-2-item toc-2-header">Policies</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/policies/index.html#introduction"><div class="toc-3-item">Introduction</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/policies/index.html#writing-policies"><div class="toc-3-item">Writing Policies</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/policies/index.html#off-the-shelf-policies"><div class="toc-3-item">Off-the-Shelf Policies</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/policies/index.html#implementing-policies"><div class="toc-3-item">Implementing Policies</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/use/guide/entities/index.html"><div class="toc-2-item toc-2-header">Custom Entities</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/entities/index.html#entity-lifestyle"><div class="toc-3-item">Entity Lifecycle</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/entities/index.html#implementation-classes"><div class="toc-3-item">What to Extend</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/entities/index.html#configuration"><div class="toc-3-item">Configuration</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/entities/index.html#implementing-sensors"><div class="toc-3-item">Implementing Sensors</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/entities/index.html#implementing-effectors"><div class="toc-3-item">Implementing Effectors</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/entities/index.html#testing"><div class="toc-3-item">Testing</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/use/guide/extras/index.html"><div class="toc-2-item toc-2-header">Extras</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/extras/index.html#web"><div class="toc-3-item">Web</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/extras/index.html#database"><div class="toc-3-item">Database</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/extras/index.html#nosql"><div class="toc-3-item">NoSQL</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/extras/index.html#messaging"><div class="toc-3-item">Messaging</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/extras/index.html#provisioning"><div class="toc-3-item">Provisioning</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/v/0.5.0-M2/start/index.html"><div class="toc-1-item toc-1-header ">Elsewhere</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/use/examples/index.html"><div class="toc-2-item toc-2-header">Examples</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/examples/webcluster/index.html"><div class="toc-3-item">Elastic Web Cluster</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/examples/global-web-fabric/index.html"><div class="toc-3-item">Global Web Fabric</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/examples/whirrhadoop/index.html"><div class="toc-3-item">Whirr Hadoop Cluster</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/examples/portable-cloudfoundry/index.html"><div class="toc-3-item">Portable Cloud Foundry</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/examples/messaging/index.html"><div class="toc-3-item">Publish-Subscribe Messaging</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/use/api/index.html"><div class="toc-2-item">API Reference</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/dev/code/index.html"><div class="toc-2-item toc-2-header">Contributing</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/dev/code/index.html"><div class="toc-3-item">The Code</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/dev/build/index.html"><div class="toc-3-item">Build and Test</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/dev/tips/index.html"><div class="toc-3-item">Tips and Tricks</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/dev/wishlist.html"><div class="toc-3-item">Wishlist</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/dev/links.html"><div class="toc-3-item">Links</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/dev/how-to-contrib.html"><div class="toc-3-item">How to Contribute</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/license/index.html"><div class="toc-2-item">License</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+ 
+</div>
+<br/>
+
+
+      </div>
+
+    </div><!--contentcontainer-->
+        
+    <div id="footer">
+        <p id="copyright">
+            <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
+            brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
+            &copy; 2012 Cloudsoft Corporation.
+        </p>
+    </div><!--footer -->
+
+</div><!--container-->
+
+</body>
+</html>

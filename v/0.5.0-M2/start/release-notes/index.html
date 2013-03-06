@@ -1,0 +1,292 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+  <title>Release Notes</title>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+
+  <link rel="stylesheet" href="/v/0.5.0-M2/style/style.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/v/0.5.0-M2/style/toc.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/v/0.5.0-M2/style/docs/code.css" type="text/css" media="screen" />
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  
+	<!-- Sidebar/ToC Scripts and CSS -->
+	<script src="/v/0.5.0-M2/style/js/jquery/jquery-1.7.1.min.js"></script>
+	<script src="/v/0.5.0-M2/style/js/jquery/jquery-ui-1.8.18.custom.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/v/0.5.0-M2/style/js/jquery/smoothness/jquery-ui-1.8.18.custom.css" />
+	
+	<script type="text/javascript" src="/v/0.5.0-M2/style/js/superfish.js"></script>
+	
+<!-- Clipboard support -->
+<script src="/v/0.5.0-M2/style/js/zeroclipboard/ZeroClipboard.js"></script>
+<style type="text/css">
+.clipboard_container { float: right; padding: 8px; }
+.clipboard_button {
+    background-image: url("/v/0.5.0-M2/style/icons/clipboard-green-normal.png");
+    background-size: 18px 21px;
+    width: 18px; height: 21px;
+}
+.clipboard_button.hover  { background-image: url("/v/0.5.0-M2/style/icons/clipboard-green-hover.png"); }
+.clipboard_button.active  { background-image: url("/v/0.5.0-M2/style/icons/clipboard-green-click.png"); }'
+</style>
+<script type="text/javascript"> <!-- clipboard -->
+ZeroClipboard.setMoviePath( '/v/0.5.0-M2/style/js/zeroclipboard/ZeroClipboard.swf' );
+</script>
+<script type="text/javascript"> <!-- clipboard positioning -->
+$(document).ready(function() {
+  $('<div class="clipboard_container" title="Copy to Clipboard">'+
+    '<div class="clipboard_button"/>'+
+  '</div>').insertBefore($('div.highlight'))
+  $('div.clipboard_container').each(function(index) {
+    var clipboard = new ZeroClipboard.Client();
+    clipboard.glue( $(this).find(":first")[0], $(this)[0] );
+    var target = $(this).next();
+    var txt = target.text().trim();
+    if (target.find('code.bash')) {
+      txt = txt.replace(/^[^%$]*[%$] /, "").replace(new RegExp('\n[^%$]*[%$] ','g'), "\n");
+    }
+    clipboard.setText(txt);
+  });
+});
+</script>
+
+    <script type="text/javascript">
+        // initialise menu delay
+        jQuery(function(){
+            jQuery('ul#mainmenu').superfish({ 
+                autoArrows:  false,  // disable generation of arrow mark-up 
+                dropShadows: false,  // disable drop shadows 
+                disableHI:   true,   // set to true to disable hoverIntent detection 
+                delay:       500,    // the delay in milliseconds that the mouse can remain outside a submenu without it closing 
+                speed:       'fast', 
+            });
+        });
+    </script>
+
+<script type="text/javascript"> <!-- search -->
+	$(function() {
+		$('#simple_google')
+			.submit(function() {
+				$('input[name="q"]').val("site:" + document.location.hostname + " " + $('input[name="brooklyn-search"]').val());
+			return true;
+			});
+		$('input[name="brooklyn-search"]').focus(function() {
+				if ($(this).val() === $(this).attr('placeholder')) {
+					$(this).val('');
+				}
+			})
+			.blur(function() {
+				if ($(this).val() === '') {
+					$(this).val($(this).attr('placeholder'));
+				}
+			})
+			.blur();
+    });
+</script>
+
+<script type="text/javascript"> <!-- analytics -->
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-30530918-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+</head>
+
+<body>
+
+    <ul id="shortcuts" title="Accessibility shortcuts menu">
+        <li><a href="#maincontent">Skip to main content</a></li>
+    </ul>
+   
+
+<div id="container">
+
+    <div id="header">
+    
+        <div id="identity">
+            <a href="http://brooklyncentral.github.com/" rel="home">Brooklyn</a>
+        </div>
+        
+        <ul id="quicklinks">
+            <li><a href="/v/0.5.0-M2/meta/versions.html">0.5.0-M2</a></li>
+            <li><a href="/v/0.5.0-M2/start/download.html">Download</a></li>
+            <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
+            <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
+            <li><a href="/v/0.5.0-M2/meta/contact.html">Contact</a></li>
+        </ul>
+
+        <div id="menubar">  
+
+
+
+
+
+
+
+<ul id="mainmenu"><!-- INSERT LINKS -->
+            
+
+  
+  
+  <li class=""><a href="/v/0.5.0-M2/index.html">Overview</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.5.0-M2/start/download.html">Download</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.5.0-M2/start/walkthrough/index.html">Walkthrough</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.5.0-M2/use/guide/index.html">Guide</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.5.0-M2/use/examples/index.html">Examples</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.5.0-M2/dev/code/index.html">Contributing</a></li>
+
+
+</ul>                    
+
+            <form method="get" id="simple_google" class="searchform" action="http://www.google.com/search" method="get">
+                <input type="text" class="searchinput" name="brooklyn-search" placeholder="Search: type &amp; hit enter" />
+                <input type="hidden" name="q" value="" />
+            </form>
+            
+        </div>
+                
+    </div><!--header-->
+    
+    <div id="contentcontainer">
+    
+        <div id="maincontent">
+
+
+  
+
+
+
+
+
+
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+
+
+    
+    
+    
+    
+
+            
+<p id="breadcrumb">
+    <a href="/v/0.5.0-M2">Home</a>
+    
+        &raquo; <a href="/v/0.5.0-M2/start/release-notes/index.html">Release Notes</a>
+        
+    
+</p>
+
+
+<h1 id="header_title">Release Notes</h1>
+    
+<ul>
+<li><a href="0.5.0-M2.html">0.5.0-M2</a></li>
+</ul>
+
+
+
+        </div><!--maincontent-->
+        
+      <div id="sidebar">
+      
+
+
+  
+
+
+
+
+
+
+<div id="sidebar_toc">
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/v/0.5.0-M2/index.html"><div class="toc-1-item">Overview</div></a>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/v/0.5.0-M2/start/walkthrough/index.html"><div class="toc-1-item">Walkthrough</div></a>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/v/0.5.0-M2/start/download.html"><div class="toc-1-item">Download</div></a>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/v/0.5.0-M2/start/docs-summary.html"><div class="toc-1-item">Documentation</div></a>
+  
+      </div>
+ 
+</div>
+<br/>
+
+
+      </div>
+
+    </div><!--contentcontainer-->
+        
+    <div id="footer">
+        <p id="copyright">
+            <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
+            brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
+            &copy; 2012 Cloudsoft Corporation.
+        </p>
+    </div><!--footer -->
+
+</div><!--container-->
+
+</body>
+</html>

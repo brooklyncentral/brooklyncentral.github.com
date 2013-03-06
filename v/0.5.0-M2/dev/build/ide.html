@@ -1,0 +1,867 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+  <title>IDE Setup</title>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+
+  <link rel="stylesheet" href="/v/0.5.0-M2/style/style.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/v/0.5.0-M2/style/toc.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/v/0.5.0-M2/style/docs/code.css" type="text/css" media="screen" />
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  
+	<!-- Sidebar/ToC Scripts and CSS -->
+	<script src="/v/0.5.0-M2/style/js/jquery/jquery-1.7.1.min.js"></script>
+	<script src="/v/0.5.0-M2/style/js/jquery/jquery-ui-1.8.18.custom.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/v/0.5.0-M2/style/js/jquery/smoothness/jquery-ui-1.8.18.custom.css" />
+	
+	<script type="text/javascript" src="/v/0.5.0-M2/style/js/superfish.js"></script>
+	
+<!-- Clipboard support -->
+<script src="/v/0.5.0-M2/style/js/zeroclipboard/ZeroClipboard.js"></script>
+<style type="text/css">
+.clipboard_container { float: right; padding: 8px; }
+.clipboard_button {
+    background-image: url("/v/0.5.0-M2/style/icons/clipboard-green-normal.png");
+    background-size: 18px 21px;
+    width: 18px; height: 21px;
+}
+.clipboard_button.hover  { background-image: url("/v/0.5.0-M2/style/icons/clipboard-green-hover.png"); }
+.clipboard_button.active  { background-image: url("/v/0.5.0-M2/style/icons/clipboard-green-click.png"); }'
+</style>
+<script type="text/javascript"> <!-- clipboard -->
+ZeroClipboard.setMoviePath( '/v/0.5.0-M2/style/js/zeroclipboard/ZeroClipboard.swf' );
+</script>
+<script type="text/javascript"> <!-- clipboard positioning -->
+$(document).ready(function() {
+  $('<div class="clipboard_container" title="Copy to Clipboard">'+
+    '<div class="clipboard_button"/>'+
+  '</div>').insertBefore($('div.highlight'))
+  $('div.clipboard_container').each(function(index) {
+    var clipboard = new ZeroClipboard.Client();
+    clipboard.glue( $(this).find(":first")[0], $(this)[0] );
+    var target = $(this).next();
+    var txt = target.text().trim();
+    if (target.find('code.bash')) {
+      txt = txt.replace(/^[^%$]*[%$] /, "").replace(new RegExp('\n[^%$]*[%$] ','g'), "\n");
+    }
+    clipboard.setText(txt);
+  });
+});
+</script>
+
+    <script type="text/javascript">
+        // initialise menu delay
+        jQuery(function(){
+            jQuery('ul#mainmenu').superfish({ 
+                autoArrows:  false,  // disable generation of arrow mark-up 
+                dropShadows: false,  // disable drop shadows 
+                disableHI:   true,   // set to true to disable hoverIntent detection 
+                delay:       500,    // the delay in milliseconds that the mouse can remain outside a submenu without it closing 
+                speed:       'fast', 
+            });
+        });
+    </script>
+
+<script type="text/javascript"> <!-- search -->
+	$(function() {
+		$('#simple_google')
+			.submit(function() {
+				$('input[name="q"]').val("site:" + document.location.hostname + " " + $('input[name="brooklyn-search"]').val());
+			return true;
+			});
+		$('input[name="brooklyn-search"]').focus(function() {
+				if ($(this).val() === $(this).attr('placeholder')) {
+					$(this).val('');
+				}
+			})
+			.blur(function() {
+				if ($(this).val() === '') {
+					$(this).val($(this).attr('placeholder'));
+				}
+			})
+			.blur();
+    });
+</script>
+
+<script type="text/javascript"> <!-- analytics -->
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-30530918-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+</head>
+
+<body>
+
+    <ul id="shortcuts" title="Accessibility shortcuts menu">
+        <li><a href="#maincontent">Skip to main content</a></li>
+    </ul>
+   
+
+<div id="container">
+
+    <div id="header">
+    
+        <div id="identity">
+            <a href="http://brooklyncentral.github.com/" rel="home">Brooklyn</a>
+        </div>
+        
+        <ul id="quicklinks">
+            <li><a href="/v/0.5.0-M2/meta/versions.html">0.5.0-M2</a></li>
+            <li><a href="/v/0.5.0-M2/start/download.html">Download</a></li>
+            <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
+            <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
+            <li><a href="/v/0.5.0-M2/meta/contact.html">Contact</a></li>
+        </ul>
+
+        <div id="menubar">  
+
+
+
+
+
+
+
+<ul id="mainmenu"><!-- INSERT LINKS -->
+            
+
+  
+  
+  <li class=""><a href="/v/0.5.0-M2/index.html">Overview</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.5.0-M2/start/download.html">Download</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.5.0-M2/start/walkthrough/index.html">Walkthrough</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.5.0-M2/use/guide/index.html">Guide</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.5.0-M2/use/examples/index.html">Examples</a></li>
+
+  
+  
+  <li class="toc-active"><a href="/v/0.5.0-M2/dev/code/index.html">Contributing</a></li>
+
+
+</ul>                    
+
+            <form method="get" id="simple_google" class="searchform" action="http://www.google.com/search" method="get">
+                <input type="text" class="searchinput" name="brooklyn-search" placeholder="Search: type &amp; hit enter" />
+                <input type="hidden" name="q" value="" />
+            </form>
+            
+        </div>
+                
+    </div><!--header-->
+    
+    <div id="contentcontainer">
+    
+        <div id="maincontent">
+
+
+  
+
+
+
+
+
+
+
+    
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+
+    
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+        
+        
+    
+
+    
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+                
+                
+                
+                
+                
+                
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+
+    
+    
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+
+
+
+            
+<p id="breadcrumb">
+    <a href="/v/0.5.0-M2/dev/code/index.html">Contributing</a>
+    
+        &raquo; <a href="/v/0.5.0-M2/dev/build/index.html">Build and Test</a>
+        
+            &raquo; <a href="/v/0.5.0-M2/dev/build/ide.html">IDE</a>
+        
+    
+</p>
+
+
+<h1 id="header_title">IDE Setup</h1>
+    
+<p>Gone are the days when IDE integration always just works...  Maven and Eclipse fight,
+neither quite gets along perfectly with Groovy,
+git branch switches (sooo nice) can be slow, etc etc.</p>
+
+<p>But with a bit of a dance the IDE can still be your friend,
+making it much easier to run tests and debug.</p>
+
+<p>Here are some general tips:</p>
+
+<ul>
+<li><p>Add your favourite plugins for Maven, Groovy, Git and JavaScript, if necessary</p></li>
+<li><p>Turn off auto-rebuild if it bothers you</p></li>
+<li><p>Don't always trust the IDE to build correctly; if you hit a snag,
+do a command-line <code>mvn clean install</code> (optionally with <code>-DskipTests</code>)
+then refresh the project (optionally regenerate dependencies).
+Sometimes closing projects (so that it reads from your <code>~/.m2/repository</code>) helps.</p></li>
+</ul>
+
+
+<p>See instructions below for specific IDEs.</p>
+
+<h2>Eclipse</h2>
+
+<p>If you're an Eclipse user, you'll probably want the Groovy, Maven (m2e), Git, JavaScript and TestNG plugins.
+Via Help -> Install New Software, or from the Eclipse Marketplace,
+we recommend:</p>
+
+<ul>
+<li><p>Maven Plugin: m2e from <a href="http://download.eclipse.org/technology/m2e/releases">download.eclipse.org/technology/m2e/releases</a>
+(typically availabile in the default Eclipse update site set)</p></li>
+<li><p>Git Plugin: egit from <a href="http://download.eclipse.org/egit/updates">download.eclipse.org/egit/updates</a>
+(typically availabile in the default Eclipse update site set)</p></li>
+<li><p>Groovy Plugin: GRECLIPSE from <a href="http://dist.springsource.org/release/GRECLIPSE/e4.2">dist.springsource.org/release/GRECLIPSE/e4.2</a>
+(or <a href="http://dist.springsource.org/release/GRECLIPSE/e3.7">for Eclipse 3.7</a>)
+You can even visit the <a href="http://groovy.codehaus.org/Eclipse+Plugin">groovy update site</a> for more details.</p></li>
+<li><p>TestNG Plugin: beust TestNG from <a href="http://beust.com/eclipse">beust.com/eclipse</a></p></li>
+</ul>
+
+
+<p>As of this writing, with Eclipse 4.2, m2e 1.1, and GrEclipse 2.7,
+the codebase has been imported (Import -> Existing Maven Projects)
+and successfully run with no errors.
+However this isn't always the case.</p>
+
+<p>If you encounter issues, the following hints may be helpful:</p>
+
+<ul>
+<li><p>If m2e reports import problems, it is usually okay (even good) to mark all to "Resolve All Later".
+The build-helper connector is useful if you're prompted for it, but
+do <em>not</em> install the Tycho OSGi configurator (this causes show-stopping IAE's, and we don't need Eclipse to make bundles anyway).
+You can manually mark as permanently ignored certain errors;
+this updates the pom.xml (and should be current).</p></li>
+<li><p>m2e likes to put <code>excluding="**"</code> on `resources<code>directories; if you're seeing funny missing files
+(things like not resolving jclouds/aws-ec2 locations or missing WARs), try building clean install
+from the command-line then doing Maven -&gt; Update Project (clean uses a maven-replacer-plugin to fix</code>.classpath``s).
+Alternatively you can go through and remove these manually in Eclipse (Build Path -> Configure)
+or the filesystem, or use
+the following command to remove these rogue blocks in the generated .classpath files:</p>
+
+<p><code>find . -name .classpath -exec sed -i.bak 's/[ ]*..cluding="[\*\/]*\(\.java\)*"//g' {} \;</code></p></li>
+<li><p>Getting the web console project to build nicely can be trickier.</p></li>
+<li><p>You may need to ensure <code>src/main/{java,resources}</code> is created in each project dir,
+if (older versions) complain about missing directories,
+and the same for <code>src/test/{java,resources}</code> <em>if</em> there are tests (<code>src/test</code> exists):</p>
+
+<p><code>find . \( -path "*/src/main" -or -path "*/src/test" \) -exec echo {} \; -exec mkdir -p {}/{java,resources} \;</code></p></li>
+<li><p>You may need to add the groovy nature (or even java nature) to projects;
+with some maven-eclipse plugins this works fine,
+but for others (older ones) you may need to handcraft these
+(either right-click the project in the Package Explorer and choose Configure,
+or edit the <code>.project</code> manually adding it to the project properties).
+The tips <a href="http://www.jclouds.org/documentation/devguides/using-eclipse">for jclouds maven-eclipse</a> might be helpful.</p></li>
+</ul>
+
+
+<p> &lt;!--
+ FIXME Relates to old Grails, rather than new JavaScript web-console.
+ Should we just delete this section, or does any of it apply to the new web-console?</p>
+
+<ul>
+<li>Getting the web console project to build nicely can be trickier.
+If you're lucky it will just work...
+But you may find you have to first build from the command-line,
+then add all the source folders, and <code>target/plugin-classes</code> as a class file folder.
+Easier may be just to run "grails run-app" in the directory to launch it (plus that does dynamic restarts),
+and use the IDE as just a text editor (or use a different text editor for that project only).
+Note too that some jiggery-pokery may currently be needed to get Groovy 1.8 playing nicely with Grails 1.3.
+--></li>
+</ul>
+
+
+<p>If the pain starts to be too much, come find us on IRC #brooklyncentral or <a href="/v/0.5.0-M2/meta/contact.html">elsewhere</a> and we can hopefully share our pearls.
+(And if you have a tip we haven't mentioned please let us know that too!)</p>
+
+<h2>Intelli-J IDEA</h2>
+
+<p>Tips from Intelli-J users wanted!</p>
+
+<h2>Netbeans</h2>
+
+<p>Tips from Netbeans users wanted!</p>
+
+
+        </div><!--maincontent-->
+        
+      <div id="sidebar">
+      
+
+
+  
+
+
+
+
+
+
+<div id="sidebar_toc">
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/v/0.5.0-M2/start/index.html"><div class="toc-1-item toc-1-header ">Start</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/index.html"><div class="toc-2-item">Overview</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/start/walkthrough/index.html"><div class="toc-2-item">Walkthrough</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/start/download.html"><div class="toc-2-item">Download</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/start/docs-summary.html"><div class="toc-2-item">Documentation</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/v/0.5.0-M2/use/index.html"><div class="toc-1-item toc-1-header ">Using brooklyn</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/use/guide/index.html"><div class="toc-2-item toc-2-header">User Guide</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/quickstart/index.html"><div class="toc-3-item">Quick Start</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/defining-applications/basic-concepts.html"><div class="toc-3-item">Defining Applications</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/management/index.html"><div class="toc-3-item">Management</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/policies/index.html"><div class="toc-3-item">Policies</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/entities/index.html"><div class="toc-3-item">Custom Entities</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/extras/index.html"><div class="toc-3-item">Extras</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/use/examples/index.html"><div class="toc-2-item toc-2-header">Examples</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/examples/webcluster/index.html"><div class="toc-3-item">Elastic Web Cluster</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/examples/global-web-fabric/index.html"><div class="toc-3-item">Global Web Fabric</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/examples/whirrhadoop/index.html"><div class="toc-3-item">Whirr Hadoop Cluster</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/examples/portable-cloudfoundry/index.html"><div class="toc-3-item">Portable Cloud Foundry</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/examples/messaging/index.html"><div class="toc-3-item">Publish-Subscribe Messaging</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/use/api/index.html"><div class="toc-2-item">API Reference (javadoc)</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/use/contact.html"><div class="toc-2-item">Discuss</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 toc-active">
+  
+	    <a href="/v/0.5.0-M2/dev/code/index.html"><div class="toc-1-item toc-1-header ">Contributing</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/dev/code/index.html"><div class="toc-2-item toc-2-header">The Code</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/dev/code/index.html"><div class="toc-3-item">Structure</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/dev/code/entity.html"><div class="toc-3-item">Writing an Entity</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/dev/code/policy.html"><div class="toc-3-item">Writing a Policy</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="http://github.com/brooklyncentral/brooklyn"><div class="toc-3-item">brooklyn.git (github)</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 toc-active">
+      
+	        <a href="/v/0.5.0-M2/dev/build/index.html"><div class="toc-2-item toc-2-header">Build and Test</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/dev/build/index.html"><div class="toc-3-item">Maven</div></a>
+              </div>
+        
+            
+              <div class="toc-3 toc-active">
+	            <a href="/v/0.5.0-M2/dev/build/ide.html"><div class="toc-3-item toc-active">IDE</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/dev/build/tests.html"><div class="toc-3-item">Tests</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/dev/tips/index.html"><div class="toc-2-item toc-2-header">Tips and Tricks</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/dev/tips/index.html"><div class="toc-3-item">Miscellany</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/dev/tips/logging.html"><div class="toc-3-item">Logging</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/dev/tips/standards.html"><div class="toc-3-item">Code Standards</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/dev/tips/update-docs.html"><div class="toc-3-item">Updating Docs</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/dev/wishlist.html"><div class="toc-2-item">Wishlist</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/dev/links.html"><div class="toc-2-item toc-2-header">Links</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="https://github.com/brooklyncentral/"><div class="toc-3-item">Github repo</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="https://github.com/brooklyncentral/brooklyn/issues"><div class="toc-3-item">Github issues</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="http://ccweb.cloudsoftcorp.com/maven/libs-snapshot-local/io/brooklyn/"><div class="toc-3-item">Maven snapshots</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/dev/how-to-contrib.html"><div class="toc-2-item">How to Contribute</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/v/0.5.0-M2/license/index.html"><div class="toc-1-item toc-1-header ">License</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/license/license.html"><div class="toc-2-item">Apache License v2.0</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/license/contributor-agreements/index.html"><div class="toc-2-item toc-2-header">Contributor Agreements</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/license/contributor-agreements/index.html"><div class="toc-3-item">Instructions</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/license/contributor-agreements/individual.html"><div class="toc-3-item">Individual CLA (echosign)</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/license/contributor-agreements/corporate.html"><div class="toc-3-item">Corporate CLA (echosign)</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/license/contributor-agreements/corporate-update-schedule.html"><div class="toc-3-item">CCLA Schedule A Update (echosign)</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/license/contributor-agreements/brooklyn-icla.txt"><div class="toc-3-item">Individual CLA (raw text)</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/license/contributor-agreements/brooklyn-ccla.txt"><div class="toc-3-item">Corporate CLA (raw text)</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/v/0.5.0-M2/meta/versions.html"><div class="toc-1-item toc-1-header ">Meta</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/meta/versions.html"><div class="toc-2-item">Versions</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/meta/governance.html"><div class="toc-2-item">Governance</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/meta/contact.html"><div class="toc-2-item">Contact</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+ 
+</div>
+<br/>
+
+
+      </div>
+
+    </div><!--contentcontainer-->
+        
+    <div id="footer">
+        <p id="copyright">
+            <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
+            brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
+            &copy; 2012 Cloudsoft Corporation.
+        </p>
+    </div><!--footer -->
+
+</div><!--container-->
+
+</body>
+</html>

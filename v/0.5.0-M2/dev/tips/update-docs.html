@@ -1,0 +1,837 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+  <title>Updating the Docs</title>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+
+  <link rel="stylesheet" href="/v/0.5.0-M2/style/style.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/v/0.5.0-M2/style/toc.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/v/0.5.0-M2/style/docs/code.css" type="text/css" media="screen" />
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  
+	<!-- Sidebar/ToC Scripts and CSS -->
+	<script src="/v/0.5.0-M2/style/js/jquery/jquery-1.7.1.min.js"></script>
+	<script src="/v/0.5.0-M2/style/js/jquery/jquery-ui-1.8.18.custom.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/v/0.5.0-M2/style/js/jquery/smoothness/jquery-ui-1.8.18.custom.css" />
+	
+	<script type="text/javascript" src="/v/0.5.0-M2/style/js/superfish.js"></script>
+	
+<!-- Clipboard support -->
+<script src="/v/0.5.0-M2/style/js/zeroclipboard/ZeroClipboard.js"></script>
+<style type="text/css">
+.clipboard_container { float: right; padding: 8px; }
+.clipboard_button {
+    background-image: url("/v/0.5.0-M2/style/icons/clipboard-green-normal.png");
+    background-size: 18px 21px;
+    width: 18px; height: 21px;
+}
+.clipboard_button.hover  { background-image: url("/v/0.5.0-M2/style/icons/clipboard-green-hover.png"); }
+.clipboard_button.active  { background-image: url("/v/0.5.0-M2/style/icons/clipboard-green-click.png"); }'
+</style>
+<script type="text/javascript"> <!-- clipboard -->
+ZeroClipboard.setMoviePath( '/v/0.5.0-M2/style/js/zeroclipboard/ZeroClipboard.swf' );
+</script>
+<script type="text/javascript"> <!-- clipboard positioning -->
+$(document).ready(function() {
+  $('<div class="clipboard_container" title="Copy to Clipboard">'+
+    '<div class="clipboard_button"/>'+
+  '</div>').insertBefore($('div.highlight'))
+  $('div.clipboard_container').each(function(index) {
+    var clipboard = new ZeroClipboard.Client();
+    clipboard.glue( $(this).find(":first")[0], $(this)[0] );
+    var target = $(this).next();
+    var txt = target.text().trim();
+    if (target.find('code.bash')) {
+      txt = txt.replace(/^[^%$]*[%$] /, "").replace(new RegExp('\n[^%$]*[%$] ','g'), "\n");
+    }
+    clipboard.setText(txt);
+  });
+});
+</script>
+
+    <script type="text/javascript">
+        // initialise menu delay
+        jQuery(function(){
+            jQuery('ul#mainmenu').superfish({ 
+                autoArrows:  false,  // disable generation of arrow mark-up 
+                dropShadows: false,  // disable drop shadows 
+                disableHI:   true,   // set to true to disable hoverIntent detection 
+                delay:       500,    // the delay in milliseconds that the mouse can remain outside a submenu without it closing 
+                speed:       'fast', 
+            });
+        });
+    </script>
+
+<script type="text/javascript"> <!-- search -->
+	$(function() {
+		$('#simple_google')
+			.submit(function() {
+				$('input[name="q"]').val("site:" + document.location.hostname + " " + $('input[name="brooklyn-search"]').val());
+			return true;
+			});
+		$('input[name="brooklyn-search"]').focus(function() {
+				if ($(this).val() === $(this).attr('placeholder')) {
+					$(this).val('');
+				}
+			})
+			.blur(function() {
+				if ($(this).val() === '') {
+					$(this).val($(this).attr('placeholder'));
+				}
+			})
+			.blur();
+    });
+</script>
+
+<script type="text/javascript"> <!-- analytics -->
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-30530918-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+</head>
+
+<body>
+
+    <ul id="shortcuts" title="Accessibility shortcuts menu">
+        <li><a href="#maincontent">Skip to main content</a></li>
+    </ul>
+   
+
+<div id="container">
+
+    <div id="header">
+    
+        <div id="identity">
+            <a href="http://brooklyncentral.github.com/" rel="home">Brooklyn</a>
+        </div>
+        
+        <ul id="quicklinks">
+            <li><a href="/v/0.5.0-M2/meta/versions.html">0.5.0-M2</a></li>
+            <li><a href="/v/0.5.0-M2/start/download.html">Download</a></li>
+            <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
+            <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
+            <li><a href="/v/0.5.0-M2/meta/contact.html">Contact</a></li>
+        </ul>
+
+        <div id="menubar">  
+
+
+
+
+
+
+
+<ul id="mainmenu"><!-- INSERT LINKS -->
+            
+
+  
+  
+  <li class=""><a href="/v/0.5.0-M2/index.html">Overview</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.5.0-M2/start/download.html">Download</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.5.0-M2/start/walkthrough/index.html">Walkthrough</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.5.0-M2/use/guide/index.html">Guide</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.5.0-M2/use/examples/index.html">Examples</a></li>
+
+  
+  
+  <li class="toc-active"><a href="/v/0.5.0-M2/dev/code/index.html">Contributing</a></li>
+
+
+</ul>                    
+
+            <form method="get" id="simple_google" class="searchform" action="http://www.google.com/search" method="get">
+                <input type="text" class="searchinput" name="brooklyn-search" placeholder="Search: type &amp; hit enter" />
+                <input type="hidden" name="q" value="" />
+            </form>
+            
+        </div>
+                
+    </div><!--header-->
+    
+    <div id="contentcontainer">
+    
+        <div id="maincontent">
+
+
+  
+
+
+
+
+
+
+
+    
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+
+    
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+        
+        
+    
+
+    
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+                
+                
+                
+                
+                
+                
+            
+        
+    
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+
+    
+    
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+
+
+
+            
+<p id="breadcrumb">
+    <a href="/v/0.5.0-M2/dev/code/index.html">Contributing</a>
+    
+        &raquo; <a href="/v/0.5.0-M2/dev/tips/index.html">Tips and Tricks</a>
+        
+            &raquo; <a href="/v/0.5.0-M2/dev/tips/update-docs.html">Updating Docs</a>
+        
+    
+</p>
+
+
+<h1 id="header_title">Updating the Docs</h1>
+    
+<p>The Brooklyn docs live in the <strong>docs</strong> project in the Brooklyn codebase.
+It's built using standard jekyll/markdown with a few extensions.</p>
+
+<h2>Jekyll</h2>
+
+<p>Install the following:</p>
+
+<ul>
+<li><a href="https://github.com/mojombo/jekyll/wiki/install"><strong>Jekyll</strong></a>: <code>sudo gem install jekyll</code></li>
+<li><a href="http://rubygems.org/gems/json"><strong>JSON gem</strong></a>: <code>sudo gem install json</code></li>
+<li><a href="https://github.com/rtomayko/rdiscount/#readme"><strong>RDiscount</strong></a>: <code>sudo gem install rdiscount</code></li>
+<li><a href="http://pygments.org/"><strong>Pygments</strong></a>: <code>sudo easy_install Pygments</code></li>
+</ul>
+
+
+<p>Then, in the <code>docs/</code> directory, run:</p>
+
+<pre><code>jekyll --pygments --server --auto --url ""
+</code></pre>
+
+<p>or</p>
+
+<pre><code>./_scripts/jekyll-debug.sh 
+</code></pre>
+
+<p>Visit <a href="http://localhost:4000/">http://localhost:4000/</a> and you should see the documentation.</p>
+
+<h2>Extensions</h2>
+
+<p>In addition to the standard pygments plugin for code-highlighting,
+we use some custom Jekyll plugins (in the <code>_plugins</code> dir) to:</p>
+
+<ul>
+<li>include markdown files inside other files
+(see, for example, the <code>*.include.md</code> files which contain text
+which is used in multiple other files)</li>
+<li>parse JSON which we can loop over in our markdown docs</li>
+<li>trim whitespace of ends of variables</li>
+</ul>
+
+
+<p>Using JSON table-of-contents files (<code>toc.json</code>) is our lightweight solution
+to the problem of making the site structure navigable (the menus at left).
+If you add a page, simply add the file (with full path from project root)
+and a title to the toc.json in that directory, and it will get included
+in the menu.  You can also configure a special toc to show on your page,
+if you wish, by setting the toc variable in the header.
+Most pages declare the "page" layout (<code>_layouts/page.html</code>) which builds
+a menu in the left side-bar (<code>_includes/sidebar.html</code>) using the JSON --
+and automatically detecting which page is active.</p>
+
+<h2>Publishing</h2>
+
+<p>Because GitHub don't run plugins (they run with the <code>--safe</code> option),
+the site is built off-line and uploaded to github, where the documentation is hosted.</p>
+
+<p>This makes the process a little more tedious, but it does have the advantage
+that the documentation lives right in the Brooklyn project,
+easy to open alongside the code inside your IDE.</p>
+
+<p>The off-line build can be done using <code>/docs/_scripts/build.sh</code>,
+including both jekyll markdown documentation and Brooklyn javadoc,
+with the result of this copied to the <code>brooklyncentral/brooklyncentral.github.com</code>
+github project (as per the GitHub pages documentation).
+<a href="http://brooklyn.io">brooklyn.io</a> is CNAMEd to <a href="brooklyncentral.github.com">brooklyncentral.github.com</a>
+for convenience.</p>
+
+<p>The latest stable version typically lives in the root of the <code>brooklyncentral.github.com</code> project.
+Archived versions are kept under <code>/v/*</code> with logic in the markdown for
+<a href="/v/0.5.0-M2/meta/versions.html">meta/versions</a> to link to related versions.<br/>
+Additional instructions and scripts for automating the installs can be found in <code>/docs/_scripts/</code>.</p>
+
+
+        </div><!--maincontent-->
+        
+      <div id="sidebar">
+      
+
+
+  
+
+
+
+
+
+
+<div id="sidebar_toc">
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/v/0.5.0-M2/start/index.html"><div class="toc-1-item toc-1-header ">Start</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/index.html"><div class="toc-2-item">Overview</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/start/walkthrough/index.html"><div class="toc-2-item">Walkthrough</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/start/download.html"><div class="toc-2-item">Download</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/start/docs-summary.html"><div class="toc-2-item">Documentation</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/v/0.5.0-M2/use/index.html"><div class="toc-1-item toc-1-header ">Using brooklyn</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/use/guide/index.html"><div class="toc-2-item toc-2-header">User Guide</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/quickstart/index.html"><div class="toc-3-item">Quick Start</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/defining-applications/basic-concepts.html"><div class="toc-3-item">Defining Applications</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/management/index.html"><div class="toc-3-item">Management</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/policies/index.html"><div class="toc-3-item">Policies</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/entities/index.html"><div class="toc-3-item">Custom Entities</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/guide/extras/index.html"><div class="toc-3-item">Extras</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/use/examples/index.html"><div class="toc-2-item toc-2-header">Examples</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/examples/webcluster/index.html"><div class="toc-3-item">Elastic Web Cluster</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/examples/global-web-fabric/index.html"><div class="toc-3-item">Global Web Fabric</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/examples/whirrhadoop/index.html"><div class="toc-3-item">Whirr Hadoop Cluster</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/examples/portable-cloudfoundry/index.html"><div class="toc-3-item">Portable Cloud Foundry</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/use/examples/messaging/index.html"><div class="toc-3-item">Publish-Subscribe Messaging</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/use/api/index.html"><div class="toc-2-item">API Reference (javadoc)</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/use/contact.html"><div class="toc-2-item">Discuss</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 toc-active">
+  
+	    <a href="/v/0.5.0-M2/dev/code/index.html"><div class="toc-1-item toc-1-header ">Contributing</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/dev/code/index.html"><div class="toc-2-item toc-2-header">The Code</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/dev/code/index.html"><div class="toc-3-item">Structure</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/dev/code/entity.html"><div class="toc-3-item">Writing an Entity</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/dev/code/policy.html"><div class="toc-3-item">Writing a Policy</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="http://github.com/brooklyncentral/brooklyn"><div class="toc-3-item">brooklyn.git (github)</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/dev/build/index.html"><div class="toc-2-item toc-2-header">Build and Test</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/dev/build/index.html"><div class="toc-3-item">Maven</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/dev/build/ide.html"><div class="toc-3-item">IDE</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/dev/build/tests.html"><div class="toc-3-item">Tests</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 toc-active">
+      
+	        <a href="/v/0.5.0-M2/dev/tips/index.html"><div class="toc-2-item toc-2-header">Tips and Tricks</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/dev/tips/index.html"><div class="toc-3-item">Miscellany</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/dev/tips/logging.html"><div class="toc-3-item">Logging</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/dev/tips/standards.html"><div class="toc-3-item">Code Standards</div></a>
+              </div>
+        
+            
+              <div class="toc-3 toc-active">
+	            <a href="/v/0.5.0-M2/dev/tips/update-docs.html"><div class="toc-3-item toc-active">Updating Docs</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/dev/wishlist.html"><div class="toc-2-item">Wishlist</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/dev/links.html"><div class="toc-2-item toc-2-header">Links</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="https://github.com/brooklyncentral/"><div class="toc-3-item">Github repo</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="https://github.com/brooklyncentral/brooklyn/issues"><div class="toc-3-item">Github issues</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="http://ccweb.cloudsoftcorp.com/maven/libs-snapshot-local/io/brooklyn/"><div class="toc-3-item">Maven snapshots</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/dev/how-to-contrib.html"><div class="toc-2-item">How to Contribute</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/v/0.5.0-M2/license/index.html"><div class="toc-1-item toc-1-header ">License</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/license/license.html"><div class="toc-2-item">Apache License v2.0</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/license/contributor-agreements/index.html"><div class="toc-2-item toc-2-header">Contributor Agreements</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/license/contributor-agreements/index.html"><div class="toc-3-item">Instructions</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/license/contributor-agreements/individual.html"><div class="toc-3-item">Individual CLA (echosign)</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/license/contributor-agreements/corporate.html"><div class="toc-3-item">Corporate CLA (echosign)</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/license/contributor-agreements/corporate-update-schedule.html"><div class="toc-3-item">CCLA Schedule A Update (echosign)</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/license/contributor-agreements/brooklyn-icla.txt"><div class="toc-3-item">Individual CLA (raw text)</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.5.0-M2/license/contributor-agreements/brooklyn-ccla.txt"><div class="toc-3-item">Corporate CLA (raw text)</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/v/0.5.0-M2/meta/versions.html"><div class="toc-1-item toc-1-header ">Meta</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/meta/versions.html"><div class="toc-2-item">Versions</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/meta/governance.html"><div class="toc-2-item">Governance</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.5.0-M2/meta/contact.html"><div class="toc-2-item">Contact</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+ 
+</div>
+<br/>
+
+
+      </div>
+
+    </div><!--contentcontainer-->
+        
+    <div id="footer">
+        <p id="copyright">
+            <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
+            brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
+            &copy; 2012 Cloudsoft Corporation.
+        </p>
+    </div><!--footer -->
+
+</div><!--container-->
+
+</body>
+</html>
