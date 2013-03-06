@@ -115,7 +115,7 @@ _gaq.push(['_trackPageview']);
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.5.0-M1</a></li>
+            <li><a href="/meta/versions.html">0.5.0-M2</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -382,9 +382,9 @@ but does not assume knowledge of either of these.</p>
 
 
 
-<div class="highlight"><pre><code class="bash">% curl -LO http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.5.0-M1/brooklyn-dist-0.5.0-M1-dist.tar.gz
-% tar xvzf brooklyn-dist-0.5.0-M1-dist.tar.gz
-% <span class="nb">export </span><span class="nv">BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/brooklyn-0.5.0-M1/
+<div class="highlight"><pre><code class="bash">% curl -LO http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.5.0-M2/brooklyn-dist-0.5.0-M2-dist.tar.gz
+% tar xvzf brooklyn-dist-0.5.0-M2-dist.tar.gz
+% <span class="nb">export </span><span class="nv">BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/brooklyn-0.5.0-M2/
 </code></pre>
 </div>
 
@@ -398,7 +398,7 @@ but does not assume knowledge of either of these.</p>
 
 <div class="highlight"><pre><code class="bash">% git clone https://github.com/brooklyncentral/brooklyn-examples.git
 % <span class="nb">cd </span>brooklyn-examples
-% git checkout 0.5.0-M1
+% git checkout 0.5.0-M2
 % mvn clean install
 </code></pre>
 </div>
@@ -497,18 +497,18 @@ and adds them as DNS targets for the region they are in</li>
 </ul>
 
 
-<p>First, however, let's create the Groovy class -- call it <code>GlobalWebFabricExample</code>.
-This will extend the Brooklyn <code>AbstractApplication</code> and inheriting the default constructors:</p>
+<p>First, however, let's create the Java class -- call it <code>GlobalWebFabricExample</code>.
+This will extend the Brooklyn <code>ApplicationBuilder</code>:</p>
 
-<div class="highlight"><pre><code class="java"><span class="kn">package</span> <span class="n">brooklyn</span><span class="o">.</span><span class="na">demo</span>
+<div class="highlight"><pre><code class="java"><span class="kn">package</span> <span class="n">brooklyn</span><span class="o">.</span><span class="na">demo</span><span class="o">;</span>
 
-<span class="kn">import</span> <span class="nn">brooklyn.entity.basic.AbstractApplication</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">com</span><span class="o">.</span><span class="na">google</span><span class="o">.</span><span class="na">common</span><span class="o">.</span><span class="na">base</span><span class="o">.</span><span class="na">Preconditions</span><span class="o">.</span><span class="na">checkNotNull</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">brooklyn.entity.basic.ApplicationBuilder</span><span class="o">;</span>
 
-<span class="nd">@InheritConstructors</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">GlobalWebFabricExample</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
-
-    <span class="c1">// TODO create our app!</span>
-
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">GlobalWebFabricExample</span> <span class="kd">extends</span> <span class="n">ApplicationBuilder</span> <span class="o">{</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doBuild</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// TODO create our app!</span>
+    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre>
 </div>
@@ -525,12 +525,10 @@ such as the <code>ControlledDynamicWebAppCluster</code> used in the
 or perhaps a <code>CloudFoundryJavaWebAppCluster</code> if deploying to a Cloud Foundry location
 (see below).</p>
 
-<div class="highlight"><pre><code class="java">    <span class="n">DynamicFabric</span> <span class="n">webFabric</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DynamicFabric</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="nl">name:</span> <span class="s">&quot;Web Fabric&quot;</span><span class="o">,</span> 
-            <span class="nl">factory:</span> <span class="k">new</span> <span class="n">ElasticJavaWebAppService</span><span class="o">.</span><span class="na">Factory</span><span class="o">());</span>
-    <span class="o">{</span> 
-        <span class="c1">//specify the WAR file to use</span>
-        <span class="n">webFabric</span><span class="o">.</span><span class="na">setConfig</span><span class="o">(</span><span class="n">ElasticJavaWebAppService</span><span class="o">.</span><span class="na">ROOT_WAR</span><span class="o">,</span> <span class="n">WAR_PATH</span><span class="o">);</span>
-    <span class="o">}</span>
+<div class="highlight"><pre><code class="java">        <span class="n">DynamicFabric</span> <span class="n">webFabric</span> <span class="o">=</span> <span class="n">createChild</span><span class="o">(</span><span class="n">BasicEntitySpec</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">DynamicFabric</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">displayName</span><span class="o">(</span><span class="s">&quot;Web Fabric&quot;</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">DynamicFabric</span><span class="o">.</span><span class="na">FACTORY</span><span class="o">,</span> <span class="k">new</span> <span class="n">ElasticJavaWebAppService</span><span class="o">.</span><span class="na">Factory</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">ElasticJavaWebAppService</span><span class="o">.</span><span class="na">ROOT_WAR</span><span class="o">,</span> <span class="n">WAR_PATH</span><span class="o">));</span>
 </code></pre>
 </div>
 
@@ -549,10 +547,11 @@ as it comes online, by watching for <code>SERVICE_UP</code> sensors.
 First, however, let's make sure any load-balancer proxies (e.g. nginx) in these clusters
 are listening on port 80:</p>
 
-<div class="highlight"><pre><code class="java">    <span class="o">{</span> 
-        <span class="c1">//load-balancer instances must run on 80 to work with GeoDNS (default is 8000)</span>
-        <span class="n">webFabric</span><span class="o">.</span><span class="na">setConfig</span><span class="o">(</span><span class="n">AbstractController</span><span class="o">.</span><span class="na">PROXY_HTTP_PORT</span><span class="o">,</span> <span class="mi">80</span><span class="o">);</span>
-    <span class="o">}</span>
+<div class="highlight"><pre><code class="java">        <span class="n">DynamicFabric</span> <span class="n">webFabric</span> <span class="o">=</span> <span class="n">createChild</span><span class="o">(</span><span class="n">BasicEntitySpec</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">DynamicFabric</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">displayName</span><span class="o">(</span><span class="s">&quot;Web Fabric&quot;</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">DynamicFabric</span><span class="o">.</span><span class="na">FACTORY</span><span class="o">,</span> <span class="k">new</span> <span class="n">ElasticJavaWebAppService</span><span class="o">.</span><span class="na">Factory</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">ElasticJavaWebAppService</span><span class="o">.</span><span class="na">ROOT_WAR</span><span class="o">,</span> <span class="n">WAR_PATH</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">AbstractController</span><span class="o">.</span><span class="na">PROXY_HTTP_PORT</span><span class="o">,</span> <span class="n">PortRanges</span><span class="o">.</span><span class="na">fromInteger</span><span class="o">(</span><span class="mi">80</span><span class="o">)));</span>
 </code></pre>
 </div>
 
@@ -564,11 +563,14 @@ We'll also specify a <code>smartSubdomainName</code>, to use Geoscaling's facili
 lightweight sub-domains to prevent DNS caching and multiple instances of our application
 from confusing us -- e.g. <code>brooklyn-1234.yourname.geopaas.org</code>.</p>
 
-<div class="highlight"><pre><code class="java">    <span class="n">GeoscalingDnsService</span> <span class="n">geoDns</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GeoscalingDnsService</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="nl">name:</span> <span class="s">&quot;GeoScaling DNS&quot;</span><span class="o">,</span>
-            <span class="nl">username:</span> <span class="n">config</span><span class="o">.</span><span class="na">getFirst</span><span class="o">(</span><span class="s">&quot;brooklyn.geoscaling.username&quot;</span><span class="o">,</span> <span class="nl">failIfNone:</span><span class="kc">true</span><span class="o">),</span>
-            <span class="nl">password:</span> <span class="n">config</span><span class="o">.</span><span class="na">getFirst</span><span class="o">(</span><span class="s">&quot;brooklyn.geoscaling.password&quot;</span><span class="o">,</span> <span class="nl">failIfNone:</span><span class="kc">true</span><span class="o">),</span>
-            <span class="nl">primaryDomainName:</span> <span class="n">config</span><span class="o">.</span><span class="na">getFirst</span><span class="o">(</span><span class="s">&quot;brooklyn.geoscaling.primaryDomain&quot;</span><span class="o">,</span> <span class="nl">failIfNone:</span><span class="kc">true</span><span class="o">),</span> 
-            <span class="nl">smartSubdomainName:</span> <span class="err">&#39;</span><span class="n">brooklyn</span><span class="err">&#39;</span><span class="o">);</span>    
+<div class="highlight"><pre><code class="java">        <span class="n">StringConfigMap</span> <span class="n">config</span> <span class="o">=</span> <span class="n">getManagementContext</span><span class="o">().</span><span class="na">getConfig</span><span class="o">();</span>
+        
+        <span class="n">GeoscalingDnsService</span> <span class="n">geoDns</span> <span class="o">=</span> <span class="n">createChild</span><span class="o">(</span><span class="n">BasicEntitySpec</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">GeoscalingDnsService</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">displayName</span><span class="o">(</span><span class="s">&quot;GeoScaling DNS&quot;</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;username&quot;</span><span class="o">,</span> <span class="n">checkNotNull</span><span class="o">(</span><span class="n">config</span><span class="o">.</span><span class="na">getFirst</span><span class="o">(</span><span class="s">&quot;brooklyn.geoscaling.username&quot;</span><span class="o">),</span> <span class="s">&quot;username&quot;</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;password&quot;</span><span class="o">,</span> <span class="n">checkNotNull</span><span class="o">(</span><span class="n">config</span><span class="o">.</span><span class="na">getFirst</span><span class="o">(</span><span class="s">&quot;brooklyn.geoscaling.password&quot;</span><span class="o">),</span> <span class="s">&quot;password&quot;</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;primaryDomainName&quot;</span><span class="o">,</span> <span class="n">checkNotNull</span><span class="o">(</span><span class="n">config</span><span class="o">.</span><span class="na">getFirst</span><span class="o">(</span><span class="s">&quot;brooklyn.geoscaling.primaryDomain&quot;</span><span class="o">),</span> <span class="s">&quot;primaryDomain&quot;</span><span class="o">))</span> 
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;smartSubdomainName&quot;</span><span class="o">,</span> <span class="s">&quot;brooklyn&quot;</span><span class="o">));</span>
 </code></pre>
 </div>
 
@@ -576,9 +578,7 @@ from confusing us -- e.g. <code>brooklyn-1234.yourname.geopaas.org</code>.</p>
 <p>Lastly we need to tell this instance what entity it should monitor
 for children to include as targets:</p>
 
-<div class="highlight"><pre><code class="java">    <span class="o">{</span>
-        <span class="n">geoDns</span><span class="o">.</span><span class="na">setTargetEntityProvider</span><span class="o">(</span><span class="n">webFabric</span><span class="o">);</span>
-    <span class="o">}</span>
+<div class="highlight"><pre><code class="java">        <span class="n">geoDns</span><span class="o">.</span><span class="na">setTargetEntityProvider</span><span class="o">(</span><span class="n">webFabric</span><span class="o">);</span>
 </code></pre>
 </div>
 
@@ -606,13 +606,11 @@ It has been tested and confirmed to work in AppFog's hosted Cloud Foundry.</em><
 listen for the <code>HOSTNAME</code> sensor on <code>geoDns</code> and set the relevant Cloud Foundry
 config parameter on the <code>webFabric</code>.
 Other PaaS targets may expose a similar config key.
-Please note that this command must be placed in your class
-<em>after</em> <code>webFabric</code> and <code>geoDns</code> are defined.</p>
+Add the following configuration line in the construction of the webFabric (which must
+come after construction of the geoDns).</p>
 
-<div class="highlight"><pre><code class="java">    <span class="o">{</span>
-        <span class="n">webFabric</span><span class="o">.</span><span class="na">setConfig</span><span class="o">(</span><span class="n">CloudFoundryJavaWebAppCluster</span><span class="o">.</span><span class="na">HOSTNAME_TO_USE_FOR_URL</span><span class="o">,</span>
-            <span class="n">DependentConfiguration</span><span class="o">.</span><span class="na">attributeWhenReady</span><span class="o">(</span><span class="n">geoDns</span><span class="o">,</span> <span class="n">Attributes</span><span class="o">.</span><span class="na">HOSTNAME</span><span class="o">));</span>
-    <span class="o">}</span>
+<div class="highlight"><pre><code class="java">                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">CloudFoundryJavaWebAppCluster</span><span class="o">.</span><span class="na">HOSTNAME_TO_USE_FOR_URL</span><span class="o">,</span>
+                        <span class="n">DependentConfiguration</span><span class="o">.</span><span class="na">attributeWhenReady</span><span class="o">(</span><span class="n">geoDns</span><span class="o">,</span> <span class="n">Attributes</span><span class="o">.</span><span class="na">HOSTNAME</span><span class="o">)));</span>
 </code></pre>
 </div>
 
@@ -620,17 +618,37 @@ Please note that this command must be placed in your class
 <p>This config key will only apply to Cloud Foundry targets,
 so it is safe to include in your class whether or not you are deploying there.</p>
 
-<h3>Statics</h3>
+<h3>Imports</h3>
 
-<p>In the interest of readability above, we have omitted certain static constants we use,
-the <code>main</code> method, and the imports.  Your complete class will of course have to include these:</p>
+<p>Your imports should look as follows:</p>
+
+<div class="highlight"><pre><code class="java"><span class="kn">import</span> <span class="nn">static</span> <span class="n">com</span><span class="o">.</span><span class="na">google</span><span class="o">.</span><span class="na">common</span><span class="o">.</span><span class="na">base</span><span class="o">.</span><span class="na">Preconditions</span><span class="o">.</span><span class="na">checkNotNull</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.slf4j.Logger</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.slf4j.LoggerFactory</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">brooklyn.config.StringConfigMap</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">brooklyn.entity.basic.ApplicationBuilder</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">brooklyn.entity.basic.Attributes</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">brooklyn.entity.dns.geoscaling.GeoscalingDnsService</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">brooklyn.entity.group.DynamicFabric</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">brooklyn.entity.proxy.AbstractController</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">brooklyn.entity.proxying.BasicEntitySpec</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">brooklyn.entity.webapp.ElasticJavaWebAppService</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">brooklyn.event.basic.DependentConfiguration</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">brooklyn.extras.cloudfoundry.CloudFoundryJavaWebAppCluster</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">brooklyn.location.basic.PortRanges</span><span class="o">;</span>
+</code></pre>
+</div>
+
+
+<h3>Use of main method (optional)</h3>
+
+<p>In this example, we will use the brooklyn CLI launcher. However, it is possible to write your own main method.</p>
 
 <p>The following static constants are assumed (most of these as in the <a href="../webcluster">Simple Web Cluster</a> example and others):</p>
 
 <ul>
-<li><code>config</code>, read from <code>~/.brooklyn/brooklyn.properties</code> (as well as from environment variables)
-to provide the login data for Geoscaling.</li>
-<li><code>log</code>, a logger</li>
 <li><code>WAR_PATH</code>, pointing to the webapp to deploy (a default supplied as part of the Brooklyn examples is used here)</li>
 <li><code>DEFAULT_LOCATIONS</code>, containing a string spec of the locations to deploy to if none are supplied on the command-line;
 for this example <code>localhost</code> will frequently not work unless Geoscaling can see it
@@ -638,61 +656,40 @@ for this example <code>localhost</code> will frequently not work unless Geoscali
 </ul>
 
 
-<p>The code for these is as follows:</p>
+<p>The code (which can safely be omitted) is as follows:</p>
 
 <div class="highlight"><pre><code class="java">    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Logger</span> <span class="n">log</span> <span class="o">=</span> <span class="n">LoggerFactory</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">GlobalWebFabricExample</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
     
+    <span class="c1">// points to the webapp to deploy (a default supplied as part of the Brooklyn examples is used here)</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">WAR_PATH</span> <span class="o">=</span> <span class="s">&quot;classpath://hello-world-webapp.war&quot;</span><span class="o">;</span>
     
+    <span class="c1">// locations to deploy to if none are supplied on the command-line; for this example `localhost` will </span>
+    <span class="c1">// frequently not work unless Geoscaling can see it (i.e. it has a public IP and appropriate firewall settings)</span>
     <span class="kd">static</span> <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">DEFAULT_LOCATIONS</span> <span class="o">=</span> <span class="o">[</span>
             <span class="s">&quot;aws-ec2:eu-west-1&quot;</span><span class="o">,</span>
             <span class="s">&quot;aws-ec2:ap-southeast-1&quot;</span><span class="o">,</span>
             <span class="s">&quot;aws-ec2:us-west-1&quot;</span><span class="o">,</span> 
         <span class="o">];</span>
         
-    <span class="kd">static</span> <span class="n">BrooklynProperties</span> <span class="n">config</span> <span class="o">=</span> <span class="n">BrooklynProperties</span><span class="o">.</span><span class="na">Factory</span><span class="o">.</span><span class="na">newDefault</span><span class="o">()</span>
-</code></pre>
-</div>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">argv</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">args</span> <span class="o">=</span> <span class="n">Lists</span><span class="o">.</span><span class="na">newArrayList</span><span class="o">(</span><span class="n">argv</span><span class="o">);</span>
+        <span class="n">String</span> <span class="n">port</span> <span class="o">=</span>  <span class="n">CommandLineUtil</span><span class="o">.</span><span class="na">getCommandLineOption</span><span class="o">(</span><span class="n">args</span><span class="o">,</span> <span class="s">&quot;--port&quot;</span><span class="o">,</span> <span class="s">&quot;8081+&quot;</span><span class="o">);</span>
+        <span class="n">String</span> <span class="n">locations</span> <span class="o">=</span> <span class="n">CommandLineUtil</span><span class="o">.</span><span class="na">getCommandLineOption</span><span class="o">(</span><span class="n">args</span><span class="o">,</span> <span class="s">&quot;--locations&quot;</span><span class="o">,</span> <span class="n">Joiner</span><span class="o">.</span><span class="na">on</span><span class="o">(</span><span class="s">&quot;,&quot;</span><span class="o">).</span><span class="na">join</span><span class="o">(</span><span class="n">DEFAULT_LOCATIONS</span><span class="o">));</span>
 
+        <span class="n">BrooklynServerDetails</span> <span class="n">server</span> <span class="o">=</span> <span class="n">BrooklynLauncher</span><span class="o">.</span><span class="na">newLauncher</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">webconsolePort</span><span class="o">(</span><span class="n">port</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">launch</span><span class="o">();</span>
 
-<p>Our <code>main</code> method looks like this:</p>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">Location</span><span class="o">&gt;</span> <span class="n">locs</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LocationRegistry</span><span class="o">().</span><span class="na">getLocationsById</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">locations</span><span class="o">));</span>
 
-<div class="highlight"><pre><code class="java">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">argv</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">ArrayList</span> <span class="n">args</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">argv</span><span class="o">));</span>
-        <span class="kt">int</span> <span class="n">port</span> <span class="o">=</span> <span class="n">CommandLineUtil</span><span class="o">.</span><span class="na">getCommandLineOptionInt</span><span class="o">(</span><span class="n">args</span><span class="o">,</span> <span class="s">&quot;--port&quot;</span><span class="o">,</span> <span class="mi">8081</span><span class="o">);</span>
-        <span class="n">List</span><span class="o">&lt;</span><span class="n">Location</span><span class="o">&gt;</span> <span class="n">locations</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LocationRegistry</span><span class="o">().</span><span class="na">getLocationsById</span><span class="o">(</span><span class="n">args</span> <span class="o">?:</span> <span class="n">DEFAULT_LOCATIONS</span><span class="o">)</span>
-
-        <span class="n">GlobalWebFabricExample</span> <span class="n">app</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GlobalWebFabricExample</span><span class="o">(</span><span class="nl">name:</span> <span class="err">&#39;</span><span class="n">Brooklyn</span> <span class="n">Global</span> <span class="n">Web</span> <span class="n">Fabric</span> <span class="n">Example</span><span class="err">&#39;</span><span class="o">);</span>
-            
-        <span class="n">BrooklynLauncher</span><span class="o">.</span><span class="na">manage</span><span class="o">(</span><span class="n">app</span><span class="o">,</span> <span class="n">port</span><span class="o">)</span>
-        <span class="n">app</span><span class="o">.</span><span class="na">start</span><span class="o">(</span><span class="n">locations</span><span class="o">)</span>
-        <span class="n">Entities</span><span class="o">.</span><span class="na">dumpInfo</span><span class="o">(</span><span class="n">app</span><span class="o">)</span>
+        <span class="n">StartableApplication</span> <span class="n">app</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GlobalWebFabricExample</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">appDisplayName</span><span class="o">(</span><span class="s">&quot;Brooklyn Global Web Fabric Example&quot;</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">manage</span><span class="o">(</span><span class="n">server</span><span class="o">.</span><span class="na">getManagementContext</span><span class="o">());</span>
+        
+        <span class="n">app</span><span class="o">.</span><span class="na">start</span><span class="o">(</span><span class="n">locs</span><span class="o">);</span>
+        
+        <span class="n">Entities</span><span class="o">.</span><span class="na">dumpInfo</span><span class="o">(</span><span class="n">app</span><span class="o">);</span>
     <span class="o">}</span>
-</code></pre>
-</div>
-
-
-<p>And finally, the imports are as follows:</p>
-
-<div class="highlight"><pre><code class="java"><span class="kn">import</span> <span class="nn">groovy.transform.InheritConstructors</span>
-
-<span class="kn">import</span> <span class="nn">org.slf4j.Logger</span>
-<span class="kn">import</span> <span class="nn">org.slf4j.LoggerFactory</span>
-
-<span class="kn">import</span> <span class="nn">brooklyn.config.BrooklynProperties</span>
-<span class="kn">import</span> <span class="nn">brooklyn.entity.basic.AbstractApplication</span>
-<span class="kn">import</span> <span class="nn">brooklyn.entity.basic.Attributes</span>
-<span class="kn">import</span> <span class="nn">brooklyn.entity.basic.Entities</span>
-<span class="kn">import</span> <span class="nn">brooklyn.entity.dns.geoscaling.GeoscalingDnsService</span>
-<span class="kn">import</span> <span class="nn">brooklyn.entity.group.AbstractController</span>
-<span class="kn">import</span> <span class="nn">brooklyn.entity.group.DynamicFabric</span>
-<span class="kn">import</span> <span class="nn">brooklyn.entity.webapp.ElasticJavaWebAppService</span>
-<span class="kn">import</span> <span class="nn">brooklyn.event.basic.DependentConfiguration</span>
-<span class="kn">import</span> <span class="nn">brooklyn.extras.cloudfoundry.CloudFoundryJavaWebAppCluster</span>
-<span class="kn">import</span> <span class="nn">brooklyn.launcher.BrooklynLauncher</span>
-<span class="kn">import</span> <span class="nn">brooklyn.location.Location</span>
-<span class="kn">import</span> <span class="nn">brooklyn.location.basic.LocationRegistry</span>
-<span class="kn">import</span> <span class="nn">brooklyn.util.CommandLineUtil</span>
 </code></pre>
 </div>
 
@@ -702,15 +699,15 @@ for this example <code>localhost</code> will frequently not work unless Geoscali
 <p>Now let's run this example.  You will need to specify increased heap size and memory limits,
 as well as the appropriate classpath.</p>
 
-<div class="highlight"><pre><code class="bash"><span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.demo.GlobalWebFabricExample <span class="se">\</span>
---location locahost
+<div class="highlight"><pre><code class="bash"><span class="nb">export </span><span class="nv">BROOKLYN_CLASSPATH</span><span class="o">=</span>/path/to/your/project/target/classes
+<span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.demo.GlobalWebFabricExample <span class="se">\</span>
+    --location jclouds:aws-ec2:eu-west-1,jclouds:aws-ec2:ap-southeast-1,jclouds:aws-ec2:us-west-1 
 </code></pre>
 </div>
 
 
 <p>The management web console will start,
 followed by the web-app services in the locations specified
-(in <code>DEFAULT_LOCATIONS</code>, or as arguments on the command-line),
 creating the VM's as needed.
 Let's look at the management web console, on port 8081 (default credentials are admin/password):</p>
 
@@ -721,7 +718,7 @@ and Singapore (AWS ap-southeast-1),
 as well as a few other places (wrong locations picked up for some AWS IP's!).
 This also shows the progress of the most recent tasks.</p>
 
-<p>Navigating to the details tab, we can view sensors, invoke effectors, control policies,
+<p>Navigating to the "applications" tab, we can view sensors, invoke effectors, control policies,
 and track activity,
 for instance if a cluster is slow to start and you want to find out what is going on
 (you'll find additional information in the <code>brooklyn.log</code> file).
@@ -730,7 +727,7 @@ Let's drill down on the Geoscaling DNS entity's sensors:</p>
 <p><a href="console-geoscaling-details.png"><img src="console-geoscaling-details-w700.png" title="Web Console Geoscaling Details" alt="Web Console Geoscaling Details" /></a></p>
 
 <p>Here we see it has chosen <code>brooklyn-csgFCzTM.geopaas.org</code> as the geo-load-balanced domain name.
-(Your will be under <code>yourname.geopaas.org</code>, unless you chose a different domain earlier.)
+(Yours will be under <code>yourname.geopaas.org</code>, unless you chose a different domain earlier.)
 We can also see the hosts it is forwarding to, one for each cluster, corresponding to the
 children of the Web Fabric (propagated from the nginx hostnames, in the case of the ControlledDynamicWebAppCluster instances).</p>
 

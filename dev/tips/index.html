@@ -115,7 +115,7 @@ _gaq.push(['_trackPageview']);
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.5.0-M1</a></li>
+            <li><a href="/meta/versions.html">0.5.0-M2</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -374,7 +374,7 @@ e.g. <code>Attributes</code> and <code>UsesJmx</code>.)</p></li>
 <li><p>Understand the location hierarchy:  software process entities typically get an <code>SshMachineLocation</code>,
 and use a <code>*SshDriver</code> to do what they need.  This will usually have a <code>MachineProvisioningLocation</code> parent, e.g. a
 <code>JcloudsLocation</code> (e.g. AWS eu-west-1 with credentials) or possibly a <code>LocalhostMachineProvisioningLocation</code>.
-Clusters will take such a <code>MachineProvisioningLocation</code> (or a singleton list), and fabrics a list of locations.
+Clusters will take such a <code>MachineProvisioningLocation</code> (or a singleton list); fabircs take a list of locations.
 Some PaaS systems have their own location model, such as <code>OpenShiftLocation</code>.</p></li>
 </ul>
 

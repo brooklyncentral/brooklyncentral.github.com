@@ -115,7 +115,7 @@ _gaq.push(['_trackPageview']);
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.5.0-M1</a></li>
+            <li><a href="/meta/versions.html">0.5.0-M2</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -375,9 +375,9 @@ _gaq.push(['_trackPageview']);
 
 
 
-<div class="highlight"><pre><code class="bash">% curl -LO http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.5.0-M1/brooklyn-dist-0.5.0-M1-dist.tar.gz
-% tar xvzf brooklyn-dist-0.5.0-M1-dist.tar.gz
-% <span class="nb">export </span><span class="nv">BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/brooklyn-0.5.0-M1/
+<div class="highlight"><pre><code class="bash">% curl -LO http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.5.0-M2/brooklyn-dist-0.5.0-M2-dist.tar.gz
+% tar xvzf brooklyn-dist-0.5.0-M2-dist.tar.gz
+% <span class="nb">export </span><span class="nv">BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/brooklyn-0.5.0-M2/
 </code></pre>
 </div>
 
@@ -391,7 +391,7 @@ _gaq.push(['_trackPageview']);
 
 <div class="highlight"><pre><code class="bash">% git clone https://github.com/brooklyncentral/brooklyn-examples.git
 % <span class="nb">cd </span>brooklyn-examples
-% git checkout 0.5.0-M1
+% git checkout 0.5.0-M2
 % mvn clean install
 </code></pre>
 </div>
@@ -449,15 +449,15 @@ with a single line:</p>
 
 
 
-<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SingleWebServerExample</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SingleWebServerExample</span> <span class="kd">extends</span> <span class="n">ApplicationBuilder</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">WAR_PATH</span> <span class="o">=</span> <span class="s">&quot;classpath://hello-world-webapp.war&quot;</span><span class="o">;</span>
 
-    <span class="n">JBoss7Server</span> <span class="n">web</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JBoss7Server</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> 
-        <span class="nl">war:</span> <span class="s">&quot;classpath://hello-world-webapp.war&quot;</span><span class="o">,</span> 
-        <span class="nl">httpPort:</span> <span class="mi">8080</span><span class="o">)</span>
-        
-    <span class="c1">// other housekeeping removed, including public static void main</span>
-    <span class="c1">// you&#39;ll find this in the github repo code mentioned above</span>
-     
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doBuild</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">createChild</span><span class="o">(</span><span class="n">BasicEntitySpec</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">JBoss7Server</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;war&quot;</span><span class="o">,</span> <span class="n">WAR_PATH</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;httpPort&quot;</span><span class="o">,</span> <span class="mi">8080</span><span class="o">));</span>
+    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre>
 </div>
@@ -531,22 +531,32 @@ with an Nginx load-balancer set up in front of them, and backed by a MySQL datab
 
 
 
-<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">WebClusterDatabaseExample</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">WebClusterDatabaseExample</span> <span class="kd">extends</span> <span class="n">ApplicationBuilder</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">WAR_PATH</span> <span class="o">=</span> <span class="s">&quot;classpath://hello-world-sql-webapp.war&quot;</span><span class="o">;</span>
     
-    <span class="n">ControlledDynamicWebAppCluster</span> <span class="n">web</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ControlledDynamicWebAppCluster</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="nl">war:</span> <span class="n">WAR_PATH</span><span class="o">);</span>
-    <span class="n">MySqlNode</span> <span class="n">mysql</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MySqlNode</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="nl">creationScriptUrl:</span> <span class="n">DB_SETUP_SQL_URL</span><span class="o">);</span>
-
-    <span class="o">{</span>
-        <span class="n">web</span><span class="o">.</span><span class="na">factory</span><span class="o">.</span><span class="na">configure</span><span class="o">(</span>
-            <span class="nl">httpPort:</span> <span class="s">&quot;8080+&quot;</span><span class="o">,</span> 
-            <span class="o">(</span><span class="n">UsesJava</span><span class="o">.</span><span class="na">JAVA_OPTIONS</span><span class="o">):</span>
-                <span class="o">[</span><span class="s">&quot;brooklyn.example.db.url&quot;</span><span class="o">:</span> <span class="n">valueWhenAttributeReady</span><span class="o">(</span><span class="n">mysql</span><span class="o">,</span> <span class="n">MySqlNode</span><span class="o">.</span><span class="na">MYSQL_URL</span><span class="o">,</span>
-                    <span class="o">{</span> <span class="s">&quot;jdbc:&quot;</span><span class="o">+</span><span class="n">it</span><span class="o">+</span><span class="s">&quot;visitors?user=${DB_USERNAME}\\&amp;password=${DB_PASSWORD}&quot;</span> <span class="o">})</span> <span class="o">]);</span>
-
-        <span class="n">web</span><span class="o">.</span><span class="na">cluster</span><span class="o">.</span><span class="na">addPolicy</span><span class="o">(</span><span class="k">new</span>
-            <span class="n">ResizerPolicy</span><span class="o">(</span><span class="n">DynamicWebAppCluster</span><span class="o">.</span><span class="na">AVERAGE_REQUESTS_PER_SECOND</span><span class="o">).</span>
-                <span class="n">setSizeRange</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">5</span><span class="o">).</span>
-                <span class="n">setMetricRange</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="mi">100</span><span class="o">));</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">DB_SETUP_SQL_URL</span> <span class="o">=</span> <span class="s">&quot;classpath://visitors-creation-script.sql&quot;</span><span class="o">;</span>
+    
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">DB_TABLE</span> <span class="o">=</span> <span class="s">&quot;visitors&quot;</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">DB_USERNAME</span> <span class="o">=</span> <span class="s">&quot;brooklyn&quot;</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">DB_PASSWORD</span> <span class="o">=</span> <span class="s">&quot;br00k11n&quot;</span><span class="o">;</span>
+    
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doBuild</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">MySqlNode</span> <span class="n">mysql</span> <span class="o">=</span> <span class="n">createChild</span><span class="o">(</span><span class="n">BasicEntitySpec</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">MySqlNode</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;creationScriptUrl&quot;</span><span class="o">,</span> <span class="n">DB_SETUP_SQL_URL</span><span class="o">));</span>
+        
+        <span class="n">ControlledDynamicWebAppCluster</span> <span class="n">web</span> <span class="o">=</span> <span class="n">createChild</span><span class="o">(</span><span class="n">BasicEntitySpec</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">ControlledDynamicWebAppCluster</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;memberSpec&quot;</span><span class="o">,</span> <span class="n">BasicEntitySpec</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">JBoss7Server</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;httpPort&quot;</span><span class="o">,</span> <span class="s">&quot;8080+&quot;</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;war&quot;</span><span class="o">,</span> <span class="n">WAR_PATH</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">javaSysProp</span><span class="o">(</span><span class="s">&quot;brooklyn.example.db.url&quot;</span><span class="o">),</span> 
+                                <span class="n">formatString</span><span class="o">(</span><span class="s">&quot;jdbc:%s%s?user=%s\\&amp;password=%s&quot;</span><span class="o">,</span> 
+                                        <span class="n">attributeWhenReady</span><span class="o">(</span><span class="n">mysql</span><span class="o">,</span> <span class="n">MySqlNode</span><span class="o">.</span><span class="na">MYSQL_URL</span><span class="o">),</span> <span class="n">DB_TABLE</span><span class="o">,</span> <span class="n">DB_USERNAME</span><span class="o">,</span> <span class="n">DB_PASSWORD</span><span class="o">))));</span>
+        
+        <span class="n">web</span><span class="o">.</span><span class="na">getCluster</span><span class="o">().</span><span class="na">addPolicy</span><span class="o">(</span><span class="n">AutoScalerPolicy</span><span class="o">.</span><span class="na">builder</span><span class="o">().</span>
+                        <span class="n">metric</span><span class="o">(</span><span class="n">DynamicWebAppCluster</span><span class="o">.</span><span class="na">AVERAGE_REQUESTS_PER_SECOND</span><span class="o">).</span>
+                        <span class="n">sizeRange</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">5</span><span class="o">).</span>
+                        <span class="n">metricRange</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="mi">100</span><span class="o">).</span>
+                        <span class="n">build</span><span class="o">());</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre>
@@ -566,10 +576,9 @@ tweak the database start script, or drop in your favourite WAR.</p>
 
 
 
-<p>The project includes several variants of the examples shown here.
-In particular note the pure-Java version in <code>WebClusterDatabaseExampleAltJava.java</code>
-some other variations in syntax (the <code>*Alt*</code> files), and a
-web-only cluster (no database) in <code>WebClusterExample</code>.</p>
+<p>The project includes variants of the examples shown here,
+including alternative syntax (the <code>*Alt*</code> files),
+and a web-only cluster (no database) in `WebClusterExample``.</p>
 
 
 

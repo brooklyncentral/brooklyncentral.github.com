@@ -115,7 +115,7 @@ _gaq.push(['_trackPageview']);
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.5.0-M1</a></li>
+            <li><a href="/meta/versions.html">0.5.0-M2</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -406,11 +406,15 @@ These examples are pushed to the <a href="http://github.com/brooklyncentral/broo
 <li><strong><code>usage</code></strong>: projects which make Brooklyn easier to use, either for end-users or Brooklyn developers
 
 <ul>
-<li><strong>web-console</strong>: Grails web-app for the brooklyn management web console (builds a WAR)</li>
-<li><strong>launcher</strong>: CLI support and provides a JAR including the web-console WAR</li>
-<li><strong>test-support</strong>: provides support for tests, used by nearly all projects in scope <code>test</code></li>
 <li><strong>all</strong>: maven project to supply a shaded JAR (containing all dependencies) for convenience</li>
+<li><strong>cli</strong>: backing implementation for Brooklyn's command line interface</li>
+<li><strong>dist</strong>: builds brooklyn as a downloadable .zip and .tar.gz</li>
+<li><strong>jsgui</strong>: Javascript web-app for the brooklyn management web console (builds a WAR)</li>
+<li><strong>launcher</strong>: for launching brooklyn, either using a main method or invoked from the cli project</li>
+<li><strong>qa</strong>: longevity and stress tests</li>
+<li><strong>rest</strong>: implementation of brooklyn's REST api</li>
 <li><strong>scripts</strong>: various scripts useful for building, updating, etc. (see comments in the scripts)</li>
+<li><strong>test-support</strong>: provides support for tests, used by nearly all projects in scope <code>test</code></li>
 </ul>
 </li>
 <li><strong><code>docs</code></strong>: the markdown source code for this documentation, as described <a href="/dev/tips/update-docs.html">here</a></li>

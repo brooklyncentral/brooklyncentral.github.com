@@ -115,7 +115,7 @@ _gaq.push(['_trackPageview']);
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.5.0-M1</a></li>
+            <li><a href="/meta/versions.html">0.5.0-M2</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -424,11 +424,16 @@ This console is not designed as a management dashboard or portal --
 many good options exist in that space --
 but what could be useful is to embed widgets from the brooklyn portal for selected high-level views.</p>
 
-<p>To start a management console from your own code, use the <code>BrooklynLaucher.manage</code> method:</p>
+<!-- FIXME Update to use new construction pattern, rather than calling app's constructor -->
 
-<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="err">\</span><span class="o">[</span><span class="err">\</span><span class="o">]</span> <span class="n">argv</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">application</span> <span class="n">app</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyApplicationExample</span><span class="o">(</span><span class="nl">displayName:</span><span class="s">&quot;myapp&quot;</span><span class="o">)</span>
-    <span class="n">brooklyn</span><span class="o">.</span><span class="na">launcher</span><span class="o">.</span><span class="na">BrooklynLauncher</span><span class="o">.</span><span class="na">manage</span><span class="o">(</span><span class="n">app</span><span class="o">)</span>
+
+<p>To start a management console from your own code, use <code>BrooklynLaucher.launch</code>:</p>
+
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">argv</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Application</span> <span class="n">app</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyApplicationExample</span><span class="o">(</span><span class="nl">displayName:</span><span class="s">&quot;myapp&quot;</span><span class="o">)</span>
+    <span class="n">BrooklynServerDetails</span> <span class="n">server</span> <span class="o">=</span> <span class="n">BrooklynLauncher</span><span class="o">.</span><span class="na">newLauncher</span><span class="o">()</span>
+            <span class="o">.</span><span class="na">managing</span><span class="o">(</span><span class="n">app</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">launch</span><span class="o">();</span>
     <span class="c1">// ...</span>
 <span class="o">}</span>
 </code></pre>

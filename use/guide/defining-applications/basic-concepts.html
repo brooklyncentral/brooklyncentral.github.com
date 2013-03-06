@@ -115,7 +115,7 @@ _gaq.push(['_trackPageview']);
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.5.0-M1</a></li>
+            <li><a href="/meta/versions.html">0.5.0-M2</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -359,7 +359,7 @@ Application entities are the top-level entities created and managed externally, 
 
 <p>Applications are typically defined in Brooklyn as an <strong><em>application descriptor</em></strong>.
 This is a Java class specifying the entities which make up the application,
-by extending the class <code>AbstractApplication</code>, and specifying how these entities should be configured and managed.</p>
+by extending the class <code>ApplicationBuilder</code>, and specifying how these entities should be configured and managed.</p>
 
 <p>All entities, including applications, can be the parent of other entities.
 This means that the "child" is typically started, configured, and managed by the parent.
@@ -380,17 +380,20 @@ created by different parents (e.g. a multi-tier stack within a location).</p>
 <p>All entities contain a map of config information. This can contain arbitrary values, typically keyed under static <code>ConfigKey</code> fields on the <code>Entity</code> sub-class. These values are inherited, so setting a configuration value at the
 application level will make it available in all entities underneath unless it is overridden.</p>
 
-<p>Configuration is propagated when an application "goes live" (i.e. its <code>deploy()</code> or <code>start()</code> method is invoked), so config values must be set before this occurs.</p>
+<p>Configuration is propagated when an application "goes live" (i.e. it becomes "managed", either explicitly or when its <code>start()</code> method is invoked), so config values must be set before this occurs.</p>
 
 <p>Configuration values can be specified in a configuration file (<code>~/.brooklyn/brooklyn.properties</code>)
-to apply universally, and/or programmatically to a specific entity and its descendants using the <code>entity.setConfig(KEY, VALUE)</code>
-method.
-Additionally, many common configuration parameters are available as "flags" which can be supplied in the entity's constructor
-of the form <code>new MyEntity(parent, config1: "value1", config2: "value2")</code>.</p>
+to apply universally, and/or programmatically to a specific entity and its descendants
+by calling <code>.configure(KEY, VALUE)</code> in the entity spec when creating it.
+There is also an <code>entity.setConfig(KEY, VALUE)</code> method.</p>
 
-<p>Documentation of the flags available for individual constructors can normally be found in the javadocs,
-or by inspecting <code>@SetFromFlag</code> annotations on the <code>ConfigKey</code> static field definitions
-in the class or its ancestors (often in interfaces).</p>
+<p>Additionally, many common configuration parameters are available as "flags" which can be supplied as Strings when constructing
+then entity, in the form
+<code>BasicEntitySpec.newInstance(MyEntity.class).configure("config1", "value1").configure("config2", "value2")</code>.</p>
+
+<p>Documentation of the flags available for individual entities can normally be found in the javadocs.
+The <code>@SetFromFlag</code> annotations on <code>ConfigKey</code> static field definitions
+in the entity's interface is the recommended mechanism for exposing configuration options.</p>
 
 <h3>Sensors and Effectors</h3>
 
@@ -400,8 +403,9 @@ in the class or its ancestors (often in interfaces).</p>
 
 <p>Effectors can be invoked by an entity's parent remotely, and the invoker is able to track the execution of that effector. Effectors can be invoked by other entities, but use this functionality with care to prevent too many managers!</p>
 
-<p>Entities are Java classes and data can also be stored in internal fields.
-This data will not be inherited and will not be externally visible (and resilience is more limited), but the data will be moved when an entity's master location is changed.</p>
+<p>An entity consists of a Java interface (used when interacting with the entity) and a Java class. For resilience. it is recommended to store
+the entity's state in attributes (see `getAttribute(AttributeKey)``). If internal fields can be used then the data will be lost on brooklyn
+restart, and may cause problems if the entity is to be moved to a different brooklyn management node.</p>
 
 <p>Next: <a href="/use/guide/defining-applications/advanced-concepts.html">Advanced Concepts</a>.
 See also: <a href="/use/guide/management/index.html#sensors-and-effectors">Management > Sensors and Effectors</a>.</p>

@@ -115,7 +115,7 @@ _gaq.push(['_trackPageview']);
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.5.0-M1</a></li>
+            <li><a href="/meta/versions.html">0.5.0-M2</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -380,9 +380,9 @@ Java AMQP message broker and clients using the
 
 
 
-<div class="highlight"><pre><code class="bash">% curl -LO http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.5.0-M1/brooklyn-dist-0.5.0-M1-dist.tar.gz
-% tar xvzf brooklyn-dist-0.5.0-M1-dist.tar.gz
-% <span class="nb">export </span><span class="nv">BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/brooklyn-0.5.0-M1/
+<div class="highlight"><pre><code class="bash">% curl -LO http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.5.0-M2/brooklyn-dist-0.5.0-M2-dist.tar.gz
+% tar xvzf brooklyn-dist-0.5.0-M2-dist.tar.gz
+% <span class="nb">export </span><span class="nv">BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/brooklyn-0.5.0-M2/
 </code></pre>
 </div>
 
@@ -396,7 +396,7 @@ Java AMQP message broker and clients using the
 
 <div class="highlight"><pre><code class="bash">% git clone https://github.com/brooklyncentral/brooklyn-examples.git
 % <span class="nb">cd </span>brooklyn-examples
-% git checkout 0.5.0-M1
+% git checkout 0.5.0-M2
 % mvn clean install
 </code></pre>
 </div>
@@ -440,7 +440,13 @@ also create a queue for use by a pair of test clients.</p>
 default configuration, specifying only the AMQP port and creates
 no queues or topics:</p>
 
-<div class="highlight"><pre><code class="java"><span class="n">QpidBroker</span> <span class="n">broker</span> <span class="o">=</span> <span class="k">new</span> <span class="n">QpidBroker</span><span class="o">(</span><span class="n">app</span><span class="o">,</span> <span class="nl">amqpPort:</span><span class="mi">5672</span><span class="o">)</span>
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">StandaloneBrokerExample</span> <span class="kd">extends</span> <span class="n">ApplicationBuilder</span> <span class="o">{</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doBuild</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// Configure the Qpid broker entity</span>
+        <span class="n">QpidBroker</span> <span class="n">broker</span> <span class="o">=</span> <span class="n">createChild</span><span class="o">(</span><span class="n">BasicEntitySpec</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">QpidBroker</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;amqpPort&quot;</span><span class="o">,</span> <span class="mi">5672</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </code></pre>
 </div>
 
@@ -453,9 +459,16 @@ copying them to the <code>src/main/resources</code> directory. For example,
 here we copy a custom XML configuration file and a new password
 file:</p>
 
-<div class="highlight"><pre><code class="java"><span class="n">QpidBroker</span> <span class="n">broker</span> <span class="o">=</span> <span class="k">new</span> <span class="n">QpidBroker</span><span class="o">(</span><span class="n">app</span><span class="o">,</span>
-        <span class="nl">runtimeFiles:</span><span class="o">[</span> <span class="o">(</span><span class="n">QpidBroker</span><span class="o">.</span><span class="na">CONFIG_XML</span><span class="o">):</span><span class="s">&quot;classpath://custom-config.xml&quot;</span><span class="o">,</span>
-                       <span class="o">(</span><span class="n">QpidBroker</span><span class="o">.</span><span class="na">PASSWD</span><span class="o">):</span><span class="s">&quot;classpath://passwd&quot;</span> <span class="o">])</span>
+<div class="highlight"><pre><code class="java">        <span class="kd">final</span> <span class="n">String</span> <span class="n">CUSTOM_CONFIG_PATH</span> <span class="o">=</span> <span class="s">&quot;classpath://custom-config.xml&quot;</span><span class="o">;</span>
+        <span class="kd">final</span> <span class="n">String</span> <span class="n">PASSWD_PATH</span> <span class="o">=</span> <span class="s">&quot;classpath://passwd&quot;</span><span class="o">;</span>
+
+        <span class="n">QpidBroker</span> <span class="n">broker</span> <span class="o">=</span> <span class="n">createChild</span><span class="o">(</span><span class="n">BasicEntitySpec</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">QpidBroker</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;amqpPort&quot;</span><span class="o">,</span> <span class="mi">5672</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;amqpVersion&quot;</span><span class="o">,</span> <span class="n">AmqpServer</span><span class="o">.</span><span class="na">AMQP_0_10</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;runtimeFiles&quot;</span><span class="o">,</span> <span class="n">ImmutableMap</span><span class="o">.</span><span class="na">builder</span><span class="o">()</span>
+                        <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">QpidBroker</span><span class="o">.</span><span class="na">CONFIG_XML</span><span class="o">,</span> <span class="n">CUSTOM_CONFIG_PATH</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">QpidBroker</span><span class="o">.</span><span class="na">PASSWD</span><span class="o">,</span> <span class="n">PASSWD_PATH</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">build</span><span class="o">()));</span>
 </code></pre>
 </div>
 
@@ -465,15 +478,21 @@ entity using the BDB store. The additional properties here specify
 the AMQP version and that a queue named <em>testQueue</em> should be created
 on startup.</p>
 
-<div class="highlight"><pre><code class="java"><span class="c1">// Configure the Qpid broker entity</span>
-<span class="n">QpidBroker</span> <span class="n">broker</span> <span class="o">=</span> <span class="k">new</span> <span class="n">QpidBroker</span><span class="o">(</span><span class="n">app</span><span class="o">,</span>
-        <span class="nl">amqpPort:</span><span class="mi">5672</span><span class="o">,</span>
-        <span class="nl">amqpVersion:</span><span class="n">AmqpServer</span><span class="o">.</span><span class="na">AMQP_0_10</span><span class="o">,</span>
-        <span class="nl">runtimeFiles:</span><span class="o">[</span> <span class="o">(</span><span class="n">QpidBroker</span><span class="o">.</span><span class="na">CONFIG_XML</span><span class="o">):</span><span class="n">CUSTOM_CONFIG_PATH</span><span class="o">,</span>
-                       <span class="o">(</span><span class="n">QpidBroker</span><span class="o">.</span><span class="na">PASSWD</span><span class="o">):</span><span class="n">PASSWD_PATH</span><span class="o">,</span>
-                       <span class="o">(</span><span class="s">&quot;lib/opt/qpid-bdbstore-0.14.jar&quot;</span><span class="o">):</span><span class="n">QPID_BDBSTORE_JAR_PATH</span> <span class="o">],</span>
-                       <span class="o">(</span><span class="s">&quot;lib/opt/je-5.0.34.jar&quot;</span><span class="o">):</span><span class="n">BDBSTORE_JAR_PATH</span> <span class="o">],</span>
-        <span class="nl">queue:</span><span class="s">&quot;testQueue&quot;</span><span class="o">)</span>
+<div class="highlight"><pre><code class="java">        <span class="kd">final</span> <span class="n">String</span> <span class="n">CUSTOM_CONFIG_PATH</span> <span class="o">=</span> <span class="s">&quot;classpath://custom-config.xml&quot;</span><span class="o">;</span>
+        <span class="kd">final</span> <span class="n">String</span> <span class="n">PASSWD_PATH</span> <span class="o">=</span> <span class="s">&quot;classpath://passwd&quot;</span><span class="o">;</span>
+        <span class="kd">final</span> <span class="n">String</span> <span class="n">QPID_BDBSTORE_JAR_PATH</span> <span class="o">=</span> <span class="s">&quot;classpath://qpid-bdbstore-0.14.jar&quot;</span><span class="o">;</span>
+        <span class="kd">final</span> <span class="n">String</span> <span class="n">BDBSTORE_JAR_PATH</span> <span class="o">=</span> <span class="s">&quot;classpath://je-5.0.34.jar&quot;</span><span class="o">;</span>
+
+        <span class="n">QpidBroker</span> <span class="n">broker</span> <span class="o">=</span> <span class="n">createChild</span><span class="o">(</span><span class="n">BasicEntitySpec</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">QpidBroker</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;amqpPort&quot;</span><span class="o">,</span> <span class="mi">5672</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;amqpVersion&quot;</span><span class="o">,</span> <span class="n">AmqpServer</span><span class="o">.</span><span class="na">AMQP_0_10</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;runtimeFiles&quot;</span><span class="o">,</span> <span class="n">ImmutableMap</span><span class="o">.</span><span class="na">builder</span><span class="o">()</span>
+                        <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">QpidBroker</span><span class="o">.</span><span class="na">CONFIG_XML</span><span class="o">,</span> <span class="n">CUSTOM_CONFIG_PATH</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">QpidBroker</span><span class="o">.</span><span class="na">PASSWD</span><span class="o">,</span> <span class="n">PASSWD_PATH</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;lib/opt/qpid-bdbstore-0.14.jar&quot;</span><span class="o">,</span> <span class="n">QPID_BDBSTORE_JAR_PATH</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;lib/opt/je-5.0.34.jar&quot;</span><span class="o">,</span> <span class="n">BDBSTORE_JAR_PATH</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">build</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;queue&quot;</span><span class="o">,</span> <span class="s">&quot;testQueue&quot;</span><span class="o">));</span>
 </code></pre>
 </div>
 
@@ -489,7 +508,7 @@ as follows:</p>
 </div>
 
 
-<p>Now, visit the the Brooklyn web console on port 8081 using credentials
+<p>Now, visit the Brooklyn web console on port 8081 using credentials
 admin/password.  This allows you to view the Brooklyn entities and
 their current state for debugging.</p>
 

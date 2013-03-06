@@ -115,7 +115,7 @@ _gaq.push(['_trackPageview']);
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.5.0-M1</a></li>
+            <li><a href="/meta/versions.html">0.5.0-M2</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -336,8 +336,8 @@ _gaq.push(['_trackPageview']);
 <h3>Clusters and Interfaces</h3>
 
 <p>The class <code>ControlledDynamicWebAppCluster</code> creates a load-balanced cluster of web servers.
-It defaults to Nginx and JBoss 7, but this is configurable with the <code>controller:</code> and <code>factory:</code>
-named flags in the constructor.</p>
+It defaults to Nginx and JBoss 7, but this is configurable with the <code>controller</code> and
+either the <code>factory</code> or <code>memberSpec</code> configuration options.</p>
 
 <p>Most web app server processes, and some clusters and PaaS implementations,
 support the interface <code>WebAppService</code> which defines many sensors including requests per second.
@@ -356,7 +356,7 @@ including switching from JMX to HTTP/JSON as the preferred metrics mechanism.)</
 
 <p>Apache Tomcat is supported in the class <code>TomcatServer</code>.
 (Note that this currently uses a legacy Brooklyn class hierarchy,
-and could benefit from being ported to the <code>JavaStartStopSshDriver</code> implementation.)</p>
+and could benefit from being ported to the <code>JavaSoftwareProcessSshDriver</code> implementation.)</p>
 
 <h3>Nginx Load Balancer</h3>
 
@@ -397,8 +397,7 @@ added as Brooklyn entities.)</p>
 <h3>Redis</h3>
 
 <p>Redis is a distributed key-value store, supporting master/slave replication of a store as a clustered cache. This gives
-a series of read-only slaves and a single read-write master, which propagates to the slaves with eventual consistency.
-See RedisSetup.groovy.</p>
+a series of read-only slaves and a single read-write master, which propagates to the slaves with eventual consistency.</p>
 
 <h3>Infinispan</h3>
 

@@ -115,7 +115,7 @@ _gaq.push(['_trackPageview']);
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.5.0-M1</a></li>
+            <li><a href="/meta/versions.html">0.5.0-M2</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -325,13 +325,8 @@ _gaq.push(['_trackPageview']);
 <p>By convention in Brooklyn the following words have a particular meaning, both as types (which extend <code>Group</code>, which extends <code>Entity</code>) and when used as words in other entities (such as <code>TomcatFabric</code>):</p>
 
 <ul>
-<li><em>Tier</em> - anything which is homogeneous (has an entity factory and type)
-
-<ul>
-<li><em>Cluster</em> - an in-location tier</li>
-<li><em>Fabric</em> - a multi-location tier</li>
-</ul>
-</li>
+<li><em>Cluster</em> - a homogeneous collection of entities</li>
+<li><em>Fabric</em> - a multi-location collection of entities, with one per location; often used with a cluster per location</li>
 <li><em>Stack</em> - heterogeneous (mixed types of children)</li>
 <li><em>Application</em> - user's entry point</li>
 </ul>
@@ -343,12 +338,13 @@ TODO
 
 
 <ul>
+<li><em>entity spec</em> defines an entity, so that one or more such entities can be created; often used by clusters/groups to define how to instantiate new children.</li>
 <li><em>entity factories</em> are often used by clusters/groups to define how to instantiate new children.</li>
 <li><em>traits</em> (mixins) providing certain capabilities, such as Resizable and Balanceable</li>
 <li><em>Resizable</em> entities can re-sized dynamically, to increase/decrease the number of child entities.</li>
 <li><em>Movable</em> entities can be migrated between <em>balanceable containers</em>.</li>
 <li><em>Balanceable containers</em> can contain <em>movable</em> entities, where each contained entity is normally associated with
-a piece of work within that container.</li>
+  a piece of work within that container.</li>
 </ul>
 
 
@@ -362,7 +358,7 @@ including appropriate sensors and effectors, and in some cases include Cluster a
 
 <ul>
 <li><strong>Web</strong>: Tomcat, JBoss, Jetty (external), Play (external); nginx; GeoScaling</li>
-<li><strong>Data</strong>: MySQL, Redis, Infinispan, GemFire (external)</li>
+<li><strong>Data</strong>: MySQL, Redis, MongoDB, Infinispan, GemFire (external)</li>
 <li><strong>Containers</strong>: Karaf</li>
 <li><strong>Messaging</strong>: ActiveMQ, Qpid, Rabbit MQ</li>
 <li><strong>PaaS</strong>: Cloud Foundry, Stackato; OpenShift</li>

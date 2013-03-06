@@ -90,8 +90,25 @@ Package brooklyn.entity.basic
     </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="AbstractGroup.html" title="class in brooklyn/entity/basic">AbstractGroup</A></B></TD>
+        <TD>Represents a group of entities - sub-classes can support dynamically changing membership, 
+ ad hoc groupings, etc.</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="Attributes.html" title="class in brooklyn/entity/basic">Attributes</A></B></TD>
         <TD>This interface should be used to access Sensor definitions.</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="BasicApplication.html" title="class in brooklyn/entity/basic">BasicApplication</A></B></TD>
+        <TD>The most basic implementation of an application possible.
+ </TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="BasicGroup.html" title="class in brooklyn/entity/basic">BasicGroup</A></B></TD>
+        <TD></TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -101,6 +118,11 @@ Package brooklyn.entity.basic
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="ConfigurableEntityFactory.html" title="class in brooklyn/entity/basic">ConfigurableEntityFactory</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="DynamicGroup.html" title="class in brooklyn/entity/basic">DynamicGroup</A></B></TD>
         <TD></TD>
         </TR>
 
@@ -116,14 +138,30 @@ Package brooklyn.entity.basic
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="EntityInternal.html" title="class in brooklyn/entity/basic">EntityInternal</A></B></TD>
+        <TD>Extended Entity interface with additional functionality that is purely-internal (i.e. intended 
+ for the brooklyn framework only).</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="EntityLocal.html" title="class in brooklyn/entity/basic">EntityLocal</A></B></TD>
         <TD>Extended Entity interface for use in places where the caller should have certain privileges,
  such as setting attribute values, adding policies, etc.</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="SoftwareProcess.html" title="class in brooklyn/entity/basic">SoftwareProcess</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="SoftwareProcessDriver.html" title="class in brooklyn/entity/basic">SoftwareProcessDriver</A></B></TD>
-        <TD>The EntityDriver for a SoftwareProcessEntity.</TD>
+        <TD>The EntityDriver for a SoftwareProcess.</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="StartableApplication.html" title="class in brooklyn/entity/basic">StartableApplication</A></B></TD>
+        <TD></TD>
         </TR>
 
 </TABLE>
@@ -158,11 +196,11 @@ Package brooklyn.entity.basic
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="AbstractEntity.html" title="class in brooklyn/entity/basic">AbstractEntity</A></B></TD>
-        <TD>Default Entity implementation.</TD>
+        <TD>Default Entity implementation, which should be extended whenever implementing an entity.</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="AbstractGroup.html" title="class in brooklyn/entity/basic">AbstractGroup</A></B></TD>
+        <TD WIDTH="15%"><B><A HREF="AbstractGroupImpl.html" title="class in brooklyn/entity/basic">AbstractGroupImpl</A></B></TD>
         <TD>Represents a group of entities - sub-classes can support dynamically changing membership, 
  ad hoc groupings, etc.</TD>
         </TR>
@@ -178,6 +216,21 @@ Package brooklyn.entity.basic
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="ApplicationBuilder.html" title="class in brooklyn/entity/basic">ApplicationBuilder</A></B></TD>
+        <TD>For building an application. </TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="ApplicationBuilder.Builder.html" title="class in brooklyn/entity/basic">ApplicationBuilder.Builder</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="BasicApplicationImpl.html" title="class in brooklyn/entity/basic">BasicApplicationImpl</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="BasicConfigurableEntityFactory.html" title="class in brooklyn/entity/basic">BasicConfigurableEntityFactory</A></B></TD>
         <TD></TD>
         </TR>
@@ -188,7 +241,7 @@ Package brooklyn.entity.basic
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="BasicGroup.html" title="class in brooklyn/entity/basic">BasicGroup</A></B></TD>
+        <TD WIDTH="15%"><B><A HREF="BasicGroupImpl.html" title="class in brooklyn/entity/basic">BasicGroupImpl</A></B></TD>
         <TD></TD>
         </TR>
 
@@ -208,12 +261,18 @@ Package brooklyn.entity.basic
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="ConfigMapViewWithStringKeys.html" title="class in brooklyn/entity/basic">ConfigMapViewWithStringKeys</A></B></TD>
+        <TD>Internal class that presents a view over a ConfigMap, so it looks like a Map (with the
+ keys being the config key names).</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="ConfigurableEntityFactoryFromEntityFactory.html" title="class in brooklyn/entity/basic">ConfigurableEntityFactoryFromEntityFactory</A></B></TD>
         <TD></TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="DynamicGroup.html" title="class in brooklyn/entity/basic">DynamicGroup</A></B></TD>
+        <TD WIDTH="15%"><B><A HREF="DynamicGroupImpl.html" title="class in brooklyn/entity/basic">DynamicGroupImpl</A></B></TD>
         <TD></TD>
         </TR>
 
@@ -303,7 +362,7 @@ Package brooklyn.entity.basic
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="SoftwareProcessEntity.html" title="class in brooklyn/entity/basic">SoftwareProcessEntity</A></B></TD>
+        <TD WIDTH="15%"><B><A HREF="SoftwareProcessImpl.html" title="class in brooklyn/entity/basic">SoftwareProcessImpl</A></B></TD>
         <TD>An Entity representing a piece of software which can be installed, run, and controlled.
  </TD>
         </TR>

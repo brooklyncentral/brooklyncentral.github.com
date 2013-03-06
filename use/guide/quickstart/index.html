@@ -115,7 +115,7 @@ _gaq.push(['_trackPageview']);
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.5.0-SNAPSHOT</a></li>
+            <li><a href="/meta/versions.html">0.5.0-M2</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -330,12 +330,12 @@ _gaq.push(['_trackPageview']);
 
 <p>Save the Distro tgz file to your home directory <code>~/</code>, or a location of your choice.</p>
 
-<p>Untar the tgx. Each Distro is timestamped, so your filename will be different.</p>
+<p>Untar the tgz. Each Distro is timestamped, so your filename will be different.</p>
 
 <pre><code>$ tar -zxf brooklyn-dist-&lt;version&gt;-&lt;timestamp&gt;-dist.tar.tar.gz
 </code></pre>
 
-<p>This will create a brooklyn-&lt;version> folder. At the time of writing this was <code>brooklyn-0.5.0-M1</code>.</p>
+<p>This will create a brooklyn-&lt;version> folder. At the time of writing this was <code>brooklyn-0.5.0-SNAPSHOT</code>.</p>
 
 <p>Let's setup some paths for easy commands.</p>
 
@@ -376,7 +376,7 @@ $ export PATH=$PATH:$BROOKLYN_HOME/bin/
 
 <p>brooklyn.properties is a standard java .properties file.</p>
 
-<p>Edit this file (in any text editor) to add credentials for your favourite cloud.</p>
+<p>Edit this file (in any text editor) to add credentials for your favorite cloud.</p>
 
 <h3>catalog.xml</h3>
 
@@ -384,7 +384,7 @@ $ export PATH=$PATH:$BROOKLYN_HOME/bin/
 
 <p>catalog.xml is catalog of application or service blueprints. The example file contains two demos which will be automatically downloaded from the web if you run them.</p>
 
-<p>Edit this file (text editor) and check that the links to the demo applications' .jars are valid. At the time of writing these were for version <code>0.5.0-M1</code>, but if this has changed you may need to update the links.</p>
+<p>Edit this file (text editor) and check that the links to the demo applications' .jars are valid. At the time of writing these were for version <code>0.5.0-SNAPSHOT</code>, but if this has changed you may need to update the links.</p>
 
 <h3>SSH Keys</h3>
 
@@ -438,7 +438,7 @@ The loadbalancer will automatically be updated by the targets policy as the clus
 
 <p>Sitting idle, your cluster will only contain one server, but you can check that the policy works  using a tool like <a href="http://jmeter.apache.org/">jmeter</a> pointed at the nginx endpoint to create load on the cluster.</p>
 
-<p>Brooklyn's policies are configurable, customizable, and can be completely bespoke to your needs. As an example, the <code>AutoScalerPolicy</code> is tuneable, can be applied to any relevant metric (here, average requests per second), and is a sufficiently complex piece of math that it understand hysteresis and prevents thrashing.</p>
+<p>Brooklyn's policies are configurable, customizable, and can be completely bespoke to your needs. As an example, the <code>AutoScalerPolicy</code> is tunable, can be applied to any relevant metric (here, average requests per second), and is a sufficiently complex piece of math that it understand hysteresis and prevents thrashing.</p>
 
 <h3>REST API Browser</h3>
 
@@ -468,11 +468,11 @@ The loadbalancer will automatically be updated by the targets policy as the clus
 
 <h3>Closing Thoughts</h3>
 
-<p>This guide has shown two aspects of Brooklyn in action: policy driven management capability, and the service catalog/web interface.</p>
+<p>This guide has shown two aspects of Brooklyn in action: policy driven management capability, and the service catalog/web interface. Additionally, we briefly explored Brooklyn's API.</p>
 
 <p>It is worth noting that Brooklyn could be included as a library in your own applications (no command line required), or it could be used just as a management plane (without a service catalog).</p>
 
-<p>We have been using Brooklyn web interface, but Brooklyn's APIs are extensive and powerful and can be integrated with existing management systems.</p>
+<p>During this guide we have been using Brooklyn's web interface, but Brooklyn's APIs are extensive and powerful. Brooklyn can be used with (controlled by and make data available to) your existing management UI. Brooklyn is intended to complement (not replace) your existing technologies and tooling.</p>
 
 <h3>Next</h3>
 
