@@ -402,6 +402,16 @@ _gaq.push(['_trackPageview']);
 <li>The recommended approach is to use the EntitySpec when constructing entities. A good place to start is to look at the updated example applications.</li>
 </ul>
 </li>
+<li><p>The default username for provisioning with jclouds has changed to use the name of the user executing the Brooklyn process.</p>
+
+<ul>
+<li>Java's <code>System.getProperty("user.name")</code> is used instead of 'root' or 'ubuntu'</li>
+<li><p>Usernames can be overridden in <code>brooklyn.properties</code> or using system properties.
+  For example, by entering '<code>brooklyn.location.named.acmecloud.user=root</code>' in <code>brooklyn.properties</code> or using the command syntax <code>-Dbrooklyn.location.named.acmecloud.user=root</code>.</p>
+
+<p>  '<code>brooklyn.jclouds.aws-ec2.user=root</code>' could also be used to apply <code>user=root</code> to all aws-ec2 VMs.</p></li>
+</ul>
+</li>
 <li><p>Some deprecated code has been deleted. All of this code was commented in 0.4.0 with text such as "will be deleted in 0.5".</p></li>
 </ol>
 
