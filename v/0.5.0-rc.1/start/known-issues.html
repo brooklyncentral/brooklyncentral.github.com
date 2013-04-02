@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 
 <head>
-  <title>Release Notes</title>
+  <title>Known Issues</title>
   <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 
   <link rel="stylesheet" href="/v/0.5.0-rc.1/style/style.css" type="text/css" media="screen" />
@@ -377,7 +377,7 @@ $(document).ready(function() {
 <p id="breadcrumb">
     <a href="/v/0.5.0-rc.1">Home</a>
     
-        &raquo; <a href="/v/0.5.0-rc.1/start/release-notes/0.5.0-M2.html">Release Notes</a>
+        &raquo; <a href="/v/0.5.0-rc.1/start/known-issues.html">Known Issues</a>
         
     
 </p>
@@ -385,88 +385,19 @@ $(document).ready(function() {
 
 <div id="page_notes"></div>
 
-<h1 id="header_title">Release Notes</h1>
+<h1 id="header_title">Known Issues</h1>
     
-<h2>Brooklyn Version 0.5.0 Milestone Two (0.5.0-M2)</h2>
+<h2>Unable to Provision certain types of Debian VMs</h2>
 
-<h3>Introduction</h3>
+<p><em>Symptom</em>: Brooklyn fails to provision Debian VMs (e.g. in aws-ec2).</p>
 
-<p>This milestone release includes many big features, and brings us much closer to a 0.5.0 release.</p>
+<p><em>Cause</em>: <code>sudo</code> is not available on path, causing Brooklyn to fail to confirm that the VM is ssh'able.</p>
 
-<p>It incorporates a lot of improvements and feedback from our community. Thank you!</p>
+<p><em>Workaround</em>: Choose an image that does have sudo (see <a href="http://wiki.debian.org/Cloud/AmazonEC2Image">wiki.debian.org/Cloud/AmazonEC2Image</a>).</p>
 
-<p>Thanks also go to Brooklyn's commercial users. Already Brooklyn has been adopted into some very exciting projects including controlling custom PaaS offerings, big data clusters, and three-tier web-apps.</p>
+<p><em>Fix</em>: is <a href="https://github.com/brooklyncentral/brooklyn/pull/600">Pull #600</a>; you may also want to run with <code>brooklyn.jclouds.aws-ec2.user=root</code> if subsequent commands give permission errors.</p>
 
-<p>Work on this release can be tracked using Brooklyn's GitHub issue tracker:</p>
-
-<ul>
-<li><a href="https://github.com/brooklyncentral/brooklyn/issues?milestone=1">github.com/brooklyncentral/brooklyn/issues?milestone=1</a></li>
-</ul>
-
-
-<p>And via the mailing lists:</p>
-
-<ul>
-<li><a href="http://groups.google.com/group/brooklyn-dev">brooklyn-dev@googlegroups.com</a></li>
-<li><a href="http://groups.google.com/group/brooklyn-users">brooklyn-users@googlegroups.com</a></li>
-</ul>
-
-
-<h3>New Features</h3>
-
-<p>The major changes between M1 and M2 are:</p>
-
-<ol>
-<li><p>Entities have been separated into an interface and implementation, rather than just a single class. Construction of entities is now done using an EntitySpec, rather than directly calling the constructor. This improvement is required to simplify remoting in a distributed brooklyn management plane.</p></li>
-<li><p>Downloading of entity installers is greatly improved:</p>
-
-<ul>
-<li>More configurable, with ability to specify URLs in the brooklyn configuration files or to override in code.</li>
-<li><p>Will fallback to a repository maintained by Cloudsoft, so if an artifact is removed from the official public site then it will not break the entity.</p>
-
-<p>  See <a href="http://downloads.cloudsoftcorp.com/brooklyn/repository/">downloads.cloudsoftcorp.com/brooklyn/repository/</a></p></li>
-</ul>
-</li>
-<li><p>Support for running applications across private subnets.</p></li>
-<li><p>Policies can now be re-configured on-the-fly through the REST api and through the web-console.</p></li>
-<li><p>Some entities now support configuration files being supplied in FreeMarker template format. These include JBoss AS7, ActiveMQ and MySql. More will be converted to use this pattern.</p></li>
-<li><p>Several new entities have been added, including:</p>
-
-<ul>
-<li>MongoDB</li>
-<li>Cassandra</li>
-<li>RubyRep</li>
-<li>DynamicWebAppFabric</li>
-</ul>
-</li>
-</ol>
-
-
-<h3>Backwards Compatibility</h3>
-
-<p>For upgrading from 0.5.0-M1 to M2:</p>
-
-<ol>
-<li><p>Entity classes have been renamed, e.g. MySqlNode is now an interface and the implementationis MySqlNodeImpl.</p>
-
-<ul>
-<li>The minimum change for this to work is to update your references to include the Impl suffixes. However, that will result in deprecation warnings.</li>
-<li>The recommended approach is to use the EntitySpec when constructing entities. A good place to start is to look at the updated example applications.</li>
-</ul>
-</li>
-<li><p>The default username for provisioning with jclouds has changed to use the name of the user executing the Brooklyn process.</p>
-
-<ul>
-<li>Java's <code>System.getProperty("user.name")</code> is used instead of 'root' or 'ubuntu'</li>
-<li><p>Usernames can be overridden in <code>brooklyn.properties</code> or using system properties.
-  For example, by entering '<code>brooklyn.location.named.acmecloud.user=root</code>' in <code>brooklyn.properties</code> or using the command syntax <code>-Dbrooklyn.location.named.acmecloud.user=root</code>.</p>
-
-<p>  '<code>brooklyn.jclouds.aws-ec2.user=root</code>' could also be used to apply <code>user=root</code> to all aws-ec2 VMs.</p></li>
-</ul>
-</li>
-<li><p>Some deprecated code has been deleted. All of this code was commented in 0.4.0 with text such as "will be deleted in 0.5".</p></li>
-</ol>
-
+<p><em>Versions Affected</em>: 0.5.0-M2</p>
 
 
         </div><!--maincontent-->
