@@ -518,9 +518,9 @@ with an arbitrary size, using the <code>WhirrHadoopCluster</code> entity.</p>
 
 
 
-<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">WhirrHadoopExample</span> <span class="kd">extends</span> <span class="n">ApplicationBuilder</span> <span class="o">{</span>
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">WhirrHadoopExample</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
     <span class="nd">@Override</span>
-    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doBuild</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
         <span class="n">WhirrCluster</span> <span class="n">cluster</span> <span class="o">=</span> <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpecs</span><span class="o">.</span><span class="na">spec</span><span class="o">(</span><span class="n">WhirrHadoopCluster</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;size&quot;</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;memory&quot;</span><span class="o">,</span> <span class="mi">2048</span><span class="o">));</span>
@@ -578,13 +578,14 @@ can be run from within Brooklyn:</p>
 
 
 
-<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">WhirrExample</span> <span class="kd">extends</span> <span class="n">ApplicationBuilder</span> <span class="o">{</span>
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">WhirrExample</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">RECIPE</span> <span class="o">=</span>
             <span class="s">&quot;whirr.cluster-name=brooklyn-whirr&quot;</span><span class="o">+</span><span class="s">&quot;\n&quot;</span><span class="o">+</span>
             <span class="s">&quot;whirr.hardware-min-ram=1024&quot;</span><span class="o">+</span><span class="s">&quot;\n&quot;</span><span class="o">+</span>
             <span class="s">&quot;whirr.instance-templates=1 noop, 1 elasticsearch&quot;</span><span class="o">+</span><span class="s">&quot;\n&quot;</span><span class="o">;</span>
 
-    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doBuild</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
         <span class="n">WhirrCluster</span> <span class="n">cluster</span> <span class="o">=</span> <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpecs</span><span class="o">.</span><span class="na">spec</span><span class="o">(</span><span class="n">WhirrCluster</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;recipe&quot;</span><span class="o">,</span> <span class="n">RECIPE</span><span class="o">));</span>
     <span class="o">}</span>

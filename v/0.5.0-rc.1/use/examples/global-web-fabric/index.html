@@ -550,16 +550,17 @@ and adds them as DNS targets for the region they are in</li>
 
 
 <p>First, however, let's create the Java class -- call it <code>GlobalWebFabricExample</code>.
-This will extend the Brooklyn <code>ApplicationBuilder</code>:</p>
+This will extend the Brooklyn <code>AbstractApplication</code>:</p>
 
 <div class="highlight"><pre><code class="java"><span class="kn">package</span> <span class="n">brooklyn</span><span class="o">.</span><span class="na">demo</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">static</span> <span class="n">com</span><span class="o">.</span><span class="na">google</span><span class="o">.</span><span class="na">common</span><span class="o">.</span><span class="na">base</span><span class="o">.</span><span class="na">Preconditions</span><span class="o">.</span><span class="na">checkNotNull</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">brooklyn.entity.basic.ApplicationBuilder</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">brooklyn.entity.basic.AbstractApplication</span><span class="o">;</span>
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">GlobalWebFabricExample</span> <span class="kd">extends</span> <span class="n">ApplicationBuilder</span> <span class="o">{</span>
-    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doBuild</span><span class="o">()</span> <span class="o">{</span>
-        <span class="c1">// TODO create our app!</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">GlobalWebFabricExample</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
+         <span class="c1">// TODO create our app!</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre>
@@ -680,7 +681,7 @@ so it is safe to include in your class whether or not you are deploying there.</
 <span class="kn">import</span> <span class="nn">org.slf4j.LoggerFactory</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">brooklyn.config.StringConfigMap</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">brooklyn.entity.basic.ApplicationBuilder</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">brooklyn.entity.basic.AbstractApplication</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">brooklyn.entity.basic.Attributes</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">brooklyn.entity.dns.geoscaling.GeoscalingDnsService</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">brooklyn.entity.group.DynamicFabric</span><span class="o">;</span>

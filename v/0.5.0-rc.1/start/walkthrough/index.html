@@ -404,8 +404,9 @@ composed of:</p>
 <p>Here's the essential code which creates these and sets them up
 for management:</p>
 
-<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">WebClusterDatabaseExample</span> <span class="kd">extends</span> <span class="n">ApplicationBuilder</span> <span class="o">{</span>
-    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doBuild</span><span class="o">()</span> <span class="o">{</span>
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">WebClusterDatabaseExample</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
         <span class="n">MySqlNode</span> <span class="n">mysql</span> <span class="o">=</span> <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpecs</span><span class="o">.</span><span class="na">spec</span><span class="o">(</span><span class="n">MySqlNode</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
         <span class="n">ControlledDynamicWebAppCluster</span> <span class="n">web</span> <span class="o">=</span> <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpecs</span><span class="o">.</span><span class="na">spec</span><span class="o">(</span><span class="n">ControlledDynamicWebAppCluster</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
     <span class="o">}</span>
@@ -463,8 +464,9 @@ Due to the use of futures, the Brooklyn webapp entities will automatically
 block "at the last moment" when the value is needed
 (but after e.g. the VMs have been provisioned, to speed things up).</p>
 
-<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">WebClusterDatabaseExample</span> <span class="kd">extends</span> <span class="n">ApplicationBuilder</span> <span class="o">{</span>
-    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doBuild</span><span class="o">()</span> <span class="o">{</span>
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">WebClusterDatabaseExample</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
         <span class="n">MySqlNode</span> <span class="n">mysql</span> <span class="o">=</span> <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpecs</span><span class="o">.</span><span class="na">spec</span><span class="o">(</span><span class="n">MySqlNode</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">MySqlNode</span><span class="o">.</span><span class="na">CREATION_SCRIPT_URL</span><span class="o">,</span> <span class="s">&quot;classpath://visitors-database-setup.sql&quot;</span><span class="o">));</span>
         

@@ -399,6 +399,16 @@ $(document).ready(function() {
 
 <p><em>Versions Affected</em>: 0.5.0-M2</p>
 
+<h3>Unable to Provision Ubuntu 8 VMs</h3>
+
+<p>*Symptom: Brooklyn fails to provision Ubuntu 8 VMs (e.g. in aws-ec2) with the following error 'Cannot insert the iptables rule for port 22. Error: sudo: illegal option `-n''.</p>
+
+<p>*Cause: Ubuntu 8 is too old; the sudo command doesn't support the -n setting.</p>
+
+<p>*Workaround: Choose Ubuntu 10 or higher.</p>
+
+<p><em>Versions Affected</em>: 0.5.0-M2</p>
+
 
         </div><!--maincontent-->
         

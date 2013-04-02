@@ -492,12 +492,12 @@ a java webapp in VMware's Cloud Foundry PaaS, just as easily as creating it
 from scratch in a VM-based cloud.
 We'll create our application in a Java class <code>MovableCloudFoundryClusterExample</code>:</p>
 
-<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MovableCloudFoundryClusterExample</span> <span class="kd">extends</span> <span class="n">ApplicationBuilder</span> <span class="o">{</span>
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MovableCloudFoundryClusterExample</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
 
     <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">WAR_FILE_URL</span> <span class="o">=</span> <span class="s">&quot;classpath://hello-world-webapp.war&quot;</span><span class="o">;</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doBuild</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
         <span class="c1">// FIXME Code not supported; temporary situation while we update to new mechanism!</span>
         <span class="c1">// ElasticJavaWebAppService websvc = new ElasticWebAppService(MutableMap.of(&quot;war&quot;, WAR_FILE_URL), getApp());</span>
     <span class="o">}</span>

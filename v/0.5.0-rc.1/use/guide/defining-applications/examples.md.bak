@@ -416,9 +416,9 @@ It is then started in a localhost location (other locations are shown in the nex
 The Tomcat's configuration indicates that the given WAR should be deployed to the Tomcat server when it is started.
 
 <div class="highlight"><pre><code class="java"><span class="c1">// TODO Untested code; see brooklyn-example for better maintained examples!</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TomcatServerApp</span> <span class="kd">extends</span> <span class="n">ApplicationBuilder</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TomcatServerApp</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
     <span class="nd">@Override</span>
-    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doBuild</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
         <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpecs</span><span class="o">.</span><span class="na">spec</span><span class="o">(</span><span class="n">TomcatServer</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;httpPort&quot;</span><span class="o">,</span> <span class="s">&quot;8080+&quot;</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;war&quot;</span><span class="o">,</span> <span class="s">&quot;/path/to/booking-mvc.war&quot;</span><span class="o">)));</span>
@@ -452,9 +452,9 @@ brooklyn launch --app TomcatServerApp --location aws-ec2:eu-west-1
 The code below starts a Tomcat cluster along with an Nginx instance, where each Tomcat server in the cluster is registered with the Nginx instance.
 
 <div class="highlight"><pre><code class="java"><span class="c1">// TODO Untested code; see brooklyn-example for better maintained examples!</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TomcatClusterWithNginxApp</span> <span class="kd">extends</span> <span class="n">ApplicationBuilder</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TomcatClusterWithNginxApp</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
     <span class="nd">@Override</span>
-    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doBuild</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
         <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpecs</span><span class="o">.</span><span class="na">spec</span><span class="o">(</span><span class="n">NginxController</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;domain&quot;</span><span class="o">,</span> <span class="s">&quot;brooklyn.geopaas.org&quot;</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;port&quot;</span><span class="o">,</span> <span class="s">&quot;8000+&quot;</span><span class="o">)</span>
@@ -497,9 +497,9 @@ The ``ControlledDynamicWebAppCluster`` entity used above can also be used with a
 a web-cluster in each location.
 
 <div class="highlight"><pre><code class="java"><span class="c1">// TODO Untested code; see brooklyn-example for better maintained examples!</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TomcatFabricApp</span> <span class="kd">extends</span> <span class="n">ApplicationBuilder</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TomcatFabricApp</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
     <span class="nd">@Override</span>
-    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doBuild</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
         <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpecs</span><span class="o">.</span><span class="na">spec</span><span class="o">(</span><span class="n">DynamicFabric</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;displayName&quot;</span><span class="o">,</span> <span class="s">&quot;WebFabric&quot;</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;displayNamePrefix&quot;</span><span class="o">,</span> <span class="s">&quot;&quot;</span><span class="o">)</span>
