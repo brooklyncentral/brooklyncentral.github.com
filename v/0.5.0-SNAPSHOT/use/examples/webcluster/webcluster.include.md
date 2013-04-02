@@ -24,12 +24,12 @@ The simplest of these, ``SingleWebServerExample``, starts JBoss on a single mach
 with a single line:
 
 {% highlight java %}
-public class SingleWebServerExample extends ApplicationBuilder {
+public class SingleWebServerExample extends AbstractApplication {
     private static final String WAR_PATH = "classpath://hello-world-webapp.war";
 
     @Override
-    protected void doBuild() {
-        createChild(BasicEntitySpec.newInstance(JBoss7Server.class)
+    public void init() {
+        addChild(EntitySpecs.spec(JBoss7Server.class)
                 .configure("war", WAR_PATH)
                 .configure("httpPort", 8080));
     }
@@ -75,7 +75,7 @@ with an Nginx load-balancer set up in front of them, and backed by a MySQL datab
 The essential code fragment looks like this:
 
 {% highlight java %}
-public class WebClusterDatabaseExample extends ApplicationBuilder {
+public class WebClusterDatabaseExample extends AbstractApplication {
     public static final String WAR_PATH = "classpath://hello-world-sql-webapp.war";
     
     public static final String DB_SETUP_SQL_URL = "classpath://visitors-creation-script.sql";
@@ -83,13 +83,14 @@ public class WebClusterDatabaseExample extends ApplicationBuilder {
     public static final String DB_TABLE = "visitors";
     public static final String DB_USERNAME = "brooklyn";
     public static final String DB_PASSWORD = "br00k11n";
-    
-    protected void doBuild() {
-        MySqlNode mysql = createChild(BasicEntitySpec.newInstance(MySqlNode.class)
+
+    @Override
+    public void init() {
+        MySqlNode mysql = addChild(EntitySpecs.spec(MySqlNode.class)
                 .configure("creationScriptUrl", DB_SETUP_SQL_URL));
         
-        ControlledDynamicWebAppCluster web = createChild(BasicEntitySpec.newInstance(ControlledDynamicWebAppCluster.class)
-                .configure("memberSpec", BasicEntitySpec.newInstance(JBoss7Server.class)
+        ControlledDynamicWebAppCluster web = addChild(EntitySpecs.spec(ControlledDynamicWebAppCluster.class)
+                .configure("memberSpec", EntitySpecs.spec(JBoss7Server.class)
                         .configure("httpPort", "8080+")
                         .configure("war", WAR_PATH)
                         .configure(javaSysProp("brooklyn.example.db.url"), 

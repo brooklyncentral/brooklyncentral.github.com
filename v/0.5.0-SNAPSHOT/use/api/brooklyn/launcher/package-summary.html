@@ -97,15 +97,10 @@ Package brooklyn.launcher
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="BrooklynLauncher.html" title="class in brooklyn/launcher">BrooklynLauncher</A></B></TD>
-        <TD></TD>
-        </TR>
-
-        <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="BrooklynLauncherCli.html" title="class in brooklyn/launcher">BrooklynLauncherCli</A></B></TD>
         <TD>Example usage is:
  <pre>
  {@code
- BrooklynLauncherCli launcher = BrooklynLauncherCli.newInstance()
+ BrooklynLauncher launcher = BrooklynLauncher.newInstance()
      .application(new WebClusterDatabaseExample().appDisplayName("Web-cluster example"))
      .location("localhost")
      .start();</TD>

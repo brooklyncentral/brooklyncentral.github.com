@@ -91,42 +91,60 @@ $(document).ready(function() {
 <!-- page notes -->
    	$(function() {
 		if (document.location.pathname.replace(/^\/([^\/]*).*$/, '$1') === "v"){
-			var thisversion, msg;
-			thisversion = document.location.pathname.split("/")[2];
+			var thisversion = document.location.pathname.split("/")[2],
+				msg = "";
 			
-			if (!$.cookie('brooklyn_versions') || $.inArray(thisversion, $.cookie('brooklyn_versions').split(",")) === -1){
-				msg = "<p>Careful. This page is for <strong>Brooklyn version "+thisversion+"</strong>, and the content may differ between versions.</p>"
-				msg += "<p><a href = '/v/0.5.0-SNAPSHOT'>Latest version</a>, "
-				msg += "<a href = '/v/0.5.0-SNAPSHOT/meta/versions.html'>All versions</a>, "
-				msg += "<a href = '#' onclick=\"set_user_version('"+thisversion+"');\">Don't show again</a>. </p>"
+			if (!$.cookie('brooklyn_versions') || 
+			        (($.inArray('ALL', $.cookie('brooklyn_versions').split(",")) === -1) &&
+			        ($.inArray(thisversion, $.cookie('brooklyn_versions').split(",")) === -1)) ){
+			    msg += "<div class='warning_banner_image'><img src='/v/0.5.0-SNAPSHOT/style/icons/warning.png'/></div>";
+				msg += "<p>This content is for <strong>Brooklyn "+thisversion+"</strong>, and may differ across versions.</p>";
+			    msg += "<p>Are you using version "+thisversion+"?</p>";
+				msg += "<p class='warning_banner_buttons'>";
+				msg += "<a href = '#' onclick=\"set_user_version('"+thisversion+"');\">Yes, hide this warning</a>";
+			    msg += "<a href = '/'>No, show me the latest version</a>";
+				msg += "<a href = '/meta/versions.html'>Show all versions</a>";
+				msg += "</p>"
 							
 				$('#page_notes').html(msg);
 				$('#page_notes').fadeIn('slow');
 			}
 		}
 	});
+   	function get_user_versions() {
+   	    return $.cookie("brooklyn_versions") ? $.cookie("brooklyn_versions").split(",") : [];
+   	};
 	function set_user_version(version) {
-		var version_cookie = $.cookie("brooklyn_versions").split(",") || [];
+		var version_cookie = get_user_versions();
 		version_cookie.push(version);
 		$.cookie('brooklyn_versions', version_cookie, { expires: 365, path: '/' });
 		$('#page_notes').fadeOut();
 		event.preventDefault ? event.preventDefault() : event.returnValue = false;
-	}
-	
+	};
+    function set_user_versions_all() {
+        var version_cookie = get_user_versions();
+        version_cookie.push("ALL");
+        $.cookie('brooklyn_versions', version_cookie, { expires: 365, path: '/' });
+        $('#page_notes').fadeOut();
+        event.preventDefault ? event.preventDefault() : event.returnValue = false;
+    };
+    function clear_user_versions() {
+        $.removeCookie('brooklyn_versions', { path: '/' });
+        $('#page_notes').fadeIn('slow');
+        event.preventDefault ? event.preventDefault() : event.returnValue = false;
+    };
 	
    
-</script>
-
-<script type="text/javascript"> <!-- analytics -->
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-30530918-1']);
-_gaq.push(['_trackPageview']);
-
-(function() {
-  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
+ <!-- analytics -->
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-30530918-1']);
+	_gaq.push(['_trackPageview']);
+	
+	(function() {
+	  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
 </script>
 
 </head>
@@ -209,22 +227,10 @@ _gaq.push(['_trackPageview']);
   
 
 
+Liquid error: 757: unexpected token at 'Liquid error: No such file or directory - /Users/alex/Data/cloudsoft/dev/gits/brooklyn/docs/start/../../toc.json'
 
 
 
-
-
-    
-    
-
-    
-    
-
-    
-    
-
-    
-    
 
 
 
@@ -237,7 +243,7 @@ _gaq.push(['_trackPageview']);
 <p id="breadcrumb">
     <a href="/v/0.5.0-SNAPSHOT">Home</a>
     
-        &raquo; <a href="/v/0.5.0-SNAPSHOT/start/release-notes/index.html">Release Notes</a>
+        &raquo; <a href="/v/0.5.0-SNAPSHOT/start/release-notes.html">Release Notes</a>
         
     
 </p>
@@ -247,9 +253,91 @@ _gaq.push(['_trackPageview']);
 
 <h1 id="header_title">Release Notes</h1>
     
+<h2>Brooklyn Version 0.5.0 RC1 (0.5.0-rc.1)</h2>
+
+<p>API Tidy on top of M2, using <code>init()</code> as the method to override when building composed Application and Entity classes.</p>
+
+<p>There are known issues with Whirr clusters and the Cloud Foundry example (moving) which will be resolved for RC2.</p>
+
+<h2>Brooklyn Version 0.5.0 Milestone Two (0.5.0-M2)</h2>
+
+<h3>Introduction</h3>
+
+<p>This milestone release includes many big features, and brings us much closer to a 0.5.0 release.</p>
+
+<p>It incorporates a lot of improvements and feedback from our community. Thank you!</p>
+
+<p>Thanks also go to Brooklyn's commercial users. Already Brooklyn has been adopted into some very exciting projects including controlling custom PaaS offerings, big data clusters, and three-tier web-apps.</p>
+
+<p>Work on this release can be tracked using Brooklyn's GitHub issue tracker:</p>
+
 <ul>
-<li><a href="0.5.0-M2.html">0.5.0-M2</a></li>
+<li><a href="https://github.com/brooklyncentral/brooklyn/issues?milestone=1">github.com/brooklyncentral/brooklyn/issues?milestone=1</a></li>
 </ul>
+
+
+<p>And via the mailing lists:</p>
+
+<ul>
+<li><a href="http://groups.google.com/group/brooklyn-dev">brooklyn-dev@googlegroups.com</a></li>
+<li><a href="http://groups.google.com/group/brooklyn-users">brooklyn-users@googlegroups.com</a></li>
+</ul>
+
+
+<h3>New Features</h3>
+
+<p>The major changes between M1 and M2 are:</p>
+
+<ol>
+<li><p>Entities have been separated into an interface and implementation, rather than just a single class. Construction of entities is now done using an EntitySpec, rather than directly calling the constructor. This improvement is required to simplify remoting in a distributed brooklyn management plane.</p></li>
+<li><p>Downloading of entity installers is greatly improved:</p>
+
+<ul>
+<li>More configurable, with ability to specify URLs in the brooklyn configuration files or to override in code.</li>
+<li><p>Will fallback to a repository maintained by Cloudsoft, so if an artifact is removed from the official public site then it will not break the entity.</p>
+
+<p>  See <a href="http://downloads.cloudsoftcorp.com/brooklyn/repository/">downloads.cloudsoftcorp.com/brooklyn/repository/</a></p></li>
+</ul>
+</li>
+<li><p>Support for running applications across private subnets.</p></li>
+<li><p>Policies can now be re-configured on-the-fly through the REST api and through the web-console.</p></li>
+<li><p>Some entities now support configuration files being supplied in FreeMarker template format. These include JBoss AS7, ActiveMQ and MySql. More will be converted to use this pattern.</p></li>
+<li><p>Several new entities have been added, including:</p>
+
+<ul>
+<li>MongoDB</li>
+<li>Cassandra</li>
+<li>RubyRep</li>
+<li>DynamicWebAppFabric</li>
+</ul>
+</li>
+</ol>
+
+
+<h3>Backwards Compatibility</h3>
+
+<p>For upgrading from 0.5.0-M1 to M2:</p>
+
+<ol>
+<li><p>Entity classes have been renamed, e.g. MySqlNode is now an interface and the implementationis MySqlNodeImpl.</p>
+
+<ul>
+<li>The minimum change for this to work is to update your references to include the Impl suffixes. However, that will result in deprecation warnings.</li>
+<li>The recommended approach is to use the EntitySpec when constructing entities. A good place to start is to look at the updated example applications.</li>
+</ul>
+</li>
+<li><p>The default username for provisioning with jclouds has changed to use the name of the user executing the Brooklyn process.</p>
+
+<ul>
+<li>Java's <code>System.getProperty("user.name")</code> is used instead of 'root' or 'ubuntu'</li>
+<li><p>Usernames can be overridden in <code>brooklyn.properties</code> or using system properties.
+  For example, by entering '<code>brooklyn.location.named.acmecloud.user=root</code>' in <code>brooklyn.properties</code> or using the command syntax <code>-Dbrooklyn.location.named.acmecloud.user=root</code>.</p>
+
+<p>  '<code>brooklyn.jclouds.aws-ec2.user=root</code>' could also be used to apply <code>user=root</code> to all aws-ec2 VMs.</p></li>
+</ul>
+</li>
+<li><p>Some deprecated code has been deleted. All of this code was commented in 0.4.0 with text such as "will be deleted in 0.5".</p></li>
+</ol>
 
 
 
@@ -262,47 +350,11 @@ _gaq.push(['_trackPageview']);
   
 
 
-
+Liquid error: 757: unexpected token at 'Liquid error: No such file or directory - /Users/alex/Data/cloudsoft/dev/gits/brooklyn/docs/start/../../toc.json'
 
 
 
 <div id="sidebar_toc">
-
-    
-    
-    
-	  <div class="toc-1 ">
-  
-	    <a href="/v/0.5.0-SNAPSHOT/index.html"><div class="toc-1-item">Overview</div></a>
-  
-      </div>
-
-    
-    
-    
-	  <div class="toc-1 ">
-  
-	    <a href="/v/0.5.0-SNAPSHOT/start/walkthrough/index.html"><div class="toc-1-item">Walkthrough</div></a>
-  
-      </div>
-
-    
-    
-    
-	  <div class="toc-1 ">
-  
-	    <a href="/v/0.5.0-SNAPSHOT/start/download.html"><div class="toc-1-item">Download</div></a>
-  
-      </div>
-
-    
-    
-    
-	  <div class="toc-1 ">
-  
-	    <a href="/v/0.5.0-SNAPSHOT/start/docs-summary.html"><div class="toc-1-item">Documentation</div></a>
-  
-      </div>
  
 </div>
 <br/>

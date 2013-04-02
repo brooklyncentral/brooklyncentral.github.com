@@ -91,42 +91,60 @@ $(document).ready(function() {
 <!-- page notes -->
    	$(function() {
 		if (document.location.pathname.replace(/^\/([^\/]*).*$/, '$1') === "v"){
-			var thisversion, msg;
-			thisversion = document.location.pathname.split("/")[2];
+			var thisversion = document.location.pathname.split("/")[2],
+				msg = "";
 			
-			if (!$.cookie('brooklyn_versions') || $.inArray(thisversion, $.cookie('brooklyn_versions').split(",")) === -1){
-				msg = "<p>Careful. This page is for <strong>Brooklyn version "+thisversion+"</strong>, and the content may differ between versions.</p>"
-				msg += "<p><a href = '/v/0.5.0-SNAPSHOT'>Latest version</a>, "
-				msg += "<a href = '/v/0.5.0-SNAPSHOT/meta/versions.html'>All versions</a>, "
-				msg += "<a href = '#' onclick=\"set_user_version('"+thisversion+"');\">Don't show again</a>. </p>"
+			if (!$.cookie('brooklyn_versions') || 
+			        (($.inArray('ALL', $.cookie('brooklyn_versions').split(",")) === -1) &&
+			        ($.inArray(thisversion, $.cookie('brooklyn_versions').split(",")) === -1)) ){
+			    msg += "<div class='warning_banner_image'><img src='/v/0.5.0-SNAPSHOT/style/icons/warning.png'/></div>";
+				msg += "<p>This content is for <strong>Brooklyn "+thisversion+"</strong>, and may differ across versions.</p>";
+			    msg += "<p>Are you using version "+thisversion+"?</p>";
+				msg += "<p class='warning_banner_buttons'>";
+				msg += "<a href = '#' onclick=\"set_user_version('"+thisversion+"');\">Yes, hide this warning</a>";
+			    msg += "<a href = '/'>No, show me the latest version</a>";
+				msg += "<a href = '/meta/versions.html'>Show all versions</a>";
+				msg += "</p>"
 							
 				$('#page_notes').html(msg);
 				$('#page_notes').fadeIn('slow');
 			}
 		}
 	});
+   	function get_user_versions() {
+   	    return $.cookie("brooklyn_versions") ? $.cookie("brooklyn_versions").split(",") : [];
+   	};
 	function set_user_version(version) {
-		var version_cookie = $.cookie("brooklyn_versions").split(",") || [];
+		var version_cookie = get_user_versions();
 		version_cookie.push(version);
 		$.cookie('brooklyn_versions', version_cookie, { expires: 365, path: '/' });
 		$('#page_notes').fadeOut();
 		event.preventDefault ? event.preventDefault() : event.returnValue = false;
-	}
-	
+	};
+    function set_user_versions_all() {
+        var version_cookie = get_user_versions();
+        version_cookie.push("ALL");
+        $.cookie('brooklyn_versions', version_cookie, { expires: 365, path: '/' });
+        $('#page_notes').fadeOut();
+        event.preventDefault ? event.preventDefault() : event.returnValue = false;
+    };
+    function clear_user_versions() {
+        $.removeCookie('brooklyn_versions', { path: '/' });
+        $('#page_notes').fadeIn('slow');
+        event.preventDefault ? event.preventDefault() : event.returnValue = false;
+    };
 	
    
-</script>
-
-<script type="text/javascript"> <!-- analytics -->
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-30530918-1']);
-_gaq.push(['_trackPageview']);
-
-(function() {
-  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
+ <!-- analytics -->
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-30530918-1']);
+	_gaq.push(['_trackPageview']);
+	
+	(function() {
+	  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
 </script>
 
 </head>
@@ -479,12 +497,12 @@ a java webapp in VMware's Cloud Foundry PaaS, just as easily as creating it
 from scratch in a VM-based cloud.
 We'll create our application in a Java class <code>MovableCloudFoundryClusterExample</code>:</p>
 
-<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MovableCloudFoundryClusterExample</span> <span class="kd">extends</span> <span class="n">ApplicationBuilder</span> <span class="o">{</span>
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MovableCloudFoundryClusterExample</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
 
     <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">WAR_FILE_URL</span> <span class="o">=</span> <span class="s">&quot;classpath://hello-world-webapp.war&quot;</span><span class="o">;</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doBuild</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
         <span class="c1">// FIXME Code not supported; temporary situation while we update to new mechanism!</span>
         <span class="c1">// ElasticJavaWebAppService websvc = new ElasticWebAppService(MutableMap.of(&quot;war&quot;, WAR_FILE_URL), getApp());</span>
     <span class="o">}</span>
@@ -619,7 +637,7 @@ This means we could run our new entity by changing one line in the
 <code>MovableCloudFoundryClusterExample</code> application above
 (although of course <code>move</code> will throw an exception):</p>
 
-<div class="highlight"><pre><code class="java">        <span class="n">createChild</span><span class="o">(</span><span class="n">BasicEntitySpec</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">MovableElasticWebAppCluster</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<div class="highlight"><pre><code class="java">        <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpecs</span><span class="o">.</span><span class="na">spec</span><span class="o">(</span><span class="n">MovableElasticWebAppCluster</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;war&quot;</span><span class="o">,</span> <span class="n">WAR_FILE_URL</span><span class="o">));</span>
 </code></pre>
 </div>

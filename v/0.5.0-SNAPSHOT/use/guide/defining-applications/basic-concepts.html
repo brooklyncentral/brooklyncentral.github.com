@@ -91,42 +91,60 @@ $(document).ready(function() {
 <!-- page notes -->
    	$(function() {
 		if (document.location.pathname.replace(/^\/([^\/]*).*$/, '$1') === "v"){
-			var thisversion, msg;
-			thisversion = document.location.pathname.split("/")[2];
+			var thisversion = document.location.pathname.split("/")[2],
+				msg = "";
 			
-			if (!$.cookie('brooklyn_versions') || $.inArray(thisversion, $.cookie('brooklyn_versions').split(",")) === -1){
-				msg = "<p>Careful. This page is for <strong>Brooklyn version "+thisversion+"</strong>, and the content may differ between versions.</p>"
-				msg += "<p><a href = '/v/0.5.0-SNAPSHOT'>Latest version</a>, "
-				msg += "<a href = '/v/0.5.0-SNAPSHOT/meta/versions.html'>All versions</a>, "
-				msg += "<a href = '#' onclick=\"set_user_version('"+thisversion+"');\">Don't show again</a>. </p>"
+			if (!$.cookie('brooklyn_versions') || 
+			        (($.inArray('ALL', $.cookie('brooklyn_versions').split(",")) === -1) &&
+			        ($.inArray(thisversion, $.cookie('brooklyn_versions').split(",")) === -1)) ){
+			    msg += "<div class='warning_banner_image'><img src='/v/0.5.0-SNAPSHOT/style/icons/warning.png'/></div>";
+				msg += "<p>This content is for <strong>Brooklyn "+thisversion+"</strong>, and may differ across versions.</p>";
+			    msg += "<p>Are you using version "+thisversion+"?</p>";
+				msg += "<p class='warning_banner_buttons'>";
+				msg += "<a href = '#' onclick=\"set_user_version('"+thisversion+"');\">Yes, hide this warning</a>";
+			    msg += "<a href = '/'>No, show me the latest version</a>";
+				msg += "<a href = '/meta/versions.html'>Show all versions</a>";
+				msg += "</p>"
 							
 				$('#page_notes').html(msg);
 				$('#page_notes').fadeIn('slow');
 			}
 		}
 	});
+   	function get_user_versions() {
+   	    return $.cookie("brooklyn_versions") ? $.cookie("brooklyn_versions").split(",") : [];
+   	};
 	function set_user_version(version) {
-		var version_cookie = $.cookie("brooklyn_versions").split(",") || [];
+		var version_cookie = get_user_versions();
 		version_cookie.push(version);
 		$.cookie('brooklyn_versions', version_cookie, { expires: 365, path: '/' });
 		$('#page_notes').fadeOut();
 		event.preventDefault ? event.preventDefault() : event.returnValue = false;
-	}
-	
+	};
+    function set_user_versions_all() {
+        var version_cookie = get_user_versions();
+        version_cookie.push("ALL");
+        $.cookie('brooklyn_versions', version_cookie, { expires: 365, path: '/' });
+        $('#page_notes').fadeOut();
+        event.preventDefault ? event.preventDefault() : event.returnValue = false;
+    };
+    function clear_user_versions() {
+        $.removeCookie('brooklyn_versions', { path: '/' });
+        $('#page_notes').fadeIn('slow');
+        event.preventDefault ? event.preventDefault() : event.returnValue = false;
+    };
 	
    
-</script>
-
-<script type="text/javascript"> <!-- analytics -->
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-30530918-1']);
-_gaq.push(['_trackPageview']);
-
-(function() {
-  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
+ <!-- analytics -->
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-30530918-1']);
+	_gaq.push(['_trackPageview']);
+	
+	(function() {
+	  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
 </script>
 
 </head>
@@ -393,7 +411,7 @@ Application entities are the top-level entities created and managed externally, 
 
 <p>Applications are typically defined in Brooklyn as an <strong><em>application descriptor</em></strong>.
 This is a Java class specifying the entities which make up the application,
-by extending the class <code>ApplicationBuilder</code>, and specifying how these entities should be configured and managed.</p>
+by extending the class <code>AbstractApplication</code>, and specifying how these entities should be configured and managed.</p>
 
 <p>All entities, including applications, can be the parent of other entities.
 This means that the "child" is typically started, configured, and managed by the parent.
@@ -423,7 +441,7 @@ There is also an <code>entity.setConfig(KEY, VALUE)</code> method.</p>
 
 <p>Additionally, many common configuration parameters are available as "flags" which can be supplied as Strings when constructing
 then entity, in the form
-<code>BasicEntitySpec.newInstance(MyEntity.class).configure("config1", "value1").configure("config2", "value2")</code>.</p>
+<code>EntitySpecs.spec˙(MyEntity.class).configure("config1", "value1").configure("config2", "value2")</code>.</p>
 
 <p>Documentation of the flags available for individual entities can normally be found in the javadocs.
 The <code>@SetFromFlag</code> annotations on <code>ConfigKey</code> static field definitions

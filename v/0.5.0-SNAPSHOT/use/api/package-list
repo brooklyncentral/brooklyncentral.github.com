@@ -31,6 +31,7 @@ brooklyn.entity.messaging.qpid
 brooklyn.entity.messaging.rabbit
 brooklyn.entity.nosql
 brooklyn.entity.nosql.cassandra
+brooklyn.entity.nosql.couchdb
 brooklyn.entity.nosql.mongodb
 brooklyn.entity.nosql.redis
 brooklyn.entity.osgi.karaf
@@ -106,6 +107,7 @@ brooklyn.util.math
 brooklyn.util.mutex
 brooklyn.util.net
 brooklyn.util.pool
+brooklyn.util.ssh
 brooklyn.util.stream
 brooklyn.util.task
 brooklyn.util.text
