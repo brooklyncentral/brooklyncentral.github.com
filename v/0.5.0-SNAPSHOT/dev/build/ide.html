@@ -17,6 +17,8 @@
 	<link rel="stylesheet" type="text/css" href="/v/0.5.0-SNAPSHOT/style/js/jquery/smoothness/jquery-ui-1.8.18.custom.css" />
 	
 	<script type="text/javascript" src="/v/0.5.0-SNAPSHOT/style/js/superfish.js"></script>
+	<script type="text/javascript" src="/v/0.5.0-SNAPSHOT/style/js/jquery.cookie.js"></script>
+	
 	
 <!-- Clipboard support -->
 <script src="/v/0.5.0-SNAPSHOT/style/js/zeroclipboard/ZeroClipboard.js"></script>
@@ -64,7 +66,9 @@ $(document).ready(function() {
         });
     </script>
 
-<script type="text/javascript"> <!-- search -->
+<script type="text/javascript">
+
+<!-- search -->
 	$(function() {
 		$('#simple_google')
 			.submit(function() {
@@ -83,6 +87,34 @@ $(document).ready(function() {
 			})
 			.blur();
     });
+    
+<!-- page notes -->
+   	$(function() {
+		if (document.location.pathname.replace(/^\/([^\/]*).*$/, '$1') === "v"){
+			var thisversion, msg;
+			thisversion = document.location.pathname.split("/")[2];
+			
+			if (!$.cookie('brooklyn_versions') || $.inArray(thisversion, $.cookie('brooklyn_versions').split(",")) === -1){
+				msg = "<p>Careful. This page is for <strong>Brooklyn version "+thisversion+"</strong>, and the content may differ between versions.</p>"
+				msg += "<p><a href = '/v/0.5.0-SNAPSHOT'>Latest version</a>, "
+				msg += "<a href = '/v/0.5.0-SNAPSHOT/meta/versions.html'>All versions</a>, "
+				msg += "<a href = '#' onclick=\"set_user_version('"+thisversion+"');\">Don't show again</a>. </p>"
+							
+				$('#page_notes').html(msg);
+				$('#page_notes').fadeIn('slow');
+			}
+		}
+	});
+	function set_user_version(version) {
+		var version_cookie = $.cookie("brooklyn_versions").split(",") || [];
+		version_cookie.push(version);
+		$.cookie('brooklyn_versions', version_cookie, { expires: 365, path: '/' });
+		$('#page_notes').fadeOut();
+		event.preventDefault ? event.preventDefault() : event.returnValue = false;
+	}
+	
+	
+   
 </script>
 
 <script type="text/javascript"> <!-- analytics -->
@@ -337,10 +369,12 @@ _gaq.push(['_trackPageview']);
 </p>
 
 
+<div id="page_notes"></div>
+
 <h1 id="header_title">IDE Setup</h1>
     
 <p>Gone are the days when IDE integration always just works...  Maven and Eclipse fight,
-neither quite gets along perfectly with Groovy, let alone Grails,
+neither quite gets along perfectly with Groovy,
 git branch switches (sooo nice) can be slow, etc etc.</p>
 
 <p>But with a bit of a dance the IDE can still be your friend,
@@ -349,7 +383,7 @@ making it much easier to run tests and debug.</p>
 <p>Here are some general tips:</p>
 
 <ul>
-<li><p>Add your favourite plugins for Maven, Groovy, and Git, if necessary</p></li>
+<li><p>Add your favourite plugins for Maven, Groovy, Git and JavaScript, if necessary</p></li>
 <li><p>Turn off auto-rebuild if it bothers you</p></li>
 <li><p>Don't always trust the IDE to build correctly; if you hit a snag,
 do a command-line <code>mvn clean install</code> (optionally with <code>-DskipTests</code>)
@@ -362,7 +396,7 @@ Sometimes closing projects (so that it reads from your <code>~/.m2/repository</c
 
 <h2>Eclipse</h2>
 
-<p>If you're an Eclipse user, you'll probably want the Groovy, Maven (m2e), Git, and TestNG plugins.
+<p>If you're an Eclipse user, you'll probably want the Groovy, Maven (m2e), Git, JavaScript and TestNG plugins.
 Via Help -> Install New Software, or from the Eclipse Marketplace,
 we recommend:</p>
 
@@ -411,13 +445,22 @@ but for others (older ones) you may need to handcraft these
 (either right-click the project in the Package Explorer and choose Configure,
 or edit the <code>.project</code> manually adding it to the project properties).
 The tips <a href="http://www.jclouds.org/documentation/devguides/using-eclipse">for jclouds maven-eclipse</a> might be helpful.</p></li>
-<li><p>Getting the web console project to build nicely can be trickier.
+</ul>
+
+
+<p> &lt;!--
+ FIXME Relates to old Grails, rather than new JavaScript web-console.
+ Should we just delete this section, or does any of it apply to the new web-console?</p>
+
+<ul>
+<li>Getting the web console project to build nicely can be trickier.
 If you're lucky it will just work...
 But you may find you have to first build from the command-line,
 then add all the source folders, and <code>target/plugin-classes</code> as a class file folder.
 Easier may be just to run "grails run-app" in the directory to launch it (plus that does dynamic restarts),
 and use the IDE as just a text editor (or use a different text editor for that project only).
-Note too that some jiggery-pokery may currently be needed to get Groovy 1.8 playing nicely with Grails 1.3.</p></li>
+Note too that some jiggery-pokery may currently be needed to get Groovy 1.8 playing nicely with Grails 1.3.
+--></li>
 </ul>
 
 

@@ -17,6 +17,8 @@
 	<link rel="stylesheet" type="text/css" href="/v/0.5.0-SNAPSHOT/style/js/jquery/smoothness/jquery-ui-1.8.18.custom.css" />
 	
 	<script type="text/javascript" src="/v/0.5.0-SNAPSHOT/style/js/superfish.js"></script>
+	<script type="text/javascript" src="/v/0.5.0-SNAPSHOT/style/js/jquery.cookie.js"></script>
+	
 	
 <!-- Clipboard support -->
 <script src="/v/0.5.0-SNAPSHOT/style/js/zeroclipboard/ZeroClipboard.js"></script>
@@ -64,7 +66,9 @@ $(document).ready(function() {
         });
     </script>
 
-<script type="text/javascript"> <!-- search -->
+<script type="text/javascript">
+
+<!-- search -->
 	$(function() {
 		$('#simple_google')
 			.submit(function() {
@@ -83,6 +87,34 @@ $(document).ready(function() {
 			})
 			.blur();
     });
+    
+<!-- page notes -->
+   	$(function() {
+		if (document.location.pathname.replace(/^\/([^\/]*).*$/, '$1') === "v"){
+			var thisversion, msg;
+			thisversion = document.location.pathname.split("/")[2];
+			
+			if (!$.cookie('brooklyn_versions') || $.inArray(thisversion, $.cookie('brooklyn_versions').split(",")) === -1){
+				msg = "<p>Careful. This page is for <strong>Brooklyn version "+thisversion+"</strong>, and the content may differ between versions.</p>"
+				msg += "<p><a href = '/v/0.5.0-SNAPSHOT'>Latest version</a>, "
+				msg += "<a href = '/v/0.5.0-SNAPSHOT/meta/versions.html'>All versions</a>, "
+				msg += "<a href = '#' onclick=\"set_user_version('"+thisversion+"');\">Don't show again</a>. </p>"
+							
+				$('#page_notes').html(msg);
+				$('#page_notes').fadeIn('slow');
+			}
+		}
+	});
+	function set_user_version(version) {
+		var version_cookie = $.cookie("brooklyn_versions").split(",") || [];
+		version_cookie.push(version);
+		$.cookie('brooklyn_versions', version_cookie, { expires: 365, path: '/' });
+		$('#page_notes').fadeOut();
+		event.preventDefault ? event.preventDefault() : event.returnValue = false;
+	}
+	
+	
+   
 </script>
 
 <script type="text/javascript"> <!-- analytics -->
@@ -314,6 +346,8 @@ _gaq.push(['_trackPageview']);
 </p>
 
 
+<div id="page_notes"></div>
+
 <h1 id="header_title">Examples</h1>
     
 <p><strong> TODO: this examples page is deprecated;
@@ -364,109 +398,55 @@ It is then started in a localhost location (other locations are shown in the nex
 
 <p>The Tomcat's configuration indicates that the given WAR should be deployed to the Tomcat server when it is started.</p>
 
-<div class="highlight"><pre><code class="java"><span class="kd">class</span> <span class="nc">TomcatServerApp</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
-
-    <span class="n">def</span> <span class="n">tomcat</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TomcatServer</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> 
-            <span class="nl">httpPort:</span> <span class="mi">8080</span><span class="o">,</span>
-            <span class="nl">war:</span> <span class="s">&quot;/path/to/booking-mvc.war&quot;</span><span class="o">)</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">...</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">TomcatServerApp</span> <span class="n">demo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TomcatServerApp</span><span class="o">(</span>
-                <span class="n">displayName</span> <span class="o">:</span> <span class="s">&quot;tomcat server example&quot;</span><span class="o">)</span>
-
-        <span class="n">BrooklynLauncher</span><span class="o">.</span><span class="na">manage</span><span class="o">(</span><span class="n">demo</span><span class="o">)</span>
-        <span class="n">demo</span><span class="o">.</span><span class="na">start</span><span class="o">([</span><span class="k">new</span> <span class="n">LocalhostMachineProvisioningLocation</span><span class="o">()])</span>
+<div class="highlight"><pre><code class="java"><span class="c1">// TODO Untested code; see brooklyn-example for better maintained examples!</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TomcatServerApp</span> <span class="kd">extends</span> <span class="n">ApplicationBuilder</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doBuild</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">createChild</span><span class="o">(</span><span class="n">BasicEntitySpec</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">TomcatServer</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;httpPort&quot;</span><span class="o">,</span> <span class="s">&quot;8080+&quot;</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;war&quot;</span><span class="o">,</span> <span class="s">&quot;/path/to/booking-mvc.war&quot;</span><span class="o">)));</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre>
 </div>
 
 
-<p>While this is written in Groovy, the code can be written in pure Java if preferred,
-using the long-hand syntax of <code>tomcat.setConfig(TomcatServer.HTTP_PORT, 80)</code>
-in lieu of the flags (named arguments in <code>flagKey: value</code> notation).</p>
-
-<p>The <code>wars</code> flag is also supported (with config keys <code>ROOT_WAR</code> and <code>NAMED_WARS</code> the long-hand syntax);
+<p>The <code>wars</code> config is also supported (with config keys <code>ROOT_WAR</code> and <code>NAMED_WARS</code> the long-hand syntax);
 they accept EARs and other common archives, and can be described as files or as URLs (as Strings),
 with URLs supporting an optional <code>classpath://org/acme/resources/xxx.war</code> syntax.</p>
 
-<h3>Starting a Tomcat Cluster in Amazon EC2</h3>
+<h3>Starting Tomcat in Amazon EC2</h3>
 
-<p>The code below starts a tomcat cluster in Amazon EC2:</p>
+<p>To start a tomcat node or cluster in Amazon EC2, the application is identical to that for localhost.
+The only difference is the location supplied.</p>
 
-<p><em>In this release, the following snippet should be considered pseudo code.</em></p>
+<p>The Brooklyn CLI can be used to launch the application in your choice of location, such as:</p>
 
-<div class="highlight"><pre><code class="java"><span class="kd">class</span> <span class="nc">TomcatClusterApp</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
-    <span class="n">DynamicWebAppCluster</span> <span class="n">cluster</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DynamicWebAppCluster</span><span class="o">(</span><span class="k">this</span>
-        <span class="nl">initialSize:</span> <span class="mi">2</span><span class="o">,</span>
-        <span class="nl">factory:</span> <span class="o">{</span> <span class="n">properties</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="n">TomcatServer</span><span class="o">(</span><span class="n">properties</span><span class="o">)</span> <span class="o">},</span>
-        <span class="nl">httpPort:</span> <span class="mi">8080</span><span class="o">,</span> 
-        <span class="nl">war:</span> <span class="s">&quot;/path/to/booking-mvc.war&quot;</span><span class="o">)</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">argv</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">TomcatClusterApp</span> <span class="n">demo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TomcatClusterApp</span><span class="o">(</span>
-            <span class="n">displayName</span> <span class="o">:</span> <span class="s">&quot;tomcat cluster example&quot;</span><span class="o">)</span>
-        <span class="n">BrooklynLauncher</span><span class="o">.</span><span class="na">manage</span><span class="o">(</span><span class="n">demo</span><span class="o">)</span>
-
-        <span class="n">JcloudsLocationFactory</span> <span class="n">locFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JcloudsLocationFactory</span><span class="o">([</span>
-            <span class="n">provider</span> <span class="o">:</span> <span class="s">&quot;aws-ec2&quot;</span><span class="o">,</span>
-            <span class="n">identity</span> <span class="o">:</span> <span class="s">&quot;xxxxxxxxxxxxxxxxxxxxxxxxxxx&quot;</span><span class="o">,</span>
-            <span class="n">credential</span> <span class="o">:</span> <span class="s">&quot;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&quot;</span><span class="o">,</span>
-            <span class="n">sshPrivateKey</span> <span class="o">:</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&quot;/home/bob/.ssh/id_rsa.private&quot;</span><span class="o">),</span>
-            <span class="n">sshPublicKey</span> <span class="o">:</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&quot;/home/bob/.ssh/id_rsa.pub&quot;</span><span class="o">),</span>
-            <span class="nl">securityGroups:</span><span class="o">[</span><span class="s">&quot;my-security-group&quot;</span><span class="o">]</span>
-        <span class="o">])</span>
-
-        <span class="n">JcloudsLocation</span> <span class="n">loc</span> <span class="o">=</span> <span class="n">locFactory</span><span class="o">.</span><span class="na">newLocation</span><span class="o">(</span><span class="s">&quot;us-west-1&quot;</span><span class="o">)</span>
-        <span class="n">demo</span><span class="o">.</span><span class="na">start</span><span class="o">([</span><span class="n">loc</span><span class="o">])</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+<div class="highlight"><pre><code class="bash">brooklyn launch --app TomcatServerApp --location localhost
+brooklyn launch --app TomcatServerApp --location aws-ec2:eu-west-1
 </code></pre>
 </div>
 
-
-<p>The <code>newEntity</code> flag in the cluster constructor indicates how new entities should be created. The WAR configuration set on the cluster is inherited by each of the TomcatServer contained by (i.e. "children of") the cluster.</p>
-
-<p>The <code>DynamicWebAppCluster</code> is dynamic in that it supports resizing the cluster, adding and removing servers, as managed either manually or by policies embedded in the entity.</p>
-
-<p>The main method creates a <code>JcloudsLocationFactory</code> with appropriate credentials for the AWS account, along with the
-RSA key to used for subsequently logging into the VM. It also specifies the relevant security group which should enable
-the 8080 port configured above. Finally, a JcloudsLocation allows to select the Amazon region the cluster will run in.</p>
 
 <h3>Starting a Tomcat Cluster with Nginx</h3>
 
 <p>The code below starts a Tomcat cluster along with an Nginx instance, where each Tomcat server in the cluster is registered with the Nginx instance.</p>
 
-<div class="highlight"><pre><code class="java"><span class="kd">class</span> <span class="nc">TomcatClusterWithNginxApp</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
-    <span class="n">NginxController</span> <span class="n">nginxController</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NginxController</span><span class="o">(</span>
-        <span class="n">domain</span> <span class="o">:</span> <span class="s">&quot;brooklyn.geopaas.org&quot;</span><span class="o">,</span>
-        <span class="n">port</span> <span class="o">:</span> <span class="mi">8000</span><span class="o">,</span>
-        <span class="n">portNumberSensor</span> <span class="o">:</span> <span class="n">Attributes</span><span class="o">.</span><span class="na">HTTP_PORT</span><span class="o">)</span>
-
-    <span class="n">ControlledDynamicWebAppCluster</span> <span class="n">cluster</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ControlledDynamicWebAppCluster</span><span class="o">(</span>
-        <span class="n">parent</span> <span class="o">:</span> <span class="k">this</span><span class="o">,</span>
-        <span class="n">controller</span> <span class="o">:</span> <span class="n">nginxController</span><span class="o">,</span>
-        <span class="n">webServerFactory</span> <span class="o">:</span> <span class="o">{</span> <span class="n">properties</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="n">TomcatServer</span><span class="o">(</span><span class="n">properties</span><span class="o">)</span> <span class="o">},</span>
-        <span class="nl">initialSize:</span> <span class="mi">2</span><span class="o">,</span>
-        <span class="nl">httpPort:</span> <span class="mi">8080</span><span class="o">,</span> <span class="nl">war:</span> <span class="s">&quot;/path/to/booking-mvc.war&quot;</span><span class="o">)</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">argv</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">TomcatClusterWithNginxApp</span> <span class="n">demo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TomcatClusterWithNginxApp</span><span class="o">(</span>
-            <span class="n">displayName</span> <span class="o">:</span> <span class="s">&quot;tomcat cluster with nginx example&quot;</span><span class="o">)</span>
-        <span class="n">BrooklynLauncher</span><span class="o">.</span><span class="na">manage</span><span class="o">(</span><span class="n">demo</span><span class="o">)</span>
+<div class="highlight"><pre><code class="java"><span class="c1">// TODO Untested code; see brooklyn-example for better maintained examples!</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TomcatClusterWithNginxApp</span> <span class="kd">extends</span> <span class="n">ApplicationBuilder</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doBuild</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">createChild</span><span class="o">(</span><span class="n">BasicEntitySpec</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">NginxController</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;domain&quot;</span><span class="o">,</span> <span class="s">&quot;brooklyn.geopaas.org&quot;</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;port&quot;</span><span class="o">,</span> <span class="s">&quot;8000+&quot;</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;portNumberSensor&quot;</span><span class="o">,</span> <span class="n">Attributes</span><span class="o">.</span><span class="na">HTTP_PORT</span><span class="o">));</span>
         
-        <span class="n">JcloudsLocationFactory</span> <span class="n">locFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JcloudsLocationFactory</span><span class="o">([</span>
-            <span class="n">provider</span> <span class="o">:</span> <span class="s">&quot;aws-ec2&quot;</span><span class="o">,</span>
-            <span class="n">identity</span> <span class="o">:</span> <span class="s">&quot;xxxxxxxxxxxxxxxxxxxxxxxxxxx&quot;</span><span class="o">,</span>
-            <span class="n">credential</span> <span class="o">:</span> <span class="s">&quot;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&quot;</span><span class="o">,</span>
-            <span class="n">sshPrivateKey</span> <span class="o">:</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&quot;/home/bob/.ssh/id_rsa.private&quot;</span><span class="o">),</span>
-            <span class="n">sshPublicKey</span> <span class="o">:</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&quot;/home/bob/.ssh/id_rsa.pub&quot;</span><span class="o">),</span>
-            <span class="nl">securityGroups:</span><span class="o">[</span><span class="s">&quot;my-security-group&quot;</span><span class="o">]</span>
-        <span class="o">])</span>
-
-        <span class="n">JcloudsLocation</span> <span class="n">loc</span> <span class="o">=</span> <span class="n">locFactory</span><span class="o">.</span><span class="na">newLocation</span><span class="o">(</span><span class="s">&quot;us-west-1&quot;</span><span class="o">)</span>
-
-        <span class="n">demo</span><span class="o">.</span><span class="na">start</span><span class="o">([</span><span class="n">loc</span><span class="o">])</span>
+        <span class="n">createChild</span><span class="o">(</span><span class="n">BasicEntitySpec</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">ControlledDynamicWebAppCluster</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;controller&quot;</span><span class="o">,</span> <span class="n">nginxController</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;memberSpec&quot;</span><span class="o">,</span> <span class="o">:</span> <span class="n">BasicEntitySpec</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">TomcatServer</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;httpPort&quot;</span><span class="o">,</span> <span class="s">&quot;8080+&quot;</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;war&quot;</span><span class="o">,</span> <span class="s">&quot;/path/to/booking-mvc.war&quot;</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;initialSize&quot;</span><span class="o">,</span> <span class="mi">2</span><span class="o">));</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre>
@@ -476,9 +456,6 @@ the 8080 port configured above. Finally, a JcloudsLocation allows to select the 
 <p>This creates a cluster that of Tomcat servers, along with an Nginx instance. The <code>NginxController</code> instance
 is notified whenever a member of the cluster joins or leaves; the entity is configured to look at the <code>HTTP_PORT</code>
 attribute of that instance so that the Nginx configuration can be updated with the ip:port of the cluster member.</p>
-
-<p>The beauty of OO programming is that classes can be re-used.  The compound entity created above is
-available off-the-shelf as the <code>LoadBalancedWebCluster</code> entity, as used in the following example.</p>
 
 <!---
 TODO things may need tidying (paragraphs, and/or eliminating any extra setConfig calls, though looks like these have gone)
@@ -500,52 +477,31 @@ FIXME Discuss above comment with Aled/Alex as it is contentious
 -->
 
 
+<p>The <code>ControlledDynamicWebAppCluster</code> entity used above can also be used with a DynamicFabric to start
+a web-cluster in each location.</p>
 
-
-<div class="highlight"><pre><code class="java"><span class="kd">class</span> <span class="nc">TomcatFabricApp</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
-    <span class="n">Closure</span> <span class="n">webClusterFactory</span> <span class="o">=</span> <span class="o">{</span> <span class="n">Map</span> <span class="n">flags</span><span class="o">,</span> <span class="n">Entity</span> <span class="n">parent</span> <span class="o">-&gt;</span>
-        <span class="n">Map</span> <span class="n">clusterFlags</span> <span class="o">=</span> <span class="n">flags</span> <span class="o">+</span> 
-            <span class="o">[</span><span class="nl">factory:</span> <span class="o">{</span> <span class="n">properties</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="n">TomcatServer</span><span class="o">(</span><span class="n">properties</span><span class="o">)</span> <span class="o">}]</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nf">DynamicWebAppCluster</span><span class="o">(</span><span class="n">clusterFlags</span><span class="o">,</span> <span class="n">parent</span><span class="o">)</span>
-    <span class="o">}</span>
-
-    <span class="n">DynamicFabric</span> <span class="n">fabric</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DynamicFabric</span><span class="o">(</span>
-            <span class="n">parent</span> <span class="o">:</span> <span class="k">this</span><span class="o">,</span>
-            <span class="n">displayName</span> <span class="o">:</span> <span class="s">&quot;WebFabric&quot;</span><span class="o">,</span>
-            <span class="n">displayNamePrefix</span> <span class="o">:</span> <span class="s">&quot;&quot;</span><span class="o">,</span>
-            <span class="n">displayNameSuffix</span> <span class="o">:</span> <span class="s">&quot; web cluster&quot;</span><span class="o">,</span>
-            <span class="n">initialSize</span> <span class="o">:</span> <span class="mi">2</span><span class="o">,</span>
-            <span class="n">factory</span> <span class="o">:</span> <span class="n">webClusterFactory</span><span class="o">,</span>
-            <span class="n">httpPort</span> <span class="o">:</span> <span class="mi">8080</span><span class="o">,</span> 
-            <span class="nl">war:</span> <span class="s">&quot;/path/to/booking-mvc.war&quot;</span><span class="o">)</span>
-    
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">argv</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">TomcatFabricApp</span> <span class="n">demo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TomcatFabricApp</span><span class="o">(</span><span class="n">displayName</span> <span class="o">:</span> <span class="s">&quot;tomcat example&quot;</span><span class="o">)</span>
-        <span class="n">BrooklynLauncher</span><span class="o">.</span><span class="na">manage</span><span class="o">(</span><span class="n">demo</span><span class="o">)</span>
-        
-        <span class="n">JcloudsLocationFactory</span> <span class="n">locFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JcloudsLocationFactory</span><span class="o">([</span>
-            <span class="n">provider</span> <span class="o">:</span> <span class="s">&quot;aws-ec2&quot;</span><span class="o">,</span>
-            <span class="n">identity</span> <span class="o">:</span> <span class="s">&quot;xxxxxxxxxxxxxxxxxxxxxxxxxxx&quot;</span><span class="o">,</span>
-            <span class="n">credential</span> <span class="o">:</span> <span class="s">&quot;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&quot;</span><span class="o">,</span>
-            <span class="n">sshPrivateKey</span> <span class="o">:</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&quot;/home/bob/.ssh/id_rsa.private&quot;</span><span class="o">),</span>
-            <span class="n">sshPublicKey</span> <span class="o">:</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&quot;/home/bob/.ssh/id_rsa.pub&quot;</span><span class="o">),</span>
-            <span class="nl">securityGroups:</span><span class="o">[</span><span class="s">&quot;my-security-group&quot;</span><span class="o">]</span>
-        <span class="o">])</span>
-
-        <span class="n">JcloudsLocation</span> <span class="n">loc</span> <span class="o">=</span> <span class="n">locFactory</span><span class="o">.</span><span class="na">newLocation</span><span class="o">(</span><span class="s">&quot;us-west-1&quot;</span><span class="o">)</span>
-        <span class="n">JcloudsLocation</span> <span class="n">loc2</span> <span class="o">=</span> <span class="n">locFactory</span><span class="o">.</span><span class="na">newLocation</span><span class="o">(</span><span class="s">&quot;eu-west-1&quot;</span><span class="o">)</span>
-        <span class="n">demo</span><span class="o">.</span><span class="na">start</span><span class="o">([</span><span class="n">loc</span><span class="o">,</span> <span class="n">loc2</span><span class="o">])</span>
+<div class="highlight"><pre><code class="java"><span class="c1">// TODO Untested code; see brooklyn-example for better maintained examples!</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TomcatFabricApp</span> <span class="kd">extends</span> <span class="n">ApplicationBuilder</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doBuild</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">createChild</span><span class="o">(</span><span class="n">BasicEntitySpec</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">DynamicFabric</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;displayName&quot;</span><span class="o">,</span> <span class="s">&quot;WebFabric&quot;</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;displayNamePrefix&quot;</span><span class="o">,</span> <span class="s">&quot;&quot;</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;displayNameSuffix&quot;</span><span class="o">,</span> <span class="s">&quot; web cluster&quot;</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;memberSpec&quot;</span><span class="o">,</span> <span class="n">BasicEntitySpec</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">ControlledDynamicWebAppCluster</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;initialSize&quot;</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;memberSpec&quot;</span><span class="o">,</span> <span class="o">:</span> <span class="n">BasicEntitySpec</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">TomcatServer</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;httpPort&quot;</span><span class="o">,</span> <span class="s">&quot;8080+&quot;</span><span class="o">)</span>
+                                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;war&quot;</span><span class="o">,</span> <span class="s">&quot;/path/to/booking-mvc.war&quot;</span><span class="o">))));</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre>
 </div>
 
 
-<p>This creates a web-fabric. When started, this creates a web-cluster in each location supplied.</p>
-
 <h2>Examples Source</h2>
 
-<p>The source code for these examples is available for download from GitHub. To retrieve the source, execute the following command:</p>
+<p>Source code for (more up-to-date!) examples is available for download from GitHub. To retrieve the source, execute the following command:</p>
 
 <pre><code>git clone git@github.com:brooklyncentral/brooklyn-examples.git
 </code></pre>

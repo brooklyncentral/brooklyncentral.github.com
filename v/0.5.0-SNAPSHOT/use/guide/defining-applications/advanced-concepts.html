@@ -17,6 +17,8 @@
 	<link rel="stylesheet" type="text/css" href="/v/0.5.0-SNAPSHOT/style/js/jquery/smoothness/jquery-ui-1.8.18.custom.css" />
 	
 	<script type="text/javascript" src="/v/0.5.0-SNAPSHOT/style/js/superfish.js"></script>
+	<script type="text/javascript" src="/v/0.5.0-SNAPSHOT/style/js/jquery.cookie.js"></script>
+	
 	
 <!-- Clipboard support -->
 <script src="/v/0.5.0-SNAPSHOT/style/js/zeroclipboard/ZeroClipboard.js"></script>
@@ -64,7 +66,9 @@ $(document).ready(function() {
         });
     </script>
 
-<script type="text/javascript"> <!-- search -->
+<script type="text/javascript">
+
+<!-- search -->
 	$(function() {
 		$('#simple_google')
 			.submit(function() {
@@ -83,6 +87,34 @@ $(document).ready(function() {
 			})
 			.blur();
     });
+    
+<!-- page notes -->
+   	$(function() {
+		if (document.location.pathname.replace(/^\/([^\/]*).*$/, '$1') === "v"){
+			var thisversion, msg;
+			thisversion = document.location.pathname.split("/")[2];
+			
+			if (!$.cookie('brooklyn_versions') || $.inArray(thisversion, $.cookie('brooklyn_versions').split(",")) === -1){
+				msg = "<p>Careful. This page is for <strong>Brooklyn version "+thisversion+"</strong>, and the content may differ between versions.</p>"
+				msg += "<p><a href = '/v/0.5.0-SNAPSHOT'>Latest version</a>, "
+				msg += "<a href = '/v/0.5.0-SNAPSHOT/meta/versions.html'>All versions</a>, "
+				msg += "<a href = '#' onclick=\"set_user_version('"+thisversion+"');\">Don't show again</a>. </p>"
+							
+				$('#page_notes').html(msg);
+				$('#page_notes').fadeIn('slow');
+			}
+		}
+	});
+	function set_user_version(version) {
+		var version_cookie = $.cookie("brooklyn_versions").split(",") || [];
+		version_cookie.push(version);
+		$.cookie('brooklyn_versions', version_cookie, { expires: 365, path: '/' });
+		$('#page_notes').fadeOut();
+		event.preventDefault ? event.preventDefault() : event.returnValue = false;
+	}
+	
+	
+   
 </script>
 
 <script type="text/javascript"> <!-- analytics -->
@@ -318,31 +350,44 @@ _gaq.push(['_trackPageview']);
 </p>
 
 
+<div id="page_notes"></div>
+
 <h1 id="header_title">Advanced Concepts</h1>
     
 <h2>Lifecycle and ManagementContext</h2>
 
-<p>A Brooklyn deployment consists of many entities in a hierarchical tree, with  the privileged <em>application</em> entity at the top level.</p>
+<p>Under-the-covers, at heart of the brooklyn management plane is the <code>ManagementContext</code>.
+This is started automatically when using launching an application using the brooklyn CLI. For programmatic use, see
+<code>BrooklynLauncher.newLauncher().launch()</code>.</p>
 
-<p>An application entity (<code>Application</code> class) defines a management context  (<code>ManagementContext</code> instance) and is responsible for starting the deployment of all its child entities (i.e. the entire entity tree under its ownership). Only an application entity can define the <code>ManagementContext</code>.</p>
+<p>A Brooklyn deployment consists of many entities in a hierarchical tree, with the privileged <em>application</em> entity at the top level.</p>
 
-<p>An <code>Application</code>'s <code>start()</code> method begins provisioning the management plane and distributing the management of child entities of the application (and their entities, recursively).</p>
+<p>An application entity (<code>Application</code> class) is responsible for starting the deployment of all its child entities (i.e. the entire entity tree under its ownership).</p>
+
+<p>An <code>Application</code>'s <code>start()</code> method begins provisioning the child entities of the application (and their entities, recursively).</p>
 
 <p>Provisioning of entities typically happens in parallel automatically,
 although this can be customized. This is implemented as <strong><em>tasks</em></strong> which are tracked by the management plane and is visible in the <a href="/v/0.5.0-SNAPSHOT/use/guide/management/index.html#console">web-based management console</a>.</p>
 
 <p>Customized provisioning can be useful where two starting entities depend on each other. For example, it is often necessary to delay start of one entity until another entity reaches a certain state, and to supply run-time information about the latter to the former.</p>
 
-<p>When new entities join an existing network, the entity is deployed to the management plane when it is wired in to an application i.e. by giving it a parent. Templates for new entities are also deployed to the management plane in the same manner.</p>
+<!-- TODO ambiguous language; need a better description of the "manage" lifecycle -->
 
-<p>Typically a Brooklyn deployment has a single management context which records all the entities under management, as well as:</p>
+
+<p>When new entities are created, the entity is wired up to an application by giving it a parent. The entity is then explicitly "managed", which allows other entities to discover it.</p>
+
+<p>Typically a Brooklyn deployment has a single management context which records:</p>
 
 <ul>
-<li>the state associated with each entity parented (directly or recursively) by any application,</li>
+<li>all entities under management that are reachable by the application(s) via the parent-child relationships,</li>
+<li>the state associated with each entity,</li>
 <li>subscribers (listeners) to sensor events arising from the entities,</li>
 <li>active tasks (jobs) associated with any the entity,</li>
 <li>which Brooklyn management node is mastering (managing) each entity.</li>
 </ul>
+
+
+<!-- TODO Distributed brooklyn not yet supported; needs clarification in docs -->
 
 
 <p>In a multi-location deployment, management operates in all regions, with brooklyn entity instances being mastered in the relevant region.</p>
@@ -360,17 +405,17 @@ tracking the transfer of events (subscriptions) between ``Entity`` instances, an
 
 <h2>Dependent Configuration</h2>
 
-<p>Under the covers Brooklyn has a sophisticated sensor event and subscription model, but conveniences around this model make it very simple to express  cross-entity dependencies. Consider the example where Tomcat instances need to know a set of URLs to connect to a Monterey processing fabric (or a database tier or other entities)</p>
+<p>Under the covers Brooklyn has a sophisticated sensor event and subscription model, but conveniences around this model make it very simple to express cross-entity dependencies. Consider the example where Tomcat instances need to know the URL of a database (or a set of URLs to connect to a Monterey processing fabric, or other entities)</p>
 
-<div class="highlight"><pre><code class="java"><span class="n">web</span><span class="o">.</span><span class="na">factory</span><span class="o">.</span><span class="na">setConfig</span><span class="o">(</span><span class="n">UsesJava</span><span class="o">.</span><span class="na">JAVA_OPTIONS</span><span class="o">,</span> <span class="o">[</span><span class="s">&quot;mysql.url&quot;</span><span class="o">:</span>
-    <span class="n">attributeWhenReady</span><span class="o">(</span><span class="n">mysql</span><span class="o">,</span> <span class="n">MySqlNode</span><span class="o">.</span><span class="na">MY_SQL_URL</span><span class="o">)</span> <span class="o">])</span>
+<div class="highlight"><pre><code class="java"><span class="n">setConfiguration</span><span class="o">(</span><span class="n">UsesJava</span><span class="o">.</span><span class="na">JAVA_OPTIONS</span><span class="o">,</span> <span class="n">ImmutableMap</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&quot;mysql.url&quot;</span><span class="o">,</span> 
+        <span class="n">attributeWhenReady</span><span class="o">(</span><span class="n">mysql</span><span class="o">,</span> <span class="n">MySqlNode</span><span class="o">.</span><span class="na">MY_SQL_URL</span><span class="o">)</span> <span class="o">))</span>
 </code></pre>
 </div>
 
 
 <p>The <code>attributeWhenReady(Entity, Sensor)</code> call (a static method on the class <code>DependentConfiguration</code>)
 causes the configuration value to be set when that given entity's attribue is ready.
-In the example, <code>attributeWhenReady()</code> causes the JVM system property <code>monterey.urls</code> to be set to the value of the <code>Monterey.MGMT_PLANE_URLS</code> sensor from <code>monterey</code> when that value is ready. As soon as a management plane URL is announced by the Monterey entity, the configuration value will be available to the Tomcat cluster.</p>
+In the example, <code>attributeWhenReady()</code> causes the JVM system property <code>mysql.url</code> to be set to the value of the <code>MySqlNode.MY_SQL_URL</code> sensor from <code>mysql</code> when that value is ready. As soon as the database URL is announced by the MySql entity, the configuration value will be available to the Tomcat cluster.</p>
 
 <p>By default "ready" means being <em>set</em> (non-null) and, if appropriate, <em>non-empty</em> (for collections and strings) or <em>non-zero</em> (for numbers). Formally the interpretation of ready is that of "Groovy truth" defined by an <code>asBoolean()</code> method on the class and in the Groovy language extensions.</p>
 
@@ -440,11 +485,11 @@ created by a task associated with a different entity.</p>
 <p>One vital aspect of Brooklyn is its ability to communicate with the systems it starts. This is abstracted using a <strong><em>driver</em></strong> facility in Brooklyn, where a
 driver describes how a process or service can be installed and managed using a particular technology.</p>
 
-<p>For example, a <code>TomcatServer</code> may implement start and other effectors using a <code>TomcatSshDriver</code> which inherits from <code>JavaSshStartStopDriver</code> (for JVM and JMX start confguration), inheriting from <code>AbstractSshDriver</code>
+<p>For example, a <code>TomcatServer</code> may implement start and other effectors using a <code>TomcatSshDriver</code> which inherits from <code>JavaSoftwareProcessSshDriver</code> (for JVM and JMX start confguration), inheriting from <code>AbstractSoftwareProcessSshDriver</code>
 (for SSH scripting support).</p>
 
 <p>Particularly for sensors, some technologies are used so frequently that they are
-packaged as <strong><em>adapters</em></strong> which can discover their configuration (including from drivers). These include JMX and HTTP.</p>
+packaged as <strong><em>feeds</em></strong> which can discover their configuration (including from drivers). These include JMX and HTTP (see <code>JmxFeed</code> and <code>HttpFeed</code>).</p>
 
 <p>Brooklyn comes with entity implementations for a growing number of commonly used systems, including various web application servers, databases and NoSQL data stores, and messaging systems. See: <a href="/v/0.5.0-SNAPSHOT/use/guide/extras/index.html">Extras</a>.</p>
 
