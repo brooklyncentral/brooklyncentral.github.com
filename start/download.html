@@ -17,6 +17,8 @@
 	<link rel="stylesheet" type="text/css" href="/style/js/jquery/smoothness/jquery-ui-1.8.18.custom.css" />
 	
 	<script type="text/javascript" src="/style/js/superfish.js"></script>
+	<script type="text/javascript" src="/style/js/jquery.cookie.js"></script>
+	
 	
 <!-- Clipboard support -->
 <script src="/style/js/zeroclipboard/ZeroClipboard.js"></script>
@@ -64,7 +66,9 @@ $(document).ready(function() {
         });
     </script>
 
-<script type="text/javascript"> <!-- search -->
+<script type="text/javascript">
+
+<!-- search -->
 	$(function() {
 		$('#simple_google')
 			.submit(function() {
@@ -83,18 +87,64 @@ $(document).ready(function() {
 			})
 			.blur();
     });
-</script>
-
-<script type="text/javascript"> <!-- analytics -->
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-30530918-1']);
-_gaq.push(['_trackPageview']);
-
-(function() {
-  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
+    
+<!-- page notes -->
+   	$(function() {
+		if (document.location.pathname.replace(/^\/([^\/]*).*$/, '$1') === "v"){
+			var thisversion = document.location.pathname.split("/")[2],
+				msg = "";
+			
+			if (!$.cookie('brooklyn_versions') || 
+			        (($.inArray('ALL', $.cookie('brooklyn_versions').split(",")) === -1) &&
+			        ($.inArray(thisversion, $.cookie('brooklyn_versions').split(",")) === -1)) ){
+			    msg += "<div class='warning_banner_image'><img src='/style/icons/warning.png'/></div>";
+				msg += "<p>This content is for <strong>Brooklyn "+thisversion+"</strong>, and may differ across versions.</p>";
+			    msg += "<p>Are you using version "+thisversion+"?</p>";
+				msg += "<p class='warning_banner_buttons'>";
+				msg += "<a href = '#' onclick=\"set_user_version('"+thisversion+"');\">Yes, hide this warning</a>";
+			    msg += "<a href = '/'>No, show me the latest version</a>";
+				msg += "<a href = '/meta/versions.html'>Show all versions</a>";
+				msg += "</p>"
+							
+				$('#page_notes').html(msg);
+				$('#page_notes').fadeIn('slow');
+			}
+		}
+	});
+   	function get_user_versions() {
+   	    return $.cookie("brooklyn_versions") ? $.cookie("brooklyn_versions").split(",") : [];
+   	};
+	function set_user_version(version) {
+		var version_cookie = get_user_versions();
+		version_cookie.push(version);
+		$.cookie('brooklyn_versions', version_cookie, { expires: 365, path: '/' });
+		$('#page_notes').fadeOut();
+		event.preventDefault ? event.preventDefault() : event.returnValue = false;
+	};
+    function set_user_versions_all() {
+        var version_cookie = get_user_versions();
+        version_cookie.push("ALL");
+        $.cookie('brooklyn_versions', version_cookie, { expires: 365, path: '/' });
+        $('#page_notes').fadeOut();
+        event.preventDefault ? event.preventDefault() : event.returnValue = false;
+    };
+    function clear_user_versions() {
+        $.removeCookie('brooklyn_versions', { path: '/' });
+        $('#page_notes').fadeIn('slow');
+        event.preventDefault ? event.preventDefault() : event.returnValue = false;
+    };
+	
+   
+ <!-- analytics -->
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-30530918-1']);
+	_gaq.push(['_trackPageview']);
+	
+	(function() {
+	  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
 </script>
 
 </head>
@@ -115,7 +165,7 @@ _gaq.push(['_trackPageview']);
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.5.0-M2</a></li>
+            <li><a href="/meta/versions.html">0.5.0-rc.1</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -333,6 +383,8 @@ _gaq.push(['_trackPageview']);
 </p>
 
 
+<div id="page_notes"></div>
+
 <h1 id="header_title">Downloads</h1>
     
 <h2>Contents</h2>
@@ -364,26 +416,25 @@ _gaq.push(['_trackPageview']);
 <!--- RELEASE -->
 
 
-<p>Distribution archives containing Brooklyn as a standalone executable package
+<p>First time user? The <a href="/use/guide/quickstart/index.html">getting started</a> guide will walk you through downloading Brooklyn, setup of your <code>brooklyn.properties</code> and <code>catalog.xml</code> files, and then trying the <a href="#examples">examples</a>.</p>
+
+<p>The Distribution archives contain Brooklyn as a standalone executable package, and
 are available in the following formats and locations:</p>
 
 <ul>
-<li><strong>v0.5.0-M2</strong> at
-<a href="http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22io.brooklyn%22%20AND%20a%3A%22brooklyn-dist%22%20AND%20v%3A%220.5.0-M2%22">Maven Central</a>
-:
-<strong><a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.5.0-M2/brooklyn-dist-0.5.0-M2-dist.zip">zip</a></strong>
-<strong><a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.5.0-M2/brooklyn-dist-0.5.0-M2-dist.tar.gz">tgz</a></strong>
-<strong><a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.5.0-M2/">dir</a></strong></li>
-<li><strong>all stable versions</strong>:
+<li><p><strong>v0.5.0-rc.1</strong>:
+<strong><a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.5.0-rc.1/brooklyn-dist-0.5.0-rc.1-dist.zip">zip</a></strong>
+<strong><a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.5.0-rc.1/brooklyn-dist-0.5.0-rc.1-dist.tar.gz">tgz</a></strong>
+<strong><a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.5.0-rc.1/">dir</a></strong>
+from <a href="http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22io.brooklyn%22%20AND%20a%3A%22brooklyn-dist%22%20AND%20v%3A%220.5.0-rc.1%22">Maven Central</a></p></li>
+<li><p><strong>all stable versions</strong>:
 at <a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/">Maven Central</a>
-and <a href="http://developers.cloudsoftcorp.com/maven/releases/io/brooklyn/brooklyn-dist/">Cloudsoft</a></li>
+and <a href="http://developers.cloudsoftcorp.com/maven/releases/io/brooklyn/brooklyn-dist/">Cloudsoft</a></p></li>
 <li><strong>all snapshot versions</strong>:
 at <a href="https://oss.sonatype.org/content/groups/public/io/brooklyn/brooklyn-dist/">Sonatype</a>
 and <a href="http://developers.cloudsoftcorp.com/maven/snapshots/io/brooklyn/brooklyn-dist/">Cloudsoft</a></li>
 </ul>
 
-
-<p>Read the <a href="/use/guide/quickstart/index.html">Getting Started</a> guide to set up your <code>brooklyn.properties</code> and <code>catalog.xml</code> files, and then try the <a href="#examples">examples</a>.</p>
 
 <p><a name="alljar"></a></p>
 
@@ -393,11 +444,11 @@ and <a href="http://developers.cloudsoftcorp.com/maven/snapshots/io/brooklyn/bro
 here:</p>
 
 <ul>
-<li><strong>v0.5.0-M2</strong> at
-<a href="http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22io.brooklyn%22%20AND%20a%3A%22brooklyn-all%22%20AND%20v%3A%220.5.0-M2%22">Maven Central</a>
+<li><strong>v0.5.0-rc.1</strong> at
+<a href="http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22io.brooklyn%22%20AND%20a%3A%22brooklyn-all%22%20AND%20v%3A%220.5.0-rc.1%22">Maven Central</a>
 :
-<strong><a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-all/0.5.0-M2/brooklyn-all-0.5.0-M2-with-dependencies.jar">jar</a></strong>
-<strong><a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-all/0.5.0-M2/">dir</a></strong></li>
+<strong><a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-all/0.5.0-rc.1/brooklyn-all-0.5.0-rc.1-with-dependencies.jar">jar</a></strong>
+<strong><a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-all/0.5.0-rc.1/">dir</a></strong></li>
 <li><strong>all stable versions</strong>:
 at <a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-all/">Maven Central</a>
 and <a href="http://developers.cloudsoftcorp.com/maven/releases//io/brooklyn/brooklyn-all/">Cloudsoft</a></li>
@@ -415,7 +466,7 @@ and <a href="http://developers.cloudsoftcorp.com/maven/snapshots/io/brooklyn/bro
 
 <p>First time using Brooklyn? Read <a href="/use/guide/quickstart/index.html">Getting Started</a> to set up your <code>brooklyn.properties</code> and <code>catalog.xml</code> files.</p>
 
-<p>Release notes can be found <a href="/start/release-notes">here</a>, and specifically for <a href="/start/release-notes/0.5.0-M2.html">0.5.0-M2</a>.</p>
+<p>Release notes can be found <a href="/start/release-notes">here</a>, and specifically for <a href="/start/release-notes/0.5.0-rc.1.html">0.5.0-rc.1</a>.</p>
 
 <p><a name="examples"></a></p>
 
@@ -423,26 +474,26 @@ and <a href="http://developers.cloudsoftcorp.com/maven/snapshots/io/brooklyn/bro
 
 <p>You can checkout the examples from the <a href="http://github.com/brooklyncentral/brooklyn-examples">brooklyn-examples git repository</a>.
 Maven (v3) is required to build them, as described <a href="/dev/build/">here</a>.
-The examples for this version (0.5.0-M2) are in the branch
-<code>0.5.0-M2</code>,
+The examples for this version (0.5.0-rc.1) are in the branch
+<code>0.5.0-rc.1</code>,
 so if you have <code>git</code> and <code>mvn</code> already, you can simply:</p>
 
 <div class="highlight"><pre><code class="bash">% git clone https://github.com/brooklyncentral/brooklyn-examples.git
 % <span class="nb">cd </span>brooklyn-examples
-% git checkout 0.5.0-M2
+% git checkout 0.5.0-rc.1
 % mvn clean install
 </code></pre>
 </div>
 
 
 <p>If you don't use <code>git</code>, you can download the projects as a tarball instead
-from <a href="https://github.com/brooklyncentral/brooklyn-examples/tarball/0.5.0-M2">this link</a>.
+from <a href="https://github.com/brooklyncentral/brooklyn-examples/tarball/0.5.0-rc.1">this link</a>.
 These commands should do the trick:</p>
 
-<div class="highlight"><pre><code class="bash">% curl -L -o brooklyn-examples-0.5.0-M2.tgz <span class="se">\</span>
-     https://github.com/brooklyncentral/brooklyn-examples/tarball/0.5.0-M2
-% tar xvfz brooklyn-examples-0.5.0-M2.tgz
-% mv brooklyncentral-brooklyn-examples-* brooklyn-examples-0.5.0-M2 <span class="se">\</span>
+<div class="highlight"><pre><code class="bash">% curl -L -o brooklyn-examples-0.5.0-rc.1.tgz <span class="se">\</span>
+     https://github.com/brooklyncentral/brooklyn-examples/tarball/0.5.0-rc.1
+% tar xvfz brooklyn-examples-0.5.0-rc.1.tgz
+% mv brooklyncentral-brooklyn-examples-* brooklyn-examples-0.5.0-rc.1 <span class="se">\</span>
      <span class="c"># change the strange name which github assigns in the tarball</span>
 % mvn clean install
 </code></pre>
@@ -461,7 +512,7 @@ These commands should do the trick:</p>
         <span class="nt">&lt;dependency&gt;</span>
             <span class="nt">&lt;groupId&gt;</span>io.brooklyn<span class="nt">&lt;/groupId&gt;</span>
             <span class="nt">&lt;artifactId&gt;</span>brooklyn-all<span class="nt">&lt;/artifactId&gt;</span>
-            <span class="nt">&lt;version&gt;</span>0.5.0-M2<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;version&gt;</span>0.5.0-rc.1<span class="nt">&lt;/version&gt;</span>
         <span class="nt">&lt;/dependency&gt;</span>
     <span class="nt">&lt;/dependencies&gt;</span>
 </code></pre>
@@ -471,7 +522,7 @@ These commands should do the trick:</p>
 <p><code>brooklyn-all</code> (used above) brings in all dependencies, including jclouds and Apache Whirr.
 If you prefer a smaller repo you might want just <code>brooklyn-core</code>,  <code>brooklyn-policies</code>,
 and some of <code>brooklyn-software-webapp</code>,  <code>brooklyn-software-database</code>, <code>brooklyn-software-messaging</code>, or others
-(browse the full list <a href="http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22io.brooklyn%22%20AND%20AND%20v%3A%220.5.0-M2%22">here</a>).</p>
+(browse the full list <a href="http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22io.brooklyn%22%20AND%20AND%20v%3A%220.5.0-rc.1%22">here</a>).</p>
 
 <p>If you wish to use the Sonatype and/or Cloudsoft repositories (particularly for snapshots),
 you can add some of the following sections:</p>

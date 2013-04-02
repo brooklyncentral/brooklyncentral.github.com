@@ -91,27 +91,30 @@ Package brooklyn.entity.rebind
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="ChangeListener.html" title="class in brooklyn/entity/rebind">ChangeListener</A></B></TD>
-        <TD></TD>
+        <TD>Listener to be notified of changes within brooklyn, so that the new state
+ of the entity/location/policy can be persisted.</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="RebindContext.html" title="class in brooklyn/entity/rebind">RebindContext</A></B></TD>
-        <TD></TD>
+        <TD>Gives access to things that are being currently rebinding. </TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="RebindManager.html" title="class in brooklyn/entity/rebind">RebindManager</A></B></TD>
-        <TD></TD>
+        <TD>Manages the persisting of brooklyn's state, and recreating that state, e.g. on
+ brooklyn restart.</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="RebindSupport.html" title="class in brooklyn/entity/rebind">RebindSupport</A></B></TD>
-        <TD>Supporter instance for behaviour related to rebinding a given entity.</TD>
+        <TD>Supporter instance for behaviour related to rebinding a given entity/location/policy.</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="Rebindable.html" title="class in brooklyn/entity/rebind">Rebindable</A></B></TD>
-        <TD></TD>
+        <TD>Indicates that this can be recreated, e.g. after a brooklyn restart, and by
+ using a Memento it can repopulate the brooklyn objects. </TD>
         </TR>
 
 </TABLE>

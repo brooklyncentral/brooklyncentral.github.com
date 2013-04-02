@@ -17,6 +17,8 @@
 	<link rel="stylesheet" type="text/css" href="/style/js/jquery/smoothness/jquery-ui-1.8.18.custom.css" />
 	
 	<script type="text/javascript" src="/style/js/superfish.js"></script>
+	<script type="text/javascript" src="/style/js/jquery.cookie.js"></script>
+	
 	
 <!-- Clipboard support -->
 <script src="/style/js/zeroclipboard/ZeroClipboard.js"></script>
@@ -64,7 +66,9 @@ $(document).ready(function() {
         });
     </script>
 
-<script type="text/javascript"> <!-- search -->
+<script type="text/javascript">
+
+<!-- search -->
 	$(function() {
 		$('#simple_google')
 			.submit(function() {
@@ -83,18 +87,64 @@ $(document).ready(function() {
 			})
 			.blur();
     });
-</script>
-
-<script type="text/javascript"> <!-- analytics -->
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-30530918-1']);
-_gaq.push(['_trackPageview']);
-
-(function() {
-  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
+    
+<!-- page notes -->
+   	$(function() {
+		if (document.location.pathname.replace(/^\/([^\/]*).*$/, '$1') === "v"){
+			var thisversion = document.location.pathname.split("/")[2],
+				msg = "";
+			
+			if (!$.cookie('brooklyn_versions') || 
+			        (($.inArray('ALL', $.cookie('brooklyn_versions').split(",")) === -1) &&
+			        ($.inArray(thisversion, $.cookie('brooklyn_versions').split(",")) === -1)) ){
+			    msg += "<div class='warning_banner_image'><img src='/style/icons/warning.png'/></div>";
+				msg += "<p>This content is for <strong>Brooklyn "+thisversion+"</strong>, and may differ across versions.</p>";
+			    msg += "<p>Are you using version "+thisversion+"?</p>";
+				msg += "<p class='warning_banner_buttons'>";
+				msg += "<a href = '#' onclick=\"set_user_version('"+thisversion+"');\">Yes, hide this warning</a>";
+			    msg += "<a href = '/'>No, show me the latest version</a>";
+				msg += "<a href = '/meta/versions.html'>Show all versions</a>";
+				msg += "</p>"
+							
+				$('#page_notes').html(msg);
+				$('#page_notes').fadeIn('slow');
+			}
+		}
+	});
+   	function get_user_versions() {
+   	    return $.cookie("brooklyn_versions") ? $.cookie("brooklyn_versions").split(",") : [];
+   	};
+	function set_user_version(version) {
+		var version_cookie = get_user_versions();
+		version_cookie.push(version);
+		$.cookie('brooklyn_versions', version_cookie, { expires: 365, path: '/' });
+		$('#page_notes').fadeOut();
+		event.preventDefault ? event.preventDefault() : event.returnValue = false;
+	};
+    function set_user_versions_all() {
+        var version_cookie = get_user_versions();
+        version_cookie.push("ALL");
+        $.cookie('brooklyn_versions', version_cookie, { expires: 365, path: '/' });
+        $('#page_notes').fadeOut();
+        event.preventDefault ? event.preventDefault() : event.returnValue = false;
+    };
+    function clear_user_versions() {
+        $.removeCookie('brooklyn_versions', { path: '/' });
+        $('#page_notes').fadeIn('slow');
+        event.preventDefault ? event.preventDefault() : event.returnValue = false;
+    };
+	
+   
+ <!-- analytics -->
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-30530918-1']);
+	_gaq.push(['_trackPageview']);
+	
+	(function() {
+	  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
 </script>
 
 </head>
@@ -115,7 +165,7 @@ _gaq.push(['_trackPageview']);
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.5.0-M2</a></li>
+            <li><a href="/meta/versions.html">0.5.0-rc.1</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -314,6 +364,8 @@ _gaq.push(['_trackPageview']);
 </p>
 
 
+<div id="page_notes"></div>
+
 <h1 id="header_title">Examples</h1>
     
 <p><strong> TODO: this examples page is deprecated;
@@ -334,7 +386,7 @@ need to figure out if this page should be kept at all
     <span class="nt">&lt;dependency&gt;</span>
         <span class="nt">&lt;groupId&gt;</span>io.brooklyn<span class="nt">&lt;/groupId&gt;</span>
         <span class="nt">&lt;artifactId&gt;</span>brooklyn-all<span class="nt">&lt;/artifactId&gt;</span>
-        <span class="nt">&lt;version&gt;</span>0.5.0-M2<span class="nt">&lt;/version&gt;</span>  <span class="c">&lt;!-- BROOKLYN_VERSION --&gt;</span>
+        <span class="nt">&lt;version&gt;</span>0.5.0-rc.1<span class="nt">&lt;/version&gt;</span>  <span class="c">&lt;!-- BROOKLYN_VERSION --&gt;</span>
     <span class="nt">&lt;/dependency&gt;</span>
 <span class="nt">&lt;/dependencies&gt;</span>
  
@@ -365,10 +417,10 @@ It is then started in a localhost location (other locations are shown in the nex
 <p>The Tomcat's configuration indicates that the given WAR should be deployed to the Tomcat server when it is started.</p>
 
 <div class="highlight"><pre><code class="java"><span class="c1">// TODO Untested code; see brooklyn-example for better maintained examples!</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TomcatServerApp</span> <span class="kd">extends</span> <span class="n">ApplicationBuilder</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TomcatServerApp</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
     <span class="nd">@Override</span>
-    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doBuild</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">createChild</span><span class="o">(</span><span class="n">BasicEntitySpec</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">TomcatServer</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpecs</span><span class="o">.</span><span class="na">spec</span><span class="o">(</span><span class="n">TomcatServer</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;httpPort&quot;</span><span class="o">,</span> <span class="s">&quot;8080+&quot;</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;war&quot;</span><span class="o">,</span> <span class="s">&quot;/path/to/booking-mvc.war&quot;</span><span class="o">)));</span>
     <span class="o">}</span>
@@ -399,17 +451,17 @@ brooklyn launch --app TomcatServerApp --location aws-ec2:eu-west-1
 <p>The code below starts a Tomcat cluster along with an Nginx instance, where each Tomcat server in the cluster is registered with the Nginx instance.</p>
 
 <div class="highlight"><pre><code class="java"><span class="c1">// TODO Untested code; see brooklyn-example for better maintained examples!</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TomcatClusterWithNginxApp</span> <span class="kd">extends</span> <span class="n">ApplicationBuilder</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TomcatClusterWithNginxApp</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
     <span class="nd">@Override</span>
-    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doBuild</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">createChild</span><span class="o">(</span><span class="n">BasicEntitySpec</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">NginxController</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpecs</span><span class="o">.</span><span class="na">spec</span><span class="o">(</span><span class="n">NginxController</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;domain&quot;</span><span class="o">,</span> <span class="s">&quot;brooklyn.geopaas.org&quot;</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;port&quot;</span><span class="o">,</span> <span class="s">&quot;8000+&quot;</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;portNumberSensor&quot;</span><span class="o">,</span> <span class="n">Attributes</span><span class="o">.</span><span class="na">HTTP_PORT</span><span class="o">));</span>
         
-        <span class="n">createChild</span><span class="o">(</span><span class="n">BasicEntitySpec</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">ControlledDynamicWebAppCluster</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+        <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpecs</span><span class="o">.</span><span class="na">spec</span><span class="o">(</span><span class="n">ControlledDynamicWebAppCluster</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;controller&quot;</span><span class="o">,</span> <span class="n">nginxController</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;memberSpec&quot;</span><span class="o">,</span> <span class="o">:</span> <span class="n">BasicEntitySpec</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">TomcatServer</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;memberSpec&quot;</span><span class="o">,</span> <span class="o">:</span> <span class="n">EntitySpecs</span><span class="o">.</span><span class="na">spec</span><span class="o">(</span><span class="n">TomcatServer</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
                         <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;httpPort&quot;</span><span class="o">,</span> <span class="s">&quot;8080+&quot;</span><span class="o">)</span>
                         <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;war&quot;</span><span class="o">,</span> <span class="s">&quot;/path/to/booking-mvc.war&quot;</span><span class="o">))</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;initialSize&quot;</span><span class="o">,</span> <span class="mi">2</span><span class="o">));</span>
@@ -447,16 +499,16 @@ FIXME Discuss above comment with Aled/Alex as it is contentious
 a web-cluster in each location.</p>
 
 <div class="highlight"><pre><code class="java"><span class="c1">// TODO Untested code; see brooklyn-example for better maintained examples!</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TomcatFabricApp</span> <span class="kd">extends</span> <span class="n">ApplicationBuilder</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TomcatFabricApp</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
     <span class="nd">@Override</span>
-    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doBuild</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">createChild</span><span class="o">(</span><span class="n">BasicEntitySpec</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">DynamicFabric</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpecs</span><span class="o">.</span><span class="na">spec</span><span class="o">(</span><span class="n">DynamicFabric</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;displayName&quot;</span><span class="o">,</span> <span class="s">&quot;WebFabric&quot;</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;displayNamePrefix&quot;</span><span class="o">,</span> <span class="s">&quot;&quot;</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;displayNameSuffix&quot;</span><span class="o">,</span> <span class="s">&quot; web cluster&quot;</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;memberSpec&quot;</span><span class="o">,</span> <span class="n">BasicEntitySpec</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">ControlledDynamicWebAppCluster</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;memberSpec&quot;</span><span class="o">,</span> <span class="n">EntitySpecs</span><span class="o">.</span><span class="na">spec</span><span class="o">(</span><span class="n">ControlledDynamicWebAppCluster</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
                         <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;initialSize&quot;</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span>
-                        <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;memberSpec&quot;</span><span class="o">,</span> <span class="o">:</span> <span class="n">BasicEntitySpec</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">TomcatServer</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;memberSpec&quot;</span><span class="o">,</span> <span class="o">:</span> <span class="n">EntitySpecs</span><span class="o">.</span><span class="na">spec</span><span class="o">(</span><span class="n">TomcatServer</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
                                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;httpPort&quot;</span><span class="o">,</span> <span class="s">&quot;8080+&quot;</span><span class="o">)</span>
                                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;war&quot;</span><span class="o">,</span> <span class="s">&quot;/path/to/booking-mvc.war&quot;</span><span class="o">))));</span>
     <span class="o">}</span>

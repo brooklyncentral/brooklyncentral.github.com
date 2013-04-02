@@ -1,0 +1,378 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+  <title>Release Notes</title>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+
+  <link rel="stylesheet" href="/style/style.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/style/toc.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/style/docs/code.css" type="text/css" media="screen" />
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  
+	<!-- Sidebar/ToC Scripts and CSS -->
+	<script src="/style/js/jquery/jquery-1.7.1.min.js"></script>
+	<script src="/style/js/jquery/jquery-ui-1.8.18.custom.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/style/js/jquery/smoothness/jquery-ui-1.8.18.custom.css" />
+	
+	<script type="text/javascript" src="/style/js/superfish.js"></script>
+	<script type="text/javascript" src="/style/js/jquery.cookie.js"></script>
+	
+	
+<!-- Clipboard support -->
+<script src="/style/js/zeroclipboard/ZeroClipboard.js"></script>
+<style type="text/css">
+.clipboard_container { float: right; padding: 8px; }
+.clipboard_button {
+    background-image: url("/style/icons/clipboard-green-normal.png");
+    background-size: 18px 21px;
+    width: 18px; height: 21px;
+}
+.clipboard_button.hover  { background-image: url("/style/icons/clipboard-green-hover.png"); }
+.clipboard_button.active  { background-image: url("/style/icons/clipboard-green-click.png"); }'
+</style>
+<script type="text/javascript"> <!-- clipboard -->
+ZeroClipboard.setMoviePath( '/style/js/zeroclipboard/ZeroClipboard.swf' );
+</script>
+<script type="text/javascript"> <!-- clipboard positioning -->
+$(document).ready(function() {
+  $('<div class="clipboard_container" title="Copy to Clipboard">'+
+    '<div class="clipboard_button"/>'+
+  '</div>').insertBefore($('div.highlight'))
+  $('div.clipboard_container').each(function(index) {
+    var clipboard = new ZeroClipboard.Client();
+    clipboard.glue( $(this).find(":first")[0], $(this)[0] );
+    var target = $(this).next();
+    var txt = target.text().trim();
+    if (target.find('code.bash')) {
+      txt = txt.replace(/^[^%$]*[%$] /, "").replace(new RegExp('\n[^%$]*[%$] ','g'), "\n");
+    }
+    clipboard.setText(txt);
+  });
+});
+</script>
+
+    <script type="text/javascript">
+        // initialise menu delay
+        jQuery(function(){
+            jQuery('ul#mainmenu').superfish({ 
+                autoArrows:  false,  // disable generation of arrow mark-up 
+                dropShadows: false,  // disable drop shadows 
+                disableHI:   true,   // set to true to disable hoverIntent detection 
+                delay:       500,    // the delay in milliseconds that the mouse can remain outside a submenu without it closing 
+                speed:       'fast', 
+            });
+        });
+    </script>
+
+<script type="text/javascript">
+
+<!-- search -->
+	$(function() {
+		$('#simple_google')
+			.submit(function() {
+				$('input[name="q"]').val("site:" + document.location.hostname + " " + $('input[name="brooklyn-search"]').val());
+			return true;
+			});
+		$('input[name="brooklyn-search"]').focus(function() {
+				if ($(this).val() === $(this).attr('placeholder')) {
+					$(this).val('');
+				}
+			})
+			.blur(function() {
+				if ($(this).val() === '') {
+					$(this).val($(this).attr('placeholder'));
+				}
+			})
+			.blur();
+    });
+    
+<!-- page notes -->
+   	$(function() {
+		if (document.location.pathname.replace(/^\/([^\/]*).*$/, '$1') === "v"){
+			var thisversion = document.location.pathname.split("/")[2],
+				msg = "";
+			
+			if (!$.cookie('brooklyn_versions') || 
+			        (($.inArray('ALL', $.cookie('brooklyn_versions').split(",")) === -1) &&
+			        ($.inArray(thisversion, $.cookie('brooklyn_versions').split(",")) === -1)) ){
+			    msg += "<div class='warning_banner_image'><img src='/style/icons/warning.png'/></div>";
+				msg += "<p>This content is for <strong>Brooklyn "+thisversion+"</strong>, and may differ across versions.</p>";
+			    msg += "<p>Are you using version "+thisversion+"?</p>";
+				msg += "<p class='warning_banner_buttons'>";
+				msg += "<a href = '#' onclick=\"set_user_version('"+thisversion+"');\">Yes, hide this warning</a>";
+			    msg += "<a href = '/'>No, show me the latest version</a>";
+				msg += "<a href = '/meta/versions.html'>Show all versions</a>";
+				msg += "</p>"
+							
+				$('#page_notes').html(msg);
+				$('#page_notes').fadeIn('slow');
+			}
+		}
+	});
+   	function get_user_versions() {
+   	    return $.cookie("brooklyn_versions") ? $.cookie("brooklyn_versions").split(",") : [];
+   	};
+	function set_user_version(version) {
+		var version_cookie = get_user_versions();
+		version_cookie.push(version);
+		$.cookie('brooklyn_versions', version_cookie, { expires: 365, path: '/' });
+		$('#page_notes').fadeOut();
+		event.preventDefault ? event.preventDefault() : event.returnValue = false;
+	};
+    function set_user_versions_all() {
+        var version_cookie = get_user_versions();
+        version_cookie.push("ALL");
+        $.cookie('brooklyn_versions', version_cookie, { expires: 365, path: '/' });
+        $('#page_notes').fadeOut();
+        event.preventDefault ? event.preventDefault() : event.returnValue = false;
+    };
+    function clear_user_versions() {
+        $.removeCookie('brooklyn_versions', { path: '/' });
+        $('#page_notes').fadeIn('slow');
+        event.preventDefault ? event.preventDefault() : event.returnValue = false;
+    };
+	
+   
+ <!-- analytics -->
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-30530918-1']);
+	_gaq.push(['_trackPageview']);
+	
+	(function() {
+	  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+
+</head>
+
+<body>
+
+    <ul id="shortcuts" title="Accessibility shortcuts menu">
+        <li><a href="#maincontent">Skip to main content</a></li>
+    </ul>
+   
+
+<div id="container">
+
+    <div id="header">
+    
+        <div id="identity">
+            <a href="http://brooklyncentral.github.com/" rel="home">Brooklyn</a>
+        </div>
+        
+        <ul id="quicklinks">
+            <li><a href="/meta/versions.html">0.5.0-rc.1</a></li>
+            <li><a href="/start/download.html">Download</a></li>
+            <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
+            <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
+            <li><a href="/meta/contact.html">Contact</a></li>
+        </ul>
+
+        <div id="menubar">  
+
+
+
+
+
+
+
+<ul id="mainmenu"><!-- INSERT LINKS -->
+            
+
+  
+  
+  <li class=""><a href="/index.html">Overview</a></li>
+
+  
+  
+  <li class=""><a href="/start/download.html">Download</a></li>
+
+  
+  
+  <li class=""><a href="/start/walkthrough/index.html">Walkthrough</a></li>
+
+  
+  
+  <li class=""><a href="/use/guide/index.html">Guide</a></li>
+
+  
+  
+  <li class=""><a href="/use/examples/index.html">Examples</a></li>
+
+  
+  
+  <li class=""><a href="/dev/code/index.html">Contributing</a></li>
+
+
+</ul>                    
+
+            <form method="get" id="simple_google" class="searchform" action="http://www.google.com/search" method="get">
+                <input type="text" class="searchinput" name="brooklyn-search" placeholder="Search: type &amp; hit enter" />
+                <input type="hidden" name="q" value="" />
+            </form>
+            
+        </div>
+                
+    </div><!--header-->
+    
+    <div id="contentcontainer">
+    
+        <div id="maincontent">
+
+
+  
+
+
+Liquid error: 757: unexpected token at 'Liquid error: No such file or directory - /Users/alex/Data/cloudsoft/dev/gits/brooklyn/docs/start/../../toc.json'
+
+
+
+
+
+
+    
+    
+    
+    
+
+            
+<p id="breadcrumb">
+    <a href="">Home</a>
+    
+        &raquo; <a href="/start/release-notes.html">Release Notes</a>
+        
+    
+</p>
+
+
+<div id="page_notes"></div>
+
+<h1 id="header_title">Release Notes</h1>
+    
+<h2>Brooklyn Version 0.5.0 RC1 (0.5.0-rc.1)</h2>
+
+<p>API Tidy on top of M2, using <code>init()</code> as the method to override when building composed Application and Entity classes.</p>
+
+<p>There are known issues with Whirr clusters and the Cloud Foundry example (moving) which will be resolved for RC2.</p>
+
+<h2>Brooklyn Version 0.5.0 Milestone Two (0.5.0-M2)</h2>
+
+<h3>Introduction</h3>
+
+<p>This milestone release includes many big features, and brings us much closer to a 0.5.0 release.</p>
+
+<p>It incorporates a lot of improvements and feedback from our community. Thank you!</p>
+
+<p>Thanks also go to Brooklyn's commercial users. Already Brooklyn has been adopted into some very exciting projects including controlling custom PaaS offerings, big data clusters, and three-tier web-apps.</p>
+
+<p>Work on this release can be tracked using Brooklyn's GitHub issue tracker:</p>
+
+<ul>
+<li><a href="https://github.com/brooklyncentral/brooklyn/issues?milestone=1">github.com/brooklyncentral/brooklyn/issues?milestone=1</a></li>
+</ul>
+
+
+<p>And via the mailing lists:</p>
+
+<ul>
+<li><a href="http://groups.google.com/group/brooklyn-dev">brooklyn-dev@googlegroups.com</a></li>
+<li><a href="http://groups.google.com/group/brooklyn-users">brooklyn-users@googlegroups.com</a></li>
+</ul>
+
+
+<h3>New Features</h3>
+
+<p>The major changes between M1 and M2 are:</p>
+
+<ol>
+<li><p>Entities have been separated into an interface and implementation, rather than just a single class. Construction of entities is now done using an EntitySpec, rather than directly calling the constructor. This improvement is required to simplify remoting in a distributed brooklyn management plane.</p></li>
+<li><p>Downloading of entity installers is greatly improved:</p>
+
+<ul>
+<li>More configurable, with ability to specify URLs in the brooklyn configuration files or to override in code.</li>
+<li><p>Will fallback to a repository maintained by Cloudsoft, so if an artifact is removed from the official public site then it will not break the entity.</p>
+
+<p>  See <a href="http://downloads.cloudsoftcorp.com/brooklyn/repository/">downloads.cloudsoftcorp.com/brooklyn/repository/</a></p></li>
+</ul>
+</li>
+<li><p>Support for running applications across private subnets.</p></li>
+<li><p>Policies can now be re-configured on-the-fly through the REST api and through the web-console.</p></li>
+<li><p>Some entities now support configuration files being supplied in FreeMarker template format. These include JBoss AS7, ActiveMQ and MySql. More will be converted to use this pattern.</p></li>
+<li><p>Several new entities have been added, including:</p>
+
+<ul>
+<li>MongoDB</li>
+<li>Cassandra</li>
+<li>RubyRep</li>
+<li>DynamicWebAppFabric</li>
+</ul>
+</li>
+</ol>
+
+
+<h3>Backwards Compatibility</h3>
+
+<p>For upgrading from 0.5.0-M1 to M2:</p>
+
+<ol>
+<li><p>Entity classes have been renamed, e.g. MySqlNode is now an interface and the implementationis MySqlNodeImpl.</p>
+
+<ul>
+<li>The minimum change for this to work is to update your references to include the Impl suffixes. However, that will result in deprecation warnings.</li>
+<li>The recommended approach is to use the EntitySpec when constructing entities. A good place to start is to look at the updated example applications.</li>
+</ul>
+</li>
+<li><p>The default username for provisioning with jclouds has changed to use the name of the user executing the Brooklyn process.</p>
+
+<ul>
+<li>Java's <code>System.getProperty("user.name")</code> is used instead of 'root' or 'ubuntu'</li>
+<li><p>Usernames can be overridden in <code>brooklyn.properties</code> or using system properties.
+  For example, by entering '<code>brooklyn.location.named.acmecloud.user=root</code>' in <code>brooklyn.properties</code> or using the command syntax <code>-Dbrooklyn.location.named.acmecloud.user=root</code>.</p>
+
+<p>  '<code>brooklyn.jclouds.aws-ec2.user=root</code>' could also be used to apply <code>user=root</code> to all aws-ec2 VMs.</p></li>
+</ul>
+</li>
+<li><p>Some deprecated code has been deleted. All of this code was commented in 0.4.0 with text such as "will be deleted in 0.5".</p></li>
+</ol>
+
+
+
+        </div><!--maincontent-->
+        
+      <div id="sidebar">
+      
+
+
+  
+
+
+Liquid error: 757: unexpected token at 'Liquid error: No such file or directory - /Users/alex/Data/cloudsoft/dev/gits/brooklyn/docs/start/../../toc.json'
+
+
+
+<div id="sidebar_toc">
+ 
+</div>
+<br/>
+
+
+      </div>
+
+    </div><!--contentcontainer-->
+        
+    <div id="footer">
+        <p id="copyright">
+            <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
+            brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
+            &copy; 2012 Cloudsoft Corporation.
+        </p>
+    </div><!--footer -->
+
+</div><!--container-->
+
+</body>
+</html>
