@@ -1,0 +1,280 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+<title>brooklyn.event.adapter (Brooklyn)</title>
+<META NAME="keywords" CONTENT="brooklyn.event.adapter package">
+<meta http-equiv="Content-Type" content="text/html; charset=MacRoman">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
+<link href="../../../groovy.ico" type="image/x-icon" rel="shortcut icon">
+<link href="../../../groovy.ico" type="image/x-icon" rel="icon">
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="brooklyn.event.adapter (Brooklyn)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</head>
+
+<body BGCOLOR="white" onload="windowTitle();">
+<hr>
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<a name="navbar_top"><!-- --></a>
+<table summary="" width="100%" border="0" cellpadding="1" cellspacing="0">
+<tbody><tr>
+<td colspan="2" class="NavBarCell1" bgcolor="#eeeeff">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table summary="" border="0" cellpadding="0" cellspacing="3">
+  <tbody><tr valign="top" align="center">
+  <td class="NavBarCell1" bgcolor="#eeeeff">    <a href="../../../overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td class="NavBarCell1Rev" bgcolor="#ffffff"> &nbsp;<font class="NavBarFont1Rev"><b>Package</b></font>&nbsp;</td>
+  <td class="NavBarCell1" bgcolor="#eeeeff">    <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <!--
+  <td class="NavBarCell1" bgcolor="#eeeeff">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  -->
+  <td class="NavBarCell1" bgcolor="#eeeeff">    <a href="../../../deprecated-list.html"><font class="NavBarFont1"><b>Deprecated</b></font></a>&nbsp;</td>
+  <td class="NavBarCell1" bgcolor="#eeeeff">    <a href="../../../index-all.html"><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td class="NavBarCell1" bgcolor="#eeeeff">    <a href="../../../help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</tbody></table>
+</td>
+<td rowspan="3" valign="top" align="right"><em>
+    <b>Brooklyn</b>
+</em>
+</td>
+</tr>
+
+<tr>
+<td class="NavBarCell2" bgcolor="white"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td class="NavBarCell2" bgcolor="white"><font size="-2">
+  <a href="../../../index.html?brooklyn/event/adapter/package-summary.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="package-summary.html" target="_top"><b>NO FRAMES</b></a>  &nbsp;
+&nbsp;<script type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../allclasses-frame.html"><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+  <A HREF="../../../allclasses-frame.html"><B>All Classes</B></A>
+</noscript>
+
+
+</font></td>
+</tr>
+</tbody></table>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+
+<HR>
+<H2>
+Package brooklyn.event.adapter
+</H2>
+
+
+
+<P>&nbsp;</P>
+
+
+
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+    <TR BGCOLOR="#90DDF7" CLASS="TableHeadingColor">
+    <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+    <B>Class Summary</B></FONT></TH>
+    </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="AbstractChainablePollHelper.html" title="class in brooklyn/event/adapter">AbstractChainablePollHelper</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="AbstractPollHelper.html" title="class in brooklyn/event/adapter">AbstractPollHelper</A></B></TD>
+        <TD>captures common fields and processes for pollers that support sensor adapters</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="AbstractPushHelper.html" title="class in brooklyn/event/adapter">AbstractPushHelper</A></B></TD>
+        <TD>Captures common fields and processes for pushers that support sensor adapters.</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="AbstractSensorAdapter.html" title="class in brooklyn/event/adapter">AbstractSensorAdapter</A></B></TD>
+        <TD>Captures common fields and processes for sensor adapters</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="AbstractSensorEvaluationContext.html" title="class in brooklyn/event/adapter">AbstractSensorEvaluationContext</A></B></TD>
+        <TD>provides fields and methods that are brought into scope when executing closures submitted
+ by an entity developer for evaluating a sensor; fields can be made explicit, to be shared
+ among multiple sensors; and specific per-sensor evaluation properties can be passed as 
+ "extraProperties" which exist only for that evaluation context duration</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="ConfigSensorAdapter.html" title="class in brooklyn/event/adapter">ConfigSensorAdapter</A></B></TD>
+        <TD>Simple config adapter which, on registration, sets all config-attributes from config values</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="FunctionBasePollHelper.html" title="class in brooklyn/event/adapter">FunctionBasePollHelper</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="FunctionCallAdapter.html" title="class in brooklyn/event/adapter">FunctionCallAdapter</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="FunctionChainPollHelper.html" title="class in brooklyn/event/adapter">FunctionChainPollHelper</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="FunctionSensorAdapter.html" title="class in brooklyn/event/adapter">FunctionSensorAdapter</A></B></TD>
+        <TD>Entry point for wiring up arbitrary functions to be used as the source
+ for sensors.</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="HttpPollHelper.html" title="class in brooklyn/event/adapter">HttpPollHelper</A></B></TD>
+        <TD>@deprecated See brooklyn.event.feed.http.HttpFeed</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="HttpResponseContext.html" title="class in brooklyn/event/adapter">HttpResponseContext</A></B></TD>
+        <TD>context object for evaluating sensor closures with http data handy</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="HttpSensorAdapter.html" title="class in brooklyn/event/adapter">HttpSensorAdapter</A></B></TD>
+        <TD>@deprecated See brooklyn.event.feed.http.HttpFeed</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="JmxAttributeAdapter.html" title="class in brooklyn/event/adapter">JmxAttributeAdapter</A></B></TD>
+        <TD>Adapter that polls for a JMX attribute.
+ </TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="JmxAttributeAdapter.AttributePollHelper.html" title="class in brooklyn/event/adapter">JmxAttributeAdapter.AttributePollHelper</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="JmxHelper.html" title="class in brooklyn/event/adapter">JmxHelper</A></B></TD>
+        <TD>@deprecated Use brooklyn.event.feed.jmx.JmxHelper instead</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="JmxNotificationAdapter.html" title="class in brooklyn/event/adapter">JmxNotificationAdapter</A></B></TD>
+        <TD>Adapter that subscribes to a JMX notification.</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="JmxNotificationAdapter.NotificationPushHelper.html" title="class in brooklyn/event/adapter">JmxNotificationAdapter.NotificationPushHelper</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="JmxNotificationFilters.html" title="class in brooklyn/event/adapter">JmxNotificationFilters</A></B></TD>
+        <TD>@deprecated Use brooklyn.event.feed.jmx.JmxNotificationFilters instead</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="JmxObjectNameAdapter.html" title="class in brooklyn/event/adapter">JmxObjectNameAdapter</A></B></TD>
+        <TD>Provides convenient/fluent (and preferred) way to access a JMX object instance.
+ </TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="JmxOperationAdapter.html" title="class in brooklyn/event/adapter">JmxOperationAdapter</A></B></TD>
+        <TD>Adapter that periodically calls a JMX operation.</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="JmxOperationAdapter.OperationPollHelper.html" title="class in brooklyn/event/adapter">JmxOperationAdapter.OperationPollHelper</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="JmxPostProcessors.html" title="class in brooklyn/event/adapter">JmxPostProcessors</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="JmxReachableAdapter.html" title="class in brooklyn/event/adapter">JmxReachableAdapter</A></B></TD>
+        <TD>Adapter that polls for a JMX attribute.
+ </TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="JmxSensorAdapter.html" title="class in brooklyn/event/adapter">JmxSensorAdapter</A></B></TD>
+        <TD>Entry point for wiring up brooklyn attributes to jmx; this doesn't evaluate any sensors directly,
+ but provides support for specific object-name/attribute combos etc.</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="SensorRegistry.html" title="class in brooklyn/event/adapter">SensorRegistry</A></B></TD>
+        <TD>This class manages the periodic polling of a set of sensors, to update the attribute values 
+ of a particular Entity.</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="ShellSensorAdapter.html" title="class in brooklyn/event/adapter">ShellSensorAdapter</A></B></TD>
+        <TD>Like FunctionSensorAdapter but executes a shell command (on the local machine where this instance of brooklyn is running).
+ </TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="SingleValueResponseContext.html" title="class in brooklyn/event/adapter">SingleValueResponseContext</A></B></TD>
+        <TD>@deprecated See brooklyn.event.feed</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="SshPollHelper.html" title="class in brooklyn/event/adapter">SshPollHelper</A></B></TD>
+        <TD>Captures output and exit code for SshSensorAdapter.</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="SshResultContext.html" title="class in brooklyn/event/adapter">SshResultContext</A></B></TD>
+        <TD>Context object for evaluating sensor closures with ssh command results.</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="SshSensorAdapter.html" title="class in brooklyn/event/adapter">SshSensorAdapter</A></B></TD>
+        <TD>@deprecated See brooklyn.event.feed.ssh.SshFeed</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="SshShellSensorAdapter.html" title="class in brooklyn/event/adapter">SshShellSensorAdapter</A></B></TD>
+        <TD>Like ShellSensorAdapter but executes the shell command remotely.</TD>
+        </TR>
+
+</TABLE>
+&nbsp;
+<P>
+<DL>
+</DL>
+<hr>
+    
+
+
+
+
+
+
+<p><b>Brooklyn Multi-Cloud Application Management Platform</b> <br/> <a href="http://brooklyncentral.github.com/" target="_top">brooklyncentral.github.com</a>. Apache License. &copy; 2012.</p>
+<hr>
+</body>
+</html>
