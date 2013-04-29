@@ -165,7 +165,7 @@ $(document).ready(function() {
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.5.0-rc.1</a></li>
+            <li><a href="/meta/versions.html">0.5.0-rc.2</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -193,11 +193,15 @@ $(document).ready(function() {
 
   
   
+  <li class=""><a href="/use/guide/quickstart/index.html">Getting Started</a></li>
+
+  
+  
   <li class=""><a href="/start/walkthrough/index.html">Walkthrough</a></li>
 
   
   
-  <li class=""><a href="/use/guide/index.html">Guide</a></li>
+  <li class=""><a href="/use/guide/index.html">User Guide</a></li>
 
   
   
@@ -274,8 +278,6 @@ $(document).ready(function() {
         
             
         
-            
-        
     
         
         
@@ -355,6 +357,9 @@ $(document).ready(function() {
     
 
     
+    
+        
+        
     
         
         
@@ -392,16 +397,6 @@ $(document).ready(function() {
 
 
 
-<h2>Before You Begin</h2>
-
-
-
-
-<p>To use the examples, you'll need <code>curl</code>, <code>git</code>, <code>java</code> (1.6+), and <code>maven</code> (v3) installed.</p>
-
-
-
-
 <!--- both snapshots and releases -->
 
 
@@ -422,31 +417,54 @@ $(document).ready(function() {
 
 
 
-<p>First, grab a copy of the Brooklyn distribution and set up <code>BROOKLYN_HOME</code>:</p>
+<h2>Before You Begin</h2>
 
 
 
 
-<div class="highlight"><pre><code class="bash">% curl -LO http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.5.0-rc.1/brooklyn-dist-0.5.0-rc.1-dist.tar.gz
-% tar xvzf brooklyn-dist-0.5.0-rc.1-dist.tar.gz
-% <span class="nb">export </span><span class="nv">BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/brooklyn-0.5.0-rc.1/
-</code></pre>
-</div>
+<p>To use the examples, you'll need <code>curl</code>, <code>git</code>, <code>java</code> (1.6+), and <code>maven</code> (v3) installed.</p>
 
 
 
 
-<p>Then, grab a copy of the brooklyn-examples source code and build with Maven:</p>
+<h3>Installing Brooklyn</h3>
+
+
+
+
+<p>(If you followed the <a href="/use/guide/quickstart/index.html">Getting Started</a> instructions, you can skip to Installing the Examples.)</p>
+
+
+
+
+<p>Grab a copy of the Brooklyn distribution and set up <code>BROOKLYN_HOME</code>:</p>
+
+
+
+
+<div class="highlight"><pre><code class="bash">% curl -LO http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.5.0-rc.2/brooklyn-dist-0.5.0-rc.2-dist.tar.gz
+% tar xvzf brooklyn-dist-0.5.0-rc.2-dist.tar.gz
+% <span class="nb">export </span><span class="nv">BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/brooklyn-0.5.0-rc.2/
+</code></pre></div>
+
+
+
+
+<h3>Installing the Examples</h3>
+
+
+
+
+<p>Grab a copy of the brooklyn-examples source code and build with Maven:</p>
 
 
 
 
 <div class="highlight"><pre><code class="bash">% git clone https://github.com/brooklyncentral/brooklyn-examples.git
 % <span class="nb">cd </span>brooklyn-examples
-% git checkout 0.5.0-rc.1
+% git checkout 0.5.0-rc.2
 % mvn clean install
-</code></pre>
-</div>
+</code></pre></div>
 
 
 
@@ -459,14 +477,18 @@ please visit <a href="/use/guide/management/index.html#cli">this section of the 
 
 
 
-<p>Now, go to this particular example's directory:</p>
+<h2>Simple Web Server</h2>
+
+
+
+
+<p>Go to this particular example's directory:</p>
 
 
 
 
 <div class="highlight"><pre><code class="bash">% <span class="nb">cd </span>simple-web-cluster
-</code></pre>
-</div>
+</code></pre></div>
 
 
 
@@ -478,19 +500,13 @@ the <code>BROOKLYN_CLASSPATH</code> environment variable in the following way:</
 
 
 <div class="highlight"><pre><code class="bash">% <span class="nb">export </span><span class="nv">BROOKLYN_CLASSPATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/target/classes
-</code></pre>
-</div>
+</code></pre></div>
 
 
 
 
 <p>The project <code>simple-web-cluster</code> includes several deployment descriptors
 for rolling out a web application, under <code>src/main/java</code>.</p>
-
-
-
-
-<h2>Simple Web Server</h2>
 
 
 
@@ -511,8 +527,7 @@ with a single line:</p>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;httpPort&quot;</span><span class="o">,</span> <span class="mi">8080</span><span class="o">));</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 
@@ -524,8 +539,7 @@ with a single line:</p>
 
 <div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.demo.SingleWebServerExample <span class="se">\</span>
   --location localhost
-</code></pre>
-</div>
+</code></pre></div>
 
 
 
@@ -546,8 +560,7 @@ this can also be deployed to your favourite cloud, let's pretend it's Amazon Ire
 
 <div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.demo.SingleWebServerExample <span class="se">\</span>
   --location aws-ec2:eu-west-1
-</code></pre>
-</div>
+</code></pre></div>
 
 
 
@@ -564,8 +577,7 @@ this can also be deployed to your favourite cloud, let's pretend it's Amazon Ire
 
 <div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.demo.WebClusterDatabaseExample <span class="se">\</span>
   --location localhost
-</code></pre>
-</div>
+</code></pre></div>
 
 
 
@@ -612,8 +624,7 @@ with an Nginx load-balancer set up in front of them, and backed by a MySQL datab
                         <span class="n">build</span><span class="o">());</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 
@@ -780,11 +791,6 @@ and a web-only cluster (no database) in `WebClusterExample``.</p>
             
               <div class="toc-3 ">
 	            <a href="/use/examples/whirrhadoop/index.html"><div class="toc-3-item">Whirr Hadoop Cluster</div></a>
-              </div>
-        
-            
-              <div class="toc-3 ">
-	            <a href="/use/examples/portable-cloudfoundry/index.html"><div class="toc-3-item">Portable Cloud Foundry</div></a>
               </div>
         
             
@@ -1040,6 +1046,14 @@ and a web-only cluster (no database) in `WebClusterExample``.</p>
 	      <div class="toc-2 ">
       
 	        <a href="/meta/governance.html"><div class="toc-2-item">Governance</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/meta/verify.html"><div class="toc-2-item">Verify</div></a>
       
           </div>
     

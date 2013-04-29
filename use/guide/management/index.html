@@ -165,7 +165,7 @@ $(document).ready(function() {
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.5.0-rc.1</a></li>
+            <li><a href="/meta/versions.html">0.5.0-rc.2</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -193,11 +193,15 @@ $(document).ready(function() {
 
   
   
+  <li class=""><a href="/use/guide/quickstart/index.html">Getting Started</a></li>
+
+  
+  
   <li class=""><a href="/start/walkthrough/index.html">Walkthrough</a></li>
 
   
   
-  <li class="toc-active"><a href="/use/guide/index.html">Guide</a></li>
+  <li class="toc-active"><a href="/use/guide/index.html">User Guide</a></li>
 
   
   
@@ -327,8 +331,6 @@ $(document).ready(function() {
         
             
         
-            
-        
     
         
         
@@ -409,8 +411,7 @@ but some of the most common ones are:</p>
 <span class="na">brooklyn.jclouds.aws-ec2.credential</span><span class="o">=</span><span class="s">aT0Ps3cr3tC0D3wh1chAW5w1llG1V3y0uTOus333</span>
 <span class="na">brooklyn.jclouds.private-key-file</span><span class="o">=</span><span class="s">~/my/id_rsa       # use specified key (default is ~/.ssh/id_rsa)</span>
 <span class="na">brooklyn.jclouds.public-key-file</span><span class="o">=</span><span class="s">~/my/id_rsa.pub    # (optional, inferred from previous if omitted)</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>These can be specified as a shell environment variable or as a Java system property,
@@ -427,15 +428,13 @@ is supported and recommended.</p>
 
 <div class="highlight"><pre><code class="bash"><span class="nv">BROOKLYN_HOME</span><span class="o">=</span>/path/to/brooklyn/
 <span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$BROOKLYN_HOME</span>/usage/dist/target/brooklyn-dist/bin/
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>If you have set this up correctly you should be able to invoke the <code>brooklyn</code> command:</p>
 
 <div class="highlight"><pre><code class="bash">brooklyn
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>To get information about all the supported cli options just run:</p>
@@ -448,8 +447,7 @@ The most commonly used brooklyn commands are:
     launch   Starts a brooklyn application. Note that a BROOKLYN_CLASSPATH environment variable needs to be <span class="nb">set </span>up beforehand to point to the user application classpath.
 
 See <span class="s1">&#39;brooklyn help &lt;command&gt;&#39;</span> <span class="k">for </span>more information on a specific command.
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>Here is an example of the commands you might run to get the Brooklyn code, compile it and launch an application:</p>
@@ -461,8 +459,7 @@ mvn clean install -DskipTests
 <span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="k">${</span><span class="nv">PATH</span><span class="k">}</span>:<span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/usage/dist/target/brooklyn-dist/bin/
 <span class="nb">export </span><span class="nv">BROOKLYN_CLASSPATH</span><span class="o">=</span><span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/examples/simple-web-cluster/target/classes
 brooklyn launch --app brooklyn.demo.SingleWebServerExample --location localhost
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p><a name="console"></a></p>
@@ -488,8 +485,7 @@ but what could be useful is to embed widgets from the brooklyn portal for select
             <span class="o">.</span><span class="na">launch</span><span class="o">();</span>
     <span class="c1">// ...</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>This will start an embedded brooklyn management node, including the web console.
@@ -541,8 +537,7 @@ This configuration could look like:</p>
 
 <div class="highlight"><pre><code class="properties"><span class="na">brooklyn.webconsole.security.explicit.users</span><span class="o">=</span><span class="s">admin</span>
 <span class="na">brooklyn.webconsole.security.explicit.user.admin</span><span class="o">=</span><span class="s">password</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>The <code>users</code> line should contain a comma-separated list. The special value <code>*</code> is accepted to permit all users.
@@ -645,8 +640,7 @@ TODO - describe how to simply configure logging slf4j
 <div class="highlight"><pre><code class="java"><span class="cm">/** a sensor for saying hi (illustrative), carrying a String value </span>
 <span class="cm">   which is typically the name of the person to whom we are saying hi */</span>
 <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Sensor</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">HELLO_SENSOR</span> <span class="o">=</span> <span class="o">...</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>If the entity is local (e.g. to a policy) these can be looked up using <code>get(Sensor)</code>. If it may be remote, you can subscribe to it through various APIs.</p>
@@ -704,8 +698,7 @@ TODO
 <div class="highlight"><pre><code class="java"><span class="cm">/** an effector which returns no value,</span>
 <span class="cm">   but which causes the entity to emit a HELLO sensor event */</span>
 <span class="kd">public</span> <span class="kd">static</span> <span class="n">Effector</span><span class="o">&lt;</span><span class="n">Void</span><span class="o">&gt;</span> <span class="n">SAY_HI</span> <span class="o">=</span> <span class="o">...</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>Effectors are invoked by calling <code>invoke(SAY_HI, name:"Bob")</code> or similar. The method may take an entity if context is not clear, and it takes parameters as named parameters or a Map.</p>
@@ -1007,11 +1000,6 @@ assert em.getTasksWithTag("a").every { Task t -&gt; t.isDone() }
             
               <div class="toc-3 ">
 	            <a href="/use/examples/whirrhadoop/index.html"><div class="toc-3-item">Whirr Hadoop Cluster</div></a>
-              </div>
-        
-            
-              <div class="toc-3 ">
-	            <a href="/use/examples/portable-cloudfoundry/index.html"><div class="toc-3-item">Portable Cloud Foundry</div></a>
               </div>
         
             

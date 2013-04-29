@@ -165,7 +165,7 @@ $(document).ready(function() {
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.5.0-rc.1</a></li>
+            <li><a href="/meta/versions.html">0.5.0-rc.2</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -193,11 +193,15 @@ $(document).ready(function() {
 
   
   
+  <li class=""><a href="/use/guide/quickstart/index.html">Getting Started</a></li>
+
+  
+  
   <li class=""><a href="/start/walkthrough/index.html">Walkthrough</a></li>
 
   
   
-  <li class=""><a href="/use/guide/index.html">Guide</a></li>
+  <li class=""><a href="/use/guide/index.html">User Guide</a></li>
 
   
   
@@ -227,10 +231,145 @@ $(document).ready(function() {
   
 
 
-Liquid error: 757: unexpected token at 'Liquid error: No such file or directory - /Users/alex/Data/cloudsoft/dev/gits/brooklyn/docs/start/../../toc.json'
 
 
 
+
+
+    
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+
+    
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+        
+        
+    
+
+    
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+
+    
+    
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
 
 
 
@@ -253,11 +392,26 @@ Liquid error: 757: unexpected token at 'Liquid error: No such file or directory 
 
 <h1 id="header_title">Release Notes</h1>
     
+<h2>Brooklyn Version 0.5.0 RC2 (0.5.0-rc.2)</h2>
+
+<ul>
+<li>Fix compatibility issue with Java 7 builds</li>
+<li>Fix regression in HttpFeed: if polling same URL for multiple sensors, share the same http request.</li>
+<li>Fix rebind of nginx entity</li>
+<li>Fix redis install (was failing on some platforms)</li>
+<li>Fix doc build problems</li>
+<li>Fix Whirr cluster problems from rc.1</li>
+<li>Cloud Foundry examples moved to <a href="https://github.com/cloudsoft/brooklyn-cloudfoundry">a separate repo</a>.</li>
+</ul>
+
+
 <h2>Brooklyn Version 0.5.0 RC1 (0.5.0-rc.1)</h2>
 
-<p>API Tidy on top of M2, using <code>init()</code> as the method to override when building composed Application and Entity classes.</p>
+<ul>
+<li><p>API Tidy on top of M2, using <code>init()</code> as the method to override when building composed Application and Entity classes.</p></li>
+<li><p>There are known issues with Whirr clusters and the Cloud Foundry example (moving) which will be resolved for RC2.</p></li>
+</ul>
 
-<p>There are known issues with Whirr clusters and the Cloud Foundry example (moving) which will be resolved for RC2.</p>
 
 <h2>Brooklyn Version 0.5.0 Milestone Two (0.5.0-M2)</h2>
 
@@ -350,11 +504,402 @@ Liquid error: 757: unexpected token at 'Liquid error: No such file or directory 
   
 
 
-Liquid error: 757: unexpected token at 'Liquid error: No such file or directory - /Users/alex/Data/cloudsoft/dev/gits/brooklyn/docs/start/../../toc.json'
+
 
 
 
 <div id="sidebar_toc">
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/start/index.html"><div class="toc-1-item toc-1-header ">Start</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/index.html"><div class="toc-2-item">Overview</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/start/walkthrough/index.html"><div class="toc-2-item">Walkthrough</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/start/download.html"><div class="toc-2-item">Download</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/start/docs-summary.html"><div class="toc-2-item">Documentation</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/use/index.html"><div class="toc-1-item toc-1-header ">Using brooklyn</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/guide/index.html"><div class="toc-2-item toc-2-header">User Guide</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/quickstart/index.html"><div class="toc-3-item">Quick Start</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/defining-applications/basic-concepts.html"><div class="toc-3-item">Defining Applications</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html"><div class="toc-3-item">Management</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/policies/index.html"><div class="toc-3-item">Policies</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/entities/index.html"><div class="toc-3-item">Custom Entities</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/extras/index.html"><div class="toc-3-item">Extras</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/examples/index.html"><div class="toc-2-item toc-2-header">Examples</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/webcluster/index.html"><div class="toc-3-item">Elastic Web Cluster</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/global-web-fabric/index.html"><div class="toc-3-item">Global Web Fabric</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/whirrhadoop/index.html"><div class="toc-3-item">Whirr Hadoop Cluster</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/messaging/index.html"><div class="toc-3-item">Publish-Subscribe Messaging</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/api/index.html"><div class="toc-2-item">API Reference (javadoc)</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/contact.html"><div class="toc-2-item">Discuss</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/dev/code/index.html"><div class="toc-1-item toc-1-header ">Contributing</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/dev/code/index.html"><div class="toc-2-item toc-2-header">The Code</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/code/index.html"><div class="toc-3-item">Structure</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/code/entity.html"><div class="toc-3-item">Writing an Entity</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/code/policy.html"><div class="toc-3-item">Writing a Policy</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="http://github.com/brooklyncentral/brooklyn"><div class="toc-3-item">brooklyn.git (github)</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/dev/build/index.html"><div class="toc-2-item toc-2-header">Build and Test</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/build/index.html"><div class="toc-3-item">Maven</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/build/ide.html"><div class="toc-3-item">IDE</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/build/tests.html"><div class="toc-3-item">Tests</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/dev/tips/index.html"><div class="toc-2-item toc-2-header">Tips and Tricks</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/tips/index.html"><div class="toc-3-item">Miscellany</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/tips/logging.html"><div class="toc-3-item">Logging</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/tips/standards.html"><div class="toc-3-item">Code Standards</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/tips/update-docs.html"><div class="toc-3-item">Updating Docs</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/dev/wishlist.html"><div class="toc-2-item">Wishlist</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/dev/links.html"><div class="toc-2-item toc-2-header">Links</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="https://github.com/brooklyncentral/"><div class="toc-3-item">Github repo</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="https://github.com/brooklyncentral/brooklyn/issues"><div class="toc-3-item">Github issues</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="http://ccweb.cloudsoftcorp.com/maven/libs-snapshot-local/io/brooklyn/"><div class="toc-3-item">Maven snapshots</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/dev/how-to-contrib.html"><div class="toc-2-item">How to Contribute</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/license/index.html"><div class="toc-1-item toc-1-header ">License</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/license/license.html"><div class="toc-2-item">Apache License v2.0</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/license/contributor-agreements/index.html"><div class="toc-2-item toc-2-header">Contributor Agreements</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/license/contributor-agreements/index.html"><div class="toc-3-item">Instructions</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/license/contributor-agreements/individual.html"><div class="toc-3-item">Individual CLA (echosign)</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/license/contributor-agreements/corporate.html"><div class="toc-3-item">Corporate CLA (echosign)</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/license/contributor-agreements/corporate-update-schedule.html"><div class="toc-3-item">CCLA Schedule A Update (echosign)</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/license/contributor-agreements/brooklyn-icla.txt"><div class="toc-3-item">Individual CLA (raw text)</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/license/contributor-agreements/brooklyn-ccla.txt"><div class="toc-3-item">Corporate CLA (raw text)</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/meta/versions.html"><div class="toc-1-item toc-1-header ">Meta</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/meta/versions.html"><div class="toc-2-item">Versions</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/meta/governance.html"><div class="toc-2-item">Governance</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/meta/verify.html"><div class="toc-2-item">Verify</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/meta/contact.html"><div class="toc-2-item">Contact</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
  
 </div>
 <br/>

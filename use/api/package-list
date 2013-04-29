@@ -27,6 +27,7 @@ brooklyn.entity.messaging
 brooklyn.entity.messaging.activemq
 brooklyn.entity.messaging.amqp
 brooklyn.entity.messaging.jms
+brooklyn.entity.messaging.kafka
 brooklyn.entity.messaging.qpid
 brooklyn.entity.messaging.rabbit
 brooklyn.entity.nosql
@@ -45,6 +46,7 @@ brooklyn.entity.trait
 brooklyn.entity.webapp
 brooklyn.entity.webapp.jboss
 brooklyn.entity.webapp.tomcat
+brooklyn.entity.zookeeper
 brooklyn.event
 brooklyn.event.adapter
 brooklyn.event.adapter.legacy
@@ -55,8 +57,6 @@ brooklyn.event.feed.http
 brooklyn.event.feed.jmx
 brooklyn.event.feed.shell
 brooklyn.event.feed.ssh
-brooklyn.example.cloudfoundry
-brooklyn.extras.cloudfoundry
 brooklyn.extras.openshift
 brooklyn.extras.whirr
 brooklyn.extras.whirr.core

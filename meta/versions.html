@@ -165,7 +165,7 @@ $(document).ready(function() {
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.5.0-rc.1</a></li>
+            <li><a href="/meta/versions.html">0.5.0-rc.2</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -193,11 +193,15 @@ $(document).ready(function() {
 
   
   
+  <li class=""><a href="/use/guide/quickstart/index.html">Getting Started</a></li>
+
+  
+  
   <li class=""><a href="/start/walkthrough/index.html">Walkthrough</a></li>
 
   
   
-  <li class=""><a href="/use/guide/index.html">Guide</a></li>
+  <li class=""><a href="/use/guide/index.html">User Guide</a></li>
 
   
   
@@ -274,8 +278,6 @@ $(document).ready(function() {
         
             
         
-            
-        
     
         
         
@@ -364,6 +366,9 @@ $(document).ready(function() {
             
             
             
+        
+        
+    
         
         
     
@@ -393,7 +398,7 @@ $(document).ready(function() {
 <!--- display which version we are using, based on where it is written -->
 
 
-<h3>Brooklyn v0.5.0-rc.1</h3>
+<h3>Brooklyn v0.5.0-rc.2</h3>
 
 <!--- not snapshot -->
 
@@ -404,7 +409,7 @@ $(document).ready(function() {
 
 
 <p>This is the documentation for the latest stable version of Brooklyn,
-generated 02 Apr 2013.
+generated 29 Apr 2013.
 Other versions with documentation available are listed below.</p>
 
 <h3>Version History</h3>
@@ -412,7 +417,7 @@ Other versions with documentation available are listed below.</p>
 <ul>
 <li><p><strong><a href="/v/0.6.0-SNAPSHOT">0.6.0-SNAPSHOT (master)</a></strong>: no major changes yet since 0.5.0-rc.1</p></li>
 <li><p><strong><a href="/v/0.5.0-rc.1">0.5.0-rc.1</a></strong>: includes new JS GUI and REST API, rebind/persistence support, cleaner model and naming conventions, more entities (Apr 2013)</p></li>
-<li><p><strong><a href="/v/0.4.0/">v0.4.0</a></strong>: initial public GA release of Brooklyn to Maven Central, supporting wide range of entities and examples (Jan 2013)</p></li>
+<li><p><strong><a href="/v/0.4.0/">0.4.0</a></strong>: initial public GA release of Brooklyn to Maven Central, supporting wide range of entities and examples (Jan 2013)</p></li>
 </ul>
 
 
@@ -421,6 +426,25 @@ a banner is displayed when accessing specific versions from the archive.
 You may
 <a href="#" onclick="set_user_versions_all();">disable all warnings</a> or
 <a href="#" onclick="clear_user_versions();">re-enable all warnings</a>.</p>
+
+<h3>Versioning</h3>
+
+<p>Brooklyn uses the <a href="http://semver.org/">semantic versioning</a> guidelines. Releases will be numbered with the following format:</p>
+
+<p><code>Brooklyn &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;</code></p>
+
+<p>Breaking backward compatibility increments the <code>&lt;major&gt;</code> version.
+New additions without breaking backward compatibility ups the <code>&lt;minor&gt;</code> version.
+Bug fixes and misc changes bumps the <code>&lt;patch&gt;</code> version.
+New major and minor releases zero the less significant counters.</p>
+
+<p>Additionally, Brooklyn's release process include Snapshots, Milestones and Release Candidates.</p>
+
+<p>A Snapshot (<code>-SNAPSHOT</code>) is the bleeding edge. This will not be stable.</p>
+
+<p>Milestone versions (<code>-Mn</code>) are frozen snapshots. Some code features may be stable, but the documentation and examples may not be complete.</p>
+
+<p>A Release Candidate (<code>-rc.n</code>) is a just-about-ready version.</p>
 
 
         </div><!--maincontent-->
@@ -551,11 +575,6 @@ You may
             
               <div class="toc-3 ">
 	            <a href="/use/examples/whirrhadoop/index.html"><div class="toc-3-item">Whirr Hadoop Cluster</div></a>
-              </div>
-        
-            
-              <div class="toc-3 ">
-	            <a href="/use/examples/portable-cloudfoundry/index.html"><div class="toc-3-item">Portable Cloud Foundry</div></a>
               </div>
         
             
@@ -811,6 +830,14 @@ You may
 	      <div class="toc-2 ">
       
 	        <a href="/meta/governance.html"><div class="toc-2-item">Governance</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/meta/verify.html"><div class="toc-2-item">Verify</div></a>
       
           </div>
     

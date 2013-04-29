@@ -165,7 +165,7 @@ $(document).ready(function() {
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.5.0-rc.1</a></li>
+            <li><a href="/meta/versions.html">0.5.0-rc.2</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -193,11 +193,15 @@ $(document).ready(function() {
 
   
   
+  <li class=""><a href="/use/guide/quickstart/index.html">Getting Started</a></li>
+
+  
+  
   <li class=""><a href="/start/walkthrough/index.html">Walkthrough</a></li>
 
   
   
-  <li class=""><a href="/use/guide/index.html">Guide</a></li>
+  <li class=""><a href="/use/guide/index.html">User Guide</a></li>
 
   
   
@@ -279,8 +283,6 @@ $(document).ready(function() {
         
             
         
-            
-        
     
         
         
@@ -360,6 +362,9 @@ $(document).ready(function() {
     
 
     
+    
+        
+        
     
         
         
@@ -387,21 +392,7 @@ $(document).ready(function() {
 
 <h1 id="header_title">Downloads</h1>
     
-<h2>Contents</h2>
 
-<ul>
-<li><a href="#distro">The Distro</a> (Best for getting started.)</li>
-<li><a href="#alljar">A Single Jar</a></li>
-<li><a href="#getstart-releasenotes">Getting Started &amp; Release Notes</a></li>
-<li><a href="#examples">Examples</a></li>
-<li><a href="#maven">Maven</a></li>
-<li><a href="#source">Source Code</a></li>
-</ul>
-
-
-<p><a name="distro"></a></p>
-
-<h2>The Distro</h2>
 
 <!--- both snapshots and releases -->
 
@@ -418,21 +409,47 @@ $(document).ready(function() {
 
 <p>First time user? The <a href="/use/guide/quickstart/index.html">getting started</a> guide will walk you through downloading Brooklyn, setup of your <code>brooklyn.properties</code> and <code>catalog.xml</code> files, and then trying the <a href="#examples">examples</a>.</p>
 
-<p>The Distribution archives contain Brooklyn as a standalone executable package, and
-are available in the following formats and locations:</p>
+<h2>Download Version 0.5.0-rc.2</h2>
+
+<table>
+<tr>
+    <th style='text-align:left'>Download</th>
+    <th style='text-align:left'>File/Format</th>
+    <th>checksums <small><a href="/meta/verify.html" title='Instructions on verifying the integrity of your downloads.'>(?)</a></small></th>
+</tr>
+<tr>
+    <td style='text-align:left;vertical-align:top' rowspan='2'>Distro</td>
+    <td style='text-align:left'><a href='http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.5.0-rc.2/brooklyn-dist-0.5.0-rc.2-dist.zip' title='Download ZIP archive'>brooklyn-dist-0.5.0-rc.2-dist.zip</a></td>
+    <td><small><a href='http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.5.0-rc.2/brooklyn-dist-0.5.0-rc.2-dist.zip.asc'>PGP</a>, <a href='http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.5.0-rc.2/brooklyn-dist-0.5.0-rc.2-dist.zip.sha1'>SHA1</a></small></td>
+</tr>
+<tr>
+    <td style='text-align:left'><a href='http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.5.0-rc.2/brooklyn-dist-0.5.0-rc.2-dist.tar.gz' title='Download TGZ archive'>brooklyn-dist-0.5.0-rc.2-dist.tar.gz</a></td>
+    <td ><small><a href='http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.5.0-rc.2/brooklyn-dist-0.5.0-rc.2-dist.tar.gz.asc'>PGP</a>, <a href='http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.5.0-rc.2/brooklyn-dist-0.5.0-rc.2-dist.tar.gz.sha1'>SHA1</a></small></td>
+</tr>
+<tr>
+    <td style='text-align:left'>All Jar</td>
+    <td style='text-align:left'><a href='http://repo1.maven.org/maven2/io/brooklyn/brooklyn-all/0.5.0-rc.2/brooklyn-all-0.5.0-rc.2-with-dependencies.jar' title='Download the ALL JAR'>brooklyn-all-0.5.0-rc.2-with-dependencies.jar</a></td>
+    <td ><small><a href='http://repo1.maven.org/maven2/io/brooklyn/brooklyn-all/0.5.0-rc.2/brooklyn-all-0.5.0-rc.2-with-dependencies.jar.asc'>PGP</a>, <a href='http://repo1.maven.org/maven2/io/brooklyn/brooklyn-all/0.5.0-rc.2/brooklyn-all-0.5.0-rc.2-with-dependencies.jar.sha1'>SHA1<a/></small></td>
+</tr>
+<tr>
+    <td style='text-align:left'>Release notes</td>
+    <td style='text-align:left'><a href='/start/release-notes.html'>0.5.0-rc.2</a></td>
+    <td> - </td>
+</tr>
+</table>
+
+
+<p><span style='float:right'><small>Source: <a href='http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22io.brooklyn%22%20AND%20v%3A%220.5.0-rc.2%22'>Maven Central</a></small></span></p>
+
+<p><a name="distro"></a></p>
+
+<h2>The Distro</h2>
+
+<p>The distribution archive contains Brooklyn as a standalone executable package.</p>
 
 <ul>
-<li><p><strong>v0.5.0-rc.1</strong>:
-<strong><a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.5.0-rc.1/brooklyn-dist-0.5.0-rc.1-dist.zip">zip</a></strong>
-<strong><a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.5.0-rc.1/brooklyn-dist-0.5.0-rc.1-dist.tar.gz">tgz</a></strong>
-<strong><a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.5.0-rc.1/">dir</a></strong>
-from <a href="http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22io.brooklyn%22%20AND%20a%3A%22brooklyn-dist%22%20AND%20v%3A%220.5.0-rc.1%22">Maven Central</a></p></li>
-<li><p><strong>all stable versions</strong>:
-at <a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/">Maven Central</a>
-and <a href="http://developers.cloudsoftcorp.com/maven/releases/io/brooklyn/brooklyn-dist/">Cloudsoft</a></p></li>
-<li><strong>all snapshot versions</strong>:
-at <a href="https://oss.sonatype.org/content/groups/public/io/brooklyn/brooklyn-dist/">Sonatype</a>
-and <a href="http://developers.cloudsoftcorp.com/maven/snapshots/io/brooklyn/brooklyn-dist/">Cloudsoft</a></li>
+<li>previous stable versions: <a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/">Maven Central</a></li>
+<li>previous snapshot versions: <a href="https://oss.sonatype.org/content/groups/public/io/brooklyn/brooklyn-dist/">Sonatype</a></li>
 </ul>
 
 
@@ -440,33 +457,18 @@ and <a href="http://developers.cloudsoftcorp.com/maven/snapshots/io/brooklyn/bro
 
 <h2>The All Jar</h2>
 
-<p>You can grab a single JAR containing all of Brooklyn and its dependencies
-here:</p>
+<p>This is a single JAR containing all of Brooklyn and its dependencies, for developing Brooklyn into your own applications. Just download your preferred flavour and add it to your classpath.</p>
 
 <ul>
-<li><strong>v0.5.0-rc.1</strong> at
-<a href="http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22io.brooklyn%22%20AND%20a%3A%22brooklyn-all%22%20AND%20v%3A%220.5.0-rc.1%22">Maven Central</a>
-:
-<strong><a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-all/0.5.0-rc.1/brooklyn-all-0.5.0-rc.1-with-dependencies.jar">jar</a></strong>
-<strong><a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-all/0.5.0-rc.1/">dir</a></strong></li>
-<li><strong>all stable versions</strong>:
-at <a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-all/">Maven Central</a>
-and <a href="http://developers.cloudsoftcorp.com/maven/releases//io/brooklyn/brooklyn-all/">Cloudsoft</a></li>
-<li><strong>all snapshot versions</strong>:
-at <a href="https://oss.sonatype.org/content/groups/public/io/brooklyn/brooklyn-all/">Sonatype</a>
-and <a href="http://developers.cloudsoftcorp.com/maven/snapshots/io/brooklyn/brooklyn-all/">Cloudsoft</a></li>
+<li><p><a href="http://search.maven.org/#artifactdetails|io.brooklyn|brooklyn-all|0.5.0-rc.2|jar">Version 0.5.0-rc.2</a></p></li>
+<li><p>previous stable versions: <a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-all/">Maven Central</a></p></li>
+<li>previous snapshot versions: <a href="https://oss.sonatype.org/content/groups/public/io/brooklyn/brooklyn-all/">Sonatype</a></li>
 </ul>
 
 
-<p>Just download your preferred flavour and add it to your classpath.</p>
+<h2>Release Notes</h2>
 
-<p><a name="getstart-releasenotes"></a></p>
-
-<h2>Getting Started and Release Notes</h2>
-
-<p>First time using Brooklyn? Read <a href="/use/guide/quickstart/index.html">Getting Started</a> to set up your <code>brooklyn.properties</code> and <code>catalog.xml</code> files.</p>
-
-<p>Release notes can be found <a href="/start/release-notes">here</a>, and specifically for <a href="/start/release-notes/0.5.0-rc.1.html">0.5.0-rc.1</a>.</p>
+<p>Release notes can be found <a href="/start/release-notes.html">here</a>.</p>
 
 <p><a name="examples"></a></p>
 
@@ -474,30 +476,28 @@ and <a href="http://developers.cloudsoftcorp.com/maven/snapshots/io/brooklyn/bro
 
 <p>You can checkout the examples from the <a href="http://github.com/brooklyncentral/brooklyn-examples">brooklyn-examples git repository</a>.
 Maven (v3) is required to build them, as described <a href="/dev/build/">here</a>.
-The examples for this version (0.5.0-rc.1) are in the branch
-<code>0.5.0-rc.1</code>,
+The examples for this version (0.5.0-rc.2) are in the branch
+<code>0.5.0-rc.2</code>,
 so if you have <code>git</code> and <code>mvn</code> already, you can simply:</p>
 
 <div class="highlight"><pre><code class="bash">% git clone https://github.com/brooklyncentral/brooklyn-examples.git
 % <span class="nb">cd </span>brooklyn-examples
-% git checkout 0.5.0-rc.1
+% git checkout 0.5.0-rc.2
 % mvn clean install
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>If you don't use <code>git</code>, you can download the projects as a tarball instead
-from <a href="https://github.com/brooklyncentral/brooklyn-examples/tarball/0.5.0-rc.1">this link</a>.
+from <a href="https://github.com/brooklyncentral/brooklyn-examples/tarball/0.5.0-rc.2">this link</a>.
 These commands should do the trick:</p>
 
-<div class="highlight"><pre><code class="bash">% curl -L -o brooklyn-examples-0.5.0-rc.1.tgz <span class="se">\</span>
-     https://github.com/brooklyncentral/brooklyn-examples/tarball/0.5.0-rc.1
-% tar xvfz brooklyn-examples-0.5.0-rc.1.tgz
-% mv brooklyncentral-brooklyn-examples-* brooklyn-examples-0.5.0-rc.1 <span class="se">\</span>
+<div class="highlight"><pre><code class="bash">% curl -L -o brooklyn-examples-0.5.0-rc.2.tgz <span class="se">\</span>
+     https://github.com/brooklyncentral/brooklyn-examples/tarball/0.5.0-rc.2
+% tar xvfz brooklyn-examples-0.5.0-rc.2.tgz
+% mv brooklyncentral-brooklyn-examples-* brooklyn-examples-0.5.0-rc.2 <span class="se">\</span>
      <span class="c"># change the strange name which github assigns in the tarball</span>
 % mvn clean install
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>A good example to start with is the <a href="/use/examples/webcluster.html">Elastic Web Cluster</a>.</p>
@@ -506,23 +506,22 @@ These commands should do the trick:</p>
 
 <h2>Maven</h2>
 
-<p>If you use maven, you can add Brooklyn with the following in your pom:</p>
+<p>If you use Maven, you can add Brooklyn with the following in your pom:</p>
 
 <div class="highlight"><pre><code class="xml">    <span class="nt">&lt;dependencies&gt;</span>
         <span class="nt">&lt;dependency&gt;</span>
             <span class="nt">&lt;groupId&gt;</span>io.brooklyn<span class="nt">&lt;/groupId&gt;</span>
             <span class="nt">&lt;artifactId&gt;</span>brooklyn-all<span class="nt">&lt;/artifactId&gt;</span>
-            <span class="nt">&lt;version&gt;</span>0.5.0-rc.1<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;version&gt;</span>0.5.0-rc.2<span class="nt">&lt;/version&gt;</span>
         <span class="nt">&lt;/dependency&gt;</span>
     <span class="nt">&lt;/dependencies&gt;</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p><code>brooklyn-all</code> (used above) brings in all dependencies, including jclouds and Apache Whirr.
 If you prefer a smaller repo you might want just <code>brooklyn-core</code>,  <code>brooklyn-policies</code>,
 and some of <code>brooklyn-software-webapp</code>,  <code>brooklyn-software-database</code>, <code>brooklyn-software-messaging</code>, or others
-(browse the full list <a href="http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22io.brooklyn%22%20AND%20AND%20v%3A%220.5.0-rc.1%22">here</a>).</p>
+(browse the full list <a href="http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22io.brooklyn%22%20AND%20v%3A%220.5.0-rc.2%22">here</a>).</p>
 
 <p>If you wish to use the Sonatype and/or Cloudsoft repositories (particularly for snapshots),
 you can add some of the following sections:</p>
@@ -550,8 +549,7 @@ you can add some of the following sections:</p>
            <span class="nt">&lt;/snapshots&gt;</span>
          <span class="nt">&lt;/repository&gt;</span>
     <span class="nt">&lt;/repositories&gt;</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p><a name="source"></a></p>
@@ -695,11 +693,6 @@ Information on working with the source is <a href="/dev/code">here</a>.</p>
             
               <div class="toc-3 ">
 	            <a href="/use/examples/whirrhadoop/index.html"><div class="toc-3-item">Whirr Hadoop Cluster</div></a>
-              </div>
-        
-            
-              <div class="toc-3 ">
-	            <a href="/use/examples/portable-cloudfoundry/index.html"><div class="toc-3-item">Portable Cloud Foundry</div></a>
               </div>
         
             
@@ -955,6 +948,14 @@ Information on working with the source is <a href="/dev/code">here</a>.</p>
 	      <div class="toc-2 ">
       
 	        <a href="/meta/governance.html"><div class="toc-2-item">Governance</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/meta/verify.html"><div class="toc-2-item">Verify</div></a>
       
           </div>
     

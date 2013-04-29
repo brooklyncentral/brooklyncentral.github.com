@@ -165,7 +165,7 @@ $(document).ready(function() {
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.5.0-rc.1</a></li>
+            <li><a href="/meta/versions.html">0.5.0-rc.2</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -193,11 +193,15 @@ $(document).ready(function() {
 
   
   
+  <li class=""><a href="/use/guide/quickstart/index.html">Getting Started</a></li>
+
+  
+  
   <li class=""><a href="/start/walkthrough/index.html">Walkthrough</a></li>
 
   
   
-  <li class="toc-active"><a href="/use/guide/index.html">Guide</a></li>
+  <li class="toc-active"><a href="/use/guide/index.html">User Guide</a></li>
 
   
   
@@ -329,8 +333,6 @@ $(document).ready(function() {
         
             
         
-            
-        
     
         
         
@@ -427,8 +429,7 @@ tracking the transfer of events (subscriptions) between ``Entity`` instances, an
 
 <div class="highlight"><pre><code class="java"><span class="n">setConfiguration</span><span class="o">(</span><span class="n">UsesJava</span><span class="o">.</span><span class="na">JAVA_OPTIONS</span><span class="o">,</span> <span class="n">ImmutableMap</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&quot;mysql.url&quot;</span><span class="o">,</span> 
         <span class="n">attributeWhenReady</span><span class="o">(</span><span class="n">mysql</span><span class="o">,</span> <span class="n">MySqlNode</span><span class="o">.</span><span class="na">MY_SQL_URL</span><span class="o">)</span> <span class="o">))</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>The <code>attributeWhenReady(Entity, Sensor)</code> call (a static method on the class <code>DependentConfiguration</code>)
@@ -774,11 +775,6 @@ packaged as <strong><em>feeds</em></strong> which can discover their configurati
             
               <div class="toc-3 ">
 	            <a href="/use/examples/whirrhadoop/index.html"><div class="toc-3-item">Whirr Hadoop Cluster</div></a>
-              </div>
-        
-            
-              <div class="toc-3 ">
-	            <a href="/use/examples/portable-cloudfoundry/index.html"><div class="toc-3-item">Portable Cloud Foundry</div></a>
               </div>
         
             

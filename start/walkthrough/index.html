@@ -165,7 +165,7 @@ $(document).ready(function() {
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.5.0-rc.1</a></li>
+            <li><a href="/meta/versions.html">0.5.0-rc.2</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -193,11 +193,15 @@ $(document).ready(function() {
 
   
   
+  <li class=""><a href="/use/guide/quickstart/index.html">Getting Started</a></li>
+
+  
+  
   <li class="toc-active"><a href="/start/walkthrough/index.html">Walkthrough</a></li>
 
   
   
-  <li class=""><a href="/use/guide/index.html">Guide</a></li>
+  <li class=""><a href="/use/guide/index.html">User Guide</a></li>
 
   
   
@@ -279,8 +283,6 @@ $(document).ready(function() {
         
             
         
-            
-        
     
         
         
@@ -360,6 +362,9 @@ $(document).ready(function() {
     
 
     
+    
+        
+        
     
         
         
@@ -411,8 +416,7 @@ for management:</p>
         <span class="n">ControlledDynamicWebAppCluster</span> <span class="n">web</span> <span class="o">=</span> <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpecs</span><span class="o">.</span><span class="na">spec</span><span class="o">(</span><span class="n">ControlledDynamicWebAppCluster</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <h2>Runtime: the Web Console</h2>
@@ -421,8 +425,7 @@ for management:</p>
 
 <div class="highlight"><pre><code class="bash"><span class="nb">export </span><span class="nv">BROOKLYN_CLASSPATH</span><span class="o">=</span>/path/to/your/project/target/classes
 brooklyn launch --app brooklyn.demo.WebClusterDatabaseExample --location jclouds:aws-ec2:eu-west-1
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>Amazon is used in these screenshots, but lots of targets are supported (using <a href="http://jclouds.org">jclouds</a>)
@@ -479,8 +482,7 @@ block "at the last moment" when the value is needed
                                         <span class="n">attributeWhenReady</span><span class="o">(</span><span class="n">mysql</span><span class="o">,</span> <span class="n">MySqlNode</span><span class="o">.</span><span class="na">MYSQL_URL</span><span class="o">),</span> <span class="n">DB_TABLE</span><span class="o">,</span> <span class="n">DB_USERNAME</span><span class="o">,</span> <span class="n">DB_PASSWORD</span><span class="o">))));</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>We now see our app at the Nginx URL:</p>
@@ -497,8 +499,7 @@ running management policies for applications whose topology it knows.</p>
                         <span class="n">sizeRange</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">5</span><span class="o">).</span>
                         <span class="n">metricRange</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="mi">100</span><span class="o">).</span>
                         <span class="n">build</span><span class="o">());</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p><em>Policies</em> in Brooklyn typically subscribe to sensors,
@@ -559,9 +560,7 @@ Alternatively you can just add a ``main`` method to the application class as fol
         
         <span class="n">Entities</span><span class="o">.</span><span class="na">dumpInfo</span><span class="o">(</span><span class="n">app</span><span class="o">);</span>
     <span class="o">}</span>
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 Compile and run this with the [``brooklyn-all`` jar](/start/download.html) on the classpath,
@@ -708,11 +707,6 @@ with credentials set up as described [here](/use/guide/management/index.html#sta
             
               <div class="toc-3 ">
 	            <a href="/use/examples/whirrhadoop/index.html"><div class="toc-3-item">Whirr Hadoop Cluster</div></a>
-              </div>
-        
-            
-              <div class="toc-3 ">
-	            <a href="/use/examples/portable-cloudfoundry/index.html"><div class="toc-3-item">Portable Cloud Foundry</div></a>
               </div>
         
             
@@ -968,6 +962,14 @@ with credentials set up as described [here](/use/guide/management/index.html#sta
 	      <div class="toc-2 ">
       
 	        <a href="/meta/governance.html"><div class="toc-2-item">Governance</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/meta/verify.html"><div class="toc-2-item">Verify</div></a>
       
           </div>
     
