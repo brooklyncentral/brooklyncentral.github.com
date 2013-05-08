@@ -1,0 +1,7 @@
+[{ "title": "Basic Concepts",
+  "file":  "{{ site.url }}/use/guide/defining-applications/basic-concepts.html" }, 
+{ "title": "Advanced Concepts",
+  "file":  "{{ site.url }}/use/guide/defining-applications/advanced-concepts.html" }, 
+{ "title": "Common Usage",
+  "file":  "{{ site.url }}/use/guide/defining-applications/common-usage.html" }
+]
