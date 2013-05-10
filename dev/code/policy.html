@@ -165,7 +165,7 @@ $(document).ready(function() {
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.5.0-rc.2</a></li>
+            <li><a href="/meta/versions.html">0.5.0</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -325,6 +325,8 @@ $(document).ready(function() {
         
             
         
+            
+        
     
         
         
@@ -412,7 +414,8 @@ overriding the <code>setEntity</code> method to supply any subscriptions desired
         <span class="kd">super</span><span class="o">.</span><span class="na">setEntity</span><span class="o">(</span><span class="n">entity</span><span class="o">)</span>
         <span class="n">subscribe</span><span class="o">(</span><span class="n">entity</span><span class="o">,</span> <span class="n">TARGET_SENSOR</span><span class="o">,</span> <span class="k">this</span><span class="o">)</span>
     <span class="o">}</span>
-</code></pre></div>
+</code></pre>
+</div>
 
 
 <p>and supply the computation and/or activity desired whenever that event occurs:</p>
@@ -423,7 +426,8 @@ overriding the <code>setEntity</code> method to supply any subscriptions desired
         <span class="k">if</span> <span class="o">(</span><span class="n">val</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span>
             <span class="n">entity</span><span class="o">.</span><span class="na">sayYoureOdd</span><span class="o">();</span>
     <span class="o">}</span>
-</code></pre></div>
+</code></pre>
+</div>
 
 
 <p>You'll want to do more complicated things, no doubt,
@@ -687,6 +691,11 @@ then write a second policy to perform that action.</p>
         
             
               <div class="toc-3 ">
+	            <a href="/dev/tips/local-artifact-repo.html"><div class="toc-3-item">Local Artifact Repo</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
 	            <a href="/dev/tips/update-docs.html"><div class="toc-3-item">Updating Docs</div></a>
               </div>
         
@@ -857,7 +866,7 @@ then write a second policy to perform that action.</p>
         <p id="copyright">
             <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
             brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
-            &copy; 2012 Cloudsoft Corporation.
+            &copy; 2013 Cloudsoft Corporation.
         </p>
     </div><!--footer -->
 

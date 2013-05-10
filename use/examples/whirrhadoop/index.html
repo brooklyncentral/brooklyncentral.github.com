@@ -165,7 +165,7 @@ $(document).ready(function() {
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.5.0-rc.2</a></li>
+            <li><a href="/meta/versions.html">0.5.0</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -325,6 +325,8 @@ $(document).ready(function() {
         
             
         
+            
+        
     
         
         
@@ -443,10 +445,11 @@ $(document).ready(function() {
 
 
 
-<div class="highlight"><pre><code class="bash">% curl -LO http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.5.0-rc.2/brooklyn-dist-0.5.0-rc.2-dist.tar.gz
-% tar xvzf brooklyn-dist-0.5.0-rc.2-dist.tar.gz
-% <span class="nb">export </span><span class="nv">BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/brooklyn-0.5.0-rc.2/
-</code></pre></div>
+<div class="highlight"><pre><code class="bash">% curl -LO http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.5.0/brooklyn-dist-0.5.0-dist.tar.gz
+% tar xvzf brooklyn-dist-0.5.0-dist.tar.gz
+% <span class="nb">export </span><span class="nv">BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/brooklyn-0.5.0/
+</code></pre>
+</div>
 
 
 
@@ -463,9 +466,10 @@ $(document).ready(function() {
 
 <div class="highlight"><pre><code class="bash">% git clone https://github.com/brooklyncentral/brooklyn-examples.git
 % <span class="nb">cd </span>brooklyn-examples
-% git checkout 0.5.0-rc.2
+% git checkout 0.5.0
 % mvn clean install
-</code></pre></div>
+</code></pre>
+</div>
 
 
 
@@ -484,7 +488,8 @@ please visit <a href="/use/guide/management/index.html#cli">this section of the 
 
 
 <div class="highlight"><pre><code class="bash">% <span class="nb">cd </span>hadoop-and-whirr
-</code></pre></div>
+</code></pre>
+</div>
 
 
 
@@ -496,7 +501,8 @@ the <code>BROOKLYN_CLASSPATH</code> environment variable in the following way:</
 
 
 <div class="highlight"><pre><code class="bash">% <span class="nb">export </span><span class="nv">BROOKLYN_CLASSPATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/target/classes
-</code></pre></div>
+</code></pre>
+</div>
 
 
 
@@ -544,7 +550,8 @@ with an arbitrary size, using the <code>WhirrHadoopCluster</code> entity.</p>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;memory&quot;</span><span class="o">,</span> <span class="mi">2048</span><span class="o">));</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div>
+</code></pre>
+</div>
 
 
 
@@ -555,7 +562,8 @@ with an arbitrary size, using the <code>WhirrHadoopCluster</code> entity.</p>
 
 
 <div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.extras.whirr.WhirrHadoopExample --stopOnKeyPress --location aws-ec2:eu-west-1
-</code></pre></div>
+</code></pre>
+</div>
 
 
 
@@ -606,7 +614,8 @@ can be run from within Brooklyn:</p>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;recipe&quot;</span><span class="o">,</span> <span class="n">RECIPE</span><span class="o">));</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div>
+</code></pre>
+</div>
 
 
 
@@ -617,7 +626,8 @@ can be run from within Brooklyn:</p>
 
 
 <div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.extras.whirr.WhirrExample --stopOnKeyPress --location aws-ec2:eu-west-1
-</code></pre></div>
+</code></pre>
+</div>
 
 
 
@@ -923,6 +933,11 @@ is in <code>WebFabricWithHadoopExample</code>.</p>
         
             
               <div class="toc-3 ">
+	            <a href="/dev/tips/local-artifact-repo.html"><div class="toc-3-item">Local Artifact Repo</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
 	            <a href="/dev/tips/update-docs.html"><div class="toc-3-item">Updating Docs</div></a>
               </div>
         
@@ -1093,7 +1108,7 @@ is in <code>WebFabricWithHadoopExample</code>.</p>
         <p id="copyright">
             <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
             brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
-            &copy; 2012 Cloudsoft Corporation.
+            &copy; 2013 Cloudsoft Corporation.
         </p>
     </div><!--footer -->
 

@@ -165,7 +165,7 @@ $(document).ready(function() {
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.5.0-rc.2</a></li>
+            <li><a href="/meta/versions.html">0.5.0</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -325,6 +325,8 @@ $(document).ready(function() {
         
             
         
+            
+        
     
         
         
@@ -401,7 +403,9 @@ $(document).ready(function() {
 <ul>
 <li>  normal -- should run quickly, not need internet, and not side effect the machine (apart from a few /tmp files)</li>
 <li>  integration -- deploys locally, may read and write from internet, takes longer
-      if you change an entity, rerun the relevant integration test to make sure all is well!</li>
+
+<pre><code>  if you change an entity, rerun the relevant integration test to make sure all is well!
+</code></pre></li>
 <li>  live -- deploys remotely, may provision machines (but should clean up, getting rid of them in a try block)</li>
 </ul>
 
@@ -658,6 +662,11 @@ $(document).ready(function() {
         
             
               <div class="toc-3 ">
+	            <a href="/dev/tips/local-artifact-repo.html"><div class="toc-3-item">Local Artifact Repo</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
 	            <a href="/dev/tips/update-docs.html"><div class="toc-3-item">Updating Docs</div></a>
               </div>
         
@@ -828,7 +837,7 @@ $(document).ready(function() {
         <p id="copyright">
             <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
             brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
-            &copy; 2012 Cloudsoft Corporation.
+            &copy; 2013 Cloudsoft Corporation.
         </p>
     </div><!--footer -->
 

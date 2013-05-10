@@ -165,7 +165,7 @@ $(document).ready(function() {
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.5.0-rc.2</a></li>
+            <li><a href="/meta/versions.html">0.5.0</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -318,6 +318,8 @@ $(document).ready(function() {
         
             
         
+            
+        
     
         
         
@@ -392,106 +394,72 @@ $(document).ready(function() {
 
 <h1 id="header_title">Release Notes</h1>
     
-<h2>Brooklyn Version 0.5.0 RC2 (0.5.0-rc.2)</h2>
+<h2>Brooklyn Version 0.5.0</h2>
 
-<ul>
-<li>Fix compatibility issue with Java 7 builds</li>
-<li>Fix regression in HttpFeed: if polling same URL for multiple sensors, share the same http request.</li>
-<li>Fix rebind of nginx entity</li>
-<li>Fix redis install (was failing on some platforms)</li>
-<li>Fix doc build problems</li>
-<li>Fix Whirr cluster problems from rc.1</li>
-<li>Cloud Foundry examples moved to <a href="https://github.com/cloudsoft/brooklyn-cloudfoundry">a separate repo</a>.</li>
-</ul>
-
-
-<h2>Brooklyn Version 0.5.0 RC1 (0.5.0-rc.1)</h2>
-
-<ul>
-<li><p>API Tidy on top of M2, using <code>init()</code> as the method to override when building composed Application and Entity classes.</p></li>
-<li><p>There are known issues with Whirr clusters and the Cloud Foundry example (moving) which will be resolved for RC2.</p></li>
-</ul>
-
-
-<h2>Brooklyn Version 0.5.0 Milestone Two (0.5.0-M2)</h2>
-
-<h3>Introduction</h3>
-
-<p>This milestone release includes many big features, and brings us much closer to a 0.5.0 release.</p>
-
-<p>It incorporates a lot of improvements and feedback from our community. Thank you!</p>
+<p>This release includes many big features. It incorporates a lot of improvements and feedback from our community. Thank you!</p>
 
 <p>Thanks also go to Brooklyn's commercial users. Already Brooklyn has been adopted into some very exciting projects including controlling custom PaaS offerings, big data clusters, and three-tier web-apps.</p>
 
-<p>Work on this release can be tracked using Brooklyn's GitHub issue tracker:</p>
+<h2>New Features</h2>
+
+<p>The major changes between 0.4.x and 0.5 are:</p>
 
 <ul>
-<li><a href="https://github.com/brooklyncentral/brooklyn/issues?milestone=1">github.com/brooklyncentral/brooklyn/issues?milestone=1</a></li>
-</ul>
-
-
-<p>And via the mailing lists:</p>
-
-<ul>
-<li><a href="http://groups.google.com/group/brooklyn-dev">brooklyn-dev@googlegroups.com</a></li>
-<li><a href="http://groups.google.com/group/brooklyn-users">brooklyn-users@googlegroups.com</a></li>
-</ul>
-
-
-<h3>New Features</h3>
-
-<p>The major changes between M1 and M2 are:</p>
-
-<ol>
-<li><p>Entities have been separated into an interface and implementation, rather than just a single class. Construction of entities is now done using an EntitySpec, rather than directly calling the constructor. This improvement is required to simplify remoting in a distributed brooklyn management plane.</p></li>
+<li><p>"Rebind" suppport: allow Brooklyn to restart and re-binding to the entities in the applications.
+The state is automatically persisted as entities change, so Brooklyn can survive unexpected termination
+and retarts.</p></li>
+<li><p>Entities have been separated into an interface and implementation, rather than just a single class.
+Construction of entities is now done using an EntitySpec, rather than directly calling the constructor.
+This improvement is required to simplify remoting in a distributed brooklyn management plane.</p></li>
 <li><p>Downloading of entity installers is greatly improved:</p>
 
 <ul>
-<li>More configurable, with ability to specify URLs in the brooklyn configuration files or to override in code.</li>
-<li><p>Will fallback to a repository maintained by Cloudsoft, so if an artifact is removed from the official public site then it will not break the entity.</p>
-
-<p>  See <a href="http://downloads.cloudsoftcorp.com/brooklyn/repository/">downloads.cloudsoftcorp.com/brooklyn/repository/</a></p></li>
+<li><p>More configurable, with ability to specify URLs in the brooklyn configuration files or to override in code.</p></li>
+<li><p>Will fallback to a repository maintained by Cloudsoft, so if an artifact is removed from the official public site then it will not break the entity. (<em>See also:</em> <a href="http://downloads.cloudsoftcorp.com/brooklyn/repository/">downloads.cloudsoftcorp.com/brooklyn/repository</a>)</p></li>
 </ul>
 </li>
 <li><p>Support for running applications across private subnets.</p></li>
-<li><p>Policies can now be re-configured on-the-fly through the REST api and through the web-console.</p></li>
+<li><p>Policies can now be re-configured on-the-fly through the REST API and through the web-console.</p></li>
+<li><p>New <code>feed</code> classes for entities to poll for their sensor values.
+This replaces the now-deprecated <code>SensorAdapter</code> classes.</p></li>
 <li><p>Some entities now support configuration files being supplied in FreeMarker template format. These include JBoss AS7, ActiveMQ and MySql. More will be converted to use this pattern.</p></li>
+<li><p>A CLI-based ssh-tool implementation (Brooklyn can be configured to use that, rather than the default sshj).
+This is useful for things like Tectia integration, which does not work with sshj due to key file formats.</p></li>
 <li><p>Several new entities have been added, including:</p>
 
 <ul>
 <li>MongoDB</li>
 <li>Cassandra</li>
+<li>PostgreSQL</li>
 <li>RubyRep</li>
+<li>Kafka</li>
 <li>DynamicWebAppFabric</li>
 </ul>
 </li>
-</ol>
+</ul>
 
 
-<h3>Backwards Compatibility</h3>
+<h2>Backwards Compatibility</h2>
 
-<p>For upgrading from 0.5.0-M1 to M2:</p>
-
-<ol>
-<li><p>Entity classes have been renamed, e.g. MySqlNode is now an interface and the implementationis MySqlNodeImpl.</p>
+<p>When upgrading to 0.5.0 from 0.4.x or 0.5.0-M1:</p>
 
 <ul>
-<li>The minimum change for this to work is to update your references to include the Impl suffixes. However, that will result in deprecation warnings.</li>
-<li>The recommended approach is to use the EntitySpec when constructing entities. A good place to start is to look at the updated example applications.</li>
+<li><p>Entity classes have been renamed, e.g. <code>MySqlNode</code> is now an interface and the implementationis <code>MySqlNodeImpl</code>.</p>
+
+<ul>
+<li><p>The minimum change for this to work is to update your references to include the <code>-Impl</code> suffixes. However, that will result in deprecation warnings.</p></li>
+<li><p>The recommended approach is to use the EntitySpec when constructing entities. A good place to start is to look at the updated example applications.</p></li>
 </ul>
 </li>
 <li><p>The default username for provisioning with jclouds has changed to use the name of the user executing the Brooklyn process.</p>
 
 <ul>
-<li>Java's <code>System.getProperty("user.name")</code> is used instead of 'root' or 'ubuntu'</li>
-<li><p>Usernames can be overridden in <code>brooklyn.properties</code> or using system properties.
-  For example, by entering '<code>brooklyn.location.named.acmecloud.user=root</code>' in <code>brooklyn.properties</code> or using the command syntax <code>-Dbrooklyn.location.named.acmecloud.user=root</code>.</p>
-
-<p>  '<code>brooklyn.jclouds.aws-ec2.user=root</code>' could also be used to apply <code>user=root</code> to all aws-ec2 VMs.</p></li>
+<li><p>Java's <code>System.getProperty("user.name")</code> is used instead of 'root' or 'ubuntu'</p></li>
+<li><p>Usernames can be overridden in brooklyn.properties or using system properties. For example, by entering <code>brooklyn.location.named.acmecloud.user=root</code> in brooklyn.properties or using the command syntax <code>-Dbrooklyn.location.named.acmecloud.user=root</code>.</p></li>
 </ul>
 </li>
-<li><p>Some deprecated code has been deleted. All of this code was commented in 0.4.0 with text such as "will be deleted in 0.5".</p></li>
-</ol>
+<li><p>Some deprecated code has been deleted. All of this code was commented in 0.4.0 with text such as "will be deleted in 0.5". Where code has been deprecated in 0.5.0, there are javadoc comments indicating what should be used instead.</p></li>
+</ul>
 
 
 
@@ -743,6 +711,11 @@ $(document).ready(function() {
         
             
               <div class="toc-3 ">
+	            <a href="/dev/tips/local-artifact-repo.html"><div class="toc-3-item">Local Artifact Repo</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
 	            <a href="/dev/tips/update-docs.html"><div class="toc-3-item">Updating Docs</div></a>
               </div>
         
@@ -913,7 +886,7 @@ $(document).ready(function() {
         <p id="copyright">
             <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
             brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
-            &copy; 2012 Cloudsoft Corporation.
+            &copy; 2013 Cloudsoft Corporation.
         </p>
     </div><!--footer -->
 
