@@ -402,7 +402,7 @@ $(document).ready(function() {
 <pre><code>$ tar -zxf brooklyn-dist-&lt;version&gt;-&lt;timestamp&gt;-dist.tar.tar.gz
 </code></pre>
 
-<p>This will create a brooklyn-&lt;version> folder. At the time of writing this was <code>brooklyn-0.5.0-SNAPSHOT</code>.</p>
+<p>This will create a brooklyn-&lt;version> folder. At the time of writing this was <code>brooklyn-0.5.0</code>.  <!-- BROOKLYN_VERSION --></p>
 
 <p>Let's setup some paths for easy commands.</p>
 
@@ -451,16 +451,17 @@ $ export PATH=$PATH:$BROOKLYN_HOME/bin/
 
 <p>catalog.xml is catalog of application or service blueprints. The example file contains two demos which will be automatically downloaded from the web if you run them.</p>
 
-<p>Edit this file (text editor) and check that the links to the demo applications' .jars are valid. At the time of writing these were for version <code>0.5.0-SNAPSHOT</code>, but if this has changed you may need to update the links.</p>
+<p>Edit this file (text editor) and check that the links to the demo applications' .jars are valid. At the time of writing these were for version <code>0.5.0</code>, but if this has changed you may need to update the links. <!-- BROOKLYN_VERSION --></p>
 
 <h3>SSH Key</h3>
 
-<p>If this is a new machine, or you haven't used SSH before, you will need to create keys for Brooklyn to use. (Accept all default options, as this will setup password-less keys in the default location and Brooklyn will find them.)</p>
+<p>If this is a new machine, or you haven't used SSH before, you will need to create keys for Brooklyn to use, and add them your list of authorized_keys (for deployment to localhost).</p>
 
-<pre><code>$ ssh-keygen -t rsa
+<pre><code>$ ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
+$ cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys
 </code></pre>
 
-<p>It is advisable <em>not</em> to set a password for this key. If you are using an existing key that already has a password please add it to your <code>brooklyn.properties</code> file.</p>
+<p>(If you are using an existing key SSH that has a password, or is not located at <code>~/.ssh/id_rsa</code>, please supply the <code>brooklyn.localhost.private-key-file</code> and <code>brooklyn.localhost.private-key-passphrase</code> in your <code>brooklyn.properties</code> file.)</p>
 
 <h3>3-2-1 Go!</h3>
 
