@@ -394,30 +394,24 @@ $(document).ready(function() {
 
 <h1 id="header_title">Release Notes</h1>
     
-<h2>Brooklyn Version 0.5.0 RC1 (0.5.0-rc.1)</h2>
+<h2>Brooklyn Version 0.6.0 (Milestone One - 0.6.0-M1)</h2>
 
-<p>API Tidy on top of M2, using <code>init()</code> as the method to override when building composed Application and Entity classes.</p>
+<ul>
+<li>Introduction</li>
+<li>New Features</li>
+<li>Backwards Compatibility</li>
+</ul>
 
-<p>There are known issues with Whirr clusters and the Cloud Foundry example (moving) which will be resolved for RC2.</p>
-
-<h2>Brooklyn Version 0.5.0 Milestone Two (0.5.0-M2)</h2>
 
 <h3>Introduction</h3>
 
-<p>This milestone release includes many big features, and brings us much closer to a 0.5.0 release.</p>
+<p>This milestone release includes many additions and fixes, and brings us much closer to a 0.6.0 release.</p>
 
 <p>It incorporates a lot of improvements and feedback from our community. Thank you!</p>
 
 <p>Thanks also go to Brooklyn's commercial users. Already Brooklyn has been adopted into some very exciting projects including controlling custom PaaS offerings, big data clusters, and three-tier web-apps.</p>
 
-<p>Work on this release can be tracked using Brooklyn's GitHub issue tracker:</p>
-
-<ul>
-<li><a href="https://github.com/brooklyncentral/brooklyn/issues?milestone=1">github.com/brooklyncentral/brooklyn/issues?milestone=1</a></li>
-</ul>
-
-
-<p>And via the mailing lists:</p>
+<p>For more information, please checkout <a href="http://http://brooklyncentral.github.io">http://brooklyncentral.github.io</a>, and subscribe to the mailing lists:</p>
 
 <ul>
 <li><a href="http://groups.google.com/group/brooklyn-dev">brooklyn-dev@googlegroups.com</a></li>
@@ -427,29 +421,28 @@ $(document).ready(function() {
 
 <h3>New Features</h3>
 
-<p>The major changes between M1 and M2 are:</p>
+<p>The major changes between 0.5 and 0.6.0 (including any and all previous 0.6.0 milestone releases) are:</p>
 
 <ol>
-<li><p>Entities have been separated into an interface and implementation, rather than just a single class. Construction of entities is now done using an EntitySpec, rather than directly calling the constructor. This improvement is required to simplify remoting in a distributed brooklyn management plane.</p></li>
-<li><p>Downloading of entity installers is greatly improved:</p>
+<li><p>Locations are now constructed using a LocationSpec, rather than calling the constructor directly. This improvement is required to allow the Brooklyn management plane to track locations and persist their state.</p></li>
+<li><p>A datagrid can be used to store the entity/location state within Brooklyn. This feature is currently disabled by default (i.e. storing to an in-memory pseduo-datagrid); work will continue on this in subsequent releases.</p></li>
+<li><p>A new location-metadata.properties file allows metadata values (e.g. ISO-3166, lat/lon coordinates, etc) to be added to and overridden.</p></li>
+<li><p>Several additional clouds are supported, including:</p>
 
 <ul>
-<li>More configurable, with ability to specify URLs in the brooklyn configuration files or to override in code.</li>
-<li><p>Will fallback to a repository maintained by Cloudsoft, so if an artifact is removed from the official public site then it will not break the entity.</p>
-
-<p>  See <a href="http://downloads.cloudsoftcorp.com/brooklyn/repository/">downloads.cloudsoftcorp.com/brooklyn/repository/</a></p></li>
+<li>Abiquo</li>
+<li>Google Compute Engine</li>
+<li>IBM SmartCloud (see <a href="github.com/cloudsoft/ibm-smartcloud">https://github.com/cloudsoft/ibm-smartcloud</a>
+)</li>
 </ul>
 </li>
-<li><p>Support for running applications across private subnets.</p></li>
-<li><p>Policies can now be re-configured on-the-fly through the REST api and through the web-console.</p></li>
-<li><p>Some entities now support configuration files being supplied in FreeMarker template format. These include JBoss AS7, ActiveMQ and MySql. More will be converted to use this pattern.</p></li>
 <li><p>Several new entities have been added, including:</p>
 
 <ul>
-<li>MongoDB</li>
-<li>Cassandra</li>
-<li>RubyRep</li>
-<li>DynamicWebAppFabric</li>
+<li>BindDnsServer</li>
+<li>Jetty6Server</li>
+<li>MongoDB replica sets</li>
+<li>BrooklynNode (for Brooklyn bootstrap deploying Brooklyn)</li>
 </ul>
 </li>
 </ol>
@@ -457,29 +450,34 @@ $(document).ready(function() {
 
 <h3>Backwards Compatibility</h3>
 
-<p>For upgrading from 0.5.0-M1 to M2:</p>
+<p>For upgrading from 0.5.0 to 0.6.0, existing entities/applications/policies will still work, provided they did not previously have deprecation warnings.</p>
+
+<p>Some additional code has been deprecated - users are strongly encouraged to update these:</p>
 
 <ol>
-<li><p>Entity classes have been renamed, e.g. MySqlNode is now an interface and the implementationis MySqlNodeImpl.</p>
+<li><p>Some previously deprecated code has been deleted.</p></li>
+<li><p>Use <code>LocationSpec</code> (and <code>managementContext.getLocationManager().createLocation(LocationSpec.spec(MyLocClazz.class)</code>), rather than calling location constructors directly.</p></li>
+<li><p>Use camelCase for property names in brooklyn.properties (e.g. brooklyn.jclouds.publicKeyFile instead of brooklyn.jclouds.public-key-file).</p></li>
+<li><p>Use <code>@Effector</code> and <code>@EffectorParam</code> for annotating effector methods in an entity (rather than <code>@Description</code>, <code>@NamedParameter</code> and <code>@DefaultValue</code>).</p></li>
+<li><p><code>location.getName()</code> has been renamed to <code>location.getDisplayName()</code>, to be consistent with Entity. The <code>location.getChildLocations()</code> and <code>location.getParentLocation()</code> have also been renamed to <code>getChildren()</code> and <code>getParent()</code> respectively.</p></li>
+<li><p>If overriding a config key in an entity to change the default value specified in a super-type entity or constant, then use <code>ConfigKeys.newConfigKeyWithDefault(...)</code>.</p></li>
+<li><p>Use <code>ConfigKeys.newStringConfigKey(...)</code> and similar methods, rather than using <code>new ConfigKey&lt;String&gt;(String.class, ...)</code></p></li>
+<li><p><code>ListConfigKey</code> has been deprecated because it no longer guarantees order; instead use <code>SetConfigKey</code>. This is a consequence of efficiently using a datagrid to store the data.</p></li>
+<li><p>Use the new <code>FeedConfig.onFailure()</code>, <code>FeedConfig.onError()</code> and <code>FeedConfig.checkSuccess()</code>. This is now called for example to determine if a http 404 is a success or failure (default failure), and if an ssh non-zero exit code is a failure (default yes).</p></li>
+<li><p>Some package/class changes, such as:</p>
 
 <ul>
-<li>The minimum change for this to work is to update your references to include the Impl suffixes. However, that will result in deprecation warnings.</li>
-<li>The recommended approach is to use the EntitySpec when constructing entities. A good place to start is to look at the updated example applications.</li>
+<li><code>brooklyn.util.NetworkUtils</code> renamed to <code>brooklyn.util.net.Networking</code></li>
+<li><code>brooklyn.entity.basic.lifecycle.CommonCommands</code> renamed to <code>brooklyn.util.ssh.CommonCommands</code></li>
+<li><code>brooklyn.util.MutableMap</code> renamed to <code>brooklyn.util.collections.MutableMap</code></li>
 </ul>
 </li>
-<li><p>The default username for provisioning with jclouds has changed to use the name of the user executing the Brooklyn process.</p>
-
-<ul>
-<li>Java's <code>System.getProperty("user.name")</code> is used instead of 'root' or 'ubuntu'</li>
-<li><p>Usernames can be overridden in <code>brooklyn.properties</code> or using system properties.
-  For example, by entering '<code>brooklyn.location.named.acmecloud.user=root</code>' in <code>brooklyn.properties</code> or using the command syntax <code>-Dbrooklyn.location.named.acmecloud.user=root</code>.</p>
-
-<p>  '<code>brooklyn.jclouds.aws-ec2.user=root</code>' could also be used to apply <code>user=root</code> to all aws-ec2 VMs.</p></li>
-</ul>
-</li>
-<li><p>Some deprecated code has been deleted. All of this code was commented in 0.4.0 with text such as "will be deleted in 0.5".</p></li>
 </ol>
 
+
+<h2>Previous Release Notes</h2>
+
+<p><a href="0.5.0">http://brooklyncentral.github.io/v/0.5.0/start/release-notes.html</a></p>
 
 
         </div><!--maincontent-->
