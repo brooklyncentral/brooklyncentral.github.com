@@ -165,7 +165,7 @@ $(document).ready(function() {
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.5.0</a></li>
+            <li><a href="/meta/versions.html">0.6.0-M1</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -444,9 +444,9 @@ $(document).ready(function() {
 
 
 
-<div class="highlight"><pre><code class="bash">% curl -LO http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.5.0/brooklyn-dist-0.5.0-dist.tar.gz
-% tar xvzf brooklyn-dist-0.5.0-dist.tar.gz
-% <span class="nb">export </span><span class="nv">BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/brooklyn-0.5.0/
+<div class="highlight"><pre><code class="bash">% curl -LO http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.6.0-M1/brooklyn-dist-0.6.0-M1-dist.tar.gz
+% tar xvzf brooklyn-dist-0.6.0-M1-dist.tar.gz
+% <span class="nb">export </span><span class="nv">BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/brooklyn-0.6.0-M1/
 </code></pre>
 </div>
 
@@ -465,7 +465,7 @@ $(document).ready(function() {
 
 <div class="highlight"><pre><code class="bash">% git clone https://github.com/brooklyncentral/brooklyn-examples.git
 % <span class="nb">cd </span>brooklyn-examples
-% git checkout 0.5.0
+% git checkout 0.6.0-M1
 % mvn clean install
 </code></pre>
 </div>
@@ -552,7 +552,7 @@ with a single line:</p>
 
 
 
-<p>Then visit the webapp on port 8080, or the Brooklyn console on 8081.  (Default credentials are admin/password.)
+<p>Then visit the webapp on port 8080, or the Brooklyn console on localhost:8081.
 Note that the installation may take some time, because the default deployment downloads the software from
 the official repos.  You can monitor start-up activity for each entity in the <code>Activity</code> pane in the management console,
 and see more detail by tailing the log file (<code>tail -f brooklyn.log</code>).</p>

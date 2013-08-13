@@ -165,7 +165,7 @@ $(document).ready(function() {
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.5.0</a></li>
+            <li><a href="/meta/versions.html">0.6.0-M1</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -395,18 +395,18 @@ $(document).ready(function() {
 
 <p>Download the Brooklyn distribution. This contains Brooklyn, ready to run.</p>
 
-<p>Save the <a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.5.0/brooklyn-dist-0.5.0-dist.tar.gz">Distro tgz</a> file to your home directory <code>~/</code>, or a location of your choice. (Other <a href="/start/download.html">download options</a> are available.)</p>
+<p>Save the <a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.6.0-M1/brooklyn-dist-0.6.0-M1-dist.tar.gz">Distro tgz</a> file to your home directory <code>~/</code>, or a location of your choice. (Other <a href="/start/download.html">download options</a> are available.)</p>
 
-<p>Untar the tgz. Each Distro is timestamped, so your filename will be different.</p>
+<p>Expand the <code>tar.gz</code> archive.</p>
 
-<pre><code>$ tar -zxf brooklyn-dist-&lt;version&gt;-&lt;timestamp&gt;-dist.tar.tar.gz
+<pre><code>$ tar -zxf brooklyn-dist--dist.tar.gz
 </code></pre>
 
-<p>This will create a brooklyn-&lt;version> folder. At the time of writing this was <code>brooklyn-0.5.0</code>.  <!-- BROOKLYN_VERSION --></p>
+<p>This will create a <code>brooklyn-</code> folder.</p>
 
 <p>Let's setup some paths for easy commands.</p>
 
-<pre><code>$ cd brooklyn-&lt;version&gt;
+<pre><code>$ cd brooklyn-
 $ BROOKLYN_HOME=$(pwd)
 $ export PATH=$PATH:$BROOKLYN_HOME/bin/
 </code></pre>
@@ -420,15 +420,13 @@ $ export PATH=$PATH:$BROOKLYN_HOME/bin/
 
 <p>Brooklyn will output the address of the management interface:</p>
 
-<p><code>... Started Brooklyn console at http://127.0.0.1:8081/</code> <a href="http://127.0.0.1:8081/">link</a></p>
-
-<p>Login with default credentials: <code>admin:password</code></p>
+<p><code>... Started Brooklyn console at http://127.0.0.1:8081/</code> (<a href="http://127.0.0.1:8081/">link</a>)</p>
 
 <p>Stop Brooklyn with ctrl-c.</p>
 
 <h3>Setting up Locations and Applications</h3>
 
-<p>Brooklyn loads  configuration parameters from <code>~/.brooklyn/brooklyn.properties</code> and a service catalog from <code>~/.brooklyn/catalog.xml</code>.</p>
+<p>By default Brooklyn loads configuration parameters from <code>~/.brooklyn/brooklyn.properties</code> and a service catalog from <code>~/.brooklyn/catalog.xml</code>.</p>
 
 <p>Create a .brooklyn folder:</p>
 
@@ -451,7 +449,7 @@ $ export PATH=$PATH:$BROOKLYN_HOME/bin/
 
 <p>catalog.xml is catalog of application or service blueprints. The example file contains two demos which will be automatically downloaded from the web if you run them.</p>
 
-<p>Edit this file (text editor) and check that the links to the demo applications' .jars are valid. At the time of writing these were for version <code>0.5.0</code>, but if this has changed you may need to update the links. <!-- BROOKLYN_VERSION --></p>
+<p>Edit this file (text editor) and check that the links to the demo applications' .jars are valid. At the time of writing these were for version <code>0.5.0-SNAPSHOT</code>, but if this has changed you may need to update the links. <!-- BROOKLYN VERSION --></p>
 
 <h3>SSH Key</h3>
 
@@ -461,7 +459,9 @@ $ export PATH=$PATH:$BROOKLYN_HOME/bin/
 $ cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys
 </code></pre>
 
-<p>(If you are using an existing key SSH that has a password, or is not located at <code>~/.ssh/id_rsa</code>, please supply the <code>brooklyn.localhost.private-key-file</code> and <code>brooklyn.localhost.private-key-passphrase</code> in your <code>brooklyn.properties</code> file.)</p>
+<p>(Existing SSH keys?: If you are using an existing key SSH that has a password, or is not located at <code>~/.ssh/id_rsa</code>, please supply the <code>brooklyn.localhost.privateKeyFile</code> and <code>brooklyn.localhost.privateKeyPassphrase</code> in your <code>brooklyn.properties</code> file.)</p>
+
+<p>(MacOSx user?: To allow SSH access to localhost please enable 'Remote Login' in System Preferences > Sharing.)</p>
 
 <h3>3-2-1 Go!</h3>
 

@@ -115,14 +115,38 @@ Package brooklyn.util.text
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="ComparableVersion.html" title="class in brooklyn/util/text">ComparableVersion</A></B></TD>
+        <TD>takes a version string, and compares to other versions, using NaturalOrderComparator</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="DataUriSchemeParser.html" title="class in brooklyn/util/text">DataUriSchemeParser</A></B></TD>
         <TD>implementation (currently hokey) of RFC-2397 data: URI scheme.
  </TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="FormattedString.html" title="class in brooklyn/util/text">FormattedString</A></B></TD>
+        <TD>wraps a call to String#format(String, Object...) in a toString, i.e. using %s syntax,
+ useful for places where we want deferred evaluation 
+ (e.g. as message to Preconditions to skip concatenation when not needed)</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="Identifiers.html" title="class in brooklyn/util/text">Identifiers</A></B></TD>
         <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="KeyValueParser.html" title="class in brooklyn/util/text">KeyValueParser</A></B></TD>
+        <TD>Parses a String that consists of multiple arguments, which are either single or key-value pairs.
+ </TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="NaturalOrderComparator.html" title="class in brooklyn/util/text">NaturalOrderComparator</A></B></TD>
+        <TD>comparator which takes two strings and puts them in an order with special rules for numbers to be placed in numeric order;
+ e.g. "10">"9", including when those numbers occur in the midst of equal text; e.g. </TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">

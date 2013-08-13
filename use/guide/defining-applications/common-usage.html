@@ -165,7 +165,7 @@ $(document).ready(function() {
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.5.0</a></li>
+            <li><a href="/meta/versions.html">0.6.0-M1</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -466,6 +466,8 @@ The following is supported from the configuration file (with whatever customizat
 <code>privateKeyPassphrase</code> does the trick (as in <code>brooklyn.jclouds.privateKeyPassphrase</code>, or other places
 where <code>privateKeyFile</code> is valid).  If you don't like keys, you can just use a plain old <code>password</code>.</p></li>
 <li><p>Hardware requirements such as <code>minRam</code> and <code>minCores</code> can be supplied, or a <code>hardwareId</code>  (jclouds only)</p></li>
+<li><p>Specific Secury Groups can be specified using <code>securityGroups</code>, if you want to reuse set of existing ones (jclouds only)</p></li>
+<li><p>Specific KeyPair can be specified using <code>keyPair</code>, if you want to reuse an existing keypair (jclouds only).</p></li>
 <li><p>Specific VM images can be specified using <code>imageId</code> or <code>imageNameRegex</code> (jclouds only)</p></li>
 <li><p>User metadata can be attached, using the syntax <code>userMetadata=key=value,key2="value 2"</code> (jclouds only)</p></li>
 <li><p>A <code>user</code> can be specified, with the property that -- in a jclouds world -- the user will be <em>created</em> on the machine,
@@ -475,7 +477,7 @@ Login for the root account will be disabled, as will login by password if a publ
 <li><p>You can specify the user account to use to login to jclouds initially with the <code>loginUser</code> property.
 Typically this is auto-detected by jclouds
 (often <code>root</code>, or <code>ubuntu</code> or <code>ec2-user</code> for known Ubuntu or Amazon Linux images),
-but the strategy isn't foolproof, particularly in some private cloud setups. (jclouds only)</p></li>
+but the strategy isn't foolproof, particularly in some private cloud setups. (jclouds only). In some cases, you may need to specify a <code>loginUser.privateKeyFile</code> if the image you are using doesn't allow ssh password login.</p></li>
 <li><p>Public keys can be specified using <code>publicKeyFile</code>,
 although these can usually be omitted if they follow the common pattern of being
 the private key file with the suffix <code>.pub</code> appended.

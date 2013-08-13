@@ -29,8 +29,6 @@ All Classes
 <BR>
 <A HREF="brooklyn/rest/resources/AbstractBrooklynRestResource.html" title="class in brooklyn.rest.resources" target="classFrame">AbstractBrooklynRestResource</A>
 <BR>
-<A HREF="brooklyn/event/adapter/AbstractChainablePollHelper.html" title="class in brooklyn.event.adapter" target="classFrame">AbstractChainablePollHelper</A>
-<BR>
 <A HREF="brooklyn/location/cloud/AbstractCloudMachineProvisioningLocation.html" title="class in brooklyn.location.cloud" target="classFrame">AbstractCloudMachineProvisioningLocation</A>
 <BR>
 <A HREF="brooklyn/enricher/basic/AbstractCombiningEnricher.html" title="class in brooklyn.enricher.basic" target="classFrame">AbstractCombiningEnricher</A>
@@ -75,15 +73,7 @@ All Classes
 <BR>
 <A HREF="brooklyn/policy/basic/AbstractPolicy.html" title="class in brooklyn.policy.basic" target="classFrame">AbstractPolicy</A>
 <BR>
-<A HREF="brooklyn/event/adapter/AbstractPollHelper.html" title="class in brooklyn.event.adapter" target="classFrame">AbstractPollHelper</A>
-<BR>
 <A HREF="brooklyn/location/jclouds/templates/AbstractPortableTemplateBuilder.html" title="class in brooklyn.location.jclouds.templates" target="classFrame">AbstractPortableTemplateBuilder</A>
-<BR>
-<A HREF="brooklyn/event/adapter/AbstractPushHelper.html" title="class in brooklyn.event.adapter" target="classFrame">AbstractPushHelper</A>
-<BR>
-<A HREF="brooklyn/event/adapter/AbstractSensorAdapter.html" title="class in brooklyn.event.adapter" target="classFrame">AbstractSensorAdapter</A>
-<BR>
-<A HREF="brooklyn/event/adapter/AbstractSensorEvaluationContext.html" title="class in brooklyn.event.adapter" target="classFrame">AbstractSensorEvaluationContext</A>
 <BR>
 <A HREF="brooklyn/entity/basic/AbstractSoftwareProcessDriver.html" title="class in brooklyn.entity.basic" target="classFrame">AbstractSoftwareProcessDriver</A>
 <BR>
@@ -111,17 +101,27 @@ All Classes
 <BR>
 <A HREF="brooklyn/entity/messaging/activemq/ActiveMQBrokerImpl.html" title="class in brooklyn.entity.messaging.activemq" target="classFrame">ActiveMQBrokerImpl</A>
 <BR>
-<A HREF="brooklyn/entity/messaging/activemq/ActiveMQDestination.html" title="class in brooklyn.entity.messaging.activemq" target="classFrame">ActiveMQDestination</A>
+<A HREF="brooklyn/entity/messaging/activemq/ActiveMQDestination.html" title="interface in brooklyn.entity.messaging.activemq" target="classFrame"><I>ActiveMQDestination</I></A>
+<BR>
+<A HREF="brooklyn/entity/messaging/activemq/ActiveMQDestinationImpl.html" title="class in brooklyn.entity.messaging.activemq" target="classFrame">ActiveMQDestinationImpl</A>
 <BR>
 <A HREF="brooklyn/entity/messaging/activemq/ActiveMQDriver.html" title="interface in brooklyn.entity.messaging.activemq" target="classFrame"><I>ActiveMQDriver</I></A>
 <BR>
-<A HREF="brooklyn/entity/messaging/activemq/ActiveMQQueue.html" title="class in brooklyn.entity.messaging.activemq" target="classFrame">ActiveMQQueue</A>
+<A HREF="brooklyn/entity/messaging/activemq/ActiveMQQueue.html" title="interface in brooklyn.entity.messaging.activemq" target="classFrame"><I>ActiveMQQueue</I></A>
+<BR>
+<A HREF="brooklyn/entity/messaging/activemq/ActiveMQQueueImpl.html" title="class in brooklyn.entity.messaging.activemq" target="classFrame">ActiveMQQueueImpl</A>
 <BR>
 <A HREF="brooklyn/entity/messaging/activemq/ActiveMQSshDriver.html" title="class in brooklyn.entity.messaging.activemq" target="classFrame">ActiveMQSshDriver</A>
 <BR>
-<A HREF="brooklyn/entity/messaging/activemq/ActiveMQTopic.html" title="class in brooklyn.entity.messaging.activemq" target="classFrame">ActiveMQTopic</A>
+<A HREF="brooklyn/entity/messaging/activemq/ActiveMQTopic.html" title="interface in brooklyn.entity.messaging.activemq" target="classFrame"><I>ActiveMQTopic</I></A>
+<BR>
+<A HREF="brooklyn/entity/messaging/activemq/ActiveMQTopicImpl.html" title="class in brooklyn.entity.messaging.activemq" target="classFrame">ActiveMQTopicImpl</A>
+<BR>
+<A HREF="brooklyn/rest/api/ActivityApi.html" title="interface in brooklyn.rest.api" target="classFrame"><I>ActivityApi</I></A>
 <BR>
 <A HREF="brooklyn/rest/resources/ActivityResource.html" title="class in brooklyn.rest.resources" target="classFrame">ActivityResource</A>
+<BR>
+<A HREF="brooklyn/enricher/basic/AddingEnricher.html" title="class in brooklyn.enricher.basic" target="classFrame">AddingEnricher</A>
 <BR>
 <A HREF="brooklyn/location/AddressableLocation.html" title="interface in brooklyn.location" target="classFrame"><I>AddressableLocation</I></A>
 <BR>
@@ -135,6 +135,8 @@ All Classes
 <BR>
 <A HREF="brooklyn/rest/domain/ApiError.html" title="class in brooklyn.rest.domain" target="classFrame">ApiError</A>
 <BR>
+<A HREF="brooklyn/rest/domain/ApiError.Builder.html" title="class in brooklyn.rest.domain.ApiError" target="classFrame">ApiError.Builder</A>
+<BR>
 <A HREF="brooklyn/rest/apidoc/Apidoc.html" title="annotation type in brooklyn.rest.apidoc" target="classFrame">Apidoc</A>
 <BR>
 <A HREF="brooklyn/rest/apidoc/ApidocEndpoint.html" title="class in brooklyn.rest.apidoc" target="classFrame">ApidocEndpoint</A>
@@ -147,6 +149,8 @@ All Classes
 <BR>
 <A HREF="brooklyn/entity/Application.html" title="interface in brooklyn.entity" target="classFrame"><I>Application</I></A>
 <BR>
+<A HREF="brooklyn/rest/api/ApplicationApi.html" title="interface in brooklyn.rest.api" target="classFrame"><I>ApplicationApi</I></A>
+<BR>
 <A HREF="brooklyn/entity/basic/ApplicationBuilder.html" title="class in brooklyn.entity.basic" target="classFrame">ApplicationBuilder</A>
 <BR>
 <A HREF="brooklyn/rest/resources/ApplicationResource.html" title="class in brooklyn.rest.resources" target="classFrame">ApplicationResource</A>
@@ -157,9 +161,11 @@ All Classes
 <BR>
 <A HREF="brooklyn/rest/domain/ApplicationSummary.html" title="class in brooklyn.rest.domain" target="classFrame">ApplicationSummary</A>
 <BR>
-<A HREF="brooklyn/rest/domain/ApplicationSummary.Status.html" title="enum in brooklyn.rest.domain.ApplicationSummary" target="classFrame">ApplicationSummary.Status</A>
+<A HREF="brooklyn/rest/transform/ApplicationTransformer.html" title="class in brooklyn.rest.transform" target="classFrame">ApplicationTransformer</A>
 <BR>
 <A HREF="brooklyn/test/Asserts.html" title="class in brooklyn.test" target="classFrame">Asserts</A>
+<BR>
+<A HREF="brooklyn/test/Asserts.BooleanWithMessage.html" title="class in brooklyn.test.Asserts" target="classFrame">Asserts.BooleanWithMessage</A>
 <BR>
 <A HREF="brooklyn/management/internal/AsyncCollectionChangeAdapter.html" title="class in brooklyn.management.internal" target="classFrame">AsyncCollectionChangeAdapter</A>
 <BR>
@@ -185,9 +191,11 @@ All Classes
 <BR>
 <A HREF="brooklyn/policy/loadbalancing/BalanceablePoolModel.html" title="interface in brooklyn.policy.loadbalancing" target="classFrame"><I>BalanceablePoolModel</I></A>
 <BR>
-<A HREF="brooklyn/policy/loadbalancing/BalanceableWorkerPool.html" title="class in brooklyn.policy.loadbalancing" target="classFrame">BalanceableWorkerPool</A>
+<A HREF="brooklyn/policy/loadbalancing/BalanceableWorkerPool.html" title="interface in brooklyn.policy.loadbalancing" target="classFrame"><I>BalanceableWorkerPool</I></A>
 <BR>
 <A HREF="brooklyn/policy/loadbalancing/BalanceableWorkerPool.ContainerItemPair.html" title="class in brooklyn.policy.loadbalancing.BalanceableWorkerPool" target="classFrame">BalanceableWorkerPool.ContainerItemPair</A>
+<BR>
+<A HREF="brooklyn/policy/loadbalancing/BalanceableWorkerPoolImpl.html" title="class in brooklyn.policy.loadbalancing" target="classFrame">BalanceableWorkerPoolImpl</A>
 <BR>
 <A HREF="brooklyn/policy/loadbalancing/BalancingStrategy.html" title="class in brooklyn.policy.loadbalancing" target="classFrame">BalancingStrategy</A>
 <BR>
@@ -199,13 +207,17 @@ All Classes
 <BR>
 <A HREF="brooklyn/event/basic/BasicAttributeSensorAndConfigKey.html" title="class in brooklyn.event.basic" target="classFrame">BasicAttributeSensorAndConfigKey</A>
 <BR>
+<A HREF="brooklyn/event/basic/BasicAttributeSensorAndConfigKey.IntegerAttributeSensorAndConfigKey.html" title="class in brooklyn.event.basic.BasicAttributeSensorAndConfigKey" target="classFrame">BasicAttributeSensorAndConfigKey.IntegerAttributeSensorAndConfigKey</A>
+<BR>
+<A HREF="brooklyn/event/basic/BasicAttributeSensorAndConfigKey.StringAttributeSensorAndConfigKey.html" title="class in brooklyn.event.basic.BasicAttributeSensorAndConfigKey" target="classFrame">BasicAttributeSensorAndConfigKey.StringAttributeSensorAndConfigKey</A>
+<BR>
 <A HREF="brooklyn/catalog/internal/BasicBrooklynCatalog.html" title="class in brooklyn.catalog.internal" target="classFrame">BasicBrooklynCatalog</A>
 <BR>
 <A HREF="brooklyn/event/basic/BasicConfigKey.html" title="class in brooklyn.event.basic" target="classFrame">BasicConfigKey</A>
 <BR>
-<A HREF="brooklyn/event/basic/BasicConfigKey.Builder.html" title="class in brooklyn.event.basic.BasicConfigKey" target="classFrame">BasicConfigKey.Builder</A>
+<A HREF="brooklyn/event/basic/BasicConfigKey.BasicConfigKeyOverwriting.html" title="class in brooklyn.event.basic.BasicConfigKey" target="classFrame">BasicConfigKey.BasicConfigKeyOverwriting</A>
 <BR>
-<A HREF="brooklyn/event/basic/BasicConfigKey.StringConfigKey.html" title="class in brooklyn.event.basic.BasicConfigKey" target="classFrame">BasicConfigKey.StringConfigKey</A>
+<A HREF="brooklyn/event/basic/BasicConfigKey.Builder.html" title="class in brooklyn.event.basic.BasicConfigKey" target="classFrame">BasicConfigKey.Builder</A>
 <BR>
 <A HREF="brooklyn/entity/basic/BasicConfigurableEntityFactory.html" title="class in brooklyn.entity.basic" target="classFrame">BasicConfigurableEntityFactory</A>
 <BR>
@@ -281,6 +293,8 @@ All Classes
 <BR>
 <A HREF="brooklyn/util/pool/BasicPool.Builder.html" title="class in brooklyn.util.pool.BasicPool" target="classFrame">BasicPool.Builder</A>
 <BR>
+<A HREF="brooklyn/internal/storage/impl/BasicReference.html" title="class in brooklyn.internal.storage.impl" target="classFrame">BasicReference</A>
+<BR>
 <A HREF="brooklyn/event/basic/BasicSensor.html" title="class in brooklyn.event.basic" target="classFrame">BasicSensor</A>
 <BR>
 <A HREF="brooklyn/event/basic/BasicSensorEvent.html" title="class in brooklyn.event.basic" target="classFrame">BasicSensorEvent</A>
@@ -290,6 +304,14 @@ All Classes
 <A HREF="brooklyn/util/task/BasicTask.html" title="class in brooklyn.util.task" target="classFrame">BasicTask</A>
 <BR>
 <A HREF="brooklyn/util/task/BasicTaskStub.html" title="class in brooklyn.util.task" target="classFrame">BasicTaskStub</A>
+<BR>
+<A HREF="brooklyn/entity/network/bind/BindDnsServer.html" title="interface in brooklyn.entity.network.bind" target="classFrame"><I>BindDnsServer</I></A>
+<BR>
+<A HREF="brooklyn/entity/network/bind/BindDnsServerDriver.html" title="interface in brooklyn.entity.network.bind" target="classFrame"><I>BindDnsServerDriver</I></A>
+<BR>
+<A HREF="brooklyn/entity/network/bind/BindDnsServerImpl.html" title="class in brooklyn.entity.network.bind" target="classFrame">BindDnsServerImpl</A>
+<BR>
+<A HREF="brooklyn/entity/network/bind/BindDnsServerSshDriver.html" title="class in brooklyn.entity.network.bind" target="classFrame">BindDnsServerSshDriver</A>
 <BR>
 <A HREF="brooklyn/util/math/BitList.html" title="class in brooklyn.util.math" target="classFrame">BitList</A>
 <BR>
@@ -303,9 +325,17 @@ All Classes
 <BR>
 <A HREF="brooklyn/location/access/BrooklynAccessUtils.html" title="class in brooklyn.location.access" target="classFrame">BrooklynAccessUtils</A>
 <BR>
+<A HREF="brooklyn/rest/client/BrooklynApi.html" title="class in brooklyn.rest.client" target="classFrame">BrooklynApi</A>
+<BR>
 <A HREF="brooklyn/catalog/BrooklynCatalog.html" title="interface in brooklyn.catalog" target="classFrame"><I>BrooklynCatalog</I></A>
 <BR>
+<A HREF="brooklyn/launcher/config/BrooklynDevelopmentModes.html" title="class in brooklyn.launcher.config" target="classFrame">BrooklynDevelopmentModes</A>
+<BR>
+<A HREF="brooklyn/launcher/config/BrooklynDevelopmentModes.BrooklynDevelopmentMode.html" title="enum in brooklyn.launcher.configs.BrooklynDevelopmentMode" target="classFrame">BrooklynDevelopmentModes.BrooklynDevelopmentMode</A>
+<BR>
 <A HREF="brooklyn/management/internal/BrooklynGarbageCollector.html" title="class in brooklyn.management.internal" target="classFrame">BrooklynGarbageCollector</A>
+<BR>
+<A HREF="brooklyn/launcher/config/BrooklynGlobalConfig.html" title="class in brooklyn.launcher.config" target="classFrame">BrooklynGlobalConfig</A>
 <BR>
 <A HREF="brooklyn/util/BrooklynLanguageExtensions.html" title="class in brooklyn.util" target="classFrame">BrooklynLanguageExtensions</A>
 <BR>
@@ -331,11 +361,25 @@ All Classes
 <BR>
 <A HREF="brooklyn/entity/rebind/persister/BrooklynMementoPersisterToMultiFile.html" title="class in brooklyn.entity.rebind.persister" target="classFrame">BrooklynMementoPersisterToMultiFile</A>
 <BR>
-<A HREF="brooklyn/entity/brooklyn/BrooklynMetrics.html" title="class in brooklyn.entity.brooklyn" target="classFrame">BrooklynMetrics</A>
+<A HREF="brooklyn/entity/brooklyn/BrooklynMetrics.html" title="interface in brooklyn.entity.brooklyn" target="classFrame"><I>BrooklynMetrics</I></A>
+<BR>
+<A HREF="brooklyn/entity/brooklyn/BrooklynMetricsImpl.html" title="class in brooklyn.entity.brooklyn" target="classFrame">BrooklynMetricsImpl</A>
+<BR>
+<A HREF="brooklyn/util/BrooklynNetworkUtils.html" title="class in brooklyn.util" target="classFrame">BrooklynNetworkUtils</A>
+<BR>
+<A HREF="brooklyn/entity/brooklynnode/BrooklynNode.html" title="interface in brooklyn.entity.brooklynnode" target="classFrame"><I>BrooklynNode</I></A>
+<BR>
+<A HREF="brooklyn/entity/brooklynnode/BrooklynNodeDriver.html" title="interface in brooklyn.entity.brooklynnode" target="classFrame"><I>BrooklynNodeDriver</I></A>
+<BR>
+<A HREF="brooklyn/entity/brooklynnode/BrooklynNodeImpl.html" title="class in brooklyn.entity.brooklynnode" target="classFrame">BrooklynNodeImpl</A>
+<BR>
+<A HREF="brooklyn/entity/brooklynnode/BrooklynNodeSshDriver.html" title="class in brooklyn.entity.brooklynnode" target="classFrame">BrooklynNodeSshDriver</A>
 <BR>
 <A HREF="brooklyn/config/BrooklynProperties.html" title="class in brooklyn.config" target="classFrame">BrooklynProperties</A>
 <BR>
 <A HREF="brooklyn/config/BrooklynProperties.Factory.html" title="class in brooklyn.config.BrooklynProperties" target="classFrame">BrooklynProperties.Factory</A>
+<BR>
+<A HREF="brooklyn/config/BrooklynProperties.Factory.Builder.html" title="class in brooklyn.config.BrooklynProperties.Factory" target="classFrame">BrooklynProperties.Factory.Builder</A>
 <BR>
 <A HREF="brooklyn/rest/security/BrooklynPropertiesSecurityFilter.html" title="class in brooklyn.rest.security" target="classFrame">BrooklynPropertiesSecurityFilter</A>
 <BR>
@@ -346,6 +390,12 @@ All Classes
 <A HREF="brooklyn/launcher/BrooklynServerDetails.html" title="class in brooklyn.launcher" target="classFrame">BrooklynServerDetails</A>
 <BR>
 <A HREF="brooklyn/config/BrooklynServiceAttributes.html" title="class in brooklyn.config" target="classFrame">BrooklynServiceAttributes</A>
+<BR>
+<A HREF="brooklyn/internal/storage/BrooklynStorage.html" title="interface in brooklyn.internal.storage" target="classFrame"><I>BrooklynStorage</I></A>
+<BR>
+<A HREF="brooklyn/internal/storage/BrooklynStorageFactory.html" title="interface in brooklyn.internal.storage" target="classFrame"><I>BrooklynStorageFactory</I></A>
+<BR>
+<A HREF="brooklyn/internal/storage/impl/BrooklynStorageImpl.html" title="class in brooklyn.internal.storage.impl" target="classFrame">BrooklynStorageImpl</A>
 <BR>
 <A HREF="brooklyn/util/internal/BrooklynSystemProperties.html" title="class in brooklyn.util.internal" target="classFrame">BrooklynSystemProperties</A>
 <BR>
@@ -374,6 +424,8 @@ All Classes
 <A HREF="brooklyn/entity/nosql/cassandra/CassandraNodeSshDriver.html" title="class in brooklyn.entity.nosql.cassandra" target="classFrame">CassandraNodeSshDriver</A>
 <BR>
 <A HREF="brooklyn/catalog/Catalog.html" title="annotation type in brooklyn.catalog" target="classFrame">Catalog</A>
+<BR>
+<A HREF="brooklyn/rest/api/CatalogApi.html" title="interface in brooklyn.rest.api" target="classFrame"><I>CatalogApi</I></A>
 <BR>
 <A HREF="brooklyn/catalog/internal/CatalogClasspathDo.html" title="class in brooklyn.catalog.internal" target="classFrame">CatalogClasspathDo</A>
 <BR>
@@ -415,6 +467,8 @@ All Classes
 <BR>
 <A HREF="brooklyn/catalog/internal/CatalogTemplateItemDto.html" title="class in brooklyn.catalog.internal" target="classFrame">CatalogTemplateItemDto</A>
 <BR>
+<A HREF="brooklyn/rest/transform/CatalogTransformer.html" title="class in brooklyn.rest.transform" target="classFrame">CatalogTransformer</A>
+<BR>
 <A HREF="brooklyn/catalog/internal/CatalogXmlSerializer.html" title="class in brooklyn.catalog.internal" target="classFrame">CatalogXmlSerializer</A>
 <BR>
 <A HREF="brooklyn/entity/rebind/ChangeListener.html" title="interface in brooklyn.entity.rebind" target="classFrame"><I>ChangeListener</I></A>
@@ -422,6 +476,8 @@ All Classes
 <A HREF="brooklyn/entity/trait/Changeable.html" title="interface in brooklyn.entity.trait" target="classFrame"><I>Changeable</I></A>
 <BR>
 <A HREF="brooklyn/util/net/Cidr.html" title="class in brooklyn.util.net" target="classFrame">Cidr</A>
+<BR>
+<A HREF="brooklyn/util/flags/ClassCoercionException.html" title="class in brooklyn.util.flags" target="classFrame">ClassCoercionException</A>
 <BR>
 <A HREF="brooklyn/entity/basic/ClosureEntityFactory.html" title="class in brooklyn.entity.basic" target="classFrame">ClosureEntityFactory</A>
 <BR>
@@ -433,19 +489,19 @@ All Classes
 <BR>
 <A HREF="brooklyn/management/internal/CollectionChangeListener.html" title="interface in brooklyn.management.internal" target="classFrame"><I>CollectionChangeListener</I></A>
 <BR>
-<A HREF="brooklyn/location/basic/CommandLineLocations.html" title="class in brooklyn.location.basic" target="classFrame">CommandLineLocations</A>
-<BR>
 <A HREF="brooklyn/util/CommandLineUtil.html" title="class in brooklyn.util" target="classFrame">CommandLineUtil</A>
 <BR>
 <A HREF="brooklyn/util/ssh/CommonCommands.html" title="class in brooklyn.util.ssh" target="classFrame">CommonCommands</A>
 <BR>
 <A HREF="brooklyn/entity/basic/lifecycle/CommonCommands.html" title="class in brooklyn.entity.basic.lifecycle" target="classFrame">CommonCommands</A>
 <BR>
-<A HREF="brooklyn/util/ComparableVersion.html" title="class in brooklyn.util" target="classFrame">ComparableVersion</A>
+<A HREF="brooklyn/util/text/ComparableVersion.html" title="class in brooklyn.util.text" target="classFrame">ComparableVersion</A>
 <BR>
 <A HREF="brooklyn/util/exceptions/CompoundRuntimeException.html" title="class in brooklyn.util.exceptions" target="classFrame">CompoundRuntimeException</A>
 <BR>
 <A HREF="brooklyn/util/task/CompoundTask.html" title="class in brooklyn.util.task" target="classFrame">CompoundTask</A>
+<BR>
+<A HREF="brooklyn/internal/storage/impl/ConcurrentMapAcceptingNullVals.html" title="class in brooklyn.internal.storage.impl" target="classFrame">ConcurrentMapAcceptingNullVals</A>
 <BR>
 <A HREF="brooklyn/util/config/ConfigBag.html" title="class in brooklyn.util.config" target="classFrame">ConfigBag</A>
 <BR>
@@ -459,13 +515,9 @@ All Classes
 <BR>
 <A HREF="brooklyn/config/ConfigMap.html" title="interface in brooklyn.config" target="classFrame"><I>ConfigMap</I></A>
 <BR>
-<A HREF="brooklyn/entity/basic/ConfigMap.html" title="interface in brooklyn.entity.basic" target="classFrame"><I>ConfigMap</I></A>
-<BR>
 <A HREF="brooklyn/entity/basic/ConfigMapViewWithStringKeys.html" title="class in brooklyn.entity.basic" target="classFrame">ConfigMapViewWithStringKeys</A>
 <BR>
 <A HREF="brooklyn/config/ConfigPredicates.html" title="class in brooklyn.config" target="classFrame">ConfigPredicates</A>
-<BR>
-<A HREF="brooklyn/event/adapter/ConfigSensorAdapter.html" title="class in brooklyn.event.adapter" target="classFrame">ConfigSensorAdapter</A>
 <BR>
 <A HREF="brooklyn/rest/domain/ConfigSummary.html" title="class in brooklyn.rest.domain" target="classFrame">ConfigSummary</A>
 <BR>
@@ -499,15 +551,19 @@ All Classes
 <BR>
 <A HREF="brooklyn/entity/nosql/couchdb/CouchDBNodeSshDriver.html" title="class in brooklyn.entity.nosql.couchdb" target="classFrame">CouchDBNodeSshDriver</A>
 <BR>
-<A HREF="brooklyn/entity/basic/Create.html" title="annotation type in brooklyn.entity.basic" target="classFrame">Create</A>
-<BR>
-<A HREF="brooklyn/location/jclouds/CredentialsFromEnv.html" title="class in brooklyn.location.jclouds" target="classFrame">CredentialsFromEnv</A>
-<BR>
 <A HREF="brooklyn/demo/CumulusRDFApplication.html" title="class in brooklyn.demo" target="classFrame">CumulusRDFApplication</A>
 <BR>
 <A HREF="brooklyn/demo/CumulusRDFTomcatSshDriver.html" title="class in brooklyn.demo" target="classFrame">CumulusRDFTomcatSshDriver</A>
 <BR>
 <A HREF="brooklyn/enricher/CustomAggregatingEnricher.html" title="class in brooklyn.enricher" target="classFrame">CustomAggregatingEnricher</A>
+<BR>
+<A HREF="brooklyn/launcher/config/CustomResourceLocator.html" title="class in brooklyn.launcher.config" target="classFrame">CustomResourceLocator</A>
+<BR>
+<A HREF="brooklyn/launcher/config/CustomResourceLocator.ResourceLocator.html" title="interface in brooklyn.launcher.config.CustomResourceLocator" target="classFrame"><I>CustomResourceLocator.ResourceLocator</I></A>
+<BR>
+<A HREF="brooklyn/launcher/config/CustomResourceLocator.SearchingClassPathInDevMode.html" title="class in brooklyn.launcher.config.CustomResourceLocator" target="classFrame">CustomResourceLocator.SearchingClassPathInDevMode</A>
+<BR>
+<A HREF="brooklyn/internal/storage/DataGrid.html" title="interface in brooklyn.internal.storage" target="classFrame"><I>DataGrid</I></A>
 <BR>
 <A HREF="brooklyn/entity/nosql/DataStore.html" title="interface in brooklyn.entity.nosql" target="classFrame"><I>DataStore</I></A>
 <BR>
@@ -516,6 +572,8 @@ All Classes
 <A HREF="brooklyn/entity/database/DatabaseNode.html" title="interface in brooklyn.entity.database" target="classFrame"><I>DatabaseNode</I></A>
 <BR>
 <A HREF="brooklyn/policy/loadbalancing/DefaultBalanceablePoolModel.html" title="class in brooklyn.policy.loadbalancing" target="classFrame">DefaultBalanceablePoolModel</A>
+<BR>
+<A HREF="brooklyn/rest/util/DefaultExceptionMapper.html" title="class in brooklyn.rest.util" target="classFrame">DefaultExceptionMapper</A>
 <BR>
 <A HREF="brooklyn/policy/followthesun/DefaultFollowTheSunModel.html" title="class in brooklyn.policy.followthesun" target="classFrame">DefaultFollowTheSunModel</A>
 <BR>
@@ -537,9 +595,9 @@ All Classes
 <BR>
 <A HREF="brooklyn/event/basic/DependentConfiguration.html" title="class in brooklyn.event.basic" target="classFrame">DependentConfiguration</A>
 <BR>
-<A HREF="brooklyn/entity/basic/Description.html" title="annotation type in brooklyn.entity.basic" target="classFrame">Description</A>
+<A HREF="brooklyn/location/basic/DeprecatedKeysMappingBuilder.html" title="class in brooklyn.location.basic" target="classFrame">DeprecatedKeysMappingBuilder</A>
 <BR>
-<A HREF="brooklyn/entity/basic/Destroy.html" title="annotation type in brooklyn.entity.basic" target="classFrame">Destroy</A>
+<A HREF="brooklyn/entity/basic/Description.html" title="annotation type in brooklyn.entity.basic" target="classFrame">Description</A>
 <BR>
 <A HREF="brooklyn/util/internal/DoubleSystemProperty.html" title="class in brooklyn.util.internal" target="classFrame">DoubleSystemProperty</A>
 <BR>
@@ -565,6 +623,8 @@ All Classes
 <BR>
 <A HREF="brooklyn/entity/drivers/DriverDependentEntity.html" title="interface in brooklyn.entity.drivers" target="classFrame"><I>DriverDependentEntity</I></A>
 <BR>
+<A HREF="brooklyn/util/time/Duration.html" title="class in brooklyn.util.time" target="classFrame">Duration</A>
+<BR>
 <A HREF="brooklyn/entity/group/DynamicCluster.html" title="interface in brooklyn.entity.group" target="classFrame"><I>DynamicCluster</I></A>
 <BR>
 <A HREF="brooklyn/entity/group/DynamicClusterImpl.html" title="class in brooklyn.entity.group" target="classFrame">DynamicClusterImpl</A>
@@ -585,13 +645,21 @@ All Classes
 <BR>
 <A HREF="brooklyn/entity/webapp/DynamicWebAppFabricImpl.html" title="class in brooklyn.entity.webapp" target="classFrame">DynamicWebAppFabricImpl</A>
 <BR>
+<A HREF="brooklyn/entity/annotation/Effector.html" title="annotation type in brooklyn.entity.annotation" target="classFrame">Effector</A>
+<BR>
 <A HREF="brooklyn/entity/Effector.html" title="interface in brooklyn.entity" target="classFrame"><I>Effector</I></A>
+<BR>
+<A HREF="brooklyn/rest/api/EffectorApi.html" title="interface in brooklyn.rest.api" target="classFrame"><I>EffectorApi</I></A>
+<BR>
+<A HREF="brooklyn/entity/annotation/EffectorParam.html" title="annotation type in brooklyn.entity.annotation" target="classFrame">EffectorParam</A>
 <BR>
 <A HREF="brooklyn/rest/resources/EffectorResource.html" title="class in brooklyn.rest.resources" target="classFrame">EffectorResource</A>
 <BR>
 <A HREF="brooklyn/rest/domain/EffectorSummary.html" title="class in brooklyn.rest.domain" target="classFrame">EffectorSummary</A>
 <BR>
 <A HREF="brooklyn/rest/domain/EffectorSummary.ParameterSummary.html" title="class in brooklyn.rest.domain.EffectorSummary" target="classFrame">EffectorSummary.ParameterSummary</A>
+<BR>
+<A HREF="brooklyn/rest/transform/EffectorTransformer.html" title="class in brooklyn.rest.transform" target="classFrame">EffectorTransformer</A>
 <BR>
 <A HREF="brooklyn/entity/basic/EffectorUtils.html" title="class in brooklyn.entity.basic" target="classFrame">EffectorUtils</A>
 <BR>
@@ -613,7 +681,11 @@ All Classes
 <BR>
 <A HREF="brooklyn/policy/EntityAdjunct.html" title="interface in brooklyn.policy" target="classFrame"><I>EntityAdjunct</I></A>
 <BR>
+<A HREF="brooklyn/rest/api/EntityApi.html" title="interface in brooklyn.rest.api" target="classFrame"><I>EntityApi</I></A>
+<BR>
 <A HREF="brooklyn/management/internal/EntityChangeListener.html" title="interface in brooklyn.management.internal" target="classFrame"><I>EntityChangeListener</I></A>
+<BR>
+<A HREF="brooklyn/rest/api/EntityConfigApi.html" title="interface in brooklyn.rest.api" target="classFrame"><I>EntityConfigApi</I></A>
 <BR>
 <A HREF="brooklyn/entity/basic/EntityConfigMap.html" title="class in brooklyn.entity.basic" target="classFrame">EntityConfigMap</A>
 <BR>
@@ -673,6 +745,8 @@ All Classes
 <BR>
 <A HREF="brooklyn/test/EntityTestUtils.html" title="class in brooklyn.test" target="classFrame">EntityTestUtils</A>
 <BR>
+<A HREF="brooklyn/rest/transform/EntityTransformer.html" title="class in brooklyn.rest.transform" target="classFrame">EntityTransformer</A>
+<BR>
 <A HREF="brooklyn/entity/EntityType.html" title="interface in brooklyn.entity" target="classFrame"><I>EntityType</I></A>
 <BR>
 <A HREF="brooklyn/entity/proxying/EntityTypeRegistry.html" title="interface in brooklyn.entity.proxying" target="classFrame"><I>EntityTypeRegistry</I></A>
@@ -684,8 +758,6 @@ All Classes
 <A HREF="brooklyn/util/xstream/EnumCaseForgivingConverter.html" title="class in brooklyn.util.xstream" target="classFrame">EnumCaseForgivingConverter</A>
 <BR>
 <A HREF="brooklyn/util/xstream/EnumCaseForgivingSingleValueConverter.html" title="class in brooklyn.util.xstream" target="classFrame">EnumCaseForgivingSingleValueConverter</A>
-<BR>
-<A HREF="brooklyn/entity/basic/Error.html" title="annotation type in brooklyn.entity.basic" target="classFrame">Error</A>
 <BR>
 <A HREF="brooklyn/util/exceptions/Exceptions.html" title="class in brooklyn.util.exceptions" target="classFrame">Exceptions</A>
 <BR>
@@ -727,25 +799,21 @@ All Classes
 <BR>
 <A HREF="brooklyn/policy/followthesun/FollowTheSunPolicy.html" title="class in brooklyn.policy.followthesun" target="classFrame">FollowTheSunPolicy</A>
 <BR>
-<A HREF="brooklyn/policy/followthesun/FollowTheSunPool.html" title="class in brooklyn.policy.followthesun" target="classFrame">FollowTheSunPool</A>
+<A HREF="brooklyn/policy/followthesun/FollowTheSunPool.html" title="interface in brooklyn.policy.followthesun" target="classFrame"><I>FollowTheSunPool</I></A>
 <BR>
 <A HREF="brooklyn/policy/followthesun/FollowTheSunPool.ContainerItemPair.html" title="class in brooklyn.policy.followthesun.FollowTheSunPool" target="classFrame">FollowTheSunPool.ContainerItemPair</A>
 <BR>
+<A HREF="brooklyn/policy/followthesun/FollowTheSunPoolImpl.html" title="class in brooklyn.policy.followthesun" target="classFrame">FollowTheSunPoolImpl</A>
+<BR>
 <A HREF="brooklyn/policy/followthesun/FollowTheSunStrategy.html" title="class in brooklyn.policy.followthesun" target="classFrame">FollowTheSunStrategy</A>
 <BR>
-<A HREF="brooklyn/event/adapter/FunctionBasePollHelper.html" title="class in brooklyn.event.adapter" target="classFrame">FunctionBasePollHelper</A>
-<BR>
-<A HREF="brooklyn/event/adapter/FunctionCallAdapter.html" title="class in brooklyn.event.adapter" target="classFrame">FunctionCallAdapter</A>
-<BR>
-<A HREF="brooklyn/event/adapter/FunctionChainPollHelper.html" title="class in brooklyn.event.adapter" target="classFrame">FunctionChainPollHelper</A>
+<A HREF="brooklyn/util/text/FormattedString.html" title="class in brooklyn.util.text" target="classFrame">FormattedString</A>
 <BR>
 <A HREF="brooklyn/event/feed/function/FunctionFeed.html" title="class in brooklyn.event.feed.function" target="classFrame">FunctionFeed</A>
 <BR>
 <A HREF="brooklyn/event/feed/function/FunctionFeed.Builder.html" title="class in brooklyn.event.feed.function.FunctionFeed" target="classFrame">FunctionFeed.Builder</A>
 <BR>
 <A HREF="brooklyn/event/feed/function/FunctionPollConfig.html" title="class in brooklyn.event.feed.function" target="classFrame">FunctionPollConfig</A>
-<BR>
-<A HREF="brooklyn/event/adapter/FunctionSensorAdapter.html" title="class in brooklyn.event.adapter" target="classFrame">FunctionSensorAdapter</A>
 <BR>
 <A HREF="brooklyn/policy/basic/GeneralPurposePolicy.html" title="class in brooklyn.policy.basic" target="classFrame">GeneralPurposePolicy</A>
 <BR>
@@ -799,23 +867,15 @@ All Classes
 <BR>
 <A HREF="brooklyn/event/feed/http/HttpPollConfig.html" title="class in brooklyn.event.feed.http" target="classFrame">HttpPollConfig</A>
 <BR>
-<A HREF="brooklyn/event/adapter/HttpPollHelper.html" title="class in brooklyn.event.adapter" target="classFrame">HttpPollHelper</A>
-<BR>
 <A HREF="brooklyn/event/feed/http/HttpPollValue.html" title="class in brooklyn.event.feed.http" target="classFrame">HttpPollValue</A>
 <BR>
 <A HREF="brooklyn/event/feed/http/HttpPolls.html" title="class in brooklyn.event.feed.http" target="classFrame">HttpPolls</A>
-<BR>
-<A HREF="brooklyn/event/adapter/HttpResponseContext.html" title="class in brooklyn.event.adapter" target="classFrame">HttpResponseContext</A>
-<BR>
-<A HREF="brooklyn/event/adapter/HttpSensorAdapter.html" title="class in brooklyn.event.adapter" target="classFrame">HttpSensorAdapter</A>
 <BR>
 <A HREF="brooklyn/test/HttpTestUtils.html" title="class in brooklyn.test" target="classFrame">HttpTestUtils</A>
 <BR>
 <A HREF="brooklyn/event/feed/http/HttpValueFunctions.html" title="class in brooklyn.event.feed.http" target="classFrame">HttpValueFunctions</A>
 <BR>
 <A HREF="brooklyn/entity/webapp/HttpsSslConfig.html" title="class in brooklyn.entity.webapp" target="classFrame">HttpsSslConfig</A>
-<BR>
-<A HREF="brooklyn/util/IdGenerator.html" title="class in brooklyn.util" target="classFrame">IdGenerator</A>
 <BR>
 <A HREF="brooklyn/util/text/Identifiers.html" title="class in brooklyn.util.text" target="classFrame">Identifiers</A>
 <BR>
@@ -827,7 +887,11 @@ All Classes
 <BR>
 <A HREF="brooklyn/entity/proxying/ImplementedBy.html" title="annotation type in brooklyn.entity.proxying" target="classFrame">ImplementedBy</A>
 <BR>
+<A HREF="brooklyn/internal/storage/impl/inmemory/InMemoryBrooklynStorageFactory.html" title="class in brooklyn.internal.storage.impl.inmemory" target="classFrame">InMemoryBrooklynStorageFactory</A>
+<BR>
 <A HREF="brooklyn/util/xstream/Inet4AddressConverter.html" title="class in brooklyn.util.xstream" target="classFrame">Inet4AddressConverter</A>
+<BR>
+<A HREF="brooklyn/internal/storage/impl/inmemory/InmemoryDatagrid.html" title="class in brooklyn.internal.storage.impl.inmemory" target="classFrame">InmemoryDatagrid</A>
 <BR>
 <A HREF="brooklyn/util/stream/InputStreamSupplier.html" title="class in brooklyn.util.stream" target="classFrame">InputStreamSupplier</A>
 <BR>
@@ -836,6 +900,10 @@ All Classes
 <A HREF="brooklyn/entity/proxying/InternalEntityFactory.html" title="class in brooklyn.entity.proxying" target="classFrame">InternalEntityFactory</A>
 <BR>
 <A HREF="brooklyn/entity/proxying/InternalEntityFactory.FactoryConstructionTracker.html" title="class in brooklyn.entity.proxying.InternalEntityFactory" target="classFrame">InternalEntityFactory.FactoryConstructionTracker</A>
+<BR>
+<A HREF="brooklyn/entity/proxying/InternalLocationFactory.html" title="class in brooklyn.entity.proxying" target="classFrame">InternalLocationFactory</A>
+<BR>
+<A HREF="brooklyn/entity/proxying/InternalLocationFactory.FactoryConstructionTracker.html" title="class in brooklyn.entity.proxying.InternalLocationFactory" target="classFrame">InternalLocationFactory.FactoryConstructionTracker</A>
 <BR>
 <A HREF="brooklyn/util/ssh/IptablesCommands.html" title="class in brooklyn.util.ssh" target="classFrame">IptablesCommands</A>
 <BR>
@@ -847,7 +915,9 @@ All Classes
 <BR>
 <A HREF="org/osgi/jmx/Item.html" title="class in org.osgi.jmx" target="classFrame">Item</A>
 <BR>
-<A HREF="brooklyn/policy/loadbalancing/ItemsInContainersGroup.html" title="class in brooklyn.policy.loadbalancing" target="classFrame">ItemsInContainersGroup</A>
+<A HREF="brooklyn/policy/loadbalancing/ItemsInContainersGroup.html" title="interface in brooklyn.policy.loadbalancing" target="classFrame"><I>ItemsInContainersGroup</I></A>
+<BR>
+<A HREF="brooklyn/policy/loadbalancing/ItemsInContainersGroupImpl.html" title="class in brooklyn.policy.loadbalancing" target="classFrame">ItemsInContainersGroupImpl</A>
 <BR>
 <A HREF="brooklyn/entity/webapp/jboss/JBoss6Driver.html" title="interface in brooklyn.entity.webapp.jboss" target="classFrame"><I>JBoss6Driver</I></A>
 <BR>
@@ -869,13 +939,19 @@ All Classes
 <BR>
 <A HREF="brooklyn/entity/webapp/jboss/JBoss7SshDriver.html" title="class in brooklyn.entity.webapp.jboss" target="classFrame">JBoss7SshDriver</A>
 <BR>
-<A HREF="brooklyn/entity/messaging/jms/JMSBroker.html" title="class in brooklyn.entity.messaging.jms" target="classFrame">JMSBroker</A>
+<A HREF="brooklyn/entity/messaging/jms/JMSBroker.html" title="interface in brooklyn.entity.messaging.jms" target="classFrame"><I>JMSBroker</I></A>
 <BR>
-<A HREF="brooklyn/entity/messaging/jms/JMSDestination.html" title="class in brooklyn.entity.messaging.jms" target="classFrame">JMSDestination</A>
+<A HREF="brooklyn/entity/messaging/jms/JMSBrokerImpl.html" title="class in brooklyn.entity.messaging.jms" target="classFrame">JMSBrokerImpl</A>
+<BR>
+<A HREF="brooklyn/entity/messaging/jms/JMSDestination.html" title="interface in brooklyn.entity.messaging.jms" target="classFrame"><I>JMSDestination</I></A>
+<BR>
+<A HREF="brooklyn/entity/messaging/jms/JMSDestinationImpl.html" title="class in brooklyn.entity.messaging.jms" target="classFrame">JMSDestinationImpl</A>
 <BR>
 <A HREF="brooklyn/entity/java/JarBuilder.html" title="class in brooklyn.entity.java" target="classFrame">JarBuilder</A>
 <BR>
 <A HREF="brooklyn/entity/java/JavaAppUtils.html" title="class in brooklyn.entity.java" target="classFrame">JavaAppUtils</A>
+<BR>
+<A HREF="brooklyn/util/javalang/JavaClassNames.html" title="class in brooklyn.util.javalang" target="classFrame">JavaClassNames</A>
 <BR>
 <A HREF="brooklyn/entity/java/JavaEntityMethods.html" title="class in brooklyn.entity.java" target="classFrame">JavaEntityMethods</A>
 <BR>
@@ -895,13 +971,15 @@ All Classes
 <BR>
 <A HREF="brooklyn/entity/webapp/JavaWebAppSshDriver.html" title="class in brooklyn.entity.webapp" target="classFrame">JavaWebAppSshDriver</A>
 <BR>
+<A HREF="brooklyn/location/jclouds/JcloudsByonLocationResolver.html" title="class in brooklyn.location.jclouds" target="classFrame">JcloudsByonLocationResolver</A>
+<BR>
 <A HREF="brooklyn/location/jclouds/JcloudsLocation.html" title="class in brooklyn.location.jclouds" target="classFrame">JcloudsLocation</A>
 <BR>
 <A HREF="brooklyn/location/jclouds/JcloudsLocationConfig.html" title="interface in brooklyn.location.jclouds" target="classFrame"><I>JcloudsLocationConfig</I></A>
 <BR>
 <A HREF="brooklyn/location/jclouds/JcloudsLocationCustomizer.html" title="interface in brooklyn.location.jclouds" target="classFrame"><I>JcloudsLocationCustomizer</I></A>
 <BR>
-<A HREF="brooklyn/location/jclouds/JcloudsLocationFactory.html" title="class in brooklyn.location.jclouds" target="classFrame">JcloudsLocationFactory</A>
+<A HREF="brooklyn/location/jclouds/JcloudsPropertiesFromBrooklynProperties.html" title="class in brooklyn.location.jclouds" target="classFrame">JcloudsPropertiesFromBrooklynProperties</A>
 <BR>
 <A HREF="brooklyn/location/jclouds/JcloudsResolver.html" title="class in brooklyn.location.jclouds" target="classFrame">JcloudsResolver</A>
 <BR>
@@ -911,9 +989,13 @@ All Classes
 <BR>
 <A HREF="brooklyn/location/jclouds/JcloudsUtil.html" title="class in brooklyn.location.jclouds" target="classFrame">JcloudsUtil</A>
 <BR>
-<A HREF="brooklyn/event/adapter/JmxAttributeAdapter.html" title="class in brooklyn.event.adapter" target="classFrame">JmxAttributeAdapter</A>
+<A HREF="brooklyn/entity/webapp/jetty/Jetty6Driver.html" title="interface in brooklyn.entity.webapp.jetty" target="classFrame"><I>Jetty6Driver</I></A>
 <BR>
-<A HREF="brooklyn/event/adapter/JmxAttributeAdapter.AttributePollHelper.html" title="class in brooklyn.event.adapter.JmxAttributeAdapter" target="classFrame">JmxAttributeAdapter.AttributePollHelper</A>
+<A HREF="brooklyn/entity/webapp/jetty/Jetty6Server.html" title="interface in brooklyn.entity.webapp.jetty" target="classFrame"><I>Jetty6Server</I></A>
+<BR>
+<A HREF="brooklyn/entity/webapp/jetty/Jetty6ServerImpl.html" title="class in brooklyn.entity.webapp.jetty" target="classFrame">Jetty6ServerImpl</A>
+<BR>
+<A HREF="brooklyn/entity/webapp/jetty/Jetty6SshDriver.html" title="class in brooklyn.entity.webapp.jetty" target="classFrame">Jetty6SshDriver</A>
 <BR>
 <A HREF="brooklyn/event/feed/jmx/JmxAttributePollConfig.html" title="class in brooklyn.event.feed.jmx" target="classFrame">JmxAttributePollConfig</A>
 <BR>
@@ -925,33 +1007,13 @@ All Classes
 <BR>
 <A HREF="brooklyn/event/feed/jmx/JmxHelper.html" title="class in brooklyn.event.feed.jmx" target="classFrame">JmxHelper</A>
 <BR>
-<A HREF="brooklyn/event/adapter/JmxHelper.html" title="class in brooklyn.event.adapter" target="classFrame">JmxHelper</A>
-<BR>
-<A HREF="brooklyn/event/adapter/JmxNotificationAdapter.html" title="class in brooklyn.event.adapter" target="classFrame">JmxNotificationAdapter</A>
-<BR>
-<A HREF="brooklyn/event/adapter/JmxNotificationAdapter.NotificationPushHelper.html" title="class in brooklyn.event.adapter.JmxNotificationAdapter" target="classFrame">JmxNotificationAdapter.NotificationPushHelper</A>
-<BR>
-<A HREF="brooklyn/event/adapter/JmxNotificationFilters.html" title="class in brooklyn.event.adapter" target="classFrame">JmxNotificationFilters</A>
-<BR>
 <A HREF="brooklyn/event/feed/jmx/JmxNotificationFilters.html" title="class in brooklyn.event.feed.jmx" target="classFrame">JmxNotificationFilters</A>
 <BR>
 <A HREF="brooklyn/event/feed/jmx/JmxNotificationSubscriptionConfig.html" title="class in brooklyn.event.feed.jmx" target="classFrame">JmxNotificationSubscriptionConfig</A>
 <BR>
-<A HREF="brooklyn/event/adapter/JmxObjectNameAdapter.html" title="class in brooklyn.event.adapter" target="classFrame">JmxObjectNameAdapter</A>
-<BR>
-<A HREF="brooklyn/event/adapter/JmxOperationAdapter.html" title="class in brooklyn.event.adapter" target="classFrame">JmxOperationAdapter</A>
-<BR>
-<A HREF="brooklyn/event/adapter/JmxOperationAdapter.OperationPollHelper.html" title="class in brooklyn.event.adapter.JmxOperationAdapter" target="classFrame">JmxOperationAdapter.OperationPollHelper</A>
-<BR>
 <A HREF="brooklyn/event/feed/jmx/JmxOperationPollConfig.html" title="class in brooklyn.event.feed.jmx" target="classFrame">JmxOperationPollConfig</A>
 <BR>
-<A HREF="brooklyn/event/adapter/JmxPostProcessors.html" title="class in brooklyn.event.adapter" target="classFrame">JmxPostProcessors</A>
-<BR>
-<A HREF="brooklyn/event/adapter/JmxReachableAdapter.html" title="class in brooklyn.event.adapter" target="classFrame">JmxReachableAdapter</A>
-<BR>
 <A HREF="brooklyn/util/jmx/jmxrmi/JmxRmiAgent.html" title="class in brooklyn.util.jmx.jmxrmi" target="classFrame">JmxRmiAgent</A>
-<BR>
-<A HREF="brooklyn/event/adapter/JmxSensorAdapter.html" title="class in brooklyn.event.adapter" target="classFrame">JmxSensorAdapter</A>
 <BR>
 <A HREF="brooklyn/event/feed/jmx/JmxValueFunctions.html" title="class in brooklyn.event.feed.jmx" target="classFrame">JmxValueFunctions</A>
 <BR>
@@ -997,7 +1059,7 @@ All Classes
 <BR>
 <A HREF="brooklyn/entity/osgi/karaf/KarafSshDriver.html" title="class in brooklyn.entity.osgi.karaf" target="classFrame">KarafSshDriver</A>
 <BR>
-<A HREF="brooklyn/util/KeyValueParser.html" title="class in brooklyn.util" target="classFrame">KeyValueParser</A>
+<A HREF="brooklyn/util/text/KeyValueParser.html" title="class in brooklyn.util.text" target="classFrame">KeyValueParser</A>
 <BR>
 <A HREF="brooklyn/util/stream/KnownSizeInputStream.html" title="class in brooklyn.util.stream" target="classFrame">KnownSizeInputStream</A>
 <BR>
@@ -1015,7 +1077,7 @@ All Classes
 <BR>
 <A HREF="brooklyn/event/basic/ListConfigKey.ListModification.html" title="interface in brooklyn.event.basic.ListConfigKey" target="classFrame"><I>ListConfigKey.ListModification</I></A>
 <BR>
-<A HREF="brooklyn/event/basic/ListConfigKey.ListModification.ListModificationBase.html" title="class in brooklyn.event.basic.ListConfigKey.ListModification" target="classFrame">ListConfigKey.ListModification.ListModificationBase</A>
+<A HREF="brooklyn/event/basic/ListConfigKey.ListModificationBase.html" title="class in brooklyn.event.basic.ListConfigKey" target="classFrame">ListConfigKey.ListModificationBase</A>
 <BR>
 <A HREF="brooklyn/event/basic/ListConfigKey.ListModifications.html" title="class in brooklyn.event.basic.ListConfigKey" target="classFrame">ListConfigKey.ListModifications</A>
 <BR>
@@ -1031,6 +1093,8 @@ All Classes
 <BR>
 <A HREF="brooklyn/management/internal/LocalEntityManager.html" title="class in brooklyn.management.internal" target="classFrame">LocalEntityManager</A>
 <BR>
+<A HREF="brooklyn/management/internal/LocalLocationManager.html" title="class in brooklyn.management.internal" target="classFrame">LocalLocationManager</A>
+<BR>
 <A HREF="brooklyn/management/internal/LocalManagementContext.html" title="class in brooklyn.management.internal" target="classFrame">LocalManagementContext</A>
 <BR>
 <A HREF="brooklyn/management/internal/LocalSubscriptionManager.html" title="class in brooklyn.management.internal" target="classFrame">LocalSubscriptionManager</A>
@@ -1043,6 +1107,8 @@ All Classes
 <BR>
 <A HREF="brooklyn/location/Location.html" title="interface in brooklyn.location" target="classFrame"><I>Location</I></A>
 <BR>
+<A HREF="brooklyn/rest/api/LocationApi.html" title="interface in brooklyn.rest.api" target="classFrame"><I>LocationApi</I></A>
+<BR>
 <A HREF="brooklyn/location/basic/LocationConfigKeys.html" title="class in brooklyn.location.basic" target="classFrame">LocationConfigKeys</A>
 <BR>
 <A HREF="brooklyn/location/basic/LocationConfigUtils.html" title="class in brooklyn.location.basic" target="classFrame">LocationConfigUtils</A>
@@ -1053,19 +1119,23 @@ All Classes
 <BR>
 <A HREF="brooklyn/location/LocationDefinition.html" title="interface in brooklyn.location" target="classFrame"><I>LocationDefinition</I></A>
 <BR>
+<A HREF="brooklyn/management/LocationManager.html" title="interface in brooklyn.management" target="classFrame"><I>LocationManager</I></A>
+<BR>
 <A HREF="brooklyn/mementos/LocationMemento.html" title="interface in brooklyn.mementos" target="classFrame"><I>LocationMemento</I></A>
 <BR>
 <A HREF="brooklyn/location/LocationRegistry.html" title="interface in brooklyn.location" target="classFrame"><I>LocationRegistry</I></A>
-<BR>
-<A HREF="brooklyn/location/basic/LocationRegistry.html" title="class in brooklyn.location.basic" target="classFrame">LocationRegistry</A>
 <BR>
 <A HREF="brooklyn/location/LocationResolver.html" title="interface in brooklyn.location" target="classFrame"><I>LocationResolver</I></A>
 <BR>
 <A HREF="brooklyn/rest/resources/LocationResource.html" title="class in brooklyn.rest.resources" target="classFrame">LocationResource</A>
 <BR>
+<A HREF="brooklyn/location/LocationSpec.html" title="class in brooklyn.location" target="classFrame">LocationSpec</A>
+<BR>
 <A HREF="brooklyn/rest/domain/LocationSpec.html" title="class in brooklyn.rest.domain" target="classFrame">LocationSpec</A>
 <BR>
 <A HREF="brooklyn/rest/domain/LocationSummary.html" title="class in brooklyn.rest.domain" target="classFrame">LocationSummary</A>
+<BR>
+<A HREF="brooklyn/rest/transform/LocationTransformer.html" title="class in brooklyn.rest.transform" target="classFrame">LocationTransformer</A>
 <BR>
 <A HREF="brooklyn/test/LoggingVerboseReporter.html" title="class in brooklyn.test" target="classFrame">LoggingVerboseReporter</A>
 <BR>
@@ -1078,8 +1148,6 @@ All Classes
 <A HREF="brooklyn/location/MachineProvisioningLocation.html" title="interface in brooklyn.location" target="classFrame"><I>MachineProvisioningLocation</I></A>
 <BR>
 <A HREF="brooklyn/location/jclouds/pool/MachineSet.html" title="class in brooklyn.location.jclouds.pool" target="classFrame">MachineSet</A>
-<BR>
-<A HREF="brooklyn/launcher/Main.html" title="class in brooklyn.launcher" target="classFrame">Main</A>
 <BR>
 <A HREF="brooklyn/cli/Main.html" title="class in brooklyn.cli" target="classFrame">Main</A>
 <BR>
@@ -1103,7 +1171,7 @@ All Classes
 <BR>
 <A HREF="brooklyn/event/basic/MapConfigKey.MapModification.html" title="interface in brooklyn.event.basic.MapConfigKey" target="classFrame"><I>MapConfigKey.MapModification</I></A>
 <BR>
-<A HREF="brooklyn/event/basic/MapConfigKey.MapModification.MapModificationBase.html" title="class in brooklyn.event.basic.MapConfigKey.MapModification" target="classFrame">MapConfigKey.MapModification.MapModificationBase</A>
+<A HREF="brooklyn/event/basic/MapConfigKey.MapModificationBase.html" title="class in brooklyn.event.basic.MapConfigKey" target="classFrame">MapConfigKey.MapModificationBase</A>
 <BR>
 <A HREF="brooklyn/event/basic/MapConfigKey.MapModifications.html" title="class in brooklyn.event.basic.MapConfigKey" target="classFrame">MapConfigKey.MapModifications</A>
 <BR>
@@ -1137,13 +1205,19 @@ All Classes
 <BR>
 <A HREF="brooklyn/entity/basic/MethodEffector.AnnotationsOnMethod.html" title="class in brooklyn.entity.basic.MethodEffector" target="classFrame">MethodEffector.AnnotationsOnMethod</A>
 <BR>
-<A HREF="brooklyn/entity/nosql/mongodb/MongoDbDriver.html" title="interface in brooklyn.entity.nosql.mongodb" target="classFrame"><I>MongoDbDriver</I></A>
+<A HREF="brooklyn/entity/nosql/mongodb/MongoClientSupport.html" title="class in brooklyn.entity.nosql.mongodb" target="classFrame">MongoClientSupport</A>
 <BR>
-<A HREF="brooklyn/entity/nosql/mongodb/MongoDbServer.html" title="interface in brooklyn.entity.nosql.mongodb" target="classFrame"><I>MongoDbServer</I></A>
+<A HREF="brooklyn/entity/nosql/mongodb/MongoDBDriver.html" title="interface in brooklyn.entity.nosql.mongodb" target="classFrame"><I>MongoDBDriver</I></A>
 <BR>
-<A HREF="brooklyn/entity/nosql/mongodb/MongoDbServerImpl.html" title="class in brooklyn.entity.nosql.mongodb" target="classFrame">MongoDbServerImpl</A>
+<A HREF="brooklyn/entity/nosql/mongodb/MongoDBReplicaSet.html" title="interface in brooklyn.entity.nosql.mongodb" target="classFrame"><I>MongoDBReplicaSet</I></A>
 <BR>
-<A HREF="brooklyn/entity/nosql/mongodb/MongoDbSshDriver.html" title="class in brooklyn.entity.nosql.mongodb" target="classFrame">MongoDbSshDriver</A>
+<A HREF="brooklyn/entity/nosql/mongodb/MongoDBReplicaSetImpl.html" title="class in brooklyn.entity.nosql.mongodb" target="classFrame">MongoDBReplicaSetImpl</A>
+<BR>
+<A HREF="brooklyn/entity/nosql/mongodb/MongoDBServer.html" title="interface in brooklyn.entity.nosql.mongodb" target="classFrame"><I>MongoDBServer</I></A>
+<BR>
+<A HREF="brooklyn/entity/nosql/mongodb/MongoDBServerImpl.html" title="class in brooklyn.entity.nosql.mongodb" target="classFrame">MongoDBServerImpl</A>
+<BR>
+<A HREF="brooklyn/entity/nosql/mongodb/MongoDBSshDriver.html" title="class in brooklyn.entity.nosql.mongodb" target="classFrame">MongoDBSshDriver</A>
 <BR>
 <A HREF="brooklyn/qa/longevity/Monitor.html" title="class in brooklyn.qa.longevity" target="classFrame">Monitor</A>
 <BR>
@@ -1159,17 +1233,23 @@ All Classes
 <BR>
 <A HREF="brooklyn/entity/rebind/dto/MutableBrooklynMemento.html" title="class in brooklyn.entity.rebind.dto" target="classFrame">MutableBrooklynMemento</A>
 <BR>
+<A HREF="brooklyn/util/collections/MutableList.html" title="class in brooklyn.util.collections" target="classFrame">MutableList</A>
+<BR>
 <A HREF="brooklyn/util/MutableList.html" title="class in brooklyn.util" target="classFrame">MutableList</A>
 <BR>
-<A HREF="brooklyn/util/MutableList.Builder.html" title="class in brooklyn.util.MutableList" target="classFrame">MutableList.Builder</A>
+<A HREF="brooklyn/util/collections/MutableList.Builder.html" title="class in brooklyn.util.collections.MutableList" target="classFrame">MutableList.Builder</A>
+<BR>
+<A HREF="brooklyn/util/collections/MutableMap.html" title="class in brooklyn.util.collections" target="classFrame">MutableMap</A>
 <BR>
 <A HREF="brooklyn/util/MutableMap.html" title="class in brooklyn.util" target="classFrame">MutableMap</A>
 <BR>
-<A HREF="brooklyn/util/MutableMap.Builder.html" title="class in brooklyn.util.MutableMap" target="classFrame">MutableMap.Builder</A>
+<A HREF="brooklyn/util/collections/MutableMap.Builder.html" title="class in brooklyn.util.collections.MutableMap" target="classFrame">MutableMap.Builder</A>
+<BR>
+<A HREF="brooklyn/util/collections/MutableSet.html" title="class in brooklyn.util.collections" target="classFrame">MutableSet</A>
 <BR>
 <A HREF="brooklyn/util/MutableSet.html" title="class in brooklyn.util" target="classFrame">MutableSet</A>
 <BR>
-<A HREF="brooklyn/util/MutableSet.Builder.html" title="class in brooklyn.util.MutableSet" target="classFrame">MutableSet.Builder</A>
+<A HREF="brooklyn/util/collections/MutableSet.Builder.html" title="class in brooklyn.util.collections.MutableSet" target="classFrame">MutableSet.Builder</A>
 <BR>
 <A HREF="brooklyn/util/mutex/MutexSupport.html" title="class in brooklyn.util.mutex" target="classFrame">MutexSupport</A>
 <BR>
@@ -1185,11 +1265,13 @@ All Classes
 <BR>
 <A HREF="brooklyn/entity/basic/NamedParameter.html" title="annotation type in brooklyn.entity.basic" target="classFrame">NamedParameter</A>
 <BR>
-<A HREF="brooklyn/util/NaturalOrderComparator.html" title="class in brooklyn.util" target="classFrame">NaturalOrderComparator</A>
+<A HREF="brooklyn/util/text/NaturalOrderComparator.html" title="class in brooklyn.util.text" target="classFrame">NaturalOrderComparator</A>
 <BR>
 <A HREF="brooklyn/util/net/NetworkMultiAddressUtils.html" title="class in brooklyn.util.net" target="classFrame">NetworkMultiAddressUtils</A>
 <BR>
 <A HREF="brooklyn/util/NetworkUtils.html" title="class in brooklyn.util" target="classFrame">NetworkUtils</A>
+<BR>
+<A HREF="brooklyn/util/net/Networking.html" title="class in brooklyn.util.net" target="classFrame">Networking</A>
 <BR>
 <A HREF="brooklyn/entity/proxy/nginx/NginxController.html" title="interface in brooklyn.entity.proxy.nginx" target="classFrame"><I>NginxController</I></A>
 <BR>
@@ -1203,27 +1285,15 @@ All Classes
 <BR>
 <A HREF="brooklyn/management/internal/NonDeploymentEntityManager.html" title="class in brooklyn.management.internal" target="classFrame">NonDeploymentEntityManager</A>
 <BR>
+<A HREF="brooklyn/management/internal/NonDeploymentLocationManager.html" title="class in brooklyn.management.internal" target="classFrame">NonDeploymentLocationManager</A>
+<BR>
 <A HREF="brooklyn/management/internal/NonDeploymentManagementContext.html" title="class in brooklyn.management.internal" target="classFrame">NonDeploymentManagementContext</A>
 <BR>
 <A HREF="brooklyn/management/internal/NonDeploymentManagementContext.NonDeploymentManagementContextMode.html" title="enum in brooklyn.management.internal.NonDeploymentManagementContext" target="classFrame">NonDeploymentManagementContext.NonDeploymentManagementContextMode</A>
 <BR>
-<A HREF="brooklyn/extras/openshift/OpenshiftExpressAccess.html" title="class in brooklyn.extras.openshift" target="classFrame">OpenshiftExpressAccess</A>
-<BR>
 <A HREF="brooklyn/extras/openshift/OpenshiftExpressAccess.Cartridge.html" title="enum in brooklyn.extras.openshift.OpenshiftExpressAccess" target="classFrame">OpenshiftExpressAccess.Cartridge</A>
 <BR>
-<A HREF="brooklyn/extras/openshift/OpenshiftExpressAccess.OpenshiftExpressApplicationAccess.html" title="class in brooklyn.extras.openshift.OpenshiftExpressAccess" target="classFrame">OpenshiftExpressAccess.OpenshiftExpressApplicationAccess</A>
-<BR>
-<A HREF="brooklyn/extras/openshift/OpenshiftExpressAccess.OpenshiftJsonResult.html" title="class in brooklyn.extras.openshift.OpenshiftExpressAccess" target="classFrame">OpenshiftExpressAccess.OpenshiftJsonResult</A>
-<BR>
-<A HREF="brooklyn/extras/openshift/OpenshiftExpressAccess.UserInfoResult.html" title="class in brooklyn.extras.openshift.OpenshiftExpressAccess" target="classFrame">OpenshiftExpressAccess.UserInfoResult</A>
-<BR>
-<A HREF="brooklyn/extras/openshift/OpenshiftExpressAccess.UserInfoResult.AppInfoFields.html" title="class in brooklyn.extras.openshift.OpenshiftExpressAccess.UserInfoResult" target="classFrame">OpenshiftExpressAccess.UserInfoResult.AppInfoFields</A>
-<BR>
-<A HREF="brooklyn/extras/openshift/OpenshiftExpressAccess.UserInfoResult.UserInfoFields.html" title="class in brooklyn.extras.openshift.OpenshiftExpressAccess.UserInfoResult" target="classFrame">OpenshiftExpressAccess.UserInfoResult.UserInfoFields</A>
-<BR>
-<A HREF="brooklyn/extras/openshift/OpenshiftExpressJavaWebAppCluster.html" title="class in brooklyn.extras.openshift" target="classFrame">OpenshiftExpressJavaWebAppCluster</A>
-<BR>
-<A HREF="brooklyn/extras/openshift/OpenshiftLocation.html" title="class in brooklyn.extras.openshift" target="classFrame">OpenshiftLocation</A>
+<A HREF="brooklyn/extras/openshift/OpenshiftExpressApplicationAccess.html" title="class in brooklyn.extras.openshift" target="classFrame">OpenshiftExpressApplicationAccess</A>
 <BR>
 <A HREF="brooklyn/extras/openshift/OpenshiftLocation.Resolver.html" title="class in brooklyn.extras.openshift.OpenshiftLocation" target="classFrame">OpenshiftLocation.Resolver</A>
 <BR>
@@ -1239,6 +1309,10 @@ All Classes
 <BR>
 <A HREF="brooklyn/policy/Policy.html" title="interface in brooklyn.policy" target="classFrame"><I>Policy</I></A>
 <BR>
+<A HREF="brooklyn/rest/api/PolicyApi.html" title="interface in brooklyn.rest.api" target="classFrame"><I>PolicyApi</I></A>
+<BR>
+<A HREF="brooklyn/rest/api/PolicyConfigApi.html" title="interface in brooklyn.rest.api" target="classFrame"><I>PolicyConfigApi</I></A>
+<BR>
 <A HREF="brooklyn/policy/basic/PolicyConfigMap.html" title="class in brooklyn.policy.basic" target="classFrame">PolicyConfigMap</A>
 <BR>
 <A HREF="brooklyn/rest/resources/PolicyConfigResource.html" title="class in brooklyn.rest.resources" target="classFrame">PolicyConfigResource</A>
@@ -1252,6 +1326,8 @@ All Classes
 <A HREF="brooklyn/rest/resources/PolicyResource.html" title="class in brooklyn.rest.resources" target="classFrame">PolicyResource</A>
 <BR>
 <A HREF="brooklyn/rest/domain/PolicySummary.html" title="class in brooklyn.rest.domain" target="classFrame">PolicySummary</A>
+<BR>
+<A HREF="brooklyn/rest/transform/PolicyTransformer.html" title="class in brooklyn.rest.transform" target="classFrame">PolicyTransformer</A>
 <BR>
 <A HREF="brooklyn/policy/PolicyType.html" title="interface in brooklyn.policy" target="classFrame"><I>PolicyType</I></A>
 <BR>
@@ -1289,10 +1365,6 @@ All Classes
 <BR>
 <A HREF="brooklyn/location/jclouds/templates/PortableTemplateBuilder.html" title="class in brooklyn.location.jclouds.templates" target="classFrame">PortableTemplateBuilder</A>
 <BR>
-<A HREF="brooklyn/entity/basic/PostStart.html" title="annotation type in brooklyn.entity.basic" target="classFrame">PostStart</A>
-<BR>
-<A HREF="brooklyn/entity/basic/PostStop.html" title="annotation type in brooklyn.entity.basic" target="classFrame">PostStop</A>
-<BR>
 <A HREF="brooklyn/entity/database/postgresql/PostgreSqlDriver.html" title="interface in brooklyn.entity.database.postgresql" target="classFrame"><I>PostgreSqlDriver</I></A>
 <BR>
 <A HREF="brooklyn/entity/database/postgresql/PostgreSqlNode.html" title="interface in brooklyn.entity.database.postgresql" target="classFrame"><I>PostgreSqlNode</I></A>
@@ -1300,10 +1372,6 @@ All Classes
 <A HREF="brooklyn/entity/database/postgresql/PostgreSqlNodeImpl.html" title="class in brooklyn.entity.database.postgresql" target="classFrame">PostgreSqlNodeImpl</A>
 <BR>
 <A HREF="brooklyn/entity/database/postgresql/PostgreSqlSshDriver.html" title="class in brooklyn.entity.database.postgresql" target="classFrame">PostgreSqlSshDriver</A>
-<BR>
-<A HREF="brooklyn/entity/basic/PreStart.html" title="annotation type in brooklyn.entity.basic" target="classFrame">PreStart</A>
-<BR>
-<A HREF="brooklyn/entity/basic/PreStop.html" title="annotation type in brooklyn.entity.basic" target="classFrame">PreStop</A>
 <BR>
 <A HREF="brooklyn/entity/proxy/ProxySslConfig.html" title="class in brooklyn.entity.proxy" target="classFrame">ProxySslConfig</A>
 <BR>
@@ -1313,15 +1381,21 @@ All Classes
 <BR>
 <A HREF="brooklyn/entity/messaging/qpid/QpidBrokerImpl.html" title="class in brooklyn.entity.messaging.qpid" target="classFrame">QpidBrokerImpl</A>
 <BR>
-<A HREF="brooklyn/entity/messaging/qpid/QpidDestination.html" title="class in brooklyn.entity.messaging.qpid" target="classFrame">QpidDestination</A>
+<A HREF="brooklyn/entity/messaging/qpid/QpidDestination.html" title="interface in brooklyn.entity.messaging.qpid" target="classFrame"><I>QpidDestination</I></A>
+<BR>
+<A HREF="brooklyn/entity/messaging/qpid/QpidDestinationImpl.html" title="class in brooklyn.entity.messaging.qpid" target="classFrame">QpidDestinationImpl</A>
 <BR>
 <A HREF="brooklyn/entity/messaging/qpid/QpidDriver.html" title="interface in brooklyn.entity.messaging.qpid" target="classFrame"><I>QpidDriver</I></A>
 <BR>
-<A HREF="brooklyn/entity/messaging/qpid/QpidQueue.html" title="class in brooklyn.entity.messaging.qpid" target="classFrame">QpidQueue</A>
+<A HREF="brooklyn/entity/messaging/qpid/QpidQueue.html" title="interface in brooklyn.entity.messaging.qpid" target="classFrame"><I>QpidQueue</I></A>
+<BR>
+<A HREF="brooklyn/entity/messaging/qpid/QpidQueueImpl.html" title="class in brooklyn.entity.messaging.qpid" target="classFrame">QpidQueueImpl</A>
 <BR>
 <A HREF="brooklyn/entity/messaging/qpid/QpidSshDriver.html" title="class in brooklyn.entity.messaging.qpid" target="classFrame">QpidSshDriver</A>
 <BR>
-<A HREF="brooklyn/entity/messaging/qpid/QpidTopic.html" title="class in brooklyn.entity.messaging.qpid" target="classFrame">QpidTopic</A>
+<A HREF="brooklyn/entity/messaging/qpid/QpidTopic.html" title="interface in brooklyn.entity.messaging.qpid" target="classFrame"><I>QpidTopic</I></A>
+<BR>
+<A HREF="brooklyn/entity/messaging/qpid/QpidTopicImpl.html" title="class in brooklyn.entity.messaging.qpid" target="classFrame">QpidTopicImpl</A>
 <BR>
 <A HREF="brooklyn/entity/messaging/Queue.html" title="interface in brooklyn.entity.messaging" target="classFrame"><I>Queue</I></A>
 <BR>
@@ -1347,7 +1421,7 @@ All Classes
 <BR>
 <A HREF="brooklyn/demo/ReadMe.html" title="class in brooklyn.demo" target="classFrame">ReadMe</A>
 <BR>
-<A HREF="brooklyn/util/ReaderInputStream.html" title="class in brooklyn.util" target="classFrame">ReaderInputStream</A>
+<A HREF="brooklyn/util/stream/ReaderInputStream.html" title="class in brooklyn.util.stream" target="classFrame">ReaderInputStream</A>
 <BR>
 <A HREF="brooklyn/entity/rebind/RebindContext.html" title="interface in brooklyn.entity.rebind" target="classFrame"><I>RebindContext</I></A>
 <BR>
@@ -1381,6 +1455,8 @@ All Classes
 <BR>
 <A HREF="brooklyn/entity/nosql/redis/RedisStoreSshDriver.html" title="class in brooklyn.entity.nosql.redis" target="classFrame">RedisStoreSshDriver</A>
 <BR>
+<A HREF="brooklyn/internal/storage/Reference.html" title="interface in brooklyn.internal.storage" target="classFrame"><I>Reference</I></A>
+<BR>
 <A HREF="brooklyn/util/javalang/ReflectionScanner.html" title="class in brooklyn.util.javalang" target="classFrame">ReflectionScanner</A>
 <BR>
 <A HREF="brooklyn/util/javalang/Reflections.html" title="class in brooklyn.util.javalang" target="classFrame">Reflections</A>
@@ -1404,6 +1480,10 @@ All Classes
 <A HREF="brooklyn/config/render/RendererHints.NamedActionWithUrl.html" title="class in brooklyn.config.render.RendererHints" target="classFrame">RendererHints.NamedActionWithUrl</A>
 <BR>
 <A HREF="brooklyn/util/internal/Repeater.html" title="class in brooklyn.util.internal" target="classFrame">Repeater</A>
+<BR>
+<A HREF="brooklyn/entity/nosql/mongodb/ReplicaSetConfig.html" title="class in brooklyn.entity.nosql.mongodb" target="classFrame">ReplicaSetConfig</A>
+<BR>
+<A HREF="brooklyn/entity/nosql/mongodb/ReplicaSetMemberStatus.html" title="enum in brooklyn.entity.nosql.mongodb" target="classFrame">ReplicaSetMemberStatus</A>
 <BR>
 <A HREF="brooklyn/entity/trait/Resizable.html" title="interface in brooklyn.entity.trait" target="classFrame"><I>Resizable</I></A>
 <BR>
@@ -1433,6 +1513,8 @@ All Classes
 <BR>
 <A HREF="brooklyn/util/task/ScheduledTask.html" title="class in brooklyn.util.task" target="classFrame">ScheduledTask</A>
 <BR>
+<A HREF="brooklyn/rest/api/ScriptApi.html" title="interface in brooklyn.rest.api" target="classFrame"><I>ScriptApi</I></A>
+<BR>
 <A HREF="brooklyn/rest/domain/ScriptExecutionSummary.html" title="class in brooklyn.rest.domain" target="classFrame">ScriptExecutionSummary</A>
 <BR>
 <A HREF="brooklyn/entity/basic/lifecycle/ScriptHelper.html" title="class in brooklyn.entity.basic.lifecycle" target="classFrame">ScriptHelper</A>
@@ -1451,27 +1533,39 @@ All Classes
 <BR>
 <A HREF="brooklyn/event/Sensor.html" title="interface in brooklyn.event" target="classFrame"><I>Sensor</I></A>
 <BR>
+<A HREF="brooklyn/rest/api/SensorApi.html" title="interface in brooklyn.rest.api" target="classFrame"><I>SensorApi</I></A>
+<BR>
 <A HREF="brooklyn/event/SensorEvent.html" title="interface in brooklyn.event" target="classFrame"><I>SensorEvent</I></A>
 <BR>
 <A HREF="brooklyn/event/SensorEventListener.html" title="interface in brooklyn.event" target="classFrame"><I>SensorEventListener</I></A>
 <BR>
 <A HREF="brooklyn/enricher/basic/SensorPropagatingEnricher.html" title="class in brooklyn.enricher.basic" target="classFrame">SensorPropagatingEnricher</A>
 <BR>
-<A HREF="brooklyn/event/adapter/SensorRegistry.html" title="class in brooklyn.event.adapter" target="classFrame">SensorRegistry</A>
-<BR>
 <A HREF="brooklyn/rest/resources/SensorResource.html" title="class in brooklyn.rest.resources" target="classFrame">SensorResource</A>
 <BR>
 <A HREF="brooklyn/rest/domain/SensorSummary.html" title="class in brooklyn.rest.domain" target="classFrame">SensorSummary</A>
 <BR>
+<A HREF="brooklyn/rest/transform/SensorTransformer.html" title="class in brooklyn.rest.transform" target="classFrame">SensorTransformer</A>
+<BR>
 <A HREF="brooklyn/enricher/basic/SensorTransformingEnricher.html" title="class in brooklyn.enricher.basic" target="classFrame">SensorTransformingEnricher</A>
+<BR>
+<A HREF="brooklyn/event/basic/Sensors.html" title="class in brooklyn.event.basic" target="classFrame">Sensors</A>
 <BR>
 <A HREF="brooklyn/util/task/SequentialTask.html" title="class in brooklyn.util.task" target="classFrame">SequentialTask</A>
 <BR>
 <A HREF="brooklyn/demo/webapp/hello/SerializeHelloWorldHadoopJar.html" title="class in brooklyn.demo.webapp.hello" target="classFrame">SerializeHelloWorldHadoopJar</A>
 <BR>
-<A HREF="brooklyn/util/Serializers.html" title="class in brooklyn.util" target="classFrame">Serializers</A>
+<A HREF="brooklyn/util/javalang/Serializers.html" title="class in brooklyn.util.javalang" target="classFrame">Serializers</A>
 <BR>
-<A HREF="brooklyn/util/Serializers.ClassLoaderObjectInputStream.html" title="class in brooklyn.util.Serializers" target="classFrame">Serializers.ClassLoaderObjectInputStream</A>
+<A HREF="brooklyn/util/javalang/Serializers.ClassLoaderObjectInputStream.html" title="class in brooklyn.util.javalang.Serializers" target="classFrame">Serializers.ClassLoaderObjectInputStream</A>
+<BR>
+<A HREF="brooklyn/event/basic/SetConfigKey.html" title="class in brooklyn.event.basic" target="classFrame">SetConfigKey</A>
+<BR>
+<A HREF="brooklyn/event/basic/SetConfigKey.SetModification.html" title="interface in brooklyn.event.basic.SetConfigKey" target="classFrame"><I>SetConfigKey.SetModification</I></A>
+<BR>
+<A HREF="brooklyn/event/basic/SetConfigKey.SetModificationBase.html" title="class in brooklyn.event.basic.SetConfigKey" target="classFrame">SetConfigKey.SetModificationBase</A>
+<BR>
+<A HREF="brooklyn/event/basic/SetConfigKey.SetModifications.html" title="class in brooklyn.event.basic.SetConfigKey" target="classFrame">SetConfigKey.SetModifications</A>
 <BR>
 <A HREF="brooklyn/util/flags/SetFromFlag.html" title="annotation type in brooklyn.util.flags" target="classFrame">SetFromFlag</A>
 <BR>
@@ -1483,13 +1577,13 @@ All Classes
 <BR>
 <A HREF="brooklyn/event/feed/shell/ShellPollConfig.html" title="class in brooklyn.event.feed.shell" target="classFrame">ShellPollConfig</A>
 <BR>
-<A HREF="brooklyn/event/adapter/ShellSensorAdapter.html" title="class in brooklyn.event.adapter" target="classFrame">ShellSensorAdapter</A>
-<BR>
 <A HREF="brooklyn/util/ShellUtils.html" title="class in brooklyn.util" target="classFrame">ShellUtils</A>
 <BR>
 <A HREF="brooklyn/demo/SimpleCassandraCluster.html" title="class in brooklyn.demo" target="classFrame">SimpleCassandraCluster</A>
 <BR>
 <A HREF="brooklyn/demo/SimpleCouchDBCluster.html" title="class in brooklyn.demo" target="classFrame">SimpleCouchDBCluster</A>
+<BR>
+<A HREF="brooklyn/demo/SimpleMongoDBReplicaSet.html" title="class in brooklyn.demo" target="classFrame">SimpleMongoDBReplicaSet</A>
 <BR>
 <A HREF="brooklyn/util/logging/SimpleOneLineLogFormatter.html" title="class in brooklyn.util.logging" target="classFrame">SimpleOneLineLogFormatter</A>
 <BR>
@@ -1499,11 +1593,7 @@ All Classes
 <BR>
 <A HREF="brooklyn/location/basic/SimulatedLocation.html" title="class in brooklyn.location.basic" target="classFrame">SimulatedLocation</A>
 <BR>
-<A HREF="brooklyn/util/task/SingleThreadedExecution.html" title="class in brooklyn.util.task" target="classFrame">SingleThreadedExecution</A>
-<BR>
 <A HREF="brooklyn/util/task/SingleThreadedScheduler.html" title="class in brooklyn.util.task" target="classFrame">SingleThreadedScheduler</A>
-<BR>
-<A HREF="brooklyn/event/adapter/SingleValueResponseContext.html" title="class in brooklyn.event.adapter" target="classFrame">SingleValueResponseContext</A>
 <BR>
 <A HREF="brooklyn/demo/SingleWebServerExample.html" title="class in brooklyn.demo" target="classFrame">SingleWebServerExample</A>
 <BR>
@@ -1545,15 +1635,7 @@ All Classes
 <BR>
 <A HREF="brooklyn/event/feed/ssh/SshPollConfig.html" title="class in brooklyn.event.feed.ssh" target="classFrame">SshPollConfig</A>
 <BR>
-<A HREF="brooklyn/event/adapter/SshPollHelper.html" title="class in brooklyn.event.adapter" target="classFrame">SshPollHelper</A>
-<BR>
 <A HREF="brooklyn/event/feed/ssh/SshPollValue.html" title="class in brooklyn.event.feed.ssh" target="classFrame">SshPollValue</A>
-<BR>
-<A HREF="brooklyn/event/adapter/SshResultContext.html" title="class in brooklyn.event.adapter" target="classFrame">SshResultContext</A>
-<BR>
-<A HREF="brooklyn/event/adapter/SshSensorAdapter.html" title="class in brooklyn.event.adapter" target="classFrame">SshSensorAdapter</A>
-<BR>
-<A HREF="brooklyn/event/adapter/SshShellSensorAdapter.html" title="class in brooklyn.event.adapter" target="classFrame">SshShellSensorAdapter</A>
 <BR>
 <A HREF="brooklyn/util/internal/ssh/SshTool.html" title="interface in brooklyn.util.internal.ssh" target="classFrame"><I>SshTool</I></A>
 <BR>
@@ -1581,6 +1663,8 @@ All Classes
 <BR>
 <A HREF="brooklyn/entity/trait/StartableMethods.html" title="class in brooklyn.entity.trait" target="classFrame">StartableMethods</A>
 <BR>
+<A HREF="brooklyn/rest/domain/Status.html" title="enum in brooklyn.rest.domain" target="classFrame">Status</A>
+<BR>
 <A HREF="brooklyn/test/StatusListener.html" title="class in brooklyn.test" target="classFrame">StatusListener</A>
 <BR>
 <A HREF="brooklyn/qa/longevity/StatusRecorder.html" title="interface in brooklyn.qa.longevity" target="classFrame"><I>StatusRecorder</I></A>
@@ -1597,7 +1681,9 @@ All Classes
 <BR>
 <A HREF="brooklyn/qa/longevity/StatusRecorder.SysoutBasedStatusRecorder.html" title="class in brooklyn.qa.longevity.StatusRecorder" target="classFrame">StatusRecorder.SysoutBasedStatusRecorder</A>
 <BR>
-<A HREF="brooklyn/util/internal/StreamGobbler.html" title="class in brooklyn.util.internal" target="classFrame">StreamGobbler</A>
+<A HREF="brooklyn/util/stream/StreamGobbler.html" title="class in brooklyn.util.stream" target="classFrame">StreamGobbler</A>
+<BR>
+<A HREF="brooklyn/util/stream/Streams.html" title="class in brooklyn.util.stream" target="classFrame">Streams</A>
 <BR>
 <A HREF="brooklyn/config/StringConfigMap.html" title="interface in brooklyn.config" target="classFrame"><I>StringConfigMap</I></A>
 <BR>
@@ -1623,8 +1709,6 @@ All Classes
 <BR>
 <A HREF="brooklyn/util/internal/StringSystemProperty.html" title="class in brooklyn.util.internal" target="classFrame">StringSystemProperty</A>
 <BR>
-<A HREF="brooklyn/util/StringUtils.html" title="class in brooklyn.util" target="classFrame">StringUtils</A>
-<BR>
 <A HREF="brooklyn/util/text/Strings.html" title="class in brooklyn.util.text" target="classFrame">Strings</A>
 <BR>
 <A HREF="brooklyn/event/basic/StructuredConfigKey.html" title="interface in brooklyn.event.basic" target="classFrame"><I>StructuredConfigKey</I></A>
@@ -1645,8 +1729,6 @@ All Classes
 <BR>
 <A HREF="brooklyn/management/internal/SubscriptionTracker.html" title="class in brooklyn.management.internal" target="classFrame">SubscriptionTracker</A>
 <BR>
-<A HREF="brooklyn/util/Suppliers2.html" title="class in brooklyn.util" target="classFrame">Suppliers2</A>
-<BR>
 <A HREF="brooklyn/location/basic/SupportsPortForwarding.html" title="interface in brooklyn.location.basic" target="classFrame"><I>SupportsPortForwarding</I></A>
 <BR>
 <A HREF="brooklyn/location/basic/SupportsPortForwarding.RequiresPortForwarding.html" title="interface in brooklyn.location.basic.SupportsPortForwarding" target="classFrame"><I>SupportsPortForwarding.RequiresPortForwarding</I></A>
@@ -1661,6 +1743,8 @@ All Classes
 <BR>
 <A HREF="brooklyn/rest/domain/TaskSummary.html" title="class in brooklyn.rest.domain" target="classFrame">TaskSummary</A>
 <BR>
+<A HREF="brooklyn/rest/transform/TaskTransformer.html" title="class in brooklyn.rest.transform" target="classFrame">TaskTransformer</A>
+<BR>
 <A HREF="brooklyn/util/task/Tasks.html" title="class in brooklyn.util.task" target="classFrame">Tasks</A>
 <BR>
 <A HREF="brooklyn/test/TestUtils.html" title="class in brooklyn.test" target="classFrame">TestUtils</A>
@@ -1673,7 +1757,7 @@ All Classes
 <BR>
 <A HREF="brooklyn/entity/group/Tier.html" title="interface in brooklyn.entity.group" target="classFrame"><I>Tier</I></A>
 <BR>
-<A HREF="brooklyn/util/Time.html" title="class in brooklyn.util" target="classFrame">Time</A>
+<A HREF="brooklyn/util/time/Time.html" title="class in brooklyn.util.time" target="classFrame">Time</A>
 <BR>
 <A HREF="brooklyn/util/internal/TimeExtras.html" title="class in brooklyn.util.internal" target="classFrame">TimeExtras</A>
 <BR>
@@ -1681,9 +1765,9 @@ All Classes
 <BR>
 <A HREF="brooklyn/enricher/TimeWeightedDeltaEnricher.html" title="class in brooklyn.enricher" target="classFrame">TimeWeightedDeltaEnricher</A>
 <BR>
-<A HREF="brooklyn/util/TimeWindowedList.html" title="class in brooklyn.util" target="classFrame">TimeWindowedList</A>
+<A HREF="brooklyn/util/collections/TimeWindowedList.html" title="class in brooklyn.util.collections" target="classFrame">TimeWindowedList</A>
 <BR>
-<A HREF="brooklyn/util/TimestampedValue.html" title="class in brooklyn.util" target="classFrame">TimestampedValue</A>
+<A HREF="brooklyn/util/collections/TimestampedValue.html" title="class in brooklyn.util.collections" target="classFrame">TimestampedValue</A>
 <BR>
 <A HREF="brooklyn/entity/webapp/tomcat/Tomcat7Driver.html" title="interface in brooklyn.entity.webapp.tomcat" target="classFrame"><I>Tomcat7Driver</I></A>
 <BR>
@@ -1702,8 +1786,6 @@ All Classes
 <A HREF="brooklyn/mementos/TreeNode.html" title="interface in brooklyn.mementos" target="classFrame"><I>TreeNode</I></A>
 <BR>
 <A HREF="brooklyn/entity/rebind/TreeUtils.html" title="class in brooklyn.entity.rebind" target="classFrame">TreeUtils</A>
-<BR>
-<A HREF="brooklyn/util/internal/TrustingSslSocketFactory.html" title="class in brooklyn.util.internal" target="classFrame">TrustingSslSocketFactory</A>
 <BR>
 <A HREF="brooklyn/test/TrustingSslSocketFactory.html" title="class in brooklyn.test" target="classFrame">TrustingSslSocketFactory</A>
 <BR>
@@ -1733,8 +1815,6 @@ All Classes
 <BR>
 <A HREF="brooklyn/location/geo/UtraceHostGeoLookup.html" title="class in brooklyn.location.geo" target="classFrame">UtraceHostGeoLookup</A>
 <BR>
-<A HREF="brooklyn/event/adapter/legacy/ValueProvider.html" title="interface in brooklyn.event.adapter.legacy" target="classFrame"><I>ValueProvider</I></A>
-<BR>
 <A HREF="brooklyn/entity/java/VanillaJavaApp.html" title="class in brooklyn.entity.java" target="classFrame">VanillaJavaApp</A>
 <BR>
 <A HREF="brooklyn/entity/java/VanillaJavaAppDriver.html" title="interface in brooklyn.entity.java" target="classFrame"><I>VanillaJavaAppDriver</I></A>
@@ -1743,11 +1823,11 @@ All Classes
 <BR>
 <A HREF="brooklyn/test/VerboseReporter.html" title="class in brooklyn.test" target="classFrame">VerboseReporter</A>
 <BR>
+<A HREF="brooklyn/rest/api/VersionApi.html" title="interface in brooklyn.rest.api" target="classFrame"><I>VersionApi</I></A>
+<BR>
 <A HREF="brooklyn/rest/resources/VersionResource.html" title="class in brooklyn.rest.resources" target="classFrame">VersionResource</A>
 <BR>
 <A HREF="brooklyn/test/WebAppMonitor.html" title="class in brooklyn.test" target="classFrame">WebAppMonitor</A>
-<BR>
-<A HREF="brooklyn/launcher/WebAppRunner.html" title="class in brooklyn.launcher" target="classFrame">WebAppRunner</A>
 <BR>
 <A HREF="brooklyn/entity/webapp/WebAppService.html" title="interface in brooklyn.entity.webapp" target="classFrame"><I>WebAppService</I></A>
 <BR>

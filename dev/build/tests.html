@@ -165,7 +165,7 @@ $(document).ready(function() {
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.5.0</a></li>
+            <li><a href="/meta/versions.html">0.6.0-M1</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -401,12 +401,27 @@ $(document).ready(function() {
 <p>We have the following tests groups:</p>
 
 <ul>
-<li>  normal -- should run quickly, not need internet, and not side effect the machine (apart from a few /tmp files)</li>
-<li>  integration -- deploys locally, may read and write from internet, takes longer
+<li>  normal (i.e. no group) -- should run quickly, not need internet, and not side effect the machine (apart from a few /tmp files)</li>
+<li>  Integration -- deploys locally, may read and write from internet, takes longer.
 
-<pre><code>  if you change an entity, rerun the relevant integration test to make sure all is well!
+<pre><code>  If you change an entity, rerun the relevant integration test to make sure all is well!
 </code></pre></li>
-<li>  live -- deploys remotely, may provision machines (but should clean up, getting rid of them in a try block)</li>
+<li>  Live -- deploys remotely, may provision machines (but should clean up, getting rid of them in a try block)</li>
+<li>  Live-sanity -- a sub-set of "Live" that can be run regularly; a trade-off of optimal code coverage for the
+  time/cost of those tests.</li>
+<li>  WIP -- short for "work in progress", this will disable the test from being run by the normal brooklyn maven profiles,
+  while leaving the test enabled so that one can work on it in IDEs or run the selected test(s) from the command line.</li>
+<li>  Acceptance -- this (currently little-used) group is for very long running tests, such as soak tests</li>
+</ul>
+
+
+<p>To run these from the command line, use something like the following:</p>
+
+<ul>
+<li>  normal: <code>mvn clean install</code></li>
+<li>  integration: <code>mvn clean verify -PEssentials,Locations,Entities,Integration -Dmaven.test.failure.ignore=true</code></li>
+<li>  Live: <code>mvn clean verify -PEntities,Locations,Entities,Live -Dmaven.test.failure.ignore=true</code></li>
+<li>  Live-sanity: <code>mvn clean verify -PEntities,Locations,Entities,Live-sanity -Dmaven.test.failure.ignore=true</code></li>
 </ul>
 
 

@@ -165,7 +165,7 @@ $(document).ready(function() {
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.5.0</a></li>
+            <li><a href="/meta/versions.html">0.6.0-M1</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -421,19 +421,19 @@ file and the <code>.asc</code> PGP signature file for the relevant artefact.</p>
 <p>Verify the signatures using one of the following commands:</p>
 
 <pre><code>pgpk -a brooklyn-gpg-public-key.asc
-pgpv brooklyn-0.5.0-dist.tar.gz.asc
+pgpv brooklyn-0.6.0-M1-dist.tar.gz.asc
 </code></pre>
 
 <p>or</p>
 
 <pre><code>pgp -ka brooklyn-gpg-public-key.asc
-pgp brooklyn-0.5.0-dist.zip.asc
+pgp brooklyn-0.6.0-M1-dist.zip.asc
 </code></pre>
 
 <p>or</p>
 
 <pre><code>gpg --import brooklyn-gpg-public-key.asc    
-gpg --verify brooklyn-0.5.0-dist.tar.gz.asc
+gpg --verify brooklyn-0.6.0-M1-dist.tar.gz.asc
 </code></pre>
 
 <p>You can also verify the SHA-1 checksum of the files.</p>

@@ -90,12 +90,18 @@ Package brooklyn.entity.nosql.mongodb
     </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="MongoDbDriver.html" title="class in brooklyn/entity/nosql/mongodb">MongoDbDriver</A></B></TD>
+        <TD WIDTH="15%"><B><A HREF="MongoDBDriver.html" title="class in brooklyn/entity/nosql/mongodb">MongoDBDriver</A></B></TD>
         <TD></TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="MongoDbServer.html" title="class in brooklyn/entity/nosql/mongodb">MongoDbServer</A></B></TD>
+        <TD WIDTH="15%"><B><A HREF="MongoDBReplicaSet.html" title="class in brooklyn/entity/nosql/mongodb">MongoDBReplicaSet</A></B></TD>
+        <TD>A replica set of MongoDBServers, based on DynamicCluster which can be resized by a policy
+ if required.</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="MongoDBServer.html" title="class in brooklyn/entity/nosql/mongodb">MongoDBServer</A></B></TD>
         <TD></TD>
         </TR>
 
@@ -115,13 +121,29 @@ Package brooklyn.entity.nosql.mongodb
     </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="MongoDbServerImpl.html" title="class in brooklyn/entity/nosql/mongodb">MongoDbServerImpl</A></B></TD>
+        <TD WIDTH="15%"><B><A HREF="MongoClientSupport.html" title="class in brooklyn/entity/nosql/mongodb">MongoClientSupport</A></B></TD>
+        <TD>Manages connections to standalone MongoDB servers.</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="MongoDBReplicaSetImpl.html" title="class in brooklyn/entity/nosql/mongodb">MongoDBReplicaSetImpl</A></B></TD>
+        <TD>Implementation of MongoDBReplicaSet.</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="MongoDBServerImpl.html" title="class in brooklyn/entity/nosql/mongodb">MongoDBServerImpl</A></B></TD>
         <TD></TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="MongoDbSshDriver.html" title="class in brooklyn/entity/nosql/mongodb">MongoDbSshDriver</A></B></TD>
+        <TD WIDTH="15%"><B><A HREF="MongoDBSshDriver.html" title="class in brooklyn/entity/nosql/mongodb">MongoDBSshDriver</A></B></TD>
         <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="ReplicaSetConfig.html" title="class in brooklyn/entity/nosql/mongodb">ReplicaSetConfig</A></B></TD>
+        <TD>Simplifies the creation of configuration objects for Mongo DB replica sets.
+ </TD>
         </TR>
 
 </TABLE>
@@ -132,6 +154,25 @@ Package brooklyn.entity.nosql.mongodb
 <hr>
     
 
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+    <TR BGCOLOR="#90DDF7" CLASS="TableHeadingColor">
+    <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+    <B>Enum Summary</B></FONT></TH>
+    </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="ReplicaSetMemberStatus.html" title="class in brooklyn/entity/nosql/mongodb">ReplicaSetMemberStatus</A></B></TD>
+        <TD>@see <a href="http://docs.mongodb.org/manual/reference/replica-status/">Replica set status reference</a></TD>
+        </TR>
+
+</TABLE>
+&nbsp;
+<P>
+<DL>
+</DL>
+<hr>
+    
 
 
 
