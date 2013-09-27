@@ -333,6 +333,10 @@ $(document).ready(function() {
         
             
         
+            
+        
+            
+        
     
         
         
@@ -415,14 +419,49 @@ $(document).ready(function() {
 
 
 <div class="highlight"><pre><code class="bash">git clone git@github.com:brooklyncentral/brooklyn.git
+<span class="nb">cd </span>brooklyn
 </code></pre>
 </div>
 
 
 
 
-<p>You'll find versions in branches, and examples in the <strong>examples</strong> sub-dir.
-These examples are pushed to the <a href="http://github.com/brooklyncentral/brooklyn-examples">brooklyn-examples</a> GitHub project when a version is released.</p>
+<p>Build it with:</p>
+
+
+
+
+<div class="highlight"><pre><code class="bash">mvn clean install
+</code></pre>
+</div>
+
+
+
+
+<p>And launch it with:</p>
+
+
+
+
+<div class="highlight"><pre><code class="bash"><span class="nb">cd </span>usage/dist/target/brooklyn-dist/
+bin/brooklyn launch
+</code></pre>
+</div>
+
+
+
+
+<p>Plenty of examples are in the <strong>examples</strong> sub-dir,
+described <a href="/v/0.6.0-SNAPSHOT/use/examples">here</a>,
+and pushed to the <a href="http://github.com/brooklyncentral/brooklyn-examples">brooklyn-examples</a>
+GitHub project when a version is released.</p>
+
+
+
+
+<p>Information on using Brooklyn -- configuring locations (in <code>brooklyn.properties</code>)
+and adding new projects to a catalog -- can be found in the <a href="/v/0.6.0-SNAPSHOT/use/guide/quickstart/index.html">User's Guide</a>.
+This document is intended to help people become familiar with the codebase.</p>
 
 
 
@@ -772,7 +811,17 @@ so we can remedy this!</p>
         
             
               <div class="toc-3 ">
+	            <a href="/v/0.6.0-SNAPSHOT/dev/tips/local-artifact-repo.html"><div class="toc-3-item">Local Artifact Repo</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
 	            <a href="/v/0.6.0-SNAPSHOT/dev/tips/update-docs.html"><div class="toc-3-item">Updating Docs</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-SNAPSHOT/dev/tips/release.html"><div class="toc-3-item">Release Process</div></a>
               </div>
         
             </div></div>
@@ -942,7 +991,7 @@ so we can remedy this!</p>
         <p id="copyright">
             <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
             brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
-            &copy; 2012 Cloudsoft Corporation.
+            &copy; 2013 Cloudsoft Corporation.
         </p>
     </div><!--footer -->
 

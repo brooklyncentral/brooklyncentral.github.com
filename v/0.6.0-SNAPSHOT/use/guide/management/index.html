@@ -404,13 +404,13 @@ detailed information on the underlying implementation of management within brook
 </ul>
 
 
-<p>Default properties are described in the Javadoc and code of classes <code>CredentialsFromEnv</code> and <code>BrooklynSystemProperties</code>,
+<p>Default properties are described in the Javadoc and code of the class <code>BrooklynProperties</code>,
 but some of the most common ones are:</p>
 
-<div class="highlight"><pre><code class="properties"><span class="na">brooklyn.jclouds.aws-ec2.identity</span><span class="o">=</span><span class="s">AKA50M30N3S1DFR0MAW55</span>
-<span class="na">brooklyn.jclouds.aws-ec2.credential</span><span class="o">=</span><span class="s">aT0Ps3cr3tC0D3wh1chAW5w1llG1V3y0uTOus333</span>
-<span class="na">brooklyn.jclouds.private-key-file</span><span class="o">=</span><span class="s">~/my/id_rsa       # use specified key (default is ~/.ssh/id_rsa)</span>
-<span class="na">brooklyn.jclouds.public-key-file</span><span class="o">=</span><span class="s">~/my/id_rsa.pub    # (optional, inferred from previous if omitted)</span>
+<div class="highlight"><pre><code class="properties"><span class="na">brooklyn.location.jclouds.aws-ec2.identity</span><span class="o">=</span><span class="s">AKA50M30N3S1DFR0MAW55</span>
+<span class="na">brooklyn.location.jclouds.aws-ec2.credential</span><span class="o">=</span><span class="s">aT0Ps3cr3tC0D3wh1chAW5w1llG1V3y0uTOus333</span>
+<span class="na">brooklyn.location.jclouds.aws-ec2.privateKeyFile</span><span class="o">=</span><span class="s">~/path/to/id_rsa       # use specified key (default is ~/.ssh/id_rsa)</span>
+<span class="na">brooklyn.location.jclouds.aws-ec2.publicKeyFile</span><span class="o">=</span><span class="s">~/path/to/id_rsa.pub    # (optional, inferred from previous if omitted)</span>
 </code></pre>
 </div>
 
@@ -447,6 +447,7 @@ usage: brooklyn <span class="o">[(</span>-q | --quiet<span class="o">)]</span> <
 
 The most commonly used brooklyn commands are:
     <span class="nb">help     </span>Display <span class="nb">help </span>information about brooklyn
+    info     Display information about brooklyn
     launch   Starts a brooklyn application. Note that a BROOKLYN_CLASSPATH environment variable needs to be <span class="nb">set </span>up beforehand to point to the user application classpath.
 
 See <span class="s1">&#39;brooklyn help &lt;command&gt;&#39;</span> <span class="k">for </span>more information on a specific command.
@@ -495,8 +496,7 @@ but what could be useful is to embed widgets from the brooklyn portal for select
 
 
 <p>This will start an embedded brooklyn management node, including the web console.
-The URL for the web console defaults to http://localhost:8081,
-with credentials admin/password.</p>
+The URL for the web console defaults to http://127.0.0.1:8081, .</p>
 
 <p>The mechanism for launching brooklyn management will change in a future release. For this release, the brooklyn management node is embedded.</p>
 
@@ -541,16 +541,15 @@ An implementation of this could point to Spring, LDAP, OpenID or another identit
 which should be specified as configuration parameters e.g. in <code>brooklyn.properties</code>.
 This configuration could look like:</p>
 
-<div class="highlight"><pre><code class="properties"><span class="na">brooklyn.webconsole.security.explicit.users</span><span class="o">=</span><span class="s">admin</span>
-<span class="na">brooklyn.webconsole.security.explicit.user.admin</span><span class="o">=</span><span class="s">password</span>
+<div class="highlight"><pre><code class="properties"><span class="na">brooklyn.webconsole.security.users</span><span class="o">=</span><span class="s">admin</span>
+<span class="na">brooklyn.webconsole.security.user.admin.password</span><span class="o">=</span><span class="s">password</span>
 </code></pre>
 </div>
 
 
-<p>The <code>users</code> line should contain a comma-separated list. The special value <code>*</code> is accepted to permit all users.
-If no values are specified at all the above setting (<code>admin</code>/<code>password</code>) is used by default.</p>
+<p>The <code>users</code> line should contain a comma-separated list. The special value <code>*</code> is accepted to permit all users.</p>
 
-<p>If not using the web console, you should specify
+<p>If not using the web console, you can specify
 <code>brooklyn.webconsole.security.provider=brooklyn.rest.security.provider.BlackholeSecurityProvider</code> to prevent inadvertant logins.
 During dev/test you can specify <code>brooklyn.webconsole.security.provider=brooklyn.rest.security.provider.AnyoneSecurityProvider</code>
 to allow logins with no credentials.</p>
@@ -1093,7 +1092,7 @@ assert em.getTasksWithTag("a").every { Task t -&gt; t.isDone() }
         <p id="copyright">
             <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
             brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
-            &copy; 2012 Cloudsoft Corporation.
+            &copy; 2013 Cloudsoft Corporation.
         </p>
     </div><!--footer -->
 

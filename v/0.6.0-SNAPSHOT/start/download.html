@@ -323,6 +323,10 @@ $(document).ready(function() {
         
             
         
+            
+        
+            
+        
     
         
         
@@ -430,7 +434,7 @@ $(document).ready(function() {
 </tr>
 <tr>
     <td style='text-align:left'>Release notes</td>
-    <td style='text-align:left'><a href='/start/release-notes.html'>0.6.0-SNAPSHOT</a></td>
+    <td style='text-align:left'><a href='/v/0.6.0-SNAPSHOT/start/release-notes.html'>0.6.0-SNAPSHOT</a></td>
     <td> - </td>
 </tr>
 </table>
@@ -475,39 +479,9 @@ You should always confirm that the source and date for snapshot artifacts.</p>
 
 <h2>Examples</h2>
 
-<p>You can checkout the examples from the <a href="http://github.com/brooklyncentral/brooklyn-examples">brooklyn-examples git repository</a>.
-Maven (v3) is required to build them, as described <a href="/v/0.6.0-SNAPSHOT/dev/build/">here</a>.
-The examples for this version (0.6.0-SNAPSHOT) are in the branch
-<code>master</code>,
-so if you have <code>git</code> and <code>mvn</code> already, you can simply:</p>
+<p>As this is a snapshot version of Brooklyn, please find the examples in the main Brooklyn codebase (in the <code>/examples</code> directory).</p>
 
-<div class="highlight"><pre><code class="bash">% git clone https://github.com/brooklyncentral/brooklyn-examples.git
-% <span class="nb">cd </span>brooklyn-examples
-% mvn clean install
-</code></pre>
-</div>
-
-
-<p><strong>Please note</strong>: for snapshot versions of Brooklyn,
-the examples in this repository may not be automatically synched.
-It is recommended that you use the code for the examples included
-in the main Brooklyn codebase, or use a released version.</p>
-
-<p>If you don't use <code>git</code>, you can download the projects as a tarball instead
-from <a href="https://github.com/brooklyncentral/brooklyn-examples/tarball/master">this link</a>.
-These commands should do the trick:</p>
-
-<div class="highlight"><pre><code class="bash">% curl -L -o brooklyn-examples-master.tgz <span class="se">\</span>
-     https://github.com/brooklyncentral/brooklyn-examples/tarball/master
-% tar xvfz brooklyn-examples-master.tgz
-% mv brooklyncentral-brooklyn-examples-* brooklyn-examples-master <span class="se">\</span>
-     <span class="c"># change the strange name which github assigns in the tarball</span>
-% mvn clean install
-</code></pre>
-</div>
-
-
-<p>A good example to start with is the <a href="/v/0.6.0-SNAPSHOT/use/examples/webcluster.html">Elastic Web Cluster</a>.</p>
+<p>When this version is released, the <a href="http://github.com/brooklyncentral/brooklyn-examples">brooklyn-examples git repository</a> will be updated and instructions for use will be included here.</p>
 
 <p><a name="maven"></a></p>
 
@@ -825,7 +799,17 @@ Information on working with the source is <a href="/v/0.6.0-SNAPSHOT/dev/code">h
         
             
               <div class="toc-3 ">
+	            <a href="/v/0.6.0-SNAPSHOT/dev/tips/local-artifact-repo.html"><div class="toc-3-item">Local Artifact Repo</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
 	            <a href="/v/0.6.0-SNAPSHOT/dev/tips/update-docs.html"><div class="toc-3-item">Updating Docs</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-SNAPSHOT/dev/tips/release.html"><div class="toc-3-item">Release Process</div></a>
               </div>
         
             </div></div>
@@ -995,7 +979,7 @@ Information on working with the source is <a href="/v/0.6.0-SNAPSHOT/dev/code">h
         <p id="copyright">
             <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
             brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
-            &copy; 2012 Cloudsoft Corporation.
+            &copy; 2013 Cloudsoft Corporation.
         </p>
     </div><!--footer -->
 

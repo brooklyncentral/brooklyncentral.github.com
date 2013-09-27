@@ -330,6 +330,10 @@ $(document).ready(function() {
         
             
         
+            
+        
+            
+        
     
         
         
@@ -439,6 +443,9 @@ simplifies building selected projects, so if you just change something in <code>
 and then want to re-run the examples you can do:</p>
 
 <p><code>examples/simple-web-cluster% mvnf ../../{software/webapp,usage/all}</code></p></li>
+<li><p>The <strong>developers catalog</strong> (<a href="developers-catalog.xml">developers-catalog.xml</a>) uses artifacts from your local <code>~/.m2/repository/...</code> (after building from source). This avoids unnecessary web requests to Maven Central or Sonatype, and will allow you to work off-line.</p>
+
+<p><code>wget /v/0.6.0-SNAPSHOT/dev/build/developers-catalog.xml &gt; ~/.brooklyn/catalog.xml</code></p></li>
 </ul>
 
 
@@ -764,7 +771,17 @@ manifest and in the META-INF/MANIFEST.MF entry in the jar file.
         
             
               <div class="toc-3 ">
+	            <a href="/v/0.6.0-SNAPSHOT/dev/tips/local-artifact-repo.html"><div class="toc-3-item">Local Artifact Repo</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
 	            <a href="/v/0.6.0-SNAPSHOT/dev/tips/update-docs.html"><div class="toc-3-item">Updating Docs</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-SNAPSHOT/dev/tips/release.html"><div class="toc-3-item">Release Process</div></a>
               </div>
         
             </div></div>
@@ -934,7 +951,7 @@ manifest and in the META-INF/MANIFEST.MF entry in the jar file.
         <p id="copyright">
             <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
             brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
-            &copy; 2012 Cloudsoft Corporation.
+            &copy; 2013 Cloudsoft Corporation.
         </p>
     </div><!--footer -->
 

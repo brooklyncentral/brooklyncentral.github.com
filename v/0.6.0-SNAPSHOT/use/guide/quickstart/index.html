@@ -396,30 +396,34 @@ $(document).ready(function() {
 
 <p>Expand the <code>tar.gz</code> archive. Each Distro is timestamped, so your filename will be different.</p>
 
-<pre><code>$ tar -zxf brooklyn-dist--timestamp-dist.tar.gz
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>tar -zxf brooklyn-dist--timestamp-dist.tar.gz
 </code></pre>
+</div>
+
 
 <p>This will create a <code>brooklyn-</code> folder.</p>
 
 <p>Let's setup some paths for easy commands.</p>
 
-<pre><code>$ cd brooklyn-
-$ BROOKLYN_HOME=$(pwd)
-$ export PATH=$PATH:$BROOKLYN_HOME/bin/
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span><span class="nb">cd </span>brooklyn-
+<span class="nv">$ BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>
+<span class="nv">$ </span><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$BROOKLYN_HOME</span>/bin/
 </code></pre>
+</div>
+
 
 <h3>A Quick Test Drive</h3>
 
 <p>Running Brooklyn now will launch the web interface, but there will be little to do, as we haven't configured any deployment locations or added a service catalog. Check your progress by running:</p>
 
-<pre><code>$ brooklyn launch
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>brooklyn launch
 </code></pre>
+</div>
+
 
 <p>Brooklyn will output the address of the management interface:</p>
 
 <p><code>... Started Brooklyn console at http://127.0.0.1:8081/</code> (<a href="http://127.0.0.1:8081/">link</a>)</p>
-
-<p>Login with default credentials: <code>admin:password</code></p>
 
 <p>Stop Brooklyn with ctrl-c.</p>
 
@@ -427,48 +431,58 @@ $ export PATH=$PATH:$BROOKLYN_HOME/bin/
 
 <p>By default Brooklyn loads configuration parameters from <code>~/.brooklyn/brooklyn.properties</code> and a service catalog from <code>~/.brooklyn/catalog.xml</code>.</p>
 
-<p>Create a .brooklyn folder:</p>
+<p>Create a <code>.brooklyn</code> folder in your home directory:</p>
 
-<pre><code>$ mkdir ~/.brooklyn
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>mkdir ~/.brooklyn
 </code></pre>
+</div>
 
-<p>Then download the following default/template files.</p>
 
-<h3>brooklyn.properties</h3>
+<p>Next, set up the following default/template files in that directory:</p>
 
-<p>Download the template <a href="brooklyn.properties">brooklyn.properties</a> (to <code>~/.brooklyn</code>).</p>
+<ul>
+<li><p><strong><code>brooklyn.properties</code></strong>: Download the template <a href="brooklyn.properties">brooklyn.properties</a>
+and place this in <code>~/.brooklyn</code>.  This is a standard java <code>.properties</code> file,
+which you can edit in your favourite text editor to add credentials for your favorite clouds.</p></li>
+<li><p><strong><code>catalog.xml</code></strong>: Download the template <a href="catalog.xml">catalog.xml</a> (also to<code>~/.brooklyn</code>).
+This is a catalog of application blueprints. The example file contains some blueprints which will
+be automatically downloaded from the web if you run them.
+You may need to edit this file (text editor) to ensure that the links to the demo application <code>.jar</code> files
+are correct for your version of Brooklyn.</p></li>
+</ul>
 
-<p>brooklyn.properties is a standard java .properties file.</p>
 
-<p>Edit this file (in any text editor) to add credentials for your favorite cloud.</p>
+<p>Finally, if you do not already have SSH keys installed (in <code>~/.ssh</code>, either <code>id_rsa</code> and <code>id_rsa.pub</code> or the
+same for <code>id_dsa</code>), you will need to create keys for Brooklyn to use.
+If you're deploying to localhost, these should be added to your <code>authorized_keys</code> file.</p>
 
-<h3>catalog.xml</h3>
-
-<p>Download the template <a href="catalog.xml">catalog.xml</a> (to <code>~/.brooklyn</code>).</p>
-
-<p>catalog.xml is catalog of application or service blueprints. The example file contains two demos which will be automatically downloaded from the web if you run them.</p>
-
-<p>Edit this file (in any text editor) and check that the links to the demo applications' .jars are valid. At the time of writing these were for version <code>0.5.0-SNAPSHOT</code>, but if this has changed you may need to update the links. <!-- BROOKLYN VERSION --></p>
-
-<h3>SSH Key</h3>
-
-<p>If this is a new machine, or you haven't used SSH before, you will need to create keys for Brooklyn to use. (Accept all default options, as this will setup password-less keys in the default location and Brooklyn will find them.)</p>
-
-<pre><code>$ ssh-keygen -t rsa
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>ssh-keygen -t rsa -N <span class="s2">&quot;&quot;</span> -f ~/.ssh/id_rsa
+<span class="nv">$ </span>cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys
 </code></pre>
+</div>
 
-<p>It is advisable <em>not</em> to set a password for this key. If you are using an existing key that already has a password please add it to your <code>brooklyn.properties</code> file.</p>
+
+<p>(<em>Existing SSH keys?</em>: If you are using an existing key SSH that has a passphrase,
+or is not located at <code>~/.ssh/id_rsa</code>, you can point Brooklyn at these by setting
+<code>brooklyn.location.localhost.privateKeyFile</code> and <code>brooklyn.location.localhost.privateKeyPassphrase</code>
+in your <code>brooklyn.properties</code> file.)</p>
+
+<p>(<em>MacOSx user?</em>: To allow SSH access to localhost please enable 'Remote Login' in System Preferences > Sharing.)</p>
 
 <h3>3-2-1 Go!</h3>
 
 <p>Now when we launch Brooklyn:</p>
 
-<pre><code>$ brooklyn launch
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>brooklyn launch
 </code></pre>
+</div>
 
-<p>Brooklyn will use the <code>brooklyn.properties</code> and <code>catalog.xml</code> files. There will be more locations available in the management interface at <a href="http://localhost:8081">localhost:8081</a>, and the blueprints from the service catalog will be available for deployment.</p>
 
-<p>Click "add application". The Create Application dialog will appear.</p>
+<p>Brooklyn will use the <code>brooklyn.properties</code> and <code>catalog.xml</code> files.
+The new locations will be available in the management interface at <a href="http://localhost:8081">localhost:8081</a>,
+and the blueprints from the service catalog will be available for deployment.</p>
+
+<p>Start opening the "Create Application" dialog.  (This may open automatically, but if it does not, click "Add Application".)</p>
 
 <p>Select the "Demo Web Cluster with DB", then "Next".</p>
 
@@ -888,7 +902,7 @@ The loadbalancer will automatically be updated by the targets policy as the clus
         <p id="copyright">
             <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
             brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
-            &copy; 2012 Cloudsoft Corporation.
+            &copy; 2013 Cloudsoft Corporation.
         </p>
     </div><!--footer -->
 

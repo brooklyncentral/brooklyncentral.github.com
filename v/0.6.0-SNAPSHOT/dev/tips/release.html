@@ -209,7 +209,7 @@ $(document).ready(function() {
 
   
   
-  <li class=""><a href="/v/0.6.0-SNAPSHOT/dev/code/index.html">Contributing</a></li>
+  <li class="toc-active"><a href="/v/0.6.0-SNAPSHOT/dev/code/index.html">Contributing</a></li>
 
 
 </ul>                    
@@ -318,6 +318,17 @@ $(document).ready(function() {
         
             
         
+            
+        
+            
+                
+                
+                
+                
+                
+                
+            
+        
     
         
         
@@ -372,17 +383,14 @@ $(document).ready(function() {
     
 
 
-
-    
-    
-    
-    
 
             
 <p id="breadcrumb">
-    <a href="/v/0.6.0-SNAPSHOT">Home</a>
+    <a href="/v/0.6.0-SNAPSHOT/dev/code/index.html">Contributing</a>
     
-        &raquo; <a href="/v/0.6.0-SNAPSHOT/dev/tips/release.html">Release Process</a>
+        &raquo; <a href="/v/0.6.0-SNAPSHOT/dev/tips/index.html">Tips and Tricks</a>
+        
+            &raquo; <a href="/v/0.6.0-SNAPSHOT/dev/tips/release.html">Release Process</a>
         
     
 </p>
@@ -413,6 +421,287 @@ push examples to repo
 push docs to branch and publish
 
 -->
+
+
+<p>Brooklyn is published to two locations:</p>
+
+<ul>
+<li>Sonatype, for snapshots and for staging releases</li>
+<li>Maven Central, for full (GA and milestone) releases</li>
+</ul>
+
+
+<p>Brooklyn artifacts are generally downloaded from:</p>
+
+<ol>
+<li><a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22io.brooklyn%22">Maven Central</a>,</li>
+<li><a href="https://oss.sonatype.org/index.html#nexus-search;quick~io.brooklyn">Sonatype</a>,</li>
+<li><a href="https://github.com/brooklyncentral/brooklyn">GitHub</a>.</li>
+</ol>
+
+
+<p>To publish:</p>
+
+<ul>
+<li>a snapshot release:
+
+<ul>
+<li>mvn deploy to Sonatype</li>
+<li>(optional) publish versioned docs to brooklyncentral.github.com project</li>
+</ul>
+</li>
+<li>a (milestone) release:
+
+<ul>
+<li>same as above, but with some git versioning</li>
+<li>deploy to Sonatype, then release to Maven Central</li>
+<li>deploy a version branch to brooklyn-examples</li>
+<li>deploy (or update) versioned docs</li>
+</ul>
+</li>
+<li>a major release:
+
+<ul>
+<li>same as above, and</li>
+<li>in addition to versioned examples,  update brooklyn-examples master to match the current (stable) release</li>
+<li>in addition to versioned docs, publish full (front page) docs to brooklyncentral.github.com project</li>
+<li>bump the snapshot version in brooklyn master to the next release</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>Configuration</h2>
+
+<p>Your .m2/settings.xml must be configured with the right credentials for Sonatype</p>
+
+<pre><code>&lt;servers&gt;
+...
+    &lt;server&gt;
+        &lt;username&gt; ... &lt;/username&gt;
+        &lt;password&gt; ... &lt;/password&gt;
+        &lt;id&gt;sonatype-nexus-snapshots&lt;/id&gt;
+    &lt;/server&gt;
+    &lt;server&gt;
+        &lt;username&gt; ... &lt;/username&gt;
+        &lt;password&gt; ... &lt;/password&gt;
+        &lt;id&gt;sonatype-nexus-staging&lt;/id&gt;
+    &lt;/server&gt;
+...
+&lt;/servers&gt;
+</code></pre>
+
+<p>You must be configured to sign artifacts using PGP.</p>
+
+<p>If this is the first time you have used Sonatype, the <a href="https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide">Sonatype - Maven Usage Guide</a> is required reading.</p>
+
+<p>The code snippets below use the following variables:</p>
+
+<div class="highlight"><pre><code class="bash"><span class="nb">export </span><span class="nv">BROOKLYN_DIR</span><span class="o">=</span>/path/to/brooklyncentral-brooklyn
+<span class="nb">export </span><span class="nv">EXAMPLES_DIR</span><span class="o">=</span>/path/to/brooklyncentral-brooklyn-examples
+<span class="nb">export </span><span class="nv">SITE_DIR</span><span class="o">=</span>/path/to/brooklyncentral-brooklyncentral.github.com
+
+<span class="nb">export </span><span class="nv">SNAPSHOT_VERSION</span><span class="o">=</span>0.6.0-SNAPSHOT
+<span class="nb">export </span><span class="nv">RELEASE_VERSION</span><span class="o">=</span>0.6.0-M1
+</code></pre>
+</div>
+
+
+<h2>Preparing a Snapshot Release</h2>
+
+<h3>Deploy to Sonatype</h3>
+
+<p>Execute the following:</p>
+
+<div class="highlight"><pre><code class="bash">mvn -Dbrooklyn.deployTo<span class="o">=</span>sonatype -DskipTests clean install deploy
+</code></pre>
+</div>
+
+
+<h3>(Option) Publish snapshot docs.</h3>
+
+<p>(Only required if there have been significant changes to docs or java docs.)</p>
+
+<div class="highlight"><pre><code class="bash"><span class="nb">cd</span> <span class="nv">$BROOKLYN_DIR</span>/docs
+git checkout master
+
+<span class="k">if</span> <span class="o">[</span> ! -f <span class="nv">$SITE_DIR</span>/index.html <span class="o">]</span> ; <span class="k">then </span><span class="nb">echo</span> <span class="s2">&quot;could not find docs in $SITE_DIR&quot;</span> ; <span class="nb">exit </span>1 ; <span class="k">fi</span>
+
+<span class="c"># Build the docs</span>
+_scripts/build.sh <span class="o">||</span> <span class="o">{</span> <span class="nb">echo</span> <span class="s2">&quot;failed to build docs&quot;</span> ; <span class="nb">exit </span>1 ; <span class="o">}</span>
+
+<span class="c"># Wipe any previous edition of the same version, replacing with new build.</span>
+rm -rf <span class="nv">$SITE_DIR</span>/v/<span class="nv">$SNAPSHOT_VERSION</span>
+mkdir <span class="nv">$SITE_DIR</span>/v/<span class="nv">$SNAPSHOT_VERSION</span>
+cp -r _site/* <span class="nv">$SITE_DIR</span>/v/<span class="nv">$SNAPSHOT_VERSION</span>/
+
+<span class="c"># and push, causing GitHub to republish with updated /v/$SNAPSHOT_VERSION/</span>
+<span class="nb">pushd</span> <span class="nv">$SITE_DIR</span>
+git add -A .
+git commit -m <span class="s2">&quot;Updated version docs for version $SNAPSHOT_VERSION&quot;</span>
+git push
+<span class="nb">popd</span>
+</code></pre>
+</div>
+
+
+<h2>Preparing a (Milestone) Release</h2>
+
+<h3>Prepare a Release Branch</h3>
+
+<div class="highlight"><pre><code class="bash"><span class="nb">cd</span> <span class="nv">$BROOKLYN_DIR</span>
+git checkout -b <span class="nv">$RELEASE_VERSION</span>
+usage/scripts/change-version.sh <span class="nv">$SNAPSHOT_VERSION</span> <span class="nv">$RELEASE_VERSION</span>
+git commit -a -m <span class="s2">&quot;Changed version to $RELEASE_VERSION&quot;</span>
+git push -u upstream <span class="nv">$RELEASE_VERSION</span>
+</code></pre>
+</div>
+
+
+<h3>Deploy to Sonatype, and Close the repo.</h3>
+
+<div class="highlight"><pre><code class="bash">mvn -Dbrooklyn.deployTo<span class="o">=</span>sonatype -DskipTests clean install deploy
+</code></pre>
+</div>
+
+
+<ul>
+<li>Go to <a href="https://oss.sonatype.org/index.html#stagingRepositories">oss.sonatype.org ... #stagingRepositories</a> (again, need credentials)</li>
+<li>'Close' the repo</li>
+<li>Email the closed repo address to brooklyn-dev list, have people download and confirm it works.</li>
+</ul>
+
+
+<h3>Update the brooklyn-examples repo's version Branch</h3>
+
+<div class="highlight"><pre><code class="bash"><span class="nb">cd</span> <span class="nv">$EXAMPLES_DIR</span>
+
+<span class="nb">pushd</span> <span class="nv">$BROOKLYN_DIR</span>
+git checkout <span class="nv">$RELEASE_VERSION</span>
+<span class="nb">popd</span>
+
+<span class="k">if</span> <span class="o">[</span> ! -d simple-web-cluster <span class="o">]</span> ; <span class="k">then </span><span class="nb">echo</span> <span class="s2">&quot;wrong dir&quot;</span> ; <span class="nb">exit </span>1 ; <span class="k">fi</span>
+git checkout master
+git checkout -b <span class="nv">$RELEASE_VERSION</span>
+rm -rf *
+cp -r <span class="nv">$BROOKLYN_DIR</span>/examples/* .
+rm -rf target
+git add -A
+git commit -m <span class="s2">&quot;branch for $RELEASE_VERSION&quot;</span>
+git push -u origin <span class="nv">$RELEASE_VERSION</span>
+</code></pre>
+</div>
+
+
+<h3>Update the Versioned Docs</h3>
+
+<div class="highlight"><pre><code class="bash"><span class="nb">cd</span> <span class="nv">$BROOKLYN_DIR</span>/docs
+git checkout <span class="nv">$RELEASE_VERSION</span>
+
+<span class="k">if</span> <span class="o">[</span> ! -f <span class="nv">$SITE_DIR</span>/index.html <span class="o">]</span> ; <span class="k">then </span><span class="nb">echo</span> <span class="s2">&quot;could not find docs in $SITE_DIR&quot;</span> ; <span class="nb">exit </span>1 ; <span class="k">fi</span>
+
+<span class="c"># Build the docs</span>
+_scripts/build.sh <span class="o">||</span> <span class="o">{</span> <span class="nb">echo</span> <span class="s2">&quot;failed to build docs&quot;</span> ; <span class="nb">exit </span>1 ; <span class="o">}</span>
+
+<span class="c"># Wipe any previous edition of the same version, replacing with new build.</span>
+rm -rf <span class="nv">$SITE_DIR</span>/v/<span class="nv">$RELEASE_VERSION</span>
+mkdir <span class="nv">$SITE_DIR</span>/v/<span class="nv">$RELEASE_VERSION</span>
+cp -r _site/* <span class="nv">$SITE_DIR</span>/v/<span class="nv">$RELEASE_VERSION</span>/
+
+<span class="c"># and push, causing GitHub to republish with updated /v/$RELEASE_VERSION/</span>
+<span class="nb">pushd</span> <span class="nv">$SITE_DIR</span>
+git add -A .
+git commit -m <span class="s2">&quot;Updated version docs for version $RELEASE_VERSION&quot;</span>
+git push
+<span class="nb">popd</span>
+</code></pre>
+</div>
+
+
+<h2>Preparing a Full Release</h2>
+
+<p>Complete <em>all</em> above steps.</p>
+
+<h3>Deploy to Maven Central</h3>
+
+<ul>
+<li>Confirm that the closed Sonatype repo has no errors</li>
+<li>Return to <a href="https://oss.sonatype.org/index.html#stagingRepositories">Sonatype: Staging Repositories</a></li>
+<li>'Release' the repo</li>
+</ul>
+
+
+<h3>Deploy the Examples master branch.</h3>
+
+<div class="highlight"><pre><code class="bash"><span class="nb">cd</span> <span class="nv">$EXAMPLES_DIR</span>
+
+<span class="nb">pushd</span> <span class="nv">$BROOKLYN_DIR</span>
+git checkout <span class="nv">$RELEASE_VERSION</span>
+<span class="nb">popd</span>
+
+<span class="k">if</span> <span class="o">[</span> ! -d simple-web-cluster <span class="o">]</span> ; <span class="k">then </span><span class="nb">echo</span> <span class="s2">&quot;wrong dir&quot;</span> ; <span class="nb">exit </span>1 ; <span class="k">fi</span>
+git checkout master
+rm -rf *
+cp -r <span class="nv">$BROOKLYN_DIR</span>/examples/* .
+rm -rf target
+git add -A
+git commit -m <span class="s2">&quot;Updated to $RELEASE_VERSION&quot;</span>
+git push -u origin master
+</code></pre>
+</div>
+
+
+<h3>Update the brooklyn.io Front Page Version</h3>
+
+<div class="highlight"><pre><code class="bash"><span class="nb">cd</span> <span class="nv">$BROOKLYN_DIR</span>/docs
+
+<span class="nb">pushd</span> <span class="nv">$SITE_DIR</span>
+<span class="c"># remove old root files, but not the previous version in /v/</span>
+<span class="k">if</span> <span class="o">[</span> -f start/index.html <span class="o">]</span> ; <span class="k">then</span>
+<span class="k">  for </span>x in * ; <span class="k">do if</span> <span class="o">[[</span> <span class="nv">$x</span> !<span class="o">=</span> <span class="s2">&quot;v&quot;</span> <span class="o">]]</span> ; <span class="k">then </span>rm -rf <span class="nv">$x</span> ; <span class="k">fi</span> ; <span class="k">done</span>
+<span class="k">else</span>
+<span class="k">  </span><span class="nb">echo </span>IN WRONG DIRECTORY <span class="nv">$SITE_DIR</span> - <span class="nb">export </span>SITE_DIR to <span class="k">continue</span>
+<span class="k">  </span><span class="nb">exit </span>1
+<span class="k">fi</span>
+<span class="nb">popd</span>
+
+<span class="c"># re-build for hosting at / rather than at /v/VERSION/</span>
+_scripts/build.sh --url <span class="s2">&quot;&quot;</span> <span class="o">||</span> <span class="o">{</span> <span class="nb">echo</span> <span class="s2">&quot;failed to build docs&quot;</span> ; <span class="nb">exit </span>1 ; <span class="o">}</span>
+
+<span class="c"># copy to site dir</span>
+cp -r _site/* <span class="nv">$SITE_DIR</span>/
+
+<span class="c"># and git push</span>
+<span class="nb">pushd</span> <span class="nv">$SITE_DIR</span>
+git add -A .
+git commit -m <span class="s2">&quot;Updated root docs for version $RELEASE_VERSION&quot;</span>
+git push
+<span class="nb">popd</span>
+</code></pre>
+</div>
+
+
+<h3>Announce</h3>
+
+<ul>
+<li>Email the Dev and Users mailing lists.</li>
+<li>Tweet from <a href="https://twitter.com/brooklyncentral">@brooklyncentral</a></li>
+</ul>
+
+
+<h3>Update Snapshot Version</h3>
+
+<div class="highlight"><pre><code class="bash"><span class="nb">export </span><span class="nv">NEW_SNAPSHOT_VERSION</span><span class="o">=</span>0.7.0-SNAPSHOT
+
+<span class="nb">cd</span> <span class="nv">$BROOKLYN_DIR</span>
+git checkout master
+usage/scripts/change-version.sh <span class="nv">$SNAPSHOT_VERSION</span> <span class="nv">$NEW_SNAPSHOT_VERSION</span>
+git commit -a -m <span class="s2">&quot;Changed version to $NEW_SNAPSHOT_VERSION&quot;</span>
+git push -u upstream master
+</code></pre>
+</div>
+
+
 
 
 
@@ -578,7 +867,7 @@ push docs to branch and publish
     
     
     
-	  <div class="toc-1 ">
+	  <div class="toc-1 toc-active">
   
 	    <a href="/v/0.6.0-SNAPSHOT/dev/code/index.html"><div class="toc-1-item toc-1-header ">Contributing</div></a>
         <div class="toc-1-children">
@@ -642,7 +931,7 @@ push docs to branch and publish
     
         
         
-	      <div class="toc-2 ">
+	      <div class="toc-2 toc-active">
       
 	        <a href="/v/0.6.0-SNAPSHOT/dev/tips/index.html"><div class="toc-2-item toc-2-header">Tips and Tricks</div></a>
             <div class="toc-2-children-popup"><div class="toc-2-children">
@@ -664,7 +953,17 @@ push docs to branch and publish
         
             
               <div class="toc-3 ">
+	            <a href="/v/0.6.0-SNAPSHOT/dev/tips/local-artifact-repo.html"><div class="toc-3-item">Local Artifact Repo</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
 	            <a href="/v/0.6.0-SNAPSHOT/dev/tips/update-docs.html"><div class="toc-3-item">Updating Docs</div></a>
+              </div>
+        
+            
+              <div class="toc-3 toc-active">
+	            <a href="/v/0.6.0-SNAPSHOT/dev/tips/release.html"><div class="toc-3-item toc-active">Release Process</div></a>
               </div>
         
             </div></div>
@@ -834,7 +1133,7 @@ push docs to branch and publish
         <p id="copyright">
             <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
             brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
-            &copy; 2012 Cloudsoft Corporation.
+            &copy; 2013 Cloudsoft Corporation.
         </p>
     </div><!--footer -->
 

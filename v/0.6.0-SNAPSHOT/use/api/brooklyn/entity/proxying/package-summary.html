@@ -90,13 +90,13 @@ Package brooklyn.entity.proxying
     </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="EntityProxy.html" title="class in brooklyn/entity/proxying">EntityProxy</A></B></TD>
-        <TD>Marker interface, indicating that this is a proxy to an entity.</TD>
+        <TD WIDTH="15%"><B><A HREF="EntityInitializer.html" title="class in brooklyn/entity/proxying">EntityInitializer</A></B></TD>
+        <TD></TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="EntitySpec.html" title="class in brooklyn/entity/proxying">EntitySpec</A></B></TD>
-        <TD>Gives details of an entity to be created. </TD>
+        <TD WIDTH="15%"><B><A HREF="EntityProxy.html" title="class in brooklyn/entity/proxying">EntityProxy</A></B></TD>
+        <TD>Marker interface, indicating that this is a proxy to an entity.</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -121,7 +121,7 @@ Package brooklyn.entity.proxying
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="BasicEntitySpec.html" title="class in brooklyn/entity/proxying">BasicEntitySpec</A></B></TD>
-        <TD></TD>
+        <TD>@deprecated since 0.6 use EntitySpec.create(...)</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -132,6 +132,11 @@ Package brooklyn.entity.proxying
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="EntityProxyImpl.html" title="class in brooklyn/entity/proxying">EntityProxyImpl</A></B></TD>
         <TD>A dynamic proxy for an entity. </TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="EntitySpec.html" title="class in brooklyn/entity/proxying">EntitySpec</A></B></TD>
+        <TD>Gives details of an entity to be created. </TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -150,8 +155,18 @@ Package brooklyn.entity.proxying
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="InternalLocationFactory.html" title="class in brooklyn/entity/proxying">InternalLocationFactory</A></B></TD>
+        <TD>Creates locations of required types.</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="InternalLocationFactory.FactoryConstructionTracker.html" title="class in brooklyn/entity/proxying">InternalLocationFactory.FactoryConstructionTracker</A></B></TD>
+        <TD>For tracking if AbstractLocation constructor has been called by framework, or in legacy way (i.e. directly).</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="WrappingEntitySpec.html" title="class in brooklyn/entity/proxying">WrappingEntitySpec</A></B></TD>
-        <TD></TD>
+        <TD>@deprecated since 0.6; use EntitySpec#create(EntitySpec)#create(EntitySpec)</TD>
         </TR>
 
 </TABLE>

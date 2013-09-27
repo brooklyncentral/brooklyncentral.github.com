@@ -90,6 +90,11 @@ Package brooklyn.util.task
     </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="BasicTask.TaskFinalizer.html" title="class in brooklyn/util/task">BasicTask.TaskFinalizer</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="CanSetName.html" title="class in brooklyn/util/task">CanSetName</A></B></TD>
         <TD></TD>
         </TR>
@@ -102,6 +107,12 @@ Package brooklyn.util.task
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="ExecutionListener.html" title="class in brooklyn/util/task">ExecutionListener</A></B></TD>
         <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="TaskInternal.html" title="class in brooklyn/util/task">TaskInternal</A></B></TD>
+        <TD>All tasks being passed to the ExecutionManager should implement this.
+ </TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -151,19 +162,47 @@ Package brooklyn.util.task
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="BasicTaskStub.html" title="class in brooklyn/util/task">BasicTaskStub</A></B></TD>
-        <TD></TD>
-        </TR>
-
-        <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="CompoundTask.html" title="class in brooklyn/util/task">CompoundTask</A></B></TD>
         <TD>A Task that is comprised of other units of work: possibly a heterogeneous mix of Task,
  java.lang.Runnable, java.util.concurrent.Callable and groovy.lang.Closure instances.</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="DynamicSequentialTask.html" title="class in brooklyn/util/task">DynamicSequentialTask</A></B></TD>
+        <TD>Represents a task whose run() method can create other tasks
+ which are run sequentially, but that sequence runs in parallel to this task</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="DynamicSequentialTask.DstJob.html" title="class in brooklyn/util/task">DynamicSequentialTask.DstJob</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="DynamicTasks.html" title="class in brooklyn/util/task">DynamicTasks</A></B></TD>
+        <TD>Contains static methods which detect and use the current TaskQueueingContext to execute tasks.</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="DynamicTasks.TaskQueueingResult.html" title="class in brooklyn/util/task">DynamicTasks.TaskQueueingResult</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="ExecutionUtils.html" title="class in brooklyn/util/task">ExecutionUtils</A></B></TD>
         <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="ForwardingTask.html" title="class in brooklyn/util/task">ForwardingTask</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="ListenableForwardingFuture.html" title="class in brooklyn/util/task">ListenableForwardingFuture</A></B></TD>
+        <TD>Wraps a Future, making it a ListenableForwardingFuture, but with the caller having the resposibility to:
+ <li> invoke the listeners on job completion (success or error)
+ <li> invoke the listeners on cancel</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -185,13 +224,18 @@ Package brooklyn.util.task
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="SingleThreadedScheduler.html" title="class in brooklyn/util/task">SingleThreadedScheduler</A></B></TD>
-        <TD>Instances of this class ensures that Tasks it is shown execute with in-order
+        <TD>Instances of this class ensures that Tasks execute with in-order
  single-threaded semantics.</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="StackTraceSimplifier.html" title="class in brooklyn/util/task">StackTraceSimplifier</A></B></TD>
         <TD>Utility class for cleaning up stacktraces.</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="TaskBuilder.html" title="class in brooklyn/util/task">TaskBuilder</A></B></TD>
+        <TD>Convenience for creating tasks; note that DynamicSequentialTask is the default</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">

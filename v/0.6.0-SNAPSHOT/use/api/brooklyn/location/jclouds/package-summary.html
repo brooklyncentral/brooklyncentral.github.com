@@ -131,13 +131,15 @@ Package brooklyn.location.jclouds
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="CloudMachineNamer.html" title="class in brooklyn/location/jclouds">CloudMachineNamer</A></B></TD>
-        <TD></TD>
-        </TR>
-
-        <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="CredentialsFromEnv.html" title="class in brooklyn/location/jclouds">CredentialsFromEnv</A></B></TD>
-        <TD>The credentials to use for a jclouds location, loaded from environment variables / system properties</TD>
+        <TD WIDTH="15%"><B><A HREF="JcloudsByonLocationResolver.html" title="class in brooklyn/location/jclouds">JcloudsByonLocationResolver</A></B></TD>
+        <TD>Examples of valid specs:
+   <ul>
+     <li>byon:(hosts=myhost)
+     <li>byon:(hosts=myhost,myhost2)
+     <li>byon:(hosts="myhost, myhost2")
+     <li>byon:(hosts=myhost,myhost2, name=abc)
+     <li>byon:(hosts="myhost, myhost2", name="my location name")
+   </ul></TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -147,7 +149,12 @@ Package brooklyn.location.jclouds
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="JcloudsLocationFactory.html" title="class in brooklyn/location/jclouds">JcloudsLocationFactory</A></B></TD>
+        <TD WIDTH="15%"><B><A HREF="JcloudsMachineNamer.html" title="class in brooklyn/location/jclouds">JcloudsMachineNamer</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="JcloudsPropertiesFromBrooklynProperties.html" title="class in brooklyn/location/jclouds">JcloudsPropertiesFromBrooklynProperties</A></B></TD>
         <TD></TD>
         </TR>
 

@@ -325,6 +325,10 @@ $(document).ready(function() {
         
             
         
+            
+        
+            
+        
     
         
         
@@ -548,7 +552,7 @@ with an arbitrary size, using the <code>WhirrHadoopCluster</code> entity.</p>
 <div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">WhirrHadoopExample</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">WhirrCluster</span> <span class="n">cluster</span> <span class="o">=</span> <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpecs</span><span class="o">.</span><span class="na">spec</span><span class="o">(</span><span class="n">WhirrHadoopCluster</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+        <span class="n">WhirrCluster</span> <span class="n">cluster</span> <span class="o">=</span> <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">WhirrHadoopCluster</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;size&quot;</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;memory&quot;</span><span class="o">,</span> <span class="mi">2048</span><span class="o">));</span>
     <span class="o">}</span>
@@ -613,7 +617,7 @@ can be run from within Brooklyn:</p>
 
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">WhirrCluster</span> <span class="n">cluster</span> <span class="o">=</span> <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpecs</span><span class="o">.</span><span class="na">spec</span><span class="o">(</span><span class="n">WhirrCluster</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+        <span class="n">WhirrCluster</span> <span class="n">cluster</span> <span class="o">=</span> <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">WhirrCluster</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;recipe&quot;</span><span class="o">,</span> <span class="n">RECIPE</span><span class="o">));</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -936,7 +940,17 @@ is in <code>WebFabricWithHadoopExample</code>.</p>
         
             
               <div class="toc-3 ">
+	            <a href="/v/0.6.0-SNAPSHOT/dev/tips/local-artifact-repo.html"><div class="toc-3-item">Local Artifact Repo</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
 	            <a href="/v/0.6.0-SNAPSHOT/dev/tips/update-docs.html"><div class="toc-3-item">Updating Docs</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-SNAPSHOT/dev/tips/release.html"><div class="toc-3-item">Release Process</div></a>
               </div>
         
             </div></div>
@@ -1106,7 +1120,7 @@ is in <code>WebFabricWithHadoopExample</code>.</p>
         <p id="copyright">
             <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
             brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
-            &copy; 2012 Cloudsoft Corporation.
+            &copy; 2013 Cloudsoft Corporation.
         </p>
     </div><!--footer -->
 

@@ -95,13 +95,13 @@ Package brooklyn.location.basic
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="RegistryLocationResolver.html" title="class in brooklyn/location/basic">RegistryLocationResolver</A></B></TD>
-        <TD>extension to LocationResolver which can take a registry</TD>
+        <TD WIDTH="15%"><B><A HREF="LocationInternal.html" title="class in brooklyn/location/basic">LocationInternal</A></B></TD>
+        <TD>Information about locations private to Brooklyn.</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="SshMachineLocation.ExecRunner.html" title="class in brooklyn/location/basic">SshMachineLocation.ExecRunner</A></B></TD>
-        <TD></TD>
+        <TD WIDTH="15%"><B><A HREF="RegistryLocationResolver.html" title="class in brooklyn/location/basic">RegistryLocationResolver</A></B></TD>
+        <TD>Extension to LocationResolver which can take a registry.</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -183,13 +183,13 @@ Package brooklyn.location.basic
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="CommandLineLocations.html" title="class in brooklyn/location/basic">CommandLineLocations</A></B></TD>
-        <TD>@deprecated in 0.5.0 use resolver</TD>
+        <TD WIDTH="15%"><B><A HREF="DefinedLocationByIdResolver.html" title="class in brooklyn/location/basic">DefinedLocationByIdResolver</A></B></TD>
+        <TD>looks up based on ID in DefinedLocations map</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="DefinedLocationByIdResolver.html" title="class in brooklyn/location/basic">DefinedLocationByIdResolver</A></B></TD>
-        <TD>looks up based on ID in DefinedLocations map</TD>
+        <TD WIDTH="15%"><B><A HREF="DeprecatedKeysMappingBuilder.html" title="class in brooklyn/location/basic">DeprecatedKeysMappingBuilder</A></B></TD>
+        <TD>@deprecated since 0.6; for use only in converting deprecated flags; will be deleted in future version.</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -205,6 +205,11 @@ Package brooklyn.location.basic
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="HostLocationResolver.html" title="class in brooklyn/location/basic">HostLocationResolver</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="LocalhostMachineProvisioningLocation.html" title="class in brooklyn/location/basic">LocalhostMachineProvisioningLocation</A></B></TD>
         <TD>An implementation of <a href='../../../brooklyn/location/MachineProvisioningLocation.html' title='MachineProvisioningLocation'>MachineProvisioningLocation</a> that can provision a SshMachineLocation for the
  local host.</TD>
@@ -213,6 +218,11 @@ Package brooklyn.location.basic
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="LocalhostMachineProvisioningLocation.LocalhostMachine.html" title="class in brooklyn/location/basic">LocalhostMachineProvisioningLocation.LocalhostMachine</A></B></TD>
         <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="LocalhostPropertiesFromBrooklynProperties.html" title="class in brooklyn/location/basic">LocalhostPropertiesFromBrooklynProperties</A></B></TD>
+        <TD>@author aledsage</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -242,8 +252,13 @@ Package brooklyn.location.basic
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="LocationRegistry.html" title="class in brooklyn/location/basic">LocationRegistry</A></B></TD>
-        <TD>@deprecated use BasicLocationRegistry implementing <a href='../../../brooklyn/location/LocationRegistry.html' title='LocationRegistry'>LocationRegistry</a></TD>
+        <TD WIDTH="15%"><B><A HREF="LocationPropertiesFromBrooklynProperties.html" title="class in brooklyn/location/basic">LocationPropertiesFromBrooklynProperties</A></B></TD>
+        <TD>The properties to use for locations, loaded from brooklyn.properties file.</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="Machines.html" title="class in brooklyn/location/basic">Machines</A></B></TD>
+        <TD>utilities for working with MachineLocations</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -263,7 +278,7 @@ Package brooklyn.location.basic
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="PortRanges.BasicPortRange.html" title="class in brooklyn/location/basic">PortRanges.BasicPortRange</A></B></TD>
-        <TD></TD>
+        <TD>@deprecated since 0.6.0; use LinearPortRange</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -280,6 +295,16 @@ Package brooklyn.location.basic
         <TD WIDTH="15%"><B><A HREF="SimulatedLocation.html" title="class in brooklyn/location/basic">SimulatedLocation</A></B></TD>
         <TD>Location for use in dev/test, defining custom start/stop support, and/or tweaking the ports which are permitted to be available
  (using setPermittedPorts(Iterable))</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="SingleMachineLocationResolver.html" title="class in brooklyn/location/basic">SingleMachineLocationResolver</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="SingleMachineProvisioningLocation.html" title="class in brooklyn/location/basic">SingleMachineProvisioningLocation</A></B></TD>
+        <TD></TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">

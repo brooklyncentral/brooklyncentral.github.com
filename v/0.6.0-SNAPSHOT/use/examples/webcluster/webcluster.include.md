@@ -30,7 +30,7 @@ public class SingleWebServerExample extends AbstractApplication {
 
     @Override
     public void init() {
-        addChild(EntitySpecs.spec(JBoss7Server.class)
+        addChild(EntitySpec.create(JBoss7Server.class)
                 .configure("war", WAR_PATH)
                 .configure("httpPort", 8080));
     }
@@ -45,7 +45,7 @@ You can run this as follows (on *nix or Mac, assuming `ssh localhost` requires n
 {% endhighlight %}
 
 
-Then visit the webapp on port 8080, or the Brooklyn console on 8081.  (Default credentials are admin/password.)
+Then visit the webapp on port 8080, or the Brooklyn console on localhost:8081.
 Note that the installation may take some time, because the default deployment downloads the software from
 the official repos.  You can monitor start-up activity for each entity in the ``Activity`` pane in the management console,
 and see more detail by tailing the log file (``tail -f brooklyn.log``).
@@ -87,11 +87,11 @@ public class WebClusterDatabaseExample extends AbstractApplication {
 
     @Override
     public void init() {
-        MySqlNode mysql = addChild(EntitySpecs.spec(MySqlNode.class)
+        MySqlNode mysql = addChild(EntitySpec.create(MySqlNode.class)
                 .configure("creationScriptUrl", DB_SETUP_SQL_URL));
         
-        ControlledDynamicWebAppCluster web = addChild(EntitySpecs.spec(ControlledDynamicWebAppCluster.class)
-                .configure("memberSpec", EntitySpecs.spec(JBoss7Server.class)
+        ControlledDynamicWebAppCluster web = addChild(EntitySpec.create(ControlledDynamicWebAppCluster.class)
+                .configure("memberSpec", EntitySpec.create(JBoss7Server.class)
                         .configure("httpPort", "8080+")
                         .configure("war", WAR_PATH)
                         .configure(javaSysProp("brooklyn.example.db.url"), 
