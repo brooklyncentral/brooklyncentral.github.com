@@ -165,7 +165,7 @@ $(document).ready(function() {
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.6.0-M1</a></li>
+            <li><a href="/meta/versions.html">0.6.0-M2</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -327,6 +327,8 @@ $(document).ready(function() {
         
             
         
+            
+        
     
         
         
@@ -445,9 +447,9 @@ $(document).ready(function() {
 
 
 
-<div class="highlight"><pre><code class="bash">% curl -LO http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.6.0-M1/brooklyn-dist-0.6.0-M1-dist.tar.gz
-% tar xvzf brooklyn-dist-0.6.0-M1-dist.tar.gz
-% <span class="nb">export </span><span class="nv">BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/brooklyn-0.6.0-M1/
+<div class="highlight"><pre><code class="bash">% curl -LO http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.6.0-M2/brooklyn-dist-0.6.0-M2-dist.tar.gz
+% tar xvzf brooklyn-dist-0.6.0-M2-dist.tar.gz
+% <span class="nb">export </span><span class="nv">BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/brooklyn-0.6.0-M2/
 </code></pre>
 </div>
 
@@ -466,7 +468,7 @@ $(document).ready(function() {
 
 <div class="highlight"><pre><code class="bash">% git clone https://github.com/brooklyncentral/brooklyn-examples.git
 % <span class="nb">cd </span>brooklyn-examples
-% git checkout 0.6.0-M1
+% git checkout 0.6.0-M2
 % mvn clean install
 </code></pre>
 </div>
@@ -529,7 +531,7 @@ with a single line:</p>
 
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpecs</span><span class="o">.</span><span class="na">spec</span><span class="o">(</span><span class="n">JBoss7Server</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+        <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">JBoss7Server</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;war&quot;</span><span class="o">,</span> <span class="n">WAR_PATH</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;httpPort&quot;</span><span class="o">,</span> <span class="mi">8080</span><span class="o">));</span>
     <span class="o">}</span>
@@ -617,11 +619,11 @@ with an Nginx load-balancer set up in front of them, and backed by a MySQL datab
 
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">MySqlNode</span> <span class="n">mysql</span> <span class="o">=</span> <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpecs</span><span class="o">.</span><span class="na">spec</span><span class="o">(</span><span class="n">MySqlNode</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+        <span class="n">MySqlNode</span> <span class="n">mysql</span> <span class="o">=</span> <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">MySqlNode</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;creationScriptUrl&quot;</span><span class="o">,</span> <span class="n">DB_SETUP_SQL_URL</span><span class="o">));</span>
         
-        <span class="n">ControlledDynamicWebAppCluster</span> <span class="n">web</span> <span class="o">=</span> <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpecs</span><span class="o">.</span><span class="na">spec</span><span class="o">(</span><span class="n">ControlledDynamicWebAppCluster</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;memberSpec&quot;</span><span class="o">,</span> <span class="n">EntitySpecs</span><span class="o">.</span><span class="na">spec</span><span class="o">(</span><span class="n">JBoss7Server</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+        <span class="n">ControlledDynamicWebAppCluster</span> <span class="n">web</span> <span class="o">=</span> <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">ControlledDynamicWebAppCluster</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;memberSpec&quot;</span><span class="o">,</span> <span class="n">EntitySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">JBoss7Server</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
                         <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;httpPort&quot;</span><span class="o">,</span> <span class="s">&quot;8080+&quot;</span><span class="o">)</span>
                         <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;war&quot;</span><span class="o">,</span> <span class="n">WAR_PATH</span><span class="o">)</span>
                         <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">javaSysProp</span><span class="o">(</span><span class="s">&quot;brooklyn.example.db.url&quot;</span><span class="o">),</span> 
@@ -929,6 +931,11 @@ and a web-only cluster (no database) in `WebClusterExample``.</p>
             
               <div class="toc-3 ">
 	            <a href="/dev/tips/update-docs.html"><div class="toc-3-item">Updating Docs</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/tips/release.html"><div class="toc-3-item">Release Process</div></a>
               </div>
         
             </div></div>

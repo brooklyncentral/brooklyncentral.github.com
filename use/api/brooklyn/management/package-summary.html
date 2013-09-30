@@ -90,6 +90,11 @@ Package brooklyn.management
     </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="AccessController.html" title="class in brooklyn/management">AccessController</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="EntityManager.html" title="class in brooklyn/management">EntityManager</A></B></TD>
         <TD>For managing and querying entities.</TD>
         </TR>
@@ -102,6 +107,12 @@ Package brooklyn.management
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="ExecutionManager.html" title="class in brooklyn/management">ExecutionManager</A></B></TD>
         <TD>This class manages the execution of a number of jobs with tags.</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="HasTaskChildren.html" title="class in brooklyn/management">HasTaskChildren</A></B></TD>
+        <TD>Interface marks tasks which have explicit children,
+ typically where the task defines the ordering of running those children tasks</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -136,8 +147,24 @@ Package brooklyn.management
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="TaskStub.html" title="class in brooklyn/management">TaskStub</A></B></TD>
-        <TD>@deprecated since 0.5; May be deleted (still up for discussion); one can use Task directly</TD>
+        <TD WIDTH="15%"><B><A HREF="TaskAdaptable.html" title="class in brooklyn/management">TaskAdaptable</A></B></TD>
+        <TD>marker interface for something which can be adapted to a task</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="TaskFactory.html" title="class in brooklyn/management">TaskFactory</A></B></TD>
+        <TD>Interface for something which can generate tasks (or task wrappers)</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="TaskQueueingContext.html" title="class in brooklyn/management">TaskQueueingContext</A></B></TD>
+        <TD>Marks a place where tasks can be added, e.g. a task which allows children to be added (including after it is activated);
+ if the implementer of this is also a task, then it may be picked up by hierarchical methods (e.g. in DynamicTasks).</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="TaskWrapper.html" title="class in brooklyn/management">TaskWrapper</A></B></TD>
+        <TD>Interface for something which is not a task, but which is closely linked to one, ie. it has a task.</TD>
         </TR>
 
 </TABLE>
@@ -148,6 +175,25 @@ Package brooklyn.management
 <hr>
     
 
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+    <TR BGCOLOR="#90DDF7" CLASS="TableHeadingColor">
+    <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+    <B>Class Summary</B></FONT></TH>
+    </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="AccessController.Response.html" title="class in brooklyn/management">AccessController.Response</A></B></TD>
+        <TD></TD>
+        </TR>
+
+</TABLE>
+&nbsp;
+<P>
+<DL>
+</DL>
+<hr>
+    
 
 
 

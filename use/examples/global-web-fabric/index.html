@@ -165,7 +165,7 @@ $(document).ready(function() {
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.6.0-M1</a></li>
+            <li><a href="/meta/versions.html">0.6.0-M2</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -327,6 +327,8 @@ $(document).ready(function() {
         
             
         
+            
+        
     
         
         
@@ -451,9 +453,9 @@ but does not assume knowledge of either of these.</p>
 
 
 
-<div class="highlight"><pre><code class="bash">% curl -LO http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.6.0-M1/brooklyn-dist-0.6.0-M1-dist.tar.gz
-% tar xvzf brooklyn-dist-0.6.0-M1-dist.tar.gz
-% <span class="nb">export </span><span class="nv">BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/brooklyn-0.6.0-M1/
+<div class="highlight"><pre><code class="bash">% curl -LO http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.6.0-M2/brooklyn-dist-0.6.0-M2-dist.tar.gz
+% tar xvzf brooklyn-dist-0.6.0-M2-dist.tar.gz
+% <span class="nb">export </span><span class="nv">BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/brooklyn-0.6.0-M2/
 </code></pre>
 </div>
 
@@ -472,7 +474,7 @@ but does not assume knowledge of either of these.</p>
 
 <div class="highlight"><pre><code class="bash">% git clone https://github.com/brooklyncentral/brooklyn-examples.git
 % <span class="nb">cd </span>brooklyn-examples
-% git checkout 0.6.0-M1
+% git checkout 0.6.0-M2
 % mvn clean install
 </code></pre>
 </div>
@@ -600,7 +602,7 @@ such as the <code>ControlledDynamicWebAppCluster</code> used in the
 or perhaps a <code>CloudFoundryJavaWebAppCluster</code> if deploying to a Cloud Foundry location
 (see <a href="https://github.com/cloudsoft/brooklyn-cloudfoundry">brooklyn-cloudfoundry repo</a>).</p>
 
-<div class="highlight"><pre><code class="java">        <span class="n">DynamicFabric</span> <span class="n">webFabric</span> <span class="o">=</span> <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpecs</span><span class="o">.</span><span class="na">spec</span><span class="o">(</span><span class="n">DynamicFabric</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<div class="highlight"><pre><code class="java">        <span class="n">DynamicFabric</span> <span class="n">webFabric</span> <span class="o">=</span> <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">DynamicFabric</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">displayName</span><span class="o">(</span><span class="s">&quot;Web Fabric&quot;</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">DynamicFabric</span><span class="o">.</span><span class="na">FACTORY</span><span class="o">,</span> <span class="k">new</span> <span class="n">ElasticJavaWebAppService</span><span class="o">.</span><span class="na">Factory</span><span class="o">())</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">ElasticJavaWebAppService</span><span class="o">.</span><span class="na">ROOT_WAR</span><span class="o">,</span> <span class="n">WAR_PATH</span><span class="o">));</span>
@@ -622,7 +624,7 @@ as it comes online, by watching for <code>SERVICE_UP</code> sensors.
 First, however, let's make sure any load-balancer proxies (e.g. nginx) in these clusters
 are listening on port 80:</p>
 
-<div class="highlight"><pre><code class="java">        <span class="n">DynamicFabric</span> <span class="n">webFabric</span> <span class="o">=</span> <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpecs</span><span class="o">.</span><span class="na">spec</span><span class="o">(</span><span class="n">DynamicFabric</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<div class="highlight"><pre><code class="java">        <span class="n">DynamicFabric</span> <span class="n">webFabric</span> <span class="o">=</span> <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">DynamicFabric</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">displayName</span><span class="o">(</span><span class="s">&quot;Web Fabric&quot;</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">DynamicFabric</span><span class="o">.</span><span class="na">FACTORY</span><span class="o">,</span> <span class="k">new</span> <span class="n">ElasticJavaWebAppService</span><span class="o">.</span><span class="na">Factory</span><span class="o">())</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">ElasticJavaWebAppService</span><span class="o">.</span><span class="na">ROOT_WAR</span><span class="o">,</span> <span class="n">WAR_PATH</span><span class="o">)</span>
@@ -640,7 +642,7 @@ from confusing us -- e.g. <code>brooklyn-1234.yourname.geopaas.org</code>.</p>
 
 <div class="highlight"><pre><code class="java">        <span class="n">StringConfigMap</span> <span class="n">config</span> <span class="o">=</span> <span class="n">getManagementContext</span><span class="o">().</span><span class="na">getConfig</span><span class="o">();</span>
         
-        <span class="n">GeoscalingDnsService</span> <span class="n">geoDns</span> <span class="o">=</span> <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpecs</span><span class="o">.</span><span class="na">spec</span><span class="o">(</span><span class="n">GeoscalingDnsService</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+        <span class="n">GeoscalingDnsService</span> <span class="n">geoDns</span> <span class="o">=</span> <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">GeoscalingDnsService</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">displayName</span><span class="o">(</span><span class="s">&quot;GeoScaling DNS&quot;</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;username&quot;</span><span class="o">,</span> <span class="n">checkNotNull</span><span class="o">(</span><span class="n">config</span><span class="o">.</span><span class="na">getFirst</span><span class="o">(</span><span class="s">&quot;brooklyn.geoscaling.username&quot;</span><span class="o">),</span> <span class="s">&quot;username&quot;</span><span class="o">))</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;password&quot;</span><span class="o">,</span> <span class="n">checkNotNull</span><span class="o">(</span><span class="n">config</span><span class="o">.</span><span class="na">getFirst</span><span class="o">(</span><span class="s">&quot;brooklyn.geoscaling.password&quot;</span><span class="o">),</span> <span class="s">&quot;password&quot;</span><span class="o">))</span>
@@ -686,7 +688,8 @@ along with an example global-web-fabric app.</p>
 <span class="kn">import</span> <span class="nn">brooklyn.entity.dns.geoscaling.GeoscalingDnsService</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">brooklyn.entity.group.DynamicFabric</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">brooklyn.entity.proxy.AbstractController</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">brooklyn.entity.proxying.BasicEntitySpec</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">brooklyn.entity.proxying.EntitySpec</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">brooklyn.entity.proxying.EntitySpecs</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">brooklyn.entity.webapp.ElasticJavaWebAppService</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">brooklyn.location.basic.PortRanges</span><span class="o">;</span>
 </code></pre>
@@ -1116,6 +1119,11 @@ Please <a href="/meta/contact.html">let us know</a> what you've built!</p></li>
             
               <div class="toc-3 ">
 	            <a href="/dev/tips/update-docs.html"><div class="toc-3-item">Updating Docs</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/tips/release.html"><div class="toc-3-item">Release Process</div></a>
               </div>
         
             </div></div>

@@ -165,7 +165,7 @@ $(document).ready(function() {
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.6.0-M1</a></li>
+            <li><a href="/meta/versions.html">0.6.0-M2</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -443,7 +443,7 @@ There is also an <code>entity.setConfig(KEY, VALUE)</code> method.</p>
 
 <p>Additionally, many common configuration parameters are available as "flags" which can be supplied as Strings when constructing
 then entity, in the form
-<code>EntitySpecs.spec˙(MyEntity.class).configure("config1", "value1").configure("config2", "value2")</code>.</p>
+<code>EntitySpec.create˙(MyEntity.class).configure("config1", "value1").configure("config2", "value2")</code>.</p>
 
 <p>Documentation of the flags available for individual entities can normally be found in the javadocs.
 The <code>@SetFromFlag</code> annotations on <code>ConfigKey</code> static field definitions

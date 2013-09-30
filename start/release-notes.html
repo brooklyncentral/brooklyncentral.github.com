@@ -165,7 +165,7 @@ $(document).ready(function() {
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.6.0-M1</a></li>
+            <li><a href="/meta/versions.html">0.6.0-M2</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -320,6 +320,8 @@ $(document).ready(function() {
         
             
         
+            
+        
     
         
         
@@ -394,7 +396,7 @@ $(document).ready(function() {
 
 <h1 id="header_title">Release Notes</h1>
     
-<h2>Brooklyn Version 0.6.0 (Milestone One - 0.6.0-M1)</h2>
+<h2>Brooklyn Version 0.6.0 Milestone Two (0.6.0-M2)</h2>
 
 <ul>
 <li>Introduction</li>
@@ -405,13 +407,21 @@ $(document).ready(function() {
 
 <h3>Introduction</h3>
 
-<p>This milestone release includes many additions and fixes, and brings us much closer to a 0.6.0 release.</p>
+<p>This milestone release includes many big features, and brings us much closer to a 0.6.0 release.</p>
 
 <p>It incorporates a lot of improvements and feedback from our community. Thank you!</p>
 
 <p>Thanks also go to Brooklyn's commercial users. Already Brooklyn has been adopted into some very exciting projects including controlling custom PaaS offerings, big data clusters, and three-tier web-apps.</p>
 
-<p>For more information, please checkout <a href="http://http://brooklyncentral.github.io">http://brooklyncentral.github.io</a>, and subscribe to the mailing lists:</p>
+<p>Work on this release can be tracked using Brooklyn's GitHub issue tracker:</p>
+
+<ul>
+<li><a href="https://github.com/brooklyncentral/brooklyn/issues">Brooklyn GitHub Issues</a></li>
+<li><a href="https://github.com/brooklyncentral/brooklyn/issues?milestone=6">Issues > 0.6.0 </a></li>
+</ul>
+
+
+<p>And via the mailing lists:</p>
 
 <ul>
 <li><a href="http://groups.google.com/group/brooklyn-dev">brooklyn-dev@googlegroups.com</a></li>
@@ -421,63 +431,49 @@ $(document).ready(function() {
 
 <h3>New Features</h3>
 
-<p>The major changes between 0.5 and 0.6.0 (including any and all previous 0.6.0 milestone releases) are:</p>
+<p>The major changes between 0.6.0-M1 and 0.6.0-M2 are:</p>
 
 <ol>
-<li><p>Locations are now constructed using a LocationSpec, rather than calling the constructor directly. This improvement is required to allow the Brooklyn management plane to track locations and persist their state.</p></li>
-<li><p>A datagrid can be used to store the entity/location state within Brooklyn. This feature is currently disabled by default (i.e. storing to an in-memory pseduo-datagrid); work will continue on this in subsequent releases.</p></li>
-<li><p>A new location-metadata.properties file allows metadata values (e.g. ISO-3166, lat/lon coordinates, etc) to be added to and overridden.</p></li>
-<li><p>Several additional clouds are supported, including:</p>
+<li><p>Improved Support for Chef, including for Windows machines.</p></li>
+<li><p>GUI Improvements: Better ability to drill down on tasks, auto-updating entity-tree with status indicators, faster status updates, and better performance over slow links.</p></li>
+<li><p>Hazelcast datagrid implementation added. (Note this is still considered experimental in M2.)</p></li>
+<li><p>Brooklyn now tracks location and application usage, and records it in the datagrid. More general:</p>
 
 <ul>
-<li>Abiquo</li>
-<li>Google Compute Engine</li>
-<li>IBM SmartCloud (see <a href="github.com/cloudsoft/ibm-smartcloud">https://github.com/cloudsoft/ibm-smartcloud</a>
-)</li>
+<li>Create/destroy of VMs (through location manage/unmanage) is tracked</li>
+<li>Application start/stop/destroy is tracked</li>
+<li>Current and historic usage information can be retrieved through the REST API.</li>
 </ul>
 </li>
-<li><p>Several new entities have been added, including:</p>
-
-<ul>
-<li>BindDnsServer</li>
-<li>Jetty6Server</li>
-<li>MongoDB replica sets</li>
-<li>BrooklynNode (for Brooklyn bootstrap deploying Brooklyn)</li>
-</ul>
-</li>
+<li><p>Improved entity restart logic, to handle failed components even better.</p></li>
+<li><p>Creation of a Maven Archetype for a sample application, which can be used as a template for new applications.</p></li>
+<li><p>Support added for location extension points. Locations that support more advanced features can expose these through the extension mechanism, allowing client-code to call <code>location.hasExtension(extensionClass)</code> and <code>location.getExtension(extensionClass)</code>.</p></li>
+<li><p>New PostgreSQL entity (via Chef)</p></li>
+<li><p>Improvements to Google compute engine support.</p></li>
+<li><p>Updated Getting Started brooklyn.properties to get HP Cloud and Softlayer users onboard faster</p></li>
+<li><p>Now using org.apache.jclouds 1.6.1-incubating (was: org.jclouds 1.6.0)</p></li>
 </ol>
 
 
 <h3>Backwards Compatibility</h3>
 
-<p>For upgrading from 0.5.0 to 0.6.0, existing entities/applications/policies will still work, provided they did not previously have deprecation warnings.</p>
-
-<p>Some additional code has been deprecated - users are strongly encouraged to update these:</p>
-
 <ol>
-<li><p>Some previously deprecated code has been deleted.</p></li>
-<li><p>Use <code>LocationSpec</code> (and <code>managementContext.getLocationManager().createLocation(LocationSpec.spec(MyLocClazz.class)</code>), rather than calling location constructors directly.</p></li>
-<li><p>Use camelCase for property names in brooklyn.properties (e.g. brooklyn.jclouds.publicKeyFile instead of brooklyn.jclouds.public-key-file).</p></li>
-<li><p>Use <code>@Effector</code> and <code>@EffectorParam</code> for annotating effector methods in an entity (rather than <code>@Description</code>, <code>@NamedParameter</code> and <code>@DefaultValue</code>).</p></li>
-<li><p><code>location.getName()</code> has been renamed to <code>location.getDisplayName()</code>, to be consistent with Entity. The <code>location.getChildLocations()</code> and <code>location.getParentLocation()</code> have also been renamed to <code>getChildren()</code> and <code>getParent()</code> respectively.</p></li>
-<li><p>If overriding a config key in an entity to change the default value specified in a super-type entity or constant, then use <code>ConfigKeys.newConfigKeyWithDefault(...)</code>.</p></li>
-<li><p>Use <code>ConfigKeys.newStringConfigKey(...)</code> and similar methods, rather than using <code>new ConfigKey&lt;String&gt;(String.class, ...)</code></p></li>
-<li><p><code>ListConfigKey</code> has been deprecated because it no longer guarantees order; instead use <code>SetConfigKey</code>. This is a consequence of efficiently using a datagrid to store the data.</p></li>
-<li><p>Use the new <code>FeedConfig.onFailure()</code>, <code>FeedConfig.onError()</code> and <code>FeedConfig.checkSuccess()</code>. This is now called for example to determine if a http 404 is a success or failure (default failure), and if an ssh non-zero exit code is a failure (default yes).</p></li>
-<li><p>Some package/class changes, such as:</p>
-
-<ul>
-<li><code>brooklyn.util.NetworkUtils</code> renamed to <code>brooklyn.util.net.Networking</code></li>
-<li><code>brooklyn.entity.basic.lifecycle.CommonCommands</code> renamed to <code>brooklyn.util.ssh.CommonCommands</code></li>
-<li><code>brooklyn.util.MutableMap</code> renamed to <code>brooklyn.util.collections.MutableMap</code></li>
-</ul>
-</li>
+<li><p>In brooklyn.properties Locations must now be specified as 'brooklyn.location.*'  e.g. <code>brooklyn.location.jclouds.*</code> rather than <code>brooklyn.jclouds.*</code> Using the old naming scheme will give deprecation warnings in the logs.</p></li>
+<li><p>Logging has been updated. Please see <a href="/dev/tips/logging.html">logging.md</a>.  Existing custom logback.xml configuration may no longer work (e.g. brooklyn logback-defaults.xml no longer exists).</p></li>
+<li><p><code>EntitySpecs.spec( ... )</code> is now deprecated; use <code>EntitySpec.create( ... )</code> instead.</p></li>
+<li><p>JcloudsLocationCustomizer: method signatures have changed. For those extending BasicJcloudsLocationCustomizer as recommended, existing code will work but should be changed to use the new signatures.</p></li>
+<li><p>Deprecated <code>new BasicConfigKey(key, defaultValue)</code>. Instead use <code>ConfigKeys.newConfigKeyWithDefault(key, defaultValue)</code>.</p></li>
+<li><p>There have been some other minor changes, where code is now deprecated - all such changes are clearly marked in the javadoc, indicating the recommended approach.</p></li>
 </ol>
 
 
 <h2>Previous Release Notes</h2>
 
-<p><a href="0.5.0">http://brooklyncentral.github.io/v/0.5.0/start/release-notes.html</a></p>
+<ul>
+<li><a href="http://brooklyncentral.github.io/v/0.6.0-M1/start/release-notes.html">0.6.0-M1 - Previous Milestone</a></li>
+<li><a href="http://brooklyncentral.github.io/v/0.5.0/start/release-notes.html">0.5.0 - Previous GA </a></li>
+</ul>
+
 
 
         </div><!--maincontent-->
@@ -734,6 +730,11 @@ $(document).ready(function() {
             
               <div class="toc-3 ">
 	            <a href="/dev/tips/update-docs.html"><div class="toc-3-item">Updating Docs</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/tips/release.html"><div class="toc-3-item">Release Process</div></a>
               </div>
         
             </div></div>

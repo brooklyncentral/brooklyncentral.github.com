@@ -106,6 +106,26 @@ Package brooklyn.policy.ha
  ENTITY_RECOVERED accordingly.</TD>
         </TR>
 
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="ServiceFailureDetector.html" title="class in brooklyn/policy/ha">ServiceFailureDetector</A></B></TD>
+        <TD>attaches to a SoftwareProcess (or anything emitting SERVICE_UP and SERVICE_STATE)
+ and emits HASensors.ENTITY_FAILED and ENTITY_RECOVERED as appropriate</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="ServiceReplacer.html" title="class in brooklyn/policy/ha">ServiceReplacer</A></B></TD>
+        <TD>attaches to a DynamicCluster and replaces a failed member in response to HASensors.ENTITY_FAILED or other sensor;
+ if this fails, it sets the Cluster state to on-fire</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="ServiceRestarter.html" title="class in brooklyn/policy/ha">ServiceRestarter</A></B></TD>
+        <TD>attaches to a SoftwareProcess (or anything Startable, emitting ENTITY_FAILED or other configurable sensor),
+ and invokes restart on failure; 
+ if there is a subsequent failure within a configurable time interval, or if the restart fails,
+ this gives up and emits <a href='#ENTITY_RESTART_FAILED'>ENTITY_RESTART_FAILED</a></TD>
+        </TR>
+
 </TABLE>
 &nbsp;
 <P>

@@ -165,7 +165,7 @@ $(document).ready(function() {
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.6.0-M1</a></li>
+            <li><a href="/meta/versions.html">0.6.0-M2</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -388,7 +388,7 @@ need to figure out if this page should be kept at all
     <span class="nt">&lt;dependency&gt;</span>
         <span class="nt">&lt;groupId&gt;</span>io.brooklyn<span class="nt">&lt;/groupId&gt;</span>
         <span class="nt">&lt;artifactId&gt;</span>brooklyn-all<span class="nt">&lt;/artifactId&gt;</span>
-        <span class="nt">&lt;version&gt;</span>0.6.0-M1<span class="nt">&lt;/version&gt;</span>  <span class="c">&lt;!-- BROOKLYN_VERSION --&gt;</span>
+        <span class="nt">&lt;version&gt;</span>0.6.0-M2<span class="nt">&lt;/version&gt;</span>  <span class="c">&lt;!-- BROOKLYN_VERSION --&gt;</span>
     <span class="nt">&lt;/dependency&gt;</span>
 <span class="nt">&lt;/dependencies&gt;</span>
  
@@ -422,7 +422,7 @@ It is then started in a localhost location (other locations are shown in the nex
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">TomcatServerApp</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpecs</span><span class="o">.</span><span class="na">spec</span><span class="o">(</span><span class="n">TomcatServer</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+        <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">TomcatServer</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;httpPort&quot;</span><span class="o">,</span> <span class="s">&quot;8080+&quot;</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;war&quot;</span><span class="o">,</span> <span class="s">&quot;/path/to/booking-mvc.war&quot;</span><span class="o">)));</span>
     <span class="o">}</span>
@@ -456,14 +456,14 @@ brooklyn launch --app TomcatServerApp --location aws-ec2:eu-west-1
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">TomcatClusterWithNginxApp</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpecs</span><span class="o">.</span><span class="na">spec</span><span class="o">(</span><span class="n">NginxController</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+        <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">NginxController</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;domain&quot;</span><span class="o">,</span> <span class="s">&quot;brooklyn.geopaas.org&quot;</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;port&quot;</span><span class="o">,</span> <span class="s">&quot;8000+&quot;</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;portNumberSensor&quot;</span><span class="o">,</span> <span class="n">Attributes</span><span class="o">.</span><span class="na">HTTP_PORT</span><span class="o">));</span>
         
-        <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpecs</span><span class="o">.</span><span class="na">spec</span><span class="o">(</span><span class="n">ControlledDynamicWebAppCluster</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+        <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">ControlledDynamicWebAppCluster</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;controller&quot;</span><span class="o">,</span> <span class="n">nginxController</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;memberSpec&quot;</span><span class="o">,</span> <span class="o">:</span> <span class="n">EntitySpecs</span><span class="o">.</span><span class="na">spec</span><span class="o">(</span><span class="n">TomcatServer</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;memberSpec&quot;</span><span class="o">,</span> <span class="o">:</span> <span class="n">EntitySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">TomcatServer</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
                         <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;httpPort&quot;</span><span class="o">,</span> <span class="s">&quot;8080+&quot;</span><span class="o">)</span>
                         <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;war&quot;</span><span class="o">,</span> <span class="s">&quot;/path/to/booking-mvc.war&quot;</span><span class="o">))</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;initialSize&quot;</span><span class="o">,</span> <span class="mi">2</span><span class="o">));</span>
@@ -504,13 +504,13 @@ a web-cluster in each location.</p>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">TomcatFabricApp</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpecs</span><span class="o">.</span><span class="na">spec</span><span class="o">(</span><span class="n">DynamicFabric</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+        <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">DynamicFabric</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;displayName&quot;</span><span class="o">,</span> <span class="s">&quot;WebFabric&quot;</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;displayNamePrefix&quot;</span><span class="o">,</span> <span class="s">&quot;&quot;</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;displayNameSuffix&quot;</span><span class="o">,</span> <span class="s">&quot; web cluster&quot;</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;memberSpec&quot;</span><span class="o">,</span> <span class="n">EntitySpecs</span><span class="o">.</span><span class="na">spec</span><span class="o">(</span><span class="n">ControlledDynamicWebAppCluster</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;memberSpec&quot;</span><span class="o">,</span> <span class="n">EntitySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">ControlledDynamicWebAppCluster</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
                         <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;initialSize&quot;</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span>
-                        <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;memberSpec&quot;</span><span class="o">,</span> <span class="o">:</span> <span class="n">EntitySpecs</span><span class="o">.</span><span class="na">spec</span><span class="o">(</span><span class="n">TomcatServer</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;memberSpec&quot;</span><span class="o">,</span> <span class="o">:</span> <span class="n">EntitySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">TomcatServer</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
                                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;httpPort&quot;</span><span class="o">,</span> <span class="s">&quot;8080+&quot;</span><span class="o">)</span>
                                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;war&quot;</span><span class="o">,</span> <span class="s">&quot;/path/to/booking-mvc.war&quot;</span><span class="o">))));</span>
     <span class="o">}</span>

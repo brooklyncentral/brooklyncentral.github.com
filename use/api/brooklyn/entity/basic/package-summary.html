@@ -118,6 +118,16 @@ Package brooklyn.entity.basic
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="BasicStartable.html" title="class in brooklyn/entity/basic">BasicStartable</A></B></TD>
+        <TD>Provides a pass-through Startable entity used for keeping hierarchies tidy.</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="BasicStartable.LocationsFilter.html" title="class in brooklyn/entity/basic">BasicStartable.LocationsFilter</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="ConfigurableEntityFactory.html" title="class in brooklyn/entity/basic">ConfigurableEntityFactory</A></B></TD>
         <TD></TD>
         </TR>
@@ -148,6 +158,13 @@ Package brooklyn.entity.basic
         <TD WIDTH="15%"><B><A HREF="EntityLocal.html" title="class in brooklyn/entity/basic">EntityLocal</A></B></TD>
         <TD>Extended Entity interface for use in places where the caller should have certain privileges,
  such as setting attribute values, adding policies, etc.</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="SameServerEntity.html" title="class in brooklyn/entity/basic">SameServerEntity</A></B></TD>
+        <TD>An entity that, on start(MachineProvisioningLocation), will obtain a machine
+ and pass that to each of its children by calling their <a href='../../../Startable.html#start(java.util.Collection)' title='Startable.start'>Startable.start</a>
+ methods with that machine.</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -248,6 +265,32 @@ Package brooklyn.entity.basic
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="BasicStartableImpl.html" title="class in brooklyn/entity/basic">BasicStartableImpl</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="BrooklynConfigKeys.html" title="class in brooklyn/entity/basic">BrooklynConfigKeys</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="BrooklynTasks.html" title="class in brooklyn/entity/basic">BrooklynTasks</A></B></TD>
+        <TD>Provides utilities for making Tasks easier to work with in Brooklyn.
+ </TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="BrooklynTasks.WrappedEntity.html" title="class in brooklyn/entity/basic">BrooklynTasks.WrappedEntity</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="BrooklynTasks.WrappedStream.html" title="class in brooklyn/entity/basic">BrooklynTasks.WrappedStream</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="ClosureEntityFactory.html" title="class in brooklyn/entity/basic">ClosureEntityFactory</A></B></TD>
         <TD></TD>
         </TR>
@@ -274,18 +317,30 @@ Package brooklyn.entity.basic
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="EffectorStartableImpl.html" title="class in brooklyn/entity/basic">EffectorStartableImpl</A></B></TD>
+        <TD>implementation of Startable which calls to tasks registered against effectors
+ if the methods are invoked directly; note this will loop indefinetly if no method impl
+ is supplied and no task is specified on an (overriding) effector</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="EffectorStartableImpl.StartParameters.html" title="class in brooklyn/entity/basic">EffectorStartableImpl.StartParameters</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="EffectorUtils.html" title="class in brooklyn/entity/basic">EffectorUtils</A></B></TD>
         <TD>@deprecated Use brooklyn.management.internal.EffectorUtils; deprecated since 0.5</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="EffectorWithExplicitImplementation.html" title="class in brooklyn/entity/basic">EffectorWithExplicitImplementation</A></B></TD>
-        <TD><DL><DT><B>deprecated:</B></DT><DD>will be deleted in 0.5.</DD></DL> </TD>
+        <TD WIDTH="15%"><B><A HREF="Entities.html" title="class in brooklyn/entity/basic">Entities</A></B></TD>
+        <TD>Convenience methods for working with entities.</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="Entities.html" title="class in brooklyn/entity/basic">Entities</A></B></TD>
-        <TD>Convenience methods for working with entities.</TD>
+        <TD WIDTH="15%"><B><A HREF="EntityAndAttribute.html" title="class in brooklyn/entity/basic">EntityAndAttribute</A></B></TD>
+        <TD>A tuple containing an Entity and an Attribute, which is assumed to be present on the entity.</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -308,7 +363,7 @@ Package brooklyn.entity.basic
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="EntityReferences.html" title="class in brooklyn/entity/basic">EntityReferences</A></B></TD>
-        <TD></TD>
+        <TD>@deprecated since 0.6; code is unused and unnecessary</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -344,7 +399,7 @@ Package brooklyn.entity.basic
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="MethodEffector.html" title="class in brooklyn/entity/basic">MethodEffector</A></B></TD>
         <TD>concrete class for providing an Effector implementation that gets its information from annotations on a method;
- see Effector*Test for usage example</TD>
+ see Effector*Test for usage example.</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -355,6 +410,17 @@ Package brooklyn.entity.basic
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="PolicyDescriptor.html" title="class in brooklyn/entity/basic">PolicyDescriptor</A></B></TD>
         <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="SameServerEntityImpl.html" title="class in brooklyn/entity/basic">SameServerEntityImpl</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="SoftwareProcessDriverLifecycleEffectorTasks.html" title="class in brooklyn/entity/basic">SoftwareProcessDriverLifecycleEffectorTasks</A></B></TD>
+        <TD>Thin shim delegating to driver to do start/stop/restart, wrapping as tasks,
+ with common code pulled up to MachineLifecycleEffectorTasks for non-driver usage</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
