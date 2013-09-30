@@ -1,0 +1,981 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+  <title>Logging</title>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+
+  <link rel="stylesheet" href="/v/0.6.0-M2/style/style.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/v/0.6.0-M2/style/toc.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/v/0.6.0-M2/style/docs/code.css" type="text/css" media="screen" />
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  
+	<!-- Sidebar/ToC Scripts and CSS -->
+	<script src="/v/0.6.0-M2/style/js/jquery/jquery-1.7.1.min.js"></script>
+	<script src="/v/0.6.0-M2/style/js/jquery/jquery-ui-1.8.18.custom.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/v/0.6.0-M2/style/js/jquery/smoothness/jquery-ui-1.8.18.custom.css" />
+	
+	<script type="text/javascript" src="/v/0.6.0-M2/style/js/superfish.js"></script>
+	<script type="text/javascript" src="/v/0.6.0-M2/style/js/jquery.cookie.js"></script>
+	
+	
+<!-- Clipboard support -->
+<script src="/v/0.6.0-M2/style/js/zeroclipboard/ZeroClipboard.js"></script>
+<style type="text/css">
+.clipboard_container { float: right; padding: 8px; }
+.clipboard_button {
+    background-image: url("/v/0.6.0-M2/style/icons/clipboard-green-normal.png");
+    background-size: 18px 21px;
+    width: 18px; height: 21px;
+}
+.clipboard_button.hover  { background-image: url("/v/0.6.0-M2/style/icons/clipboard-green-hover.png"); }
+.clipboard_button.active  { background-image: url("/v/0.6.0-M2/style/icons/clipboard-green-click.png"); }'
+</style>
+<script type="text/javascript"> <!-- clipboard -->
+ZeroClipboard.setMoviePath( '/v/0.6.0-M2/style/js/zeroclipboard/ZeroClipboard.swf' );
+</script>
+<script type="text/javascript"> <!-- clipboard positioning -->
+$(document).ready(function() {
+  $('<div class="clipboard_container" title="Copy to Clipboard">'+
+    '<div class="clipboard_button"/>'+
+  '</div>').insertBefore($('div.highlight'))
+  $('div.clipboard_container').each(function(index) {
+    var clipboard = new ZeroClipboard.Client();
+    clipboard.glue( $(this).find(":first")[0], $(this)[0] );
+    var target = $(this).next();
+    var txt = target.text().trim();
+    if (target.find('code.bash')) {
+      txt = txt.replace(/^[^%$]*[%$] /, "").replace(new RegExp('\n[^%$]*[%$] ','g'), "\n");
+    }
+    clipboard.setText(txt);
+  });
+});
+</script>
+
+    <script type="text/javascript">
+        // initialise menu delay
+        jQuery(function(){
+            jQuery('ul#mainmenu').superfish({ 
+                autoArrows:  false,  // disable generation of arrow mark-up 
+                dropShadows: false,  // disable drop shadows 
+                disableHI:   true,   // set to true to disable hoverIntent detection 
+                delay:       500,    // the delay in milliseconds that the mouse can remain outside a submenu without it closing 
+                speed:       'fast', 
+            });
+        });
+    </script>
+
+<script type="text/javascript">
+
+<!-- search -->
+	$(function() {
+		$('#simple_google')
+			.submit(function() {
+				$('input[name="q"]').val("site:" + document.location.hostname + " " + $('input[name="brooklyn-search"]').val());
+			return true;
+			});
+		$('input[name="brooklyn-search"]').focus(function() {
+				if ($(this).val() === $(this).attr('placeholder')) {
+					$(this).val('');
+				}
+			})
+			.blur(function() {
+				if ($(this).val() === '') {
+					$(this).val($(this).attr('placeholder'));
+				}
+			})
+			.blur();
+    });
+    
+<!-- page notes -->
+   	$(function() {
+		if (document.location.pathname.replace(/^\/([^\/]*).*$/, '$1') === "v"){
+			var thisversion = document.location.pathname.split("/")[2],
+				msg = "";
+			
+			if (!$.cookie('brooklyn_versions') || 
+			        (($.inArray('ALL', $.cookie('brooklyn_versions').split(",")) === -1) &&
+			        ($.inArray(thisversion, $.cookie('brooklyn_versions').split(",")) === -1)) ){
+			    msg += "<div class='warning_banner_image'><img src='/v/0.6.0-M2/style/icons/warning.png'/></div>";
+				msg += "<p>This content is for <strong>Brooklyn "+thisversion+"</strong>, and may differ across versions.</p>";
+			    msg += "<p>Are you using version "+thisversion+"?</p>";
+				msg += "<p class='warning_banner_buttons'>";
+				msg += "<a href = '#' onclick=\"set_user_version('"+thisversion+"');\">Yes, hide this warning</a>";
+			    msg += "<a href = '/'>No, show me the latest version</a>";
+				msg += "<a href = '/meta/versions.html'>Show all versions</a>";
+				msg += "</p>"
+							
+				$('#page_notes').html(msg);
+				$('#page_notes').fadeIn('slow');
+			}
+		}
+	});
+   	function get_user_versions() {
+   	    return $.cookie("brooklyn_versions") ? $.cookie("brooklyn_versions").split(",") : [];
+   	};
+	function set_user_version(version) {
+		var version_cookie = get_user_versions();
+		version_cookie.push(version);
+		$.cookie('brooklyn_versions', version_cookie, { expires: 365, path: '/' });
+		$('#page_notes').fadeOut();
+		event.preventDefault ? event.preventDefault() : event.returnValue = false;
+	};
+    function set_user_versions_all() {
+        var version_cookie = get_user_versions();
+        version_cookie.push("ALL");
+        $.cookie('brooklyn_versions', version_cookie, { expires: 365, path: '/' });
+        $('#page_notes').fadeOut();
+        event.preventDefault ? event.preventDefault() : event.returnValue = false;
+    };
+    function clear_user_versions() {
+        $.removeCookie('brooklyn_versions', { path: '/' });
+        $('#page_notes').fadeIn('slow');
+        event.preventDefault ? event.preventDefault() : event.returnValue = false;
+    };
+	
+   
+ <!-- analytics -->
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-30530918-1']);
+	_gaq.push(['_trackPageview']);
+	
+	(function() {
+	  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+
+</head>
+
+<body>
+
+    <ul id="shortcuts" title="Accessibility shortcuts menu">
+        <li><a href="#maincontent">Skip to main content</a></li>
+    </ul>
+   
+
+<div id="container">
+
+    <div id="header">
+    
+        <div id="identity">
+            <a href="http://brooklyncentral.github.com/" rel="home">Brooklyn</a>
+        </div>
+        
+        <ul id="quicklinks">
+            <li><a href="/v/0.6.0-M2/meta/versions.html">0.6.0-M2</a></li>
+            <li><a href="/v/0.6.0-M2/start/download.html">Download</a></li>
+            <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
+            <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
+            <li><a href="/v/0.6.0-M2/meta/contact.html">Contact</a></li>
+        </ul>
+
+        <div id="menubar">  
+
+
+
+
+
+
+
+<ul id="mainmenu"><!-- INSERT LINKS -->
+            
+
+  
+  
+  <li class=""><a href="/v/0.6.0-M2/index.html">Overview</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.6.0-M2/start/download.html">Download</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.6.0-M2/use/guide/quickstart/index.html">Getting Started</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.6.0-M2/start/walkthrough/index.html">Walkthrough</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.6.0-M2/use/guide/index.html">User Guide</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.6.0-M2/use/examples/index.html">Examples</a></li>
+
+  
+  
+  <li class="toc-active"><a href="/v/0.6.0-M2/dev/code/index.html">Contributing</a></li>
+
+
+</ul>                    
+
+            <form method="get" id="simple_google" class="searchform" action="http://www.google.com/search" method="get">
+                <input type="text" class="searchinput" name="brooklyn-search" placeholder="Search: type &amp; hit enter" />
+                <input type="hidden" name="q" value="" />
+            </form>
+            
+        </div>
+                
+    </div><!--header-->
+    
+    <div id="contentcontainer">
+    
+        <div id="maincontent">
+
+
+  
+
+
+
+
+
+
+
+    
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+
+    
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+        
+        
+    
+
+    
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+                
+                
+                
+                
+                
+                
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+
+    
+    
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+
+
+
+            
+<p id="breadcrumb">
+    <a href="/v/0.6.0-M2/dev/code/index.html">Contributing</a>
+    
+        &raquo; <a href="/v/0.6.0-M2/dev/tips/index.html">Tips and Tricks</a>
+        
+            &raquo; <a href="/v/0.6.0-M2/dev/tips/logging.html">Logging</a>
+        
+    
+</p>
+
+
+<div id="page_notes"></div>
+
+<h1 id="header_title">Logging</h1>
+    
+<h2>Logging: A Quick Overview</h2>
+
+<p>For logging, we use <strong>logback</strong> which implements the slf4j API.
+This means you can use any slf4j compliant logging framework,
+with a default configuration which just works out of the box
+and bindings to the other common libraries (<code>java.util.logging</code>, <code>log4j</code>, ...)
+if you prefer one of those.</p>
+
+<p>To use:</p>
+
+<ul>
+<li><p><strong>Users</strong>:
+If using a brooklyn binary installation, simply edit the <code>logback.xml</code>
+or <code>logback-custom.xml</code> supplied in the archive, sometimes in a <code>conf/</code>
+directory.</p></li>
+<li><p><strong>Developers</strong>:
+When setting up a new project, if you want logging it is recommended to include
+the <code>brooklyn-logback-xml</code> project as an <em>optional</em> and <em>provided</em> maven dependency,
+and then to put custom logging configuration in either <code>logback-custom.xml</code> or <code>logback-main.xml</code>,
+as described below.</p></li>
+</ul>
+
+
+<h2>Customizing Your Logging</h2>
+
+<p>The project <code>brooklyn-logback-xml</code> supplies a <code>logback.xml</code> configuration,
+with a mechanism which allows it to be easily customized, consumed, and overridden.
+You may wish to include this as an <em>optional</em> dependency so that it is not forced
+upon downstream projects.  This <code>logback.xml</code> file supplied contains just one instruction,
+to include <code>logback-main.xml</code>, and that file in turn includes:</p>
+
+<ul>
+<li><code>logback-custom.xml</code></li>
+<li><code>brooklyn/logback-appender-file.xml</code></li>
+<li><code>brooklyn/logback-appender-stdout.xml</code></li>
+<li><code>brooklyn/logback-logger-excludes.xml</code></li>
+<li><code>brooklyn/logback-debug.xml</code></li>
+</ul>
+
+
+<p>For the most common customizations, simply create a <code>logback-custom.xml</code> on your classpath
+(ensuring it is loaded <em>before</em> brooklyn classes in classpath ordering in the pom)
+and supply your customizations there:</p>
+
+<div class="highlight"><pre><code class="xml"><span class="nt">&lt;included&gt;</span>
+    <span class="c">&lt;!-- filename to log to --&gt;</span>           
+    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;logging.basename&quot;</span> <span class="na">scope=</span><span class="s">&quot;context&quot;</span> <span class="na">value=</span><span class="s">&quot;acme-app&quot;</span> <span class="nt">/&gt;</span>
+    
+    <span class="c">&lt;!-- additional loggers --&gt;</span>
+    <span class="nt">&lt;logger</span> <span class="na">name=</span><span class="s">&quot;com.acme.app&quot;</span> <span class="na">level=</span><span class="s">&quot;DEBUG&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/included&gt;</span>
+</code></pre>
+</div>
+
+
+<p>For other configuration, you can override individual files listed above.
+For example:</p>
+
+<ul>
+<li>To remove debug logging, create a trivial <code>brooklyn/logback-debug.xml</code>,
+containing simply <code>&lt;included/&gt;</code>.</li>
+<li>To customise stdout logging, perhaps to give it a threshhold WARN instead of INFO,
+create a <code>brooklyn/logback-appender-stdout.xml</code> which defines an appender STDOUT.</li>
+<li>To discard all brooklyn's default logging, create a <code>logback-main.xml</code> which
+contains your configuration. This should look like a standard logback
+configuration file, except it should be wrapped in <code>&lt;included&gt;</code> XML tags rather
+than <code>&lt;configuration&gt;</code> XML tags (because it is included from the <code>logback.xml</code>
+which comes with <code>brooklyn-logback-xml</code>.)</li>
+</ul>
+
+
+<p>You should <strong>not</strong> supply your own <code>logback.xml</code> if you are using <code>brooklyn-logback-xml</code>.
+If you do, logback will detect multiple files with that name and will scream at you.
+If you wish to supply your own <code>logback.xml</code>, do <strong>not</strong> include <code>brooklyn-logback-xml</code>.
+(Alternatively you can include a <code>logback.groovy</code> which causes logback to ignore <code>logback.xml</code>.)</p>
+
+<p>You can set a specific logback config file to use with:</p>
+
+<div class="highlight"><pre><code class="bash">-Dlogback.configurationFile<span class="o">=</span>/path/to/config.xml
+</code></pre>
+</div>
+
+
+<h2>Assemblies</h2>
+
+<p>When building an assembly, it is recommended to create a <code>conf/logback.xml</code> which
+simply includes <code>logback-main.xml</code> (which comes from the classpath).  Users of the assembly
+can then edit the <code>logback.xml</code> file in the usual way, or they can plug in to the configuration
+mechanisms described above, by creating files such as <code>logback-custom.xml</code> under <code>conf/</code>.</p>
+
+<p>Including <code>brooklyn-logback-xml</code> as an <em>optional</em> and <em>provided</em> dependency means everything
+should work correctly in IDE's but it will not include the extra <code>logback.xml</code> file in the assembly.
+(Alternatively if you include the <code>conf/</code> dir in your IDE build, you should exclude this dependency.)</p>
+
+<p>With this mechanism, you can include <code>logback-custom.xml</code> and/or other files underneath
+<code>src/main/resources/</code> of a project, as described above (for instance to include custom
+logging categories and define the log file name) and it should get picked up,
+both in the IDE and in the assembly.</p>
+
+<h2>Tests</h2>
+
+<p>Brooklyn projects <code>test</code> scope includes the <code>brooklyn-utils-test-support</code> project
+which supplies a <code>logback-test.xml</code>. logback uses this file in preference to <code>logback.xml</code>
+when available (ie when running tests). However the <code>logback-test.xml</code> Brooklyn uses
+includes the same <code>logback-main.xml</code> call path above, so your configurations should still work.</p>
+
+<p>The only differences of the <code>logback-test.xml</code> configuration is that:</p>
+
+<ul>
+<li>Debug logging is included for all Brooklyn packages</li>
+<li>The log file is called <code>brooklyn-tests.log</code></li>
+</ul>
+
+
+<h2>Caveats</h2>
+
+<ul>
+<li><p>logback uses SLF4J version 1.6 which is <strong>not compatible</strong> with 1.5.x.
+If you have dependent projects using 1.5.x (such as older Grails) things may break.</p></li>
+<li><p>If you're not getting the logging you expect in the IDE, make sure
+<code>src/main/resources</code> is included in the classpath.
+(In eclipse, right-click the project, the Build Path -> Configure,
+then make sure all dirs are included (All) and excluded (None) --
+<code>mvn clean install</code> should do this for you.)</p></li>
+<li><p>You may find that your IDE logs to a file <code>brooklyn-tests.log</code>
+if it doesn't distinguish between test build classpaths and normal classpaths.</p></li>
+<li><p>Logging configuration using file overrides such as this is very sensitive to
+classpath order. To get a separate <code>brooklyn-tests.log</code> file during testing,
+for example, the <code>brooklyn-test-support</code> project with scope <code>test</code> must be
+declared as a dependency <em>before</em> <code>brooklyn-logback-includes</code>, due to the way
+both files declare <code>logback-appender-file.xml</code>.</p></li>
+<li><p>Similarly note that the <code>logback-custom.xml</code> file is included <em>after</em>
+logging categories and levels are declared, but before appenders are declared,
+so that logging levels declared in that file dominate, and that
+properties from that file apply to appenders.</p></li>
+<li><p>Finally remember this is open to improvement. It's the best system we've found
+so far but we welcome advice. In particular if it could be possible to include
+files from the classpath with wildcards in alphabetical order, we'd be able
+to remove some of the quirks listed above (though at a cost of some complexity!).</p></li>
+</ul>
+
+
+
+        </div><!--maincontent-->
+        
+      <div id="sidebar">
+      
+
+
+  
+
+
+
+
+
+
+<div id="sidebar_toc">
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/v/0.6.0-M2/start/index.html"><div class="toc-1-item toc-1-header ">Start</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-M2/index.html"><div class="toc-2-item">Overview</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-M2/start/walkthrough/index.html"><div class="toc-2-item">Walkthrough</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-M2/start/download.html"><div class="toc-2-item">Download</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-M2/start/docs-summary.html"><div class="toc-2-item">Documentation</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/v/0.6.0-M2/use/index.html"><div class="toc-1-item toc-1-header ">Using brooklyn</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-M2/use/guide/index.html"><div class="toc-2-item toc-2-header">User Guide</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-M2/use/guide/quickstart/index.html"><div class="toc-3-item">Quick Start</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-M2/use/guide/defining-applications/basic-concepts.html"><div class="toc-3-item">Defining Applications</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-M2/use/guide/management/index.html"><div class="toc-3-item">Management</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-M2/use/guide/policies/index.html"><div class="toc-3-item">Policies</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-M2/use/guide/entities/index.html"><div class="toc-3-item">Custom Entities</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-M2/use/guide/extras/index.html"><div class="toc-3-item">Extras</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-M2/use/examples/index.html"><div class="toc-2-item toc-2-header">Examples</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-M2/use/examples/webcluster/index.html"><div class="toc-3-item">Elastic Web Cluster</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-M2/use/examples/global-web-fabric/index.html"><div class="toc-3-item">Global Web Fabric</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-M2/use/examples/whirrhadoop/index.html"><div class="toc-3-item">Whirr Hadoop Cluster</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-M2/use/examples/messaging/index.html"><div class="toc-3-item">Publish-Subscribe Messaging</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-M2/use/api/index.html"><div class="toc-2-item">API Reference (javadoc)</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-M2/use/contact.html"><div class="toc-2-item">Discuss</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 toc-active">
+  
+	    <a href="/v/0.6.0-M2/dev/code/index.html"><div class="toc-1-item toc-1-header ">Contributing</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-M2/dev/code/index.html"><div class="toc-2-item toc-2-header">The Code</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-M2/dev/code/index.html"><div class="toc-3-item">Structure</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-M2/dev/code/entity.html"><div class="toc-3-item">Writing an Entity</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-M2/dev/code/policy.html"><div class="toc-3-item">Writing a Policy</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="http://github.com/brooklyncentral/brooklyn"><div class="toc-3-item">brooklyn.git (github)</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-M2/dev/build/index.html"><div class="toc-2-item toc-2-header">Build and Test</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-M2/dev/build/index.html"><div class="toc-3-item">Maven</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-M2/dev/build/ide.html"><div class="toc-3-item">IDE</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-M2/dev/build/tests.html"><div class="toc-3-item">Tests</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 toc-active">
+      
+	        <a href="/v/0.6.0-M2/dev/tips/index.html"><div class="toc-2-item toc-2-header">Tips and Tricks</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-M2/dev/tips/index.html"><div class="toc-3-item">Miscellany</div></a>
+              </div>
+        
+            
+              <div class="toc-3 toc-active">
+	            <a href="/v/0.6.0-M2/dev/tips/logging.html"><div class="toc-3-item toc-active">Logging</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-M2/dev/tips/standards.html"><div class="toc-3-item">Code Standards</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-M2/dev/tips/local-artifact-repo.html"><div class="toc-3-item">Local Artifact Repo</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-M2/dev/tips/update-docs.html"><div class="toc-3-item">Updating Docs</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-M2/dev/tips/release.html"><div class="toc-3-item">Release Process</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-M2/dev/wishlist.html"><div class="toc-2-item">Wishlist</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-M2/dev/links.html"><div class="toc-2-item toc-2-header">Links</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="https://github.com/brooklyncentral/"><div class="toc-3-item">Github repo</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="https://github.com/brooklyncentral/brooklyn/issues"><div class="toc-3-item">Github issues</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="http://ccweb.cloudsoftcorp.com/maven/libs-snapshot-local/io/brooklyn/"><div class="toc-3-item">Maven snapshots</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-M2/dev/how-to-contrib.html"><div class="toc-2-item">How to Contribute</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/v/0.6.0-M2/license/index.html"><div class="toc-1-item toc-1-header ">License</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-M2/license/license.html"><div class="toc-2-item">Apache License v2.0</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-M2/license/contributor-agreements/index.html"><div class="toc-2-item toc-2-header">Contributor Agreements</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-M2/license/contributor-agreements/index.html"><div class="toc-3-item">Instructions</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-M2/license/contributor-agreements/individual.html"><div class="toc-3-item">Individual CLA (echosign)</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-M2/license/contributor-agreements/corporate.html"><div class="toc-3-item">Corporate CLA (echosign)</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-M2/license/contributor-agreements/corporate-update-schedule.html"><div class="toc-3-item">CCLA Schedule A Update (echosign)</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-M2/license/contributor-agreements/brooklyn-icla.txt"><div class="toc-3-item">Individual CLA (raw text)</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-M2/license/contributor-agreements/brooklyn-ccla.txt"><div class="toc-3-item">Corporate CLA (raw text)</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/v/0.6.0-M2/meta/versions.html"><div class="toc-1-item toc-1-header ">Meta</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-M2/meta/versions.html"><div class="toc-2-item">Versions</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-M2/meta/governance.html"><div class="toc-2-item">Governance</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-M2/meta/verify.html"><div class="toc-2-item">Verify</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-M2/meta/contact.html"><div class="toc-2-item">Contact</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+ 
+</div>
+<br/>
+
+
+      </div>
+
+    </div><!--contentcontainer-->
+        
+    <div id="footer">
+        <p id="copyright">
+            <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
+            brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
+            &copy; 2013 Cloudsoft Corporation.
+        </p>
+    </div><!--footer -->
+
+</div><!--container-->
+
+</body>
+</html>
