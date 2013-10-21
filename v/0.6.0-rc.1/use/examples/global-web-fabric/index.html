@@ -455,10 +455,11 @@ but does not assume knowledge of either of these.</p>
 
 
 
-<div class="highlight"><pre><code class="bash">% curl -LO http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.6.0-rc.1/brooklyn-dist-0.6.0-rc.1-dist.tar.gz
+<div class="highlight"><pre><code class="bash">% curl -LO <span class="s2">&quot;http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.6.0-rc.1/brooklyn-dist-0.6.0-rc.1-dist.tar.gz&quot;</span>
 % tar xvzf brooklyn-dist-0.6.0-rc.1-dist.tar.gz
 % <span class="nb">export </span><span class="nv">BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/brooklyn-0.6.0-rc.1/
-</code></pre></div>
+</code></pre>
+</div>
 
 
 
@@ -477,7 +478,8 @@ but does not assume knowledge of either of these.</p>
 % <span class="nb">cd </span>brooklyn-examples
 % git checkout 0.6.0-rc.1
 % mvn clean install
-</code></pre></div>
+</code></pre>
+</div>
 
 
 
@@ -491,14 +493,16 @@ please visit <a href="/v/0.6.0-rc.1/use/guide/management/index.html#cli">this se
 <p>Now, go to this particular example's directory:</p>
 
 <div class="highlight"><pre><code class="bash">% <span class="nb">cd </span>global-web-fabric
-</code></pre></div>
+</code></pre>
+</div>
 
 
 <p>The CLI needs to know where to find your compiled examples. You can set this up by exporting
 the <code>BROOKLYN_CLASSPATH</code> environment variable in the following way:</p>
 
 <div class="highlight"><pre><code class="bash">% <span class="nb">export </span><span class="nv">BROOKLYN_CLASSPATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/target/classes
-</code></pre></div>
+</code></pre>
+</div>
 
 
 <p>The project <code>global-web-fabric</code> contains the code used
@@ -530,7 +534,8 @@ The simplest way is to create or add the following fields to <code>~/.brooklyn/b
 <div class="highlight"><pre><code class="bash">brooklyn.geoscaling.username<span class="o">=</span>yourname
 brooklyn.geoscaling.password<span class="o">=</span>s3cr3t
 brooklyn.geoscaling.primaryDomain<span class="o">=</span>yourname.geopaas.org
-</code></pre></div>
+</code></pre>
+</div>
 
 
 <p>Replace the values of these fields as appropriate, of course!
@@ -584,7 +589,8 @@ This will extend the Brooklyn <code>AbstractApplication</code>:</p>
          <span class="c1">// TODO create our app!</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div>
+</code></pre>
+</div>
 
 
 <h3>The Fabric</h3>
@@ -602,7 +608,8 @@ or perhaps a <code>CloudFoundryJavaWebAppCluster</code> if deploying to a Cloud 
                 <span class="o">.</span><span class="na">displayName</span><span class="o">(</span><span class="s">&quot;Web Fabric&quot;</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">DynamicFabric</span><span class="o">.</span><span class="na">FACTORY</span><span class="o">,</span> <span class="k">new</span> <span class="n">ElasticJavaWebAppService</span><span class="o">.</span><span class="na">Factory</span><span class="o">())</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">ElasticJavaWebAppService</span><span class="o">.</span><span class="na">ROOT_WAR</span><span class="o">,</span> <span class="n">WAR_PATH</span><span class="o">));</span>
-</code></pre></div>
+</code></pre>
+</div>
 
 
 <p>Here we have specified the WAR to use with <code>configure(ElasticJavaWebAppService.ROOT_WAR, WAR_PATH)</code>.
@@ -624,7 +631,8 @@ are listening on port 80:</p>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">DynamicFabric</span><span class="o">.</span><span class="na">FACTORY</span><span class="o">,</span> <span class="k">new</span> <span class="n">ElasticJavaWebAppService</span><span class="o">.</span><span class="na">Factory</span><span class="o">())</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">ElasticJavaWebAppService</span><span class="o">.</span><span class="na">ROOT_WAR</span><span class="o">,</span> <span class="n">WAR_PATH</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">AbstractController</span><span class="o">.</span><span class="na">PROXY_HTTP_PORT</span><span class="o">,</span> <span class="n">PortRanges</span><span class="o">.</span><span class="na">fromInteger</span><span class="o">(</span><span class="mi">80</span><span class="o">)));</span>
-</code></pre></div>
+</code></pre>
+</div>
 
 
 <p>Let's now define the Geoscaling entity which does the stitching.
@@ -642,14 +650,16 @@ from confusing us -- e.g. <code>brooklyn-1234.yourname.geopaas.org</code>.</p>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;password&quot;</span><span class="o">,</span> <span class="n">checkNotNull</span><span class="o">(</span><span class="n">config</span><span class="o">.</span><span class="na">getFirst</span><span class="o">(</span><span class="s">&quot;brooklyn.geoscaling.password&quot;</span><span class="o">),</span> <span class="s">&quot;password&quot;</span><span class="o">))</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;primaryDomainName&quot;</span><span class="o">,</span> <span class="n">checkNotNull</span><span class="o">(</span><span class="n">config</span><span class="o">.</span><span class="na">getFirst</span><span class="o">(</span><span class="s">&quot;brooklyn.geoscaling.primaryDomain&quot;</span><span class="o">),</span> <span class="s">&quot;primaryDomain&quot;</span><span class="o">))</span> 
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;smartSubdomainName&quot;</span><span class="o">,</span> <span class="s">&quot;brooklyn&quot;</span><span class="o">));</span>
-</code></pre></div>
+</code></pre>
+</div>
 
 
 <p>Lastly we need to tell this instance what entity it should monitor
 for children to include as targets:</p>
 
 <div class="highlight"><pre><code class="java">        <span class="n">geoDns</span><span class="o">.</span><span class="na">setTargetEntityProvider</span><span class="o">(</span><span class="n">webFabric</span><span class="o">);</span>
-</code></pre></div>
+</code></pre>
+</div>
 
 
 <h3>Cloud Foundry and other PaaS Targets</h3>
@@ -684,7 +694,8 @@ along with an example global-web-fabric app.</p>
 <span class="kn">import</span> <span class="nn">brooklyn.entity.proxying.EntitySpecs</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">brooklyn.entity.webapp.ElasticJavaWebAppService</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">brooklyn.location.basic.PortRanges</span><span class="o">;</span>
-</code></pre></div>
+</code></pre>
+</div>
 
 
 <h3>Use of main method (optional)</h3>
@@ -737,7 +748,8 @@ for this example <code>localhost</code> will frequently not work unless Geoscali
         
         <span class="n">Entities</span><span class="o">.</span><span class="na">dumpInfo</span><span class="o">(</span><span class="n">app</span><span class="o">);</span>
     <span class="o">}</span>
-</code></pre></div>
+</code></pre>
+</div>
 
 
 <h2>Running the Example</h2>
@@ -748,7 +760,8 @@ as well as the appropriate classpath.</p>
 <div class="highlight"><pre><code class="bash"><span class="nb">export </span><span class="nv">BROOKLYN_CLASSPATH</span><span class="o">=</span>/path/to/your/project/target/classes
 <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.demo.GlobalWebFabricExample <span class="se">\</span>
     --location jclouds:aws-ec2:eu-west-1,jclouds:aws-ec2:ap-southeast-1,jclouds:aws-ec2:us-west-1 
-</code></pre></div>
+</code></pre>
+</div>
 
 
 <p>The management web console will start,
@@ -800,7 +813,8 @@ will not be picked up until TTL expires, typically 10m, although often more if D
 ;; ANSWER SECTION:
 brooklyn-csgFCzTm.geopaas.org. 120 IN   CNAME   ec2-46-137-138-4.eu-west-1.compute.amazonaws.com.
 ec2-46-137-138-4.eu-west-1.compute.amazonaws.com. 215 IN A 46.137.138.4
-</code></pre></div>
+</code></pre>
+</div>
 
 
 <p>This was run from Scotland so it seems a sensible choice.
@@ -823,7 +837,8 @@ geopaas.org.            86400   IN      NS      ns4.geoscaling.com.
 brooklyn-csgFCzTm.geopaas.org. 300 IN   TXT     <span class="s2">&quot;Request from [54,-2]-(GB) directed to Ireland (IE)&quot;</span>
 brooklyn-csgFCzTm.geopaas.org. 300 IN   TXT     <span class="s2">&quot;GeoScaling config auto-updated by Brooklyn 2012-04-26 12:27:25 UTC&quot;</span>
 ;; Received 189 bytes from 80.87.128.195#53<span class="o">(</span>ns3.geoscaling.com<span class="o">)</span> in 60 ms
-</code></pre></div>
+</code></pre>
+</div>
 
 
 <h2>Next Steps</h2>

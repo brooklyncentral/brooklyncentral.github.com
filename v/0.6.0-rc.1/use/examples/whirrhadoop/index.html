@@ -449,10 +449,11 @@ $(document).ready(function() {
 
 
 
-<div class="highlight"><pre><code class="bash">% curl -LO http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.6.0-rc.1/brooklyn-dist-0.6.0-rc.1-dist.tar.gz
+<div class="highlight"><pre><code class="bash">% curl -LO <span class="s2">&quot;http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.6.0-rc.1/brooklyn-dist-0.6.0-rc.1-dist.tar.gz&quot;</span>
 % tar xvzf brooklyn-dist-0.6.0-rc.1-dist.tar.gz
 % <span class="nb">export </span><span class="nv">BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/brooklyn-0.6.0-rc.1/
-</code></pre></div>
+</code></pre>
+</div>
 
 
 
@@ -471,7 +472,8 @@ $(document).ready(function() {
 % <span class="nb">cd </span>brooklyn-examples
 % git checkout 0.6.0-rc.1
 % mvn clean install
-</code></pre></div>
+</code></pre>
+</div>
 
 
 
@@ -490,7 +492,8 @@ please visit <a href="/v/0.6.0-rc.1/use/guide/management/index.html#cli">this se
 
 
 <div class="highlight"><pre><code class="bash">% <span class="nb">cd </span>hadoop-and-whirr
-</code></pre></div>
+</code></pre>
+</div>
 
 
 
@@ -502,7 +505,8 @@ the <code>BROOKLYN_CLASSPATH</code> environment variable in the following way:</
 
 
 <div class="highlight"><pre><code class="bash">% <span class="nb">export </span><span class="nv">BROOKLYN_CLASSPATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/target/classes
-</code></pre></div>
+</code></pre>
+</div>
 
 
 
@@ -550,7 +554,8 @@ with an arbitrary size, using the <code>WhirrHadoopCluster</code> entity.</p>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;memory&quot;</span><span class="o">,</span> <span class="mi">2048</span><span class="o">));</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div>
+</code></pre>
+</div>
 
 
 
@@ -561,7 +566,8 @@ with an arbitrary size, using the <code>WhirrHadoopCluster</code> entity.</p>
 
 
 <div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.extras.whirr.WhirrHadoopExample --stopOnKeyPress --location aws-ec2:eu-west-1
-</code></pre></div>
+</code></pre>
+</div>
 
 
 
@@ -612,7 +618,8 @@ can be run from within Brooklyn:</p>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;recipe&quot;</span><span class="o">,</span> <span class="n">RECIPE</span><span class="o">));</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div>
+</code></pre>
+</div>
 
 
 
@@ -623,7 +630,8 @@ can be run from within Brooklyn:</p>
 
 
 <div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.extras.whirr.WhirrExample --stopOnKeyPress --location aws-ec2:eu-west-1
-</code></pre></div>
+</code></pre>
+</div>
 
 
 

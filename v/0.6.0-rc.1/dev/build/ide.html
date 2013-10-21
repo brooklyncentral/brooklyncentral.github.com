@@ -458,7 +458,8 @@ the following command to remove these rogue blocks in the generated <code>.class
 
 
 <div class="highlight"><pre><code class="bash">% find . -name .classpath -exec sed -i.bak <span class="s1">&#39;s/[ ]*..cluding=&quot;[\*\/]*\(\.java\)*&quot;//g&#39;</span> <span class="o">{}</span> <span class="se">\;</span>
-</code></pre></div>
+</code></pre>
+</div>
 
 
 <ul>
@@ -474,7 +475,8 @@ and the same for <code>src/test/{java,resources}</code> <em>if</em> there are te
 
 
 <div class="highlight"><pre><code class="bash">find . <span class="se">\(</span> -path <span class="s2">&quot;*/src/main&quot;</span> -or -path <span class="s2">&quot;*/src/test&quot;</span> <span class="se">\)</span> -exec <span class="nb">echo</span> <span class="o">{}</span> <span class="se">\;</span> -exec mkdir -p <span class="o">{}</span>/<span class="o">{</span>java,resources<span class="o">}</span> <span class="se">\;</span>
-</code></pre></div>
+</code></pre>
+</div>
 
 
 <ul>

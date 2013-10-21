@@ -505,7 +505,8 @@ push docs to branch and publish
 
 <span class="nb">export </span><span class="nv">SNAPSHOT_VERSION</span><span class="o">=</span>0.6.0-SNAPSHOT
 <span class="nb">export </span><span class="nv">RELEASE_VERSION</span><span class="o">=</span>0.6.0-M1
-</code></pre></div>
+</code></pre>
+</div>
 
 
 <h2>Preparing a Snapshot Release</h2>
@@ -515,7 +516,8 @@ push docs to branch and publish
 <p>Execute the following:</p>
 
 <div class="highlight"><pre><code class="bash">mvn -Dbrooklyn.deployTo<span class="o">=</span>sonatype -DskipTests clean install deploy
-</code></pre></div>
+</code></pre>
+</div>
 
 
 <h3>(Option) Publish snapshot docs.</h3>
@@ -541,7 +543,8 @@ git add -A .
 git commit -m <span class="s2">&quot;Updated version docs for version $SNAPSHOT_VERSION&quot;</span>
 git push
 <span class="nb">popd</span>
-</code></pre></div>
+</code></pre>
+</div>
 
 
 <h2>Preparing a (Milestone) Release</h2>
@@ -553,13 +556,15 @@ git checkout -b <span class="nv">$RELEASE_VERSION</span>
 usage/scripts/change-version.sh <span class="nv">$SNAPSHOT_VERSION</span> <span class="nv">$RELEASE_VERSION</span>
 git commit -a -m <span class="s2">&quot;Changed version to $RELEASE_VERSION&quot;</span>
 git push -u upstream <span class="nv">$RELEASE_VERSION</span>
-</code></pre></div>
+</code></pre>
+</div>
 
 
 <h3>Deploy to Sonatype, and Close the repo.</h3>
 
 <div class="highlight"><pre><code class="bash">mvn -Dbrooklyn.deployTo<span class="o">=</span>sonatype -DskipTests clean install deploy
-</code></pre></div>
+</code></pre>
+</div>
 
 
 <ul>
@@ -586,7 +591,8 @@ rm -rf target
 git add -A
 git commit -m <span class="s2">&quot;branch for $RELEASE_VERSION&quot;</span>
 git push -u origin <span class="nv">$RELEASE_VERSION</span>
-</code></pre></div>
+</code></pre>
+</div>
 
 
 <h3>Update the Versioned Docs</h3>
@@ -610,7 +616,8 @@ git add -A .
 git commit -m <span class="s2">&quot;Updated version docs for version $RELEASE_VERSION&quot;</span>
 git push
 <span class="nb">popd</span>
-</code></pre></div>
+</code></pre>
+</div>
 
 
 <h2>Preparing a Full Release</h2>
@@ -642,7 +649,8 @@ rm -rf target
 git add -A
 git commit -m <span class="s2">&quot;Updated to $RELEASE_VERSION&quot;</span>
 git push -u origin master
-</code></pre></div>
+</code></pre>
+</div>
 
 
 <h3>Update the brooklyn.io Front Page Version</h3>
@@ -671,7 +679,8 @@ git add -A .
 git commit -m <span class="s2">&quot;Updated root docs for version $RELEASE_VERSION&quot;</span>
 git push
 <span class="nb">popd</span>
-</code></pre></div>
+</code></pre>
+</div>
 
 
 <h3>Announce</h3>
@@ -691,7 +700,10 @@ git checkout master
 usage/scripts/change-version.sh <span class="nv">$SNAPSHOT_VERSION</span> <span class="nv">$NEW_SNAPSHOT_VERSION</span>
 git commit -a -m <span class="s2">&quot;Changed version to $NEW_SNAPSHOT_VERSION&quot;</span>
 git push -u upstream master
-</code></pre></div>
+</code></pre>
+</div>
+
+
 
 
 
