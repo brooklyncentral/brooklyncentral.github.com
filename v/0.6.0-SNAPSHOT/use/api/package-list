@@ -26,6 +26,7 @@ brooklyn.entity.drivers
 brooklyn.entity.drivers.downloads
 brooklyn.entity.effector
 brooklyn.entity.group
+brooklyn.entity.group.zoneaware
 brooklyn.entity.java
 brooklyn.entity.messaging
 brooklyn.entity.messaging.activemq
@@ -80,6 +81,7 @@ brooklyn.location.geo
 brooklyn.location.jclouds
 brooklyn.location.jclouds.pool
 brooklyn.location.jclouds.templates
+brooklyn.location.jclouds.zone
 brooklyn.management
 brooklyn.management.internal
 brooklyn.management.usage

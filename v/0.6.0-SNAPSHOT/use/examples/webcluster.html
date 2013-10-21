@@ -278,6 +278,8 @@ $(document).ready(function() {
         
             
         
+            
+        
     
         
         
@@ -445,7 +447,7 @@ and export <code>BROOKLYN_HOME</code>:</p>
 
 
 
-<div class="highlight"><pre><code class="bash">% curl -L -o brooklyn-dist-0.6.0-SNAPSHOT-dist.tar.gz 
+<div class="highlight"><pre><code class="bash">% curl -L -o brooklyn-dist-0.6.0-SNAPSHOT-dist.tar.gz <span class="s2">&quot;https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&amp;g=io.brooklyn&amp;v=0.6.0-SNAPSHOT&amp;a=brooklyn-dist&amp;c=dist&amp;e=tar.gz&quot;</span>
 % tar xvzf brooklyn-dist-0.6.0-SNAPSHOT-dist.tar.gz
 % <span class="nb">export </span><span class="nv">BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/brooklyn-0.6.0-SNAPSHOT/
 </code></pre>
@@ -459,7 +461,7 @@ and export <code>BROOKLYN_HOME</code>:</p>
 
 
 
-<p>Grab a copy of the brooklyn-examples source code and build with Maven:</p>
+<p>Grab a copy of the brooklyn-examples source code and build it with Maven:</p>
 
 
 
@@ -814,6 +816,11 @@ and a web-only cluster (no database) in `WebClusterExample``.</p>
             
               <div class="toc-3 ">
 	            <a href="/v/0.6.0-SNAPSHOT/use/examples/messaging/index.html"><div class="toc-3-item">Publish-Subscribe Messaging</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-SNAPSHOT/use/examples/nosql-cassandra/index.html"><div class="toc-3-item">Cassandra Cluster</div></a>
               </div>
         
             </div></div>
