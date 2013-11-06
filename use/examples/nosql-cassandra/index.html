@@ -165,7 +165,7 @@ $(document).ready(function() {
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.6.0-rc.1</a></li>
+            <li><a href="/meta/versions.html">0.6.0-rc.2</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -449,11 +449,10 @@ $(document).ready(function() {
 
 
 
-<div class="highlight"><pre><code class="bash">% curl -LO <span class="s2">&quot;http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.6.0-rc.1/brooklyn-dist-0.6.0-rc.1-dist.tar.gz&quot;</span>
-% tar xvzf brooklyn-dist-0.6.0-rc.1-dist.tar.gz
-% <span class="nb">export </span><span class="nv">BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/brooklyn-0.6.0-rc.1/
-</code></pre>
-</div>
+<div class="highlight"><pre><code class="bash">% curl -LO <span class="s2">&quot;http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.6.0-rc.2/brooklyn-dist-0.6.0-rc.2-dist.tar.gz&quot;</span>
+% tar xvzf brooklyn-dist-0.6.0-rc.2-dist.tar.gz
+% <span class="nb">export </span><span class="nv">BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/brooklyn-0.6.0-rc.2/
+</code></pre></div>
 
 
 
@@ -470,10 +469,9 @@ $(document).ready(function() {
 
 <div class="highlight"><pre><code class="bash">% git clone https://github.com/brooklyncentral/brooklyn-examples.git
 % <span class="nb">cd </span>brooklyn-examples
-% git checkout 0.6.0-rc.1
+% git checkout 0.6.0-rc.2
 % mvn clean install
-</code></pre>
-</div>
+</code></pre></div>
 
 
 
@@ -497,8 +495,7 @@ please visit <a href="/use/guide/management/index.html#cli">this section of the 
 
 
 <div class="highlight"><pre><code class="bash">% <span class="nb">cd </span>simple-nosql-cluster
-</code></pre>
-</div>
+</code></pre></div>
 
 
 
@@ -510,8 +507,7 @@ the <code>BROOKLYN_CLASSPATH</code> environment variable in the following way:</
 
 
 <div class="highlight"><pre><code class="bash">% <span class="nb">export </span><span class="nv">BROOKLYN_CLASSPATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/target/classes
-</code></pre>
-</div>
+</code></pre></div>
 
 
 
@@ -534,8 +530,7 @@ for deploying and managing Cassandra, under <code>src/main/java</code>.</p>
         <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">CassandraCluster</span><span class="o">.</span><span class="na">CLUSTER_NAME</span><span class="o">,</span> <span class="s">&quot;Brooklyn&quot;</span><span class="o">));</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 
@@ -547,8 +542,7 @@ for deploying and managing Cassandra, under <code>src/main/java</code>.</p>
 
 <div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.demo.SimpleCassandraCluster <span class="se">\</span>
   --location localhost
-</code></pre>
-</div>
+</code></pre></div>
 
 
 
@@ -578,8 +572,7 @@ this example can also be deployed to your favourite cloud. Let's pretend it's Am
 
 <div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.demo.SimpleCassandraCluster <span class="se">\</span>
   --location aws-ec2:us-east-1
-</code></pre>
-</div>
+</code></pre></div>
 
 
 
@@ -611,8 +604,7 @@ For example, run:</p>
     --progress-interval 1 <span class="se">\</span>
     --num-keys 10000 <span class="se">\</span>
     --operation INSERT
-</code></pre>
-</div>
+</code></pre></div>
 
 
 
@@ -635,8 +627,7 @@ If you change <code>INSERT</code> to <code>READ</code>, it will read each of tho
 
 <div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.demo.HighAvailabilityCassandraCluster <span class="se">\</span>
   --location aws-ec2:us-east-1
-</code></pre>
-</div>
+</code></pre></div>
 
 
 
@@ -683,8 +674,7 @@ To wire them up, the essential code fragment looks like this:</p>
             <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">ServiceReplacer</span><span class="o">.</span><span class="na">FAILURE_SENSOR_TO_MONITOR</span><span class="o">,</span> <span class="n">ServiceRestarter</span><span class="o">.</span><span class="na">ENTITY_RESTART_FAILED</span><span class="o">)));</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 
@@ -721,8 +711,7 @@ entire VM. It sets up a new VM in the same location, and then tears down the fau
 
 
 <div class="highlight"><pre><code class="java">  <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">AVAILABILITY_ZONE_NAMES</span><span class="o">,</span> <span class="n">ImmutableList</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&quot;us-east-1b&quot;</span><span class="o">,</span> <span class="s">&quot;us-east-1c&quot;</span><span class="o">,</span> <span class="s">&quot;us-east-1e&quot;</span><span class="o">))</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 
@@ -751,8 +740,7 @@ the service.</p>
 
 <div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.demo.WideAreaCassandraCluster <span class="se">\</span>
   --location <span class="s2">&quot;aws-ec2:us-east-1,aws-ec2:us-west-2&quot;</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 
@@ -789,8 +777,7 @@ Brooklyn has a custom MultiCloudSnitch that we're looking to contribute back to 
         <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">CassandraNode</span><span class="o">.</span><span class="na">CUSTOM_SNITCH_JAR_URL</span><span class="o">,</span> <span class="s">&quot;classpath://brooklyn/entity/nosql/cassandra/cassandra-multicloud-snitch.jar&quot;</span><span class="o">));</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 
@@ -816,8 +803,7 @@ Brooklyn has a custom MultiCloudSnitch that we're looking to contribute back to 
                  <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">ServiceReplacer</span><span class="o">.</span><span class="na">FAILURE_SENSOR_TO_MONITOR</span><span class="o">,</span> <span class="n">ServiceRestarter</span><span class="o">.</span><span class="na">ENTITY_RESTART_FAILED</span><span class="o">))));</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 
@@ -829,8 +815,7 @@ Brooklyn has a custom MultiCloudSnitch that we're looking to contribute back to 
 
 <div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.demo.WideAreaCassandraCluster <span class="se">\</span>
   --location <span class="s2">&quot;aws-ec2:us-east-1,google-compute-engine,rackspace-cloudservers-uk&quot;</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 
@@ -867,8 +852,7 @@ The example below specifies a minimum of 1 replica in each datacenter.</p>
     --progress-interval 1 <span class="se">\</span>
     --num-keys 10000 <span class="se">\</span>
     --operation INSERT
-</code></pre>
-</div>
+</code></pre></div>
 
 
 
@@ -887,8 +871,7 @@ against an appropriate node:</p>
     --progress-interval 1 <span class="se">\</span>
     --num-keys 10000 <span class="se">\</span>
     --operation READ
-</code></pre>
-</div>
+</code></pre></div>
 
 
 
@@ -914,8 +897,7 @@ the brooklyn web-console (select the entity, go the policies tab, select the pol
 
 <div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.demo.CumulusRdfApplication <span class="se">\</span>
   --location <span class="s2">&quot;aws-ec2:us-east-1,aws-ec2:us-east-1&quot;</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 

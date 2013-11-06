@@ -165,7 +165,7 @@ $(document).ready(function() {
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.6.0-rc.1</a></li>
+            <li><a href="/meta/versions.html">0.6.0-rc.2</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -407,9 +407,7 @@ $(document).ready(function() {
 <ul>
 <li>  normal (i.e. no group) -- should run quickly, not need internet, and not side effect the machine (apart from a few /tmp files)</li>
 <li>  Integration -- deploys locally, may read and write from internet, takes longer.
-
-<pre><code>  If you change an entity, rerun the relevant integration test to make sure all is well!
-</code></pre></li>
+      If you change an entity, rerun the relevant integration test to make sure all is well!</li>
 <li>  Live -- deploys remotely, may provision machines (but should clean up, getting rid of them in a try block)</li>
 <li>  Live-sanity -- a sub-set of "Live" that can be run regularly; a trade-off of optimal code coverage for the
   time/cost of those tests.</li>

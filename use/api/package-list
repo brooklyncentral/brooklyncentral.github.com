@@ -17,6 +17,7 @@ brooklyn.entity.brooklyn
 brooklyn.entity.brooklynnode
 brooklyn.entity.chef
 brooklyn.entity.database
+brooklyn.entity.database.mariadb
 brooklyn.entity.database.mysql
 brooklyn.entity.database.postgresql
 brooklyn.entity.database.rubyrep
@@ -63,6 +64,7 @@ brooklyn.event.feed.http
 brooklyn.event.feed.jmx
 brooklyn.event.feed.shell
 brooklyn.event.feed.ssh
+brooklyn.event.feed.windows
 brooklyn.extras.openshift
 brooklyn.extras.whirr
 brooklyn.extras.whirr.core

@@ -1,0 +1,1355 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+  <title>Cassandra Cluster</title>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+
+  <link rel="stylesheet" href="/style/style.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/style/toc.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/style/docs/code.css" type="text/css" media="screen" />
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  
+	<!-- Sidebar/ToC Scripts and CSS -->
+	<script src="/style/js/jquery/jquery-1.7.1.min.js"></script>
+	<script src="/style/js/jquery/jquery-ui-1.8.18.custom.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/style/js/jquery/smoothness/jquery-ui-1.8.18.custom.css" />
+	
+	<script type="text/javascript" src="/style/js/superfish.js"></script>
+	<script type="text/javascript" src="/style/js/jquery.cookie.js"></script>
+	
+	
+<!-- Clipboard support -->
+<script src="/style/js/zeroclipboard/ZeroClipboard.js"></script>
+<style type="text/css">
+.clipboard_container { float: right; padding: 8px; }
+.clipboard_button {
+    background-image: url("/style/icons/clipboard-green-normal.png");
+    background-size: 18px 21px;
+    width: 18px; height: 21px;
+}
+.clipboard_button.hover  { background-image: url("/style/icons/clipboard-green-hover.png"); }
+.clipboard_button.active  { background-image: url("/style/icons/clipboard-green-click.png"); }'
+</style>
+<script type="text/javascript"> <!-- clipboard -->
+ZeroClipboard.setMoviePath( '/style/js/zeroclipboard/ZeroClipboard.swf' );
+</script>
+<script type="text/javascript"> <!-- clipboard positioning -->
+$(document).ready(function() {
+  $('<div class="clipboard_container" title="Copy to Clipboard">'+
+    '<div class="clipboard_button"/>'+
+  '</div>').insertBefore($('div.highlight'))
+  $('div.clipboard_container').each(function(index) {
+    var clipboard = new ZeroClipboard.Client();
+    clipboard.glue( $(this).find(":first")[0], $(this)[0] );
+    var target = $(this).next();
+    var txt = target.text().trim();
+    if (target.find('code.bash')) {
+      txt = txt.replace(/^[^%$]*[%$] /, "").replace(new RegExp('\n[^%$]*[%$] ','g'), "\n");
+    }
+    clipboard.setText(txt);
+  });
+});
+</script>
+
+    <script type="text/javascript">
+        // initialise menu delay
+        jQuery(function(){
+            jQuery('ul#mainmenu').superfish({ 
+                autoArrows:  false,  // disable generation of arrow mark-up 
+                dropShadows: false,  // disable drop shadows 
+                disableHI:   true,   // set to true to disable hoverIntent detection 
+                delay:       500,    // the delay in milliseconds that the mouse can remain outside a submenu without it closing 
+                speed:       'fast', 
+            });
+        });
+    </script>
+
+<script type="text/javascript">
+
+<!-- search -->
+	$(function() {
+		$('#simple_google')
+			.submit(function() {
+				$('input[name="q"]').val("site:" + document.location.hostname + " " + $('input[name="brooklyn-search"]').val());
+			return true;
+			});
+		$('input[name="brooklyn-search"]').focus(function() {
+				if ($(this).val() === $(this).attr('placeholder')) {
+					$(this).val('');
+				}
+			})
+			.blur(function() {
+				if ($(this).val() === '') {
+					$(this).val($(this).attr('placeholder'));
+				}
+			})
+			.blur();
+    });
+    
+<!-- page notes -->
+   	$(function() {
+		if (document.location.pathname.replace(/^\/([^\/]*).*$/, '$1') === "v"){
+			var thisversion = document.location.pathname.split("/")[2],
+				msg = "";
+			
+			if (!$.cookie('brooklyn_versions') || 
+			        (($.inArray('ALL', $.cookie('brooklyn_versions').split(",")) === -1) &&
+			        ($.inArray(thisversion, $.cookie('brooklyn_versions').split(",")) === -1)) ){
+			    msg += "<div class='warning_banner_image'><img src='/style/icons/warning.png'/></div>";
+				msg += "<p>This content is for <strong>Brooklyn "+thisversion+"</strong>, and may differ across versions.</p>";
+			    msg += "<p>Are you using version "+thisversion+"?</p>";
+				msg += "<p class='warning_banner_buttons'>";
+				msg += "<a href = '#' onclick=\"set_user_version('"+thisversion+"');\">Yes, hide this warning</a>";
+			    msg += "<a href = '/'>No, show me the latest version</a>";
+				msg += "<a href = '/meta/versions.html'>Show all versions</a>";
+				msg += "</p>"
+							
+				$('#page_notes').html(msg);
+				$('#page_notes').fadeIn('slow');
+			}
+		}
+	});
+   	function get_user_versions() {
+   	    return $.cookie("brooklyn_versions") ? $.cookie("brooklyn_versions").split(",") : [];
+   	};
+	function set_user_version(version) {
+		var version_cookie = get_user_versions();
+		version_cookie.push(version);
+		$.cookie('brooklyn_versions', version_cookie, { expires: 365, path: '/' });
+		$('#page_notes').fadeOut();
+		event.preventDefault ? event.preventDefault() : event.returnValue = false;
+	};
+    function set_user_versions_all() {
+        var version_cookie = get_user_versions();
+        version_cookie.push("ALL");
+        $.cookie('brooklyn_versions', version_cookie, { expires: 365, path: '/' });
+        $('#page_notes').fadeOut();
+        event.preventDefault ? event.preventDefault() : event.returnValue = false;
+    };
+    function clear_user_versions() {
+        $.removeCookie('brooklyn_versions', { path: '/' });
+        $('#page_notes').fadeIn('slow');
+        event.preventDefault ? event.preventDefault() : event.returnValue = false;
+    };
+	
+   
+ <!-- analytics -->
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-30530918-1']);
+	_gaq.push(['_trackPageview']);
+	
+	(function() {
+	  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+
+</head>
+
+<body>
+
+    <ul id="shortcuts" title="Accessibility shortcuts menu">
+        <li><a href="#maincontent">Skip to main content</a></li>
+    </ul>
+   
+
+<div id="container">
+
+    <div id="header">
+    
+        <div id="identity">
+            <a href="http://brooklyncentral.github.com/" rel="home">Brooklyn</a>
+        </div>
+        
+        <ul id="quicklinks">
+            <li><a href="/meta/versions.html">0.6.0-rc.2</a></li>
+            <li><a href="/start/download.html">Download</a></li>
+            <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
+            <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
+            <li><a href="/meta/contact.html">Contact</a></li>
+        </ul>
+
+        <div id="menubar">  
+
+
+
+
+
+
+
+<ul id="mainmenu"><!-- INSERT LINKS -->
+            
+
+  
+  
+  <li class=""><a href="/index.html">Overview</a></li>
+
+  
+  
+  <li class=""><a href="/start/download.html">Download</a></li>
+
+  
+  
+  <li class=""><a href="/use/guide/quickstart/index.html">Getting Started</a></li>
+
+  
+  
+  <li class=""><a href="/start/walkthrough/index.html">Walkthrough</a></li>
+
+  
+  
+  <li class=""><a href="/use/guide/index.html">User Guide</a></li>
+
+  
+  
+  <li class=""><a href="/use/examples/index.html">Examples</a></li>
+
+  
+  
+  <li class=""><a href="/dev/code/index.html">Contributing</a></li>
+
+
+</ul>                    
+
+            <form method="get" id="simple_google" class="searchform" action="http://www.google.com/search" method="get">
+                <input type="text" class="searchinput" name="brooklyn-search" placeholder="Search: type &amp; hit enter" />
+                <input type="hidden" name="q" value="" />
+            </form>
+            
+        </div>
+                
+    </div><!--header-->
+    
+    <div id="contentcontainer">
+    
+        <div id="maincontent">
+
+
+  
+
+
+
+
+
+
+
+    
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+
+    
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+        
+        
+    
+
+    
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+
+    
+    
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+
+
+
+    
+    
+    
+    
+
+            
+<p id="breadcrumb">
+    <a href="">Home</a>
+    
+        &raquo; <a href="/use/examples/cassandra.html">Cassandra Cluster</a>
+        
+    
+</p>
+
+
+<div id="page_notes"></div>
+
+<h1 id="header_title">Cassandra Cluster</h1>
+    
+<!-- file kept to preserve old links; remove when link not used -->
+
+
+
+
+<!--- both snapshots and releases -->
+
+
+
+
+<!--- releases -->
+
+
+
+
+<p></p>
+
+
+
+
+<!--- RELEASE -->
+
+
+
+
+<h2>Before You Begin</h2>
+
+
+
+
+<p>To use the examples, you'll need <code>curl</code>, <code>git</code>, <code>java</code> (1.6+), and <code>maven</code> (v3) installed.</p>
+
+
+
+
+<h3>Installing Brooklyn</h3>
+
+
+
+
+<p>(If you followed the <a href="/use/guide/quickstart/index.html">Getting Started</a> instructions, you can skip to Installing the Examples.)</p>
+
+
+
+
+<p>Grab a copy of the Brooklyn distribution and set up <code>BROOKLYN_HOME</code>:</p>
+
+
+
+
+<div class="highlight"><pre><code class="bash">% curl -LO <span class="s2">&quot;http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.6.0-rc.2/brooklyn-dist-0.6.0-rc.2-dist.tar.gz&quot;</span>
+% tar xvzf brooklyn-dist-0.6.0-rc.2-dist.tar.gz
+% <span class="nb">export </span><span class="nv">BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/brooklyn-0.6.0-rc.2/
+</code></pre></div>
+
+
+
+
+<h3>Installing the Examples</h3>
+
+
+
+
+<p>Grab a copy of the brooklyn-examples source code and build it with Maven:</p>
+
+
+
+
+<div class="highlight"><pre><code class="bash">% git clone https://github.com/brooklyncentral/brooklyn-examples.git
+% <span class="nb">cd </span>brooklyn-examples
+% git checkout 0.6.0-rc.2
+% mvn clean install
+</code></pre></div>
+
+
+
+
+<p>For more information on ways to download Brooklyn please
+see the <a href="/start/download.html">download page</a>.
+For more information on the Brooklyn CLI and launching apps,
+please visit <a href="/use/guide/management/index.html#cli">this section of the user guide</a>.</p>
+
+
+
+
+<h2>Simple Cassandra Cluster</h2>
+
+
+
+
+<p>Go to this particular example's directory:</p>
+
+
+
+
+<div class="highlight"><pre><code class="bash">% <span class="nb">cd </span>simple-nosql-cluster
+</code></pre></div>
+
+
+
+
+<p>The CLI needs to know where to find your compiled examples. You can set this up by exporting
+the <code>BROOKLYN_CLASSPATH</code> environment variable in the following way:</p>
+
+
+
+
+<div class="highlight"><pre><code class="bash">% <span class="nb">export </span><span class="nv">BROOKLYN_CLASSPATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/target/classes
+</code></pre></div>
+
+
+
+
+<p>The project <code>simple-nosql-cluster</code> includes several deployment descriptors
+for deploying and managing Cassandra, under <code>src/main/java</code>.</p>
+
+
+
+
+<p>The simplest of these, <code>SimpleCassandraCluster</code>, will start a Cassandra cluster. The code is:</p>
+
+
+
+
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SimpleCassandraCluster</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">CassandraCluster</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">CassandraCluster</span><span class="o">.</span><span class="na">INITIAL_SIZE</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">CassandraCluster</span><span class="o">.</span><span class="na">CLUSTER_NAME</span><span class="o">,</span> <span class="s">&quot;Brooklyn&quot;</span><span class="o">));</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+
+
+
+
+<p>To run that example on localhost (on *nix or Mac, assuming <code>ssh localhost</code> requires no password or passphrase):</p>
+
+
+
+
+<div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.demo.SimpleCassandraCluster <span class="se">\</span>
+  --location localhost
+</code></pre></div>
+
+
+
+
+<p>Then visit the Brooklyn console on <code>localhost:8081</code>.
+Note that the installation may take some time, because the default deployment downloads the software from
+the official repos.  You can monitor start-up activity for each entity in the <code>Activity</code> pane in the management console,
+and see more detail by tailing the log file (<code>tail -f brooklyn.log</code>).</p>
+
+
+
+
+<p>This example runs successfully on a local machine because <code>INITIAL_SIZE</code> is configured to just one node
+(a limitation of Cassandra is that every node must be on a different machine/VM).
+If you want to run with more than one node in the cluster, you'll need to use a location
+that either points to multiple existing machines or to a cloud provider where you can
+provision new machines.</p>
+
+
+
+
+<p>With appropriate setup of credentials (as described <a href="/use/guide/management/index.html#startup-config">here</a>)
+this example can also be deployed to your favourite cloud. Let's pretend it's Amazon US East, as follows:</p>
+
+
+
+
+<div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.demo.SimpleCassandraCluster <span class="se">\</span>
+  --location aws-ec2:us-east-1
+</code></pre></div>
+
+
+
+
+<p>If you want more nodes in your cluster, you can either modify the deployment descriptor (i.e. change the <code>INITIAL_SIZE</code> value),
+or dynamically add more nodes by calling the <code>resize</code> effector through the web-console.
+To do the latter, select cluster entity in the tree on the left, then click on the "effectors" tab, and invoke <code>resize</code>
+with the desired number of nodes.</p>
+
+
+
+
+<h3>Testing your Cluster</h3>
+
+
+
+
+<p>An easy way to test your cluster is to use the <code>cassandra-stress</code> command line tool.
+For example, run:</p>
+
+
+
+
+<div class="highlight"><pre><code class="bash"><span class="c"># Substitute the id below for your VM</span>
+<span class="nv">NODE_IDS</span><span class="o">=</span>ec2-54-221-69-95.compute-1.amazonaws.com
+/tmp/brooklyn-aled/installs/CassandraNode/1.2.9/apache-cassandra-1.2.9/tools/bin/cassandra-stress <span class="se">\</span>
+    --nodes <span class="k">${</span><span class="nv">NODE_IDS</span><span class="k">}</span> <span class="se">\</span>
+    --replication-factor 1 <span class="se">\</span>
+    --progress-interval 1 <span class="se">\</span>
+    --num-keys 10000 <span class="se">\</span>
+    --operation INSERT
+</code></pre></div>
+
+
+
+
+<p>This command will fire 10000 inserts at the cluster, via the nodes specified in the comma-separated node list.
+If you change <code>INSERT</code> to <code>READ</code>, it will read each of those 10000 values.</p>
+
+
+
+
+<h2>High Availability Cassandra Cluster</h2>
+
+
+
+
+<p>Ready for something more interesting?  Try this:</p>
+
+
+
+
+<div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.demo.HighAvailabilityCassandraCluster <span class="se">\</span>
+  --location aws-ec2:us-east-1
+</code></pre></div>
+
+
+
+
+<p>This launches the class <code>HighAvailabilityCassandraCluster</code>,
+which launches a Cassandra cluster configured to replicate across availability zones.</p>
+
+
+
+
+<p>To give some background for that statement, in
+<a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html">AWS</a>
+(and various other clouds), a region is a
+separate geographic area, consisting of multiple isolated locations known as availability zones.
+To ensure high availability, the Cassandra cluster and thus the data should be spread across the
+availability zones. Cassandra should be configured to ensure there is at least one replica in
+each availability zone. In
+<a href="http://www.datastax.com/docs/1.1/cluster_architecture/replication">Cassandra terminology</a>
+a region is normally mapped to a "datacenter" and an availability zone to a "rack".</p>
+
+
+
+
+<p>To be properly highly available, we need some automated policies to restart failed servers
+and to replace unhealthy nodes. Brooklyn has these policies available out-of-the-box.
+To wire them up, the essential code fragment looks like this:</p>
+
+
+
+
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HighAvailabilityCassandraCluster</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">CassandraCluster</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">CassandraCluster</span><span class="o">.</span><span class="na">CLUSTER_NAME</span><span class="o">,</span> <span class="s">&quot;Brooklyn&quot;</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">CassandraCluster</span><span class="o">.</span><span class="na">INITIAL_SIZE</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">CassandraCluster</span><span class="o">.</span><span class="na">ENABLE_AVAILABILITY_ZONES</span><span class="o">,</span> <span class="kc">true</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">CassandraCluster</span><span class="o">.</span><span class="na">NUM_AVAILABILITY_ZONES</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">CassandraCluster</span><span class="o">.</span><span class="na">ENDPOINT_SNITCH_NAME</span><span class="o">,</span> <span class="s">&quot;GossipingPropertyFileSnitch&quot;</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">CassandraCluster</span><span class="o">.</span><span class="na">MEMBER_SPEC</span><span class="o">,</span> <span class="n">EntitySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">CassandraNode</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">policy</span><span class="o">(</span><span class="n">PolicySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">ServiceFailureDetector</span><span class="o">.</span><span class="na">class</span><span class="o">))</span>
+            <span class="o">.</span><span class="na">policy</span><span class="o">(</span><span class="n">PolicySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">ServiceRestarter</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">ServiceRestarter</span><span class="o">.</span><span class="na">FAILURE_SENSOR_TO_MONITOR</span><span class="o">,</span> <span class="n">ServiceFailureDetector</span><span class="o">.</span><span class="na">ENTITY_FAILED</span><span class="o">)))</span>
+        <span class="o">.</span><span class="na">policy</span><span class="o">(</span><span class="n">PolicySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">ServiceReplacer</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">ServiceReplacer</span><span class="o">.</span><span class="na">FAILURE_SENSOR_TO_MONITOR</span><span class="o">,</span> <span class="n">ServiceRestarter</span><span class="o">.</span><span class="na">ENTITY_RESTART_FAILED</span><span class="o">)));</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+
+
+
+
+<p>This code is doing a lot and deserves some more detailed explanation:</p>
+
+
+
+
+<ul>
+<li>The <code>MEMBER_SPEC</code> describes the configuration of the Cassandra nodes to be created in the cluster.
+Assuming you're happy to use all the default thrift port etc, then the only configuration to add is
+a couple of policies.</li>
+<li>The <code>ServiceFailureDetector</code> policy watches the node's sensors, and generates
+an <code>ENTITY_FAILED</code> event if the node goes down.</li>
+<li>The <code>ServiceRestarter</code> policy responds to this failure-event
+by restarting the node. Its default configuration is that: if a node does not come back up, or if it
+fails again within three minutes, then it will emit an <code>ENTITY_RESTART_FAILED</code> event.</li>
+<li>Finally, the <code>SERVICE_REPLACER</code> policy on the cluster responds to this event by replacing the
+entire VM. It sets up a new VM in the same location, and then tears down the faulty node.</li>
+</ul>
+
+
+
+
+<blockquote><p><em>Troubleshooting:</em></p>
+
+<p><em>In AWS, some availability zones can be constrained for particular instance sizes (see
+  <a href="https://github.com/brooklyncentral/brooklyn/issues/973">this bug report</a>
+  If you get this error, the workaround is to specify explicitly the availability zones to use.
+  This requires an additional line of code such as:</em></p></blockquote>
+
+
+
+
+<div class="highlight"><pre><code class="java">  <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">AVAILABILITY_ZONE_NAMES</span><span class="o">,</span> <span class="n">ImmutableList</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&quot;us-east-1b&quot;</span><span class="o">,</span> <span class="s">&quot;us-east-1c&quot;</span><span class="o">,</span> <span class="s">&quot;us-east-1e&quot;</span><span class="o">))</span>
+</code></pre></div>
+
+
+
+
+<blockquote><p><em>However, this prevents the blueprint from being truly portable. We're looking at fixing this issue.</em></p></blockquote>
+
+
+
+
+<h2>Wide Area Cassandra Cluster</h2>
+
+
+
+
+<p>For critical enterprise use-cases, you'll want to run your Cassandra cluster across multiple regions,
+or better yet across multiple cloud providers. This gives the highest level of availability for
+the service.</p>
+
+
+
+
+<p>Try running:</p>
+
+
+
+
+<div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.demo.WideAreaCassandraCluster <span class="se">\</span>
+  --location <span class="s2">&quot;aws-ec2:us-east-1,aws-ec2:us-west-2&quot;</span>
+</code></pre></div>
+
+
+
+
+<p>This launches the class <code>WideAreaCassandraCluster</code> across two AWS regions.</p>
+
+
+
+
+<p>Cassandra provides some great support for this with the
+<a href="http://www.datastax.com/docs/1.1/cluster_architecture/replication">EC2MultiRegionSnitch</a>
+The
+<a href="http://www.datastax.com/docs/1.1/cluster_architecture/replication#snitches">snitch</a>
+maps IPs to racks and data centers; it defines how the nodes are grouped together within the overall
+network topology. For wide-area deployments, it must also deal with when to use the private IPs
+(within a region) and the public IPs (between regions).
+You'll need a more generic snitch if you're going to span different cloud providers.
+Brooklyn has a custom MultiCloudSnitch that we're looking to contribute back to Cassandra.</p>
+
+
+
+
+<p>The important piece of code in <code>WideAreaCassandraCluster</code> is:</p>
+
+
+
+
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">WideAreaCassandraCluster</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">CassandraFabric</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">CassandraCluster</span><span class="o">.</span><span class="na">CLUSTER_NAME</span><span class="o">,</span> <span class="s">&quot;Brooklyn&quot;</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">CassandraCluster</span><span class="o">.</span><span class="na">INITIAL_SIZE</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span> <span class="c1">// per location</span>
+        <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">CassandraCluster</span><span class="o">.</span><span class="na">ENDPOINT_SNITCH_NAME</span><span class="o">,</span> <span class="s">&quot;brooklyn.entity.nosql.cassandra.customsnitch.MultiCloudSnitch&quot;</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">CassandraNode</span><span class="o">.</span><span class="na">CUSTOM_SNITCH_JAR_URL</span><span class="o">,</span> <span class="s">&quot;classpath://brooklyn/entity/nosql/cassandra/cassandra-multicloud-snitch.jar&quot;</span><span class="o">));</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+
+
+
+
+<p>The code below shows the wide-area example with the high-availability policies from the previous section also configured:</p>
+
+
+
+
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">WideAreaCassandraCluster</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">CassandraFabric</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">CassandraCluster</span><span class="o">.</span><span class="na">CLUSTER_NAME</span><span class="o">,</span> <span class="s">&quot;Brooklyn&quot;</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">CassandraCluster</span><span class="o">.</span><span class="na">INITIAL_SIZE</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span> <span class="c1">// per location</span>
+        <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">CassandraCluster</span><span class="o">.</span><span class="na">ENDPOINT_SNITCH_NAME</span><span class="o">,</span> <span class="s">&quot;brooklyn.entity.nosql.cassandra.customsnitch.MultiCloudSnitch&quot;</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">CassandraNode</span><span class="o">.</span><span class="na">CUSTOM_SNITCH_JAR_URL</span><span class="o">,</span> <span class="s">&quot;classpath://brooklyn/entity/nosql/cassandra/cassandra-multicloud-snitch.jar&quot;</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">CassandraFabric</span><span class="o">.</span><span class="na">MEMBER_SPEC</span><span class="o">,</span> <span class="n">EntitySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">CassandraCluster</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">CassandraCluster</span><span class="o">.</span><span class="na">MEMBER_SPEC</span><span class="o">,</span> <span class="n">EntitySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">CassandraNode</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">policy</span><span class="o">(</span><span class="n">PolicySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">ServiceFailureDetector</span><span class="o">.</span><span class="na">class</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">policy</span><span class="o">(</span><span class="n">PolicySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">ServiceRestarter</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">ServiceRestarter</span><span class="o">.</span><span class="na">FAILURE_SENSOR_TO_MONITOR</span><span class="o">,</span> <span class="n">ServiceFailureDetector</span><span class="o">.</span><span class="na">ENTITY_FAILED</span><span class="o">)))</span>
+            <span class="o">.</span><span class="na">policy</span><span class="o">(</span><span class="n">PolicySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">ServiceReplacer</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">ServiceReplacer</span><span class="o">.</span><span class="na">FAILURE_SENSOR_TO_MONITOR</span><span class="o">,</span> <span class="n">ServiceRestarter</span><span class="o">.</span><span class="na">ENTITY_RESTART_FAILED</span><span class="o">))));</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+
+
+
+
+<p>To run Cassandra across multiple clouds, try running:</p>
+
+
+
+
+<div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.demo.WideAreaCassandraCluster <span class="se">\</span>
+  --location <span class="s2">&quot;aws-ec2:us-east-1,google-compute-engine,rackspace-cloudservers-uk&quot;</span>
+</code></pre></div>
+
+
+
+
+<h3>Testing your Wide-Area Cluster</h3>
+
+
+
+
+<p>You can again use the <code>cassandra-stress</code> command line tool to test the wide-area cluster.</p>
+
+
+
+
+<p>Note that the replication strategy (such as
+<a href="http://www.datastax.com/docs/1.0/cluster_architecture/replication#networktopologystrategy">NetworkTopologyStrategy</a>
+is specified when creating a
+<a href="http://www.datastax.com/documentation/cassandra/1.2/webhelp/index.html#cassandra/configuration/configStorage_r.html">keyspace</a>.
+The example below specifies a minimum of 1 replica in each datacenter.</p>
+
+
+
+
+<p>To do updates against a node in a given availability zone:</p>
+
+
+
+
+<div class="highlight"><pre><code class="bash"><span class="nv">NODE_IDS</span><span class="o">=</span>&lt;your node hostname&gt;
+/tmp/brooklyn-aled/installs/CassandraNode/1.2.9/apache-cassandra-1.2.9/tools/bin/cassandra-stress <span class="se">\</span>
+    --nodes <span class="k">${</span><span class="nv">NODE_IDS</span><span class="k">}</span> <span class="se">\</span>
+    --replication-strategy NetworkTopologyStrategy <span class="se">\</span>
+    --strategy-properties<span class="o">=</span>us-east-1:1,us-west-2:1 <span class="se">\</span>
+    --progress-interval 1 <span class="se">\</span>
+    --num-keys 10000 <span class="se">\</span>
+    --operation INSERT
+</code></pre></div>
+
+
+
+
+<p>To check that the same data is available from a different region, target the reads
+against an appropriate node:</p>
+
+
+
+
+<div class="highlight"><pre><code class="bash"><span class="nv">NODE_IDS</span><span class="o">=</span>&lt;your node hostname&gt;
+/tmp/brooklyn-aled/installs/CassandraNode/1.2.9/apache-cassandra-1.2.9/tools/bin/cassandra-stress <span class="se">\</span>
+    --nodes <span class="k">${</span><span class="nv">NODE_IDS</span><span class="k">}</span> <span class="se">\</span>
+    --replication-strategy NetworkTopologyStrategy <span class="se">\</span>
+    --strategy-properties<span class="o">=</span>us-east-1:1,us-west-2:1 <span class="se">\</span>
+    --progress-interval 1 <span class="se">\</span>
+    --num-keys 10000 <span class="se">\</span>
+    --operation READ
+</code></pre></div>
+
+
+
+
+<p>To really test this, you may want to simulate the failure of a region first.
+You can kill the VMs or <code>kill -9</code> the processes. But remember that if Brooklyn policies are configured
+they will by default restart the processes automatically! You can disable the Brooklyn policies through
+the brooklyn web-console (select the entity, go the policies tab, select the policy, and click "disable").</p>
+
+
+
+
+<h2>Putting it all together: CumulusRDF</h2>
+
+
+
+
+<p>If you want to try this with a real example application using the Cassandra cluster, take a look at
+<a href="https://code.google.com/p/cumulusrdf">CumulusRDF</a>. There is an example Brooklyn application at:</p>
+
+
+
+
+<div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.demo.CumulusRdfApplication <span class="se">\</span>
+  --location <span class="s2">&quot;aws-ec2:us-east-1,aws-ec2:us-east-1&quot;</span>
+</code></pre></div>
+
+
+
+
+<h2>Contact us!</h2>
+
+
+
+
+<p>If you encounter any difficulties or have any comments, please <a href="/meta/contact.html">tell us</a> and we'll do our best to help.</p>
+
+
+
+
+
+        </div><!--maincontent-->
+        
+      <div id="sidebar">
+      
+
+
+  
+
+
+
+
+
+
+<div id="sidebar_toc">
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/start/index.html"><div class="toc-1-item toc-1-header ">Start</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/index.html"><div class="toc-2-item">Overview</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/start/walkthrough/index.html"><div class="toc-2-item">Walkthrough</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/start/download.html"><div class="toc-2-item">Download</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/start/docs-summary.html"><div class="toc-2-item">Documentation</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/use/index.html"><div class="toc-1-item toc-1-header ">Using brooklyn</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/guide/index.html"><div class="toc-2-item toc-2-header">User Guide</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/quickstart/index.html"><div class="toc-3-item">Quick Start</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/defining-applications/basic-concepts.html"><div class="toc-3-item">Defining Applications</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html"><div class="toc-3-item">Management</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/policies/index.html"><div class="toc-3-item">Policies</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/entities/index.html"><div class="toc-3-item">Custom Entities</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/extras/index.html"><div class="toc-3-item">Extras</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/examples/index.html"><div class="toc-2-item toc-2-header">Examples</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/webcluster/index.html"><div class="toc-3-item">Elastic Web Cluster</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/global-web-fabric/index.html"><div class="toc-3-item">Global Web Fabric</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/whirrhadoop/index.html"><div class="toc-3-item">Whirr Hadoop Cluster</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/messaging/index.html"><div class="toc-3-item">Publish-Subscribe Messaging</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/nosql-cassandra/index.html"><div class="toc-3-item">Cassandra Cluster</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/api/index.html"><div class="toc-2-item">API Reference (javadoc)</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/contact.html"><div class="toc-2-item">Discuss</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/dev/code/index.html"><div class="toc-1-item toc-1-header ">Contributing</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/dev/code/index.html"><div class="toc-2-item toc-2-header">The Code</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/code/index.html"><div class="toc-3-item">Structure</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/code/entity.html"><div class="toc-3-item">Writing an Entity</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/code/policy.html"><div class="toc-3-item">Writing a Policy</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="http://github.com/brooklyncentral/brooklyn"><div class="toc-3-item">brooklyn.git (github)</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/dev/build/index.html"><div class="toc-2-item toc-2-header">Build and Test</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/build/index.html"><div class="toc-3-item">Maven</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/build/ide.html"><div class="toc-3-item">IDE</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/build/tests.html"><div class="toc-3-item">Tests</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/dev/tips/index.html"><div class="toc-2-item toc-2-header">Tips and Tricks</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/tips/index.html"><div class="toc-3-item">Miscellany</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/tips/logging.html"><div class="toc-3-item">Logging</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/tips/standards.html"><div class="toc-3-item">Code Standards</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/tips/local-artifact-repo.html"><div class="toc-3-item">Local Artifact Repo</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/tips/update-docs.html"><div class="toc-3-item">Updating Docs</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/tips/release.html"><div class="toc-3-item">Release Process</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/dev/wishlist.html"><div class="toc-2-item">Wishlist</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/dev/links.html"><div class="toc-2-item toc-2-header">Links</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="https://github.com/brooklyncentral/"><div class="toc-3-item">Github repo</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="https://github.com/brooklyncentral/brooklyn/issues"><div class="toc-3-item">Github issues</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="http://ccweb.cloudsoftcorp.com/maven/libs-snapshot-local/io/brooklyn/"><div class="toc-3-item">Maven snapshots</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/dev/how-to-contrib.html"><div class="toc-2-item">How to Contribute</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/license/index.html"><div class="toc-1-item toc-1-header ">License</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/license/license.html"><div class="toc-2-item">Apache License v2.0</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/license/contributor-agreements/index.html"><div class="toc-2-item toc-2-header">Contributor Agreements</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/license/contributor-agreements/index.html"><div class="toc-3-item">Instructions</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/license/contributor-agreements/individual.html"><div class="toc-3-item">Individual CLA (echosign)</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/license/contributor-agreements/corporate.html"><div class="toc-3-item">Corporate CLA (echosign)</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/license/contributor-agreements/corporate-update-schedule.html"><div class="toc-3-item">CCLA Schedule A Update (echosign)</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/license/contributor-agreements/brooklyn-icla.txt"><div class="toc-3-item">Individual CLA (raw text)</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/license/contributor-agreements/brooklyn-ccla.txt"><div class="toc-3-item">Corporate CLA (raw text)</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/meta/versions.html"><div class="toc-1-item toc-1-header ">Meta</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/meta/versions.html"><div class="toc-2-item">Versions</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/meta/governance.html"><div class="toc-2-item">Governance</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/meta/verify.html"><div class="toc-2-item">Verify</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/meta/contact.html"><div class="toc-2-item">Contact</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+ 
+</div>
+<br/>
+
+
+      </div>
+
+    </div><!--contentcontainer-->
+        
+    <div id="footer">
+        <p id="copyright">
+            <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
+            brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
+            &copy; 2013 Cloudsoft Corporation.
+        </p>
+    </div><!--footer -->
+
+</div><!--container-->
+
+</body>
+</html>
