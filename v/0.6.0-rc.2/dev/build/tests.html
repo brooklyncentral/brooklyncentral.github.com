@@ -407,13 +407,9 @@ $(document).ready(function() {
 <ul>
 <li>  normal (i.e. no group) -- should run quickly, not need internet, and not side effect the machine (apart from a few /tmp files)</li>
 <li>  Integration -- deploys locally, may read and write from internet, takes longer.
-<<<<<<< HEAD
 
 <pre><code>  If you change an entity, rerun the relevant integration test to make sure all is well!
 </code></pre></li>
-=======
-      If you change an entity, rerun the relevant integration test to make sure all is well!</li>
->>>>>>> 661ec68ad9eea7df8b44891be7c9ab409f2f9fc3
 <li>  Live -- deploys remotely, may provision machines (but should clean up, getting rid of them in a try block)</li>
 <li>  Live-sanity -- a sub-set of "Live" that can be run regularly; a trade-off of optimal code coverage for the
   time/cost of those tests.</li>

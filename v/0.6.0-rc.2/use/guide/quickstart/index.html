@@ -406,12 +406,8 @@ location of your choice. (Other <a href="/v/0.6.0-rc.2/start/download.html">down
 <p>Expand the <code>tar.gz</code> archive.</p>
 
 <div class="highlight"><pre><code class="bash"><span class="nv">$ </span>tar -zxf brooklyn-dist-0.6.0-rc.2-dist.tar.gz
-<<<<<<< HEAD
 </code></pre>
 </div>
-=======
-</code></pre></div>
->>>>>>> 661ec68ad9eea7df8b44891be7c9ab409f2f9fc3
 
 
 <p>This will create a <code>brooklyn-0.6.0-rc.2</code> folder.</p>
@@ -421,12 +417,8 @@ location of your choice. (Other <a href="/v/0.6.0-rc.2/start/download.html">down
 <div class="highlight"><pre><code class="bash"><span class="nv">$ </span><span class="nb">cd </span>brooklyn-0.6.0-rc.2
 <span class="nv">$ BROOKLYN_DIR</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>
 <span class="nv">$ </span><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$BROOKLYN_DIR</span>/bin/
-<<<<<<< HEAD
 </code></pre>
 </div>
-=======
-</code></pre></div>
->>>>>>> 661ec68ad9eea7df8b44891be7c9ab409f2f9fc3
 
 
 <h3>A Quick Test Drive</h3>
@@ -436,12 +428,8 @@ haven't configured any deployment locations or added a service catalog. Check yo
 progress by running:</p>
 
 <div class="highlight"><pre><code class="bash"><span class="nv">$ </span>brooklyn launch
-<<<<<<< HEAD
 </code></pre>
 </div>
-=======
-</code></pre></div>
->>>>>>> 661ec68ad9eea7df8b44891be7c9ab409f2f9fc3
 
 
 <p>Brooklyn will output the address of the management interface:</p>
@@ -458,12 +446,8 @@ and a service catalog from <code>~/.brooklyn/catalog.xml</code>.</p>
 <p>Create a <code>.brooklyn</code> folder in your home directory:</p>
 
 <div class="highlight"><pre><code class="bash"><span class="nv">$ </span>mkdir ~/.brooklyn
-<<<<<<< HEAD
 </code></pre>
 </div>
-=======
-</code></pre></div>
->>>>>>> 661ec68ad9eea7df8b44891be7c9ab409f2f9fc3
 
 
 <p><strong>Note:</strong> <code>~/.brooklyn</code> is an important directory, as this is where Brooklyn looks for configuration files and resources. It is <strong>not</strong> the
@@ -492,12 +476,8 @@ cloud machines.</p>
 <p>If you do not already have an SSH key installed, create a new id_rsa key:</p>
 
 <div class="highlight"><pre><code class="bash"><span class="nv">$ </span>ssh-keygen -t rsa -N <span class="s2">&quot;&quot;</span> -f ~/.ssh/id_rsa
-<<<<<<< HEAD
 </code></pre>
 </div>
-=======
-</code></pre></div>
->>>>>>> 661ec68ad9eea7df8b44891be7c9ab409f2f9fc3
 
 
 <p>Your SSH key (new or existing) must be added to your <code>authorized_keys</code> to allow Brooklyn
@@ -505,12 +485,8 @@ to access localhost.</p>
 
 <div class="highlight"><pre><code class="bash"><span class="c"># _Appends_ id_rsa.pub to authorized_keys. Other keys are unaffected.</span>
 <span class="nv">$ </span>cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys
-<<<<<<< HEAD
 </code></pre>
 </div>
-=======
-</code></pre></div>
->>>>>>> 661ec68ad9eea7df8b44891be7c9ab409f2f9fc3
 
 
 <p>(<strong>MacOSx user?</strong>: In addition to the above, enable 'Remote Login' in System Preferences >
@@ -526,12 +502,8 @@ that has a passphrase, or a location other than <code>~/.ssh</code>, you can spe
 <p>Now when we launch Brooklyn:</p>
 
 <div class="highlight"><pre><code class="bash"><span class="nv">$ </span>brooklyn launch
-<<<<<<< HEAD
 </code></pre>
 </div>
-=======
-</code></pre></div>
->>>>>>> 661ec68ad9eea7df8b44891be7c9ab409f2f9fc3
 
 
 <p>Brooklyn will use the <code>brooklyn.properties</code> and <code>catalog.xml</code> files.

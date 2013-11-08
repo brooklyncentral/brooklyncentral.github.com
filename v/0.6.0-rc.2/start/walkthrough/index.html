@@ -446,12 +446,8 @@ You can of course follow this walkthrough without installing it on your machine 
     -Dversion<span class="o">=</span>0.1.0-SNAPSHOT <span class="se">\</span>
     -Dpackage<span class="o">=</span>com.acme.sample.brooklyn
 <span class="nv">$ </span><span class="nb">cd </span>brooklyn-sample
-<<<<<<< HEAD
 </code></pre>
 </div>
-=======
-</code></pre></div>
->>>>>>> 661ec68ad9eea7df8b44891be7c9ab409f2f9fc3
 
 
 <h2>Define your Application Blueprint</h2>
@@ -465,12 +461,8 @@ You can of course follow this walkthrough without installing it on your machine 
         <span class="n">ControlledDynamicWebAppCluster</span> <span class="n">web</span> <span class="o">=</span> <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">ControlledDynamicWebAppCluster</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
     <span class="o">}</span>
 <span class="o">}</span>
-<<<<<<< HEAD
 </code></pre>
 </div>
-=======
-</code></pre></div>
->>>>>>> 661ec68ad9eea7df8b44891be7c9ab409f2f9fc3
 
 
 <p>The file <code>ClusterWebServerDatabaseSample.java</code> in <code>src/main/java/com/acme/sample/brooklyn/sample/app/</code>
@@ -491,12 +483,8 @@ file containing credentials for your preferred cloud provider.</p>
 <span class="nv">$ </span>./start.sh application <span class="se">\</span>
     --class com.acme.sample.brooklyn.ClusterWebServerDatabaseSample <span class="se">\</span>
     --location jclouds:aws-ec2:eu-west-1
-<<<<<<< HEAD
 </code></pre>
 </div>
-=======
-</code></pre></div>
->>>>>>> 661ec68ad9eea7df8b44891be7c9ab409f2f9fc3
 
 
 <p>(Amazon is used in this walkthrough, but lots of targets are supported,
@@ -557,12 +545,8 @@ block "at the last moment" when the value is needed
                                         <span class="n">attributeWhenReady</span><span class="o">(</span><span class="n">mysql</span><span class="o">,</span> <span class="n">MySqlNode</span><span class="o">.</span><span class="na">MYSQL_URL</span><span class="o">),</span> <span class="n">DB_TABLE</span><span class="o">,</span> <span class="n">DB_USERNAME</span><span class="o">,</span> <span class="n">DB_PASSWORD</span><span class="o">))));</span>
     <span class="o">}</span>
 <span class="o">}</span>
-<<<<<<< HEAD
 </code></pre>
 </div>
-=======
-</code></pre></div>
->>>>>>> 661ec68ad9eea7df8b44891be7c9ab409f2f9fc3
 
 
 <p>We now see our app at the Nginx URL:</p>
@@ -579,12 +563,8 @@ running management policies for applications whose topology it knows.</p>
                         <span class="n">sizeRange</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">5</span><span class="o">).</span>
                         <span class="n">metricRange</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="mi">100</span><span class="o">).</span>
                         <span class="n">build</span><span class="o">());</span>
-<<<<<<< HEAD
 </code></pre>
 </div>
-=======
-</code></pre></div>
->>>>>>> 661ec68ad9eea7df8b44891be7c9ab409f2f9fc3
 
 
 <p><em>Policies</em> in Brooklyn typically subscribe to sensors,  perform some computation, and if necessary invoke effectors on entities.  This is where the ability to group entities
@@ -634,13 +614,9 @@ Alternatively you can just add a ``main`` method to the application class as fol
         
         <span class="n">Entities</span><span class="o">.</span><span class="na">dumpInfo</span><span class="o">(</span><span class="n">app</span><span class="o">);</span>
     <span class="o">}</span>
-<<<<<<< HEAD
 </code></pre>
 </div>
 
-=======
-</code></pre></div>
->>>>>>> 661ec68ad9eea7df8b44891be7c9ab409f2f9fc3
 
 
 Compile and run this with the [``brooklyn-all`` jar](/v/0.6.0-rc.2/start/download.html) on the classpath,
