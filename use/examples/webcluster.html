@@ -451,7 +451,8 @@ $(document).ready(function() {
 <div class="highlight"><pre><code class="bash">% curl -LO <span class="s2">&quot;http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.6.0-rc.2/brooklyn-dist-0.6.0-rc.2-dist.tar.gz&quot;</span>
 % tar xvzf brooklyn-dist-0.6.0-rc.2-dist.tar.gz
 % <span class="nb">export </span><span class="nv">BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/brooklyn-0.6.0-rc.2/
-</code></pre></div>
+</code></pre>
+</div>
 
 
 
@@ -470,7 +471,8 @@ $(document).ready(function() {
 % <span class="nb">cd </span>brooklyn-examples
 % git checkout 0.6.0-rc.2
 % mvn clean install
-</code></pre></div>
+</code></pre>
+</div>
 
 
 
@@ -494,7 +496,8 @@ please visit <a href="/use/guide/management/index.html#cli">this section of the 
 
 
 <div class="highlight"><pre><code class="bash">% <span class="nb">cd </span>simple-web-cluster
-</code></pre></div>
+</code></pre>
+</div>
 
 
 
@@ -506,7 +509,8 @@ the <code>BROOKLYN_CLASSPATH</code> environment variable in the following way:</
 
 
 <div class="highlight"><pre><code class="bash">% <span class="nb">export </span><span class="nv">BROOKLYN_CLASSPATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/target/classes
-</code></pre></div>
+</code></pre>
+</div>
 
 
 
@@ -533,7 +537,8 @@ with a single line:</p>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;httpPort&quot;</span><span class="o">,</span> <span class="mi">8080</span><span class="o">));</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div>
+</code></pre>
+</div>
 
 
 
@@ -545,7 +550,8 @@ with a single line:</p>
 
 <div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.demo.SingleWebServerExample <span class="se">\</span>
   --location localhost
-</code></pre></div>
+</code></pre>
+</div>
 
 
 
@@ -566,7 +572,8 @@ this can also be deployed to your favourite cloud, let's pretend it's Amazon Ire
 
 <div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.demo.SingleWebServerExample <span class="se">\</span>
   --location aws-ec2:eu-west-1
-</code></pre></div>
+</code></pre>
+</div>
 
 
 
@@ -583,7 +590,8 @@ this can also be deployed to your favourite cloud, let's pretend it's Amazon Ire
 
 <div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.demo.WebClusterDatabaseExample <span class="se">\</span>
   --location localhost
-</code></pre></div>
+</code></pre>
+</div>
 
 
 
@@ -630,7 +638,8 @@ with an Nginx load-balancer set up in front of them, and backed by a MySQL datab
                         <span class="n">build</span><span class="o">());</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div>
+</code></pre>
+</div>
 
 
 
