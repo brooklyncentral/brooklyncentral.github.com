@@ -456,8 +456,12 @@ Java AMQP message broker and clients using the
 <div class="highlight"><pre><code class="bash">% curl -LO <span class="s2">&quot;http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.6.0-rc.2/brooklyn-dist-0.6.0-rc.2-dist.tar.gz&quot;</span>
 % tar xvzf brooklyn-dist-0.6.0-rc.2-dist.tar.gz
 % <span class="nb">export </span><span class="nv">BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/brooklyn-0.6.0-rc.2/
+<<<<<<< HEAD
 </code></pre>
 </div>
+=======
+</code></pre></div>
+>>>>>>> 661ec68ad9eea7df8b44891be7c9ab409f2f9fc3
 
 
 
@@ -476,8 +480,12 @@ Java AMQP message broker and clients using the
 % <span class="nb">cd </span>brooklyn-examples
 % git checkout 0.6.0-rc.2
 % mvn clean install
+<<<<<<< HEAD
 </code></pre>
 </div>
+=======
+</code></pre></div>
+>>>>>>> 661ec68ad9eea7df8b44891be7c9ab409f2f9fc3
 
 
 
@@ -491,16 +499,24 @@ please visit <a href="/v/0.6.0-rc.2/use/guide/management/index.html#cli">this se
 <p>Now, go to this particular example's directory:</p>
 
 <div class="highlight"><pre><code class="bash">% <span class="nb">cd </span>simple-messaging-pubsub
+<<<<<<< HEAD
 </code></pre>
 </div>
+=======
+</code></pre></div>
+>>>>>>> 661ec68ad9eea7df8b44891be7c9ab409f2f9fc3
 
 
 <p>The CLI needs to know where to find your compiled examples. You can set this up by exporting
 the <code>BROOKLYN_CLASSPATH</code> environment variable in the following way:</p>
 
 <div class="highlight"><pre><code class="bash">% <span class="nb">export </span><span class="nv">BROOKLYN_CLASSPATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/target/classes
+<<<<<<< HEAD
 </code></pre>
 </div>
+=======
+</code></pre></div>
+>>>>>>> 661ec68ad9eea7df8b44891be7c9ab409f2f9fc3
 
 
 <p>The project <code>simple-messaging-pubsub</code> includes a deployment
@@ -526,8 +542,12 @@ no queues or topics:</p>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;amqpPort&quot;</span><span class="o">,</span> <span class="mi">5672</span><span class="o">));</span>
     <span class="o">}</span>
 <span class="o">}</span>
+<<<<<<< HEAD
 </code></pre>
 </div>
+=======
+</code></pre></div>
+>>>>>>> 661ec68ad9eea7df8b44891be7c9ab409f2f9fc3
 
 
 <p>To install the custom configuration files and extra libraries for
@@ -548,8 +568,12 @@ file:</p>
                         <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">QpidBroker</span><span class="o">.</span><span class="na">CONFIG_XML</span><span class="o">,</span> <span class="n">CUSTOM_CONFIG_PATH</span><span class="o">)</span>
                         <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">QpidBroker</span><span class="o">.</span><span class="na">PASSWD</span><span class="o">,</span> <span class="n">PASSWD_PATH</span><span class="o">)</span>
                         <span class="o">.</span><span class="na">build</span><span class="o">()));</span>
+<<<<<<< HEAD
 </code></pre>
 </div>
+=======
+</code></pre></div>
+>>>>>>> 661ec68ad9eea7df8b44891be7c9ab409f2f9fc3
 
 
 <p>Finally, we come to the complete configuration of our <code>QpidBroker</code>
@@ -572,8 +596,12 @@ on startup.</p>
                         <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;lib/opt/je-5.0.34.jar&quot;</span><span class="o">,</span> <span class="n">BDBSTORE_JAR_PATH</span><span class="o">)</span>
                         <span class="o">.</span><span class="na">build</span><span class="o">())</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;queue&quot;</span><span class="o">,</span> <span class="s">&quot;testQueue&quot;</span><span class="o">));</span>
+<<<<<<< HEAD
 </code></pre>
 </div>
+=======
+</code></pre></div>
+>>>>>>> 661ec68ad9eea7df8b44891be7c9ab409f2f9fc3
 
 
 <h3>Running the Example</h3>
@@ -583,8 +611,12 @@ out the Brooklyn <a href="https://www.github.com/brooklyncentral/brooklyn">repos
 as follows:</p>
 
 <div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn -v launch --app brooklyn.demo.StandaloneQpidBrokerExample --location localhost
+<<<<<<< HEAD
 </code></pre>
 </div>
+=======
+</code></pre></div>
+>>>>>>> 661ec68ad9eea7df8b44891be7c9ab409f2f9fc3
 
 
 <p>Now, visit the Brooklyn web console on port 8081 (for pre 0.6 releases,
@@ -616,8 +648,12 @@ provide it as a parameter to other entities, as shown in the code
 fragment below.</p>
 
 <div class="highlight"><pre><code class="java"><span class="n">String</span> <span class="n">url</span> <span class="o">=</span> <span class="n">broker</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="n">MessageBroker</span><span class="o">.</span><span class="na">BROKER_URL</span><span class="o">)</span>
+<<<<<<< HEAD
 </code></pre>
 </div>
+=======
+</code></pre></div>
+>>>>>>> 661ec68ad9eea7df8b44891be7c9ab409f2f9fc3
 
 
 <p>Using the URL the demo script printed, you can run the test <code>Subscribe</code>
@@ -630,8 +666,12 @@ if present.</p>
 <div class="highlight"><pre><code class="bash">% <span class="nv">URL</span><span class="o">=</span><span class="s2">&quot;amqp://guest:guest@/localhost?brokerlist=&#39;tcp://localhost:5672&#39;&quot;</span>
 % java -cp <span class="s2">&quot;./resources/lib/*:./target/classes&quot;</span> brooklyn.demo.Subscribe <span class="k">${</span><span class="nv">URL</span><span class="k">}</span>
 % java -cp <span class="s2">&quot;./resources/lib/*:./target/classes&quot;</span> brooklyn.demo.Publish <span class="k">${</span><span class="nv">URL</span><span class="k">}</span>
+<<<<<<< HEAD
 </code></pre>
 </div>
+=======
+</code></pre></div>
+>>>>>>> 661ec68ad9eea7df8b44891be7c9ab409f2f9fc3
 
 
 <p>In the <em>Publish</em> window you should see a log message every time a
@@ -639,8 +679,12 @@ message is sent, like this:</p>
 
 <div class="highlight"><pre><code class="bash">2012-05-02 14:04:38,521 INFO  Sent message 65
 2012-05-02 14:04:39,522 INFO  Sent message 66
+<<<<<<< HEAD
 </code></pre>
 </div>
+=======
+</code></pre></div>
+>>>>>>> 661ec68ad9eea7df8b44891be7c9ab409f2f9fc3
 
 
 <p>Similarly, the <em>Subscribe</em> windows should log on reciept of these
@@ -648,8 +692,12 @@ messages, as follows:</p>
 
 <div class="highlight"><pre><code class="bash">2012-05-02 14:04:32,522 INFO  got message 41 <span class="nb">test </span>message 41
 2012-05-02 14:04:33,523 INFO  got message 42 <span class="nb">test </span>message 42
+<<<<<<< HEAD
 </code></pre>
 </div>
+=======
+</code></pre></div>
+>>>>>>> 661ec68ad9eea7df8b44891be7c9ab409f2f9fc3
 
 
 <h3>Cloud Deployment</h3>
@@ -660,8 +708,12 @@ this can also be deployed to your favourite cloud, let's pretend
 it's Amazon Ireland, as follows:</p>
 
 <div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.demo.StandaloneQpidBrokerExample --location aws-ec2:eu-west-1
+<<<<<<< HEAD
 </code></pre>
 </div>
+=======
+</code></pre></div>
+>>>>>>> 661ec68ad9eea7df8b44891be7c9ab409f2f9fc3
 
 
 <p>If you encounter any difficulties, please

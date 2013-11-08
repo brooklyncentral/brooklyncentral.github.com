@@ -165,7 +165,7 @@ $(document).ready(function() {
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.6.0-rc.1</a></li>
+            <li><a href="/meta/versions.html">0.6.0-rc.2</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -400,25 +400,23 @@ will need <code>curl</code>, <code>wget</code>, <code>tar</code>, <code>ssh</cod
 
 <p>Download the Brooklyn distribution. This contains Brooklyn, ready to run.</p>
 
-<p>Save the <a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.6.0-rc.1/brooklyn-dist-0.6.0-rc.1-dist.tar.gz">distro tgz file</a> to your home directory <code>~/</code>, or a
+<p>Save the <a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.6.0-rc.2/brooklyn-dist-0.6.0-rc.2-dist.tar.gz">distro tgz file</a> to your home directory <code>~/</code>, or a
 location of your choice. (Other <a href="/start/download.html">download options</a> are available.)</p>
 
 <p>Expand the <code>tar.gz</code> archive.</p>
 
-<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>tar -zxf brooklyn-dist-0.6.0-rc.1-dist.tar.gz
-</code></pre>
-</div>
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>tar -zxf brooklyn-dist-0.6.0-rc.2-dist.tar.gz
+</code></pre></div>
 
 
-<p>This will create a <code>brooklyn-0.6.0-rc.1</code> folder.</p>
+<p>This will create a <code>brooklyn-0.6.0-rc.2</code> folder.</p>
 
 <p>Let's setup some paths for easy commands.</p>
 
-<div class="highlight"><pre><code class="bash"><span class="nv">$ </span><span class="nb">cd </span>brooklyn-0.6.0-rc.1
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span><span class="nb">cd </span>brooklyn-0.6.0-rc.2
 <span class="nv">$ BROOKLYN_DIR</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>
 <span class="nv">$ </span><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$BROOKLYN_DIR</span>/bin/
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <h3>A Quick Test Drive</h3>
@@ -428,8 +426,7 @@ haven't configured any deployment locations or added a service catalog. Check yo
 progress by running:</p>
 
 <div class="highlight"><pre><code class="bash"><span class="nv">$ </span>brooklyn launch
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>Brooklyn will output the address of the management interface:</p>
@@ -446,12 +443,11 @@ and a service catalog from <code>~/.brooklyn/catalog.xml</code>.</p>
 <p>Create a <code>.brooklyn</code> folder in your home directory:</p>
 
 <div class="highlight"><pre><code class="bash"><span class="nv">$ </span>mkdir ~/.brooklyn
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p><strong>Note:</strong> <code>~/.brooklyn</code> is an important directory, as this is where Brooklyn looks for configuration files and resources. It is <strong>not</strong> the
-same as the directory where Brooklyn is located (<code>$BROOKLYN_DIR</code> = <code>~/brooklyn-0.6.0-rc.1</code>, if you followed the commands above).</p>
+same as the directory where Brooklyn is located (<code>$BROOKLYN_DIR</code> = <code>~/brooklyn-0.6.0-rc.2</code>, if you followed the commands above).</p>
 
 <p>Next, set up the following default/template files in that directory:</p>
 
@@ -476,8 +472,7 @@ cloud machines.</p>
 <p>If you do not already have an SSH key installed, create a new id_rsa key:</p>
 
 <div class="highlight"><pre><code class="bash"><span class="nv">$ </span>ssh-keygen -t rsa -N <span class="s2">&quot;&quot;</span> -f ~/.ssh/id_rsa
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>Your SSH key (new or existing) must be added to your <code>authorized_keys</code> to allow Brooklyn
@@ -485,8 +480,7 @@ to access localhost.</p>
 
 <div class="highlight"><pre><code class="bash"><span class="c"># _Appends_ id_rsa.pub to authorized_keys. Other keys are unaffected.</span>
 <span class="nv">$ </span>cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>(<strong>MacOSx user?</strong>: In addition to the above, enable 'Remote Login' in System Preferences >
@@ -502,8 +496,7 @@ that has a passphrase, or a location other than <code>~/.ssh</code>, you can spe
 <p>Now when we launch Brooklyn:</p>
 
 <div class="highlight"><pre><code class="bash"><span class="nv">$ </span>brooklyn launch
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>Brooklyn will use the <code>brooklyn.properties</code> and <code>catalog.xml</code> files.

@@ -165,7 +165,7 @@ $(document).ready(function() {
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.6.0-rc.1</a></li>
+            <li><a href="/meta/versions.html">0.6.0-rc.2</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -453,11 +453,10 @@ Java AMQP message broker and clients using the
 
 
 
-<div class="highlight"><pre><code class="bash">% curl -LO <span class="s2">&quot;http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.6.0-rc.1/brooklyn-dist-0.6.0-rc.1-dist.tar.gz&quot;</span>
-% tar xvzf brooklyn-dist-0.6.0-rc.1-dist.tar.gz
-% <span class="nb">export </span><span class="nv">BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/brooklyn-0.6.0-rc.1/
-</code></pre>
-</div>
+<div class="highlight"><pre><code class="bash">% curl -LO <span class="s2">&quot;http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.6.0-rc.2/brooklyn-dist-0.6.0-rc.2-dist.tar.gz&quot;</span>
+% tar xvzf brooklyn-dist-0.6.0-rc.2-dist.tar.gz
+% <span class="nb">export </span><span class="nv">BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/brooklyn-0.6.0-rc.2/
+</code></pre></div>
 
 
 
@@ -474,10 +473,9 @@ Java AMQP message broker and clients using the
 
 <div class="highlight"><pre><code class="bash">% git clone https://github.com/brooklyncentral/brooklyn-examples.git
 % <span class="nb">cd </span>brooklyn-examples
-% git checkout 0.6.0-rc.1
+% git checkout 0.6.0-rc.2
 % mvn clean install
-</code></pre>
-</div>
+</code></pre></div>
 
 
 
@@ -491,16 +489,14 @@ please visit <a href="/use/guide/management/index.html#cli">this section of the 
 <p>Now, go to this particular example's directory:</p>
 
 <div class="highlight"><pre><code class="bash">% <span class="nb">cd </span>simple-messaging-pubsub
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>The CLI needs to know where to find your compiled examples. You can set this up by exporting
 the <code>BROOKLYN_CLASSPATH</code> environment variable in the following way:</p>
 
 <div class="highlight"><pre><code class="bash">% <span class="nb">export </span><span class="nv">BROOKLYN_CLASSPATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/target/classes
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>The project <code>simple-messaging-pubsub</code> includes a deployment
@@ -518,7 +514,7 @@ also create a queue for use by a pair of test clients.</p>
 default configuration, specifying only the AMQP port and creates
 no queues or topics:</p>
 
-<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">StandaloneBrokerExample</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">StandaloneQpidBrokerExample</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
         <span class="c1">// Configure the Qpid broker entity</span>
@@ -526,8 +522,7 @@ no queues or topics:</p>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;amqpPort&quot;</span><span class="o">,</span> <span class="mi">5672</span><span class="o">));</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>To install the custom configuration files and extra libraries for
@@ -548,8 +543,7 @@ file:</p>
                         <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">QpidBroker</span><span class="o">.</span><span class="na">CONFIG_XML</span><span class="o">,</span> <span class="n">CUSTOM_CONFIG_PATH</span><span class="o">)</span>
                         <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">QpidBroker</span><span class="o">.</span><span class="na">PASSWD</span><span class="o">,</span> <span class="n">PASSWD_PATH</span><span class="o">)</span>
                         <span class="o">.</span><span class="na">build</span><span class="o">()));</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>Finally, we come to the complete configuration of our <code>QpidBroker</code>
@@ -572,8 +566,7 @@ on startup.</p>
                         <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;lib/opt/je-5.0.34.jar&quot;</span><span class="o">,</span> <span class="n">BDBSTORE_JAR_PATH</span><span class="o">)</span>
                         <span class="o">.</span><span class="na">build</span><span class="o">())</span>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;queue&quot;</span><span class="o">,</span> <span class="s">&quot;testQueue&quot;</span><span class="o">));</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <h3>Running the Example</h3>
@@ -582,9 +575,8 @@ on startup.</p>
 out the Brooklyn <a href="https://www.github.com/brooklyncentral/brooklyn">repository</a>
 as follows:</p>
 
-<div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn -v launch --app brooklyn.demo.StandaloneBrokerExample --location localhost
-</code></pre>
-</div>
+<div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn -v launch --app brooklyn.demo.StandaloneQpidBrokerExample --location localhost
+</code></pre></div>
 
 
 <p>Now, visit the Brooklyn web console on port 8081 (for pre 0.6 releases,
@@ -616,8 +608,7 @@ provide it as a parameter to other entities, as shown in the code
 fragment below.</p>
 
 <div class="highlight"><pre><code class="java"><span class="n">String</span> <span class="n">url</span> <span class="o">=</span> <span class="n">broker</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="n">MessageBroker</span><span class="o">.</span><span class="na">BROKER_URL</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>Using the URL the demo script printed, you can run the test <code>Subscribe</code>
@@ -630,8 +621,7 @@ if present.</p>
 <div class="highlight"><pre><code class="bash">% <span class="nv">URL</span><span class="o">=</span><span class="s2">&quot;amqp://guest:guest@/localhost?brokerlist=&#39;tcp://localhost:5672&#39;&quot;</span>
 % java -cp <span class="s2">&quot;./resources/lib/*:./target/classes&quot;</span> brooklyn.demo.Subscribe <span class="k">${</span><span class="nv">URL</span><span class="k">}</span>
 % java -cp <span class="s2">&quot;./resources/lib/*:./target/classes&quot;</span> brooklyn.demo.Publish <span class="k">${</span><span class="nv">URL</span><span class="k">}</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>In the <em>Publish</em> window you should see a log message every time a
@@ -639,8 +629,7 @@ message is sent, like this:</p>
 
 <div class="highlight"><pre><code class="bash">2012-05-02 14:04:38,521 INFO  Sent message 65
 2012-05-02 14:04:39,522 INFO  Sent message 66
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>Similarly, the <em>Subscribe</em> windows should log on reciept of these
@@ -648,8 +637,7 @@ messages, as follows:</p>
 
 <div class="highlight"><pre><code class="bash">2012-05-02 14:04:32,522 INFO  got message 41 <span class="nb">test </span>message 41
 2012-05-02 14:04:33,523 INFO  got message 42 <span class="nb">test </span>message 42
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <h3>Cloud Deployment</h3>
@@ -659,9 +647,8 @@ messages, as follows:</p>
 this can also be deployed to your favourite cloud, let's pretend
 it's Amazon Ireland, as follows:</p>
 
-<div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.demo.StandaloneBrokerExample --location aws-ec2:eu-west-1
-</code></pre>
-</div>
+<div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.demo.StandaloneQpidBrokerExample --location aws-ec2:eu-west-1
+</code></pre></div>
 
 
 <p>If you encounter any difficulties, please
