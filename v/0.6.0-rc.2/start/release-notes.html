@@ -1,0 +1,954 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+  <title>Release Notes</title>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+
+  <link rel="stylesheet" href="/v/0.6.0-rc.2/style/style.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/v/0.6.0-rc.2/style/toc.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/v/0.6.0-rc.2/style/docs/code.css" type="text/css" media="screen" />
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  
+	<!-- Sidebar/ToC Scripts and CSS -->
+	<script src="/v/0.6.0-rc.2/style/js/jquery/jquery-1.7.1.min.js"></script>
+	<script src="/v/0.6.0-rc.2/style/js/jquery/jquery-ui-1.8.18.custom.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/v/0.6.0-rc.2/style/js/jquery/smoothness/jquery-ui-1.8.18.custom.css" />
+	
+	<script type="text/javascript" src="/v/0.6.0-rc.2/style/js/superfish.js"></script>
+	<script type="text/javascript" src="/v/0.6.0-rc.2/style/js/jquery.cookie.js"></script>
+	
+	
+<!-- Clipboard support -->
+<script src="/v/0.6.0-rc.2/style/js/zeroclipboard/ZeroClipboard.js"></script>
+<style type="text/css">
+.clipboard_container { float: right; padding: 8px; }
+.clipboard_button {
+    background-image: url("/v/0.6.0-rc.2/style/icons/clipboard-green-normal.png");
+    background-size: 18px 21px;
+    width: 18px; height: 21px;
+}
+.clipboard_button.hover  { background-image: url("/v/0.6.0-rc.2/style/icons/clipboard-green-hover.png"); }
+.clipboard_button.active  { background-image: url("/v/0.6.0-rc.2/style/icons/clipboard-green-click.png"); }'
+</style>
+<script type="text/javascript"> <!-- clipboard -->
+ZeroClipboard.setMoviePath( '/v/0.6.0-rc.2/style/js/zeroclipboard/ZeroClipboard.swf' );
+</script>
+<script type="text/javascript"> <!-- clipboard positioning -->
+$(document).ready(function() {
+  $('<div class="clipboard_container" title="Copy to Clipboard">'+
+    '<div class="clipboard_button"/>'+
+  '</div>').insertBefore($('div.highlight'))
+  $('div.clipboard_container').each(function(index) {
+    var clipboard = new ZeroClipboard.Client();
+    clipboard.glue( $(this).find(":first")[0], $(this)[0] );
+    var target = $(this).next();
+    var txt = target.text().trim();
+    if (target.find('code.bash')) {
+      txt = txt.replace(/^[^%$]*[%$] /, "").replace(new RegExp('\n[^%$]*[%$] ','g'), "\n");
+    }
+    clipboard.setText(txt);
+  });
+});
+</script>
+
+    <script type="text/javascript">
+        // initialise menu delay
+        jQuery(function(){
+            jQuery('ul#mainmenu').superfish({ 
+                autoArrows:  false,  // disable generation of arrow mark-up 
+                dropShadows: false,  // disable drop shadows 
+                disableHI:   true,   // set to true to disable hoverIntent detection 
+                delay:       500,    // the delay in milliseconds that the mouse can remain outside a submenu without it closing 
+                speed:       'fast', 
+            });
+        });
+    </script>
+
+<script type="text/javascript">
+
+<!-- search -->
+	$(function() {
+		$('#simple_google')
+			.submit(function() {
+				$('input[name="q"]').val("site:" + document.location.hostname + " " + $('input[name="brooklyn-search"]').val());
+			return true;
+			});
+		$('input[name="brooklyn-search"]').focus(function() {
+				if ($(this).val() === $(this).attr('placeholder')) {
+					$(this).val('');
+				}
+			})
+			.blur(function() {
+				if ($(this).val() === '') {
+					$(this).val($(this).attr('placeholder'));
+				}
+			})
+			.blur();
+    });
+    
+<!-- page notes -->
+   	$(function() {
+		if (document.location.pathname.replace(/^\/([^\/]*).*$/, '$1') === "v"){
+			var thisversion = document.location.pathname.split("/")[2],
+				msg = "";
+			
+			if (!$.cookie('brooklyn_versions') || 
+			        (($.inArray('ALL', $.cookie('brooklyn_versions').split(",")) === -1) &&
+			        ($.inArray(thisversion, $.cookie('brooklyn_versions').split(",")) === -1)) ){
+			    msg += "<div class='warning_banner_image'><img src='/v/0.6.0-rc.2/style/icons/warning.png'/></div>";
+				msg += "<p>This content is for <strong>Brooklyn "+thisversion+"</strong>, and may differ across versions.</p>";
+			    msg += "<p>Are you using version "+thisversion+"?</p>";
+				msg += "<p class='warning_banner_buttons'>";
+				msg += "<a href = '#' onclick=\"set_user_version('"+thisversion+"');\">Yes, hide this warning</a>";
+			    msg += "<a href = '/'>No, show me the latest version</a>";
+				msg += "<a href = '/meta/versions.html'>Show all versions</a>";
+				msg += "</p>"
+							
+				$('#page_notes').html(msg);
+				$('#page_notes').fadeIn('slow');
+			}
+		}
+	});
+   	function get_user_versions() {
+   	    return $.cookie("brooklyn_versions") ? $.cookie("brooklyn_versions").split(",") : [];
+   	};
+	function set_user_version(version) {
+		var version_cookie = get_user_versions();
+		version_cookie.push(version);
+		$.cookie('brooklyn_versions', version_cookie, { expires: 365, path: '/' });
+		$('#page_notes').fadeOut();
+		event.preventDefault ? event.preventDefault() : event.returnValue = false;
+	};
+    function set_user_versions_all() {
+        var version_cookie = get_user_versions();
+        version_cookie.push("ALL");
+        $.cookie('brooklyn_versions', version_cookie, { expires: 365, path: '/' });
+        $('#page_notes').fadeOut();
+        event.preventDefault ? event.preventDefault() : event.returnValue = false;
+    };
+    function clear_user_versions() {
+        $.removeCookie('brooklyn_versions', { path: '/' });
+        $('#page_notes').fadeIn('slow');
+        event.preventDefault ? event.preventDefault() : event.returnValue = false;
+    };
+	
+   
+ <!-- analytics -->
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-30530918-1']);
+	_gaq.push(['_trackPageview']);
+	
+	(function() {
+	  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+
+</head>
+
+<body>
+
+    <ul id="shortcuts" title="Accessibility shortcuts menu">
+        <li><a href="#maincontent">Skip to main content</a></li>
+    </ul>
+   
+
+<div id="container">
+
+    <div id="header">
+    
+        <div id="identity">
+            <a href="http://brooklyncentral.github.com/" rel="home">Brooklyn</a>
+        </div>
+        
+        <ul id="quicklinks">
+            <li><a href="/v/0.6.0-rc.2/meta/versions.html">0.6.0-rc.2</a></li>
+            <li><a href="/v/0.6.0-rc.2/start/download.html">Download</a></li>
+            <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
+            <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
+            <li><a href="/v/0.6.0-rc.2/meta/contact.html">Contact</a></li>
+        </ul>
+
+        <div id="menubar">  
+
+
+
+
+
+
+
+<ul id="mainmenu"><!-- INSERT LINKS -->
+            
+
+  
+  
+  <li class=""><a href="/v/0.6.0-rc.2/index.html">Overview</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.6.0-rc.2/start/download.html">Download</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.6.0-rc.2/use/guide/quickstart/index.html">Getting Started</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.6.0-rc.2/start/walkthrough/index.html">Walkthrough</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.6.0-rc.2/use/guide/index.html">User Guide</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.6.0-rc.2/use/examples/index.html">Examples</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.6.0-rc.2/dev/code/index.html">Contributing</a></li>
+
+
+</ul>                    
+
+            <form method="get" id="simple_google" class="searchform" action="http://www.google.com/search" method="get">
+                <input type="text" class="searchinput" name="brooklyn-search" placeholder="Search: type &amp; hit enter" />
+                <input type="hidden" name="q" value="" />
+            </form>
+            
+        </div>
+                
+    </div><!--header-->
+    
+    <div id="contentcontainer">
+    
+        <div id="maincontent">
+
+
+  
+
+
+
+
+
+
+
+    
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+
+    
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+        
+        
+    
+
+    
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+
+    
+    
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+
+
+
+    
+    
+    
+    
+
+            
+<p id="breadcrumb">
+    <a href="/v/0.6.0-rc.2">Home</a>
+    
+        &raquo; <a href="/v/0.6.0-rc.2/start/release-notes.html">Release Notes</a>
+        
+    
+</p>
+
+
+<div id="page_notes"></div>
+
+<h1 id="header_title">Release Notes</h1>
+    
+<h2>Brooklyn Version 0.6.0</h2>
+
+<ul>
+<li>Introduction</li>
+<li>New Features</li>
+<li>Backwards Compatibility</li>
+<li>Community Activity</li>
+</ul>
+
+
+<h3>Introduction</h3>
+
+<p>This release includes many big features. It incorporates a lot of improvements and feedback from our community. Thank you!</p>
+
+<p>Thanks also go to Brooklyn's commercial users. Brooklyn continues to be used in many exciting projects, including managing distributed database clusters, and cloud-enabling financial service applications (not to mention the custom PaaS offerings, big data clusters, and three-tier web-apps that Brooklyn was being used in at Version 0.5.0).</p>
+
+<p>For more information, please checkout <a href="http://brooklyncentral.github.io">brooklyncentral.github.io</a>, and the mailing lists:</p>
+
+<ul>
+<li><a href="http://groups.google.com/group/brooklyn-dev">brooklyn-dev@googlegroups.com</a></li>
+<li><a href="http://groups.google.com/group/brooklyn-users">brooklyn-users@googlegroups.com</a></li>
+</ul>
+
+
+<h3>New Features</h3>
+
+<p><em>The changes listed here compare Brooklyn 0.5.0 and 0.6.0, and incorporate changes from the 0.6.0 milestone releases. Items marked <strong>&sup1;</strong> are new since 0.6.0-M2</em></p>
+
+<ol>
+<li><p>Locations are now constructed using a <code>LocationSpec</code>, rather than calling the constructor directly. This improvement is required to allow the Brooklyn management plane to track locations and persist their state.</p></li>
+<li><p>Location specific and advanced features can be implemented using location extension points. The extension mechanism allows client-code to call <code>location.hasExtension(extensionClass)</code> and <code>location.getExtension(extensionClass)</code>.</p></li>
+<li><p>Hazelcast datagrid implementation added. (NB: this is still considered experimental.)</p></li>
+<li><p>A datagrid can be used to store the entity/location state within Brooklyn. This feature is currently disabled by default (i.e. storing to an in-memory pseduo-datagrid); work will continue on this in subsequent releases.</p></li>
+<li><p>Brooklyn now tracks location and application usage, and records it in the datagrid. More generally:</p>
+
+<ul>
+<li>Create/destroy of VMs (through location manage/unmanage) is tracked</li>
+<li>Application start/stop/destroy is tracked</li>
+<li>Current and historic usage information can be retrieved through the REST API.</li>
+</ul>
+</li>
+<li><p>Improved Support for Chef, significantly improving support for using Windows machines.</p></li>
+<li><p>Several additional clouds are supported, including:</p>
+
+<ul>
+<li>Abiquo (see also <a href="http://www.cloudsoftcorp.com/news/as-simple-as-abc-the-abiquo-brooklyn-catalog/">this blog post</a>)</li>
+<li>Google Compute Engine</li>
+<li><em>See also:</em> Community Activity, below.</li>
+</ul>
+</li>
+<li><p>Several new entities have been added, including:</p>
+
+<ul>
+<li>BindDnsServer</li>
+<li>Jetty6Server</li>
+<li>MongoDB replica sets</li>
+<li>BrooklynNode (for Brooklyn bootstrap deploying Brooklyn)</li>
+<li>New PostgreSQL entity (via Chef)</li>
+</ul>
+</li>
+<li><p>A new <a href="https://github.com/brooklyncentral/brooklyn/blob/master/locations/jclouds/src/main/resources/brooklyn/location-metadata.properties">location-metadata.properties</a> file allows metadata values (e.g. ISO-3166, lat/lon coordinates, etc) to be added to and overridden. Metadata in <code>brooklyn.properties</code> overrides metadata in <code>location-metadata.properties</code>.</p></li>
+<li><p>GUI Improvements: Better ability to drill down on tasks, auto-updating entity-tree with status indicators, faster status updates, and better performance over slow links.</p></li>
+<li><p>Improved entity and machine restart logic&sup1;, to handle failed components and dead-on-arrival&sup1; machines even better.</p></li>
+<li><p>Improved onboarding, with the creation of a Maven Archetype for a sample application, (which can be used as a template for new applications) and updates to the <a href="/use/guide/quickstart/brooklyn.properties">Getting Started brooklyn.properties</a> to get HP Cloud and SoftLayer users onboard faster.</p></li>
+<li><p>Sandbox: Support for rolling out complex apps described using CAMP YAML. This simplifies writing application blueprints, as YAML config files are more accessible and easier to write than Java code. &sup1;</p></li>
+<li><p>Big improvements to the Cassandra integration, including new tutorials for high-availability and wide-area (inter-cloud-provider) cassandra clusters.&sup1;</p></li>
+<li><p>The policies for an entity can now be defined in in an entity's spec. (Simplifying adding policies to entities, and requiring less code to be written.) &sup1;</p></li>
+<li><p>Added support for a cluster to spread its members across a provider's availability zones (e.g. in <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html">AWS</a>), to give high availability for that cluster. &sup1;</p></li>
+<li><p>Improved the Brooklyn load balancer abstraction, so that it can be used with things like the CloudStack load balancer or AWS elastic load balancer. &sup1;</p></li>
+</ol>
+
+
+<h3>Backwards Compatibility</h3>
+
+<p>For upgrading from 0.5.0 to 0.6.0, existing entities/applications/policies will still work, provided they did not previously have deprecation warnings.</p>
+
+<p>Some additional code has been deprecated - users are strongly encouraged to update these:</p>
+
+<ol>
+<li><p>Use <code>LocationSpec</code> (and <code>managementContext.getLocationManager().createLocation(LocationSpec.spec(MyLocClazz.class)</code>), rather than calling location constructors directly.</p></li>
+<li><p>In brooklyn.properties Locations must now be specified as <code>brooklyn.location.*</code>  (e.g. <code>brooklyn.location.jclouds.*</code> rather than brooklyn.jclouds.*). Property names should use CamelCase (e.g. <code>brooklyn.location.jclouds.publicKeyFile</code> instead of brooklyn.jclouds.public-key-file). Using the old conventions will give deprecation warnings in the logs.</p></li>
+<li><p>Use <code>@Effector</code> and <code>@EffectorParam</code> for annotating effector methods in an entity (rather than <code>@Description</code>, <code>@NamedParameter</code> and <code>@DefaultValue</code>).
+<code>location.getName()</code> has been renamed to <code>location.getDisplayName()</code>, to be consistent with Entity. The <code>location.getChildLocations()</code> and <code>location.getParentLocation()</code> have also been renamed to <code>getChildren()</code> and <code>getParent()</code> respectively.</p></li>
+<li><p>If overriding a config key in an entity to change the default value specified in a super-type entity or constant, then use <code>ConfigKeys.newConfigKeyWithDefault(...)</code>.</p></li>
+<li><p>Use <code>ConfigKeys.newStringConfigKey(...)</code> and similar methods, rather than using <code>new ConfigKey&lt;String&gt;(String.class, ...)</code></p></li>
+<li><p><code>ListConfigKey</code> has been deprecated because it no longer guarantees order; instead use <code>SetConfigKey</code>. This is a consequence of efficiently using a datagrid to store the data.</p></li>
+<li><p>Use the new <code>FeedConfig.onFailure()</code>, <code>FeedConfig.onError()</code> and <code>FeedConfig.checkSuccess()</code>. For example, This is now called to determine if a http 404 is a success or failure (default: failure), and if an ssh non-zero exit code is a failure (default: yes).</p></li>
+<li><p>Some package/class changes, such as:</p>
+
+<ul>
+<li><code>brooklyn.util.NetworkUtils</code> renamed to <code>brooklyn.util.net.Networking</code></li>
+<li><code>brooklyn.entity.basic.lifecycle.CommonCommands</code> renamed to <code>brooklyn.util.ssh.CommonCommands</code></li>
+<li><code>brooklyn.util.MutableMap</code> renamed to <code>brooklyn.util.collections.MutableMap</code></li>
+</ul>
+</li>
+<li><p>Logging has been updated. Please see <a href="/docs/dev/tips/logging.html">logging.md</a>.  Existing custom logback.xml configuration may no longer work (e.g. brooklyn logback-defaults.xml no longer exists).</p></li>
+<li><code>EntitySpecs.spec(...)</code> is now deprecated; use <code>EntitySpec.create(...)</code> instead.</li>
+<li><code>JcloudsLocationCustomizer</code>: method signatures have changed. For those extending <code>BasicJcloudsLocationCustomizer</code> as recommended, existing code will work but should be changed to use the new signatures.</li>
+<li>Deprecated <code>new BasicConfigKey(key, defaultValue)</code>. Instead use <code>ConfigKeys.newConfigKeyWithDefault(key, defaultValue)</code>.</li>
+</ol>
+
+
+<p>There have been some other minor changes, where code is now deprecated - all such changes are clearly marked in the javadoc, indicating the recommended approach.</p>
+
+<h3>Community Activity</h3>
+
+<p><a href="http://www.cloudsoftcorp.com">Cloudsoft</a> has created Locations for IBM SmartCloud Enterprise and Ravello (repos: <a href="https://github.com/cloudsoft/ibm-smartcloud">github:cloudsoft/ibm-smartcloud</a>, <a href="https://github.com/cloudsoft/brooklyn-ravello">github:cloudsoft/brooklyn-ravello</a>). This code is public, subject to the Cloudsoft developer licence.</p>
+
+<h3>0.6.0-M2 - GA Changes</h3>
+
+<p>Features marked <strong>&sup1;</strong> (Features 11, 13-17, above) were added in the last push to 0.6.0 GA.</p>
+
+
+        </div><!--maincontent-->
+        
+      <div id="sidebar">
+      
+
+
+  
+
+
+
+
+
+
+<div id="sidebar_toc">
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/v/0.6.0-rc.2/start/index.html"><div class="toc-1-item toc-1-header ">Start</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-rc.2/index.html"><div class="toc-2-item">Overview</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-rc.2/start/walkthrough/index.html"><div class="toc-2-item">Walkthrough</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-rc.2/start/download.html"><div class="toc-2-item">Download</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-rc.2/start/docs-summary.html"><div class="toc-2-item">Documentation</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/v/0.6.0-rc.2/use/index.html"><div class="toc-1-item toc-1-header ">Using brooklyn</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-rc.2/use/guide/index.html"><div class="toc-2-item toc-2-header">User Guide</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-rc.2/use/guide/quickstart/index.html"><div class="toc-3-item">Quick Start</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-rc.2/use/guide/defining-applications/basic-concepts.html"><div class="toc-3-item">Defining Applications</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-rc.2/use/guide/management/index.html"><div class="toc-3-item">Management</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-rc.2/use/guide/policies/index.html"><div class="toc-3-item">Policies</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-rc.2/use/guide/entities/index.html"><div class="toc-3-item">Custom Entities</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-rc.2/use/guide/extras/index.html"><div class="toc-3-item">Extras</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-rc.2/use/examples/index.html"><div class="toc-2-item toc-2-header">Examples</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-rc.2/use/examples/webcluster/index.html"><div class="toc-3-item">Elastic Web Cluster</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-rc.2/use/examples/global-web-fabric/index.html"><div class="toc-3-item">Global Web Fabric</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-rc.2/use/examples/whirrhadoop/index.html"><div class="toc-3-item">Whirr Hadoop Cluster</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-rc.2/use/examples/messaging/index.html"><div class="toc-3-item">Publish-Subscribe Messaging</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-rc.2/use/examples/nosql-cassandra/index.html"><div class="toc-3-item">Cassandra Cluster</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-rc.2/use/api/index.html"><div class="toc-2-item">API Reference (javadoc)</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-rc.2/use/contact.html"><div class="toc-2-item">Discuss</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/v/0.6.0-rc.2/dev/code/index.html"><div class="toc-1-item toc-1-header ">Contributing</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-rc.2/dev/code/index.html"><div class="toc-2-item toc-2-header">The Code</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-rc.2/dev/code/index.html"><div class="toc-3-item">Structure</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-rc.2/dev/code/entity.html"><div class="toc-3-item">Writing an Entity</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-rc.2/dev/code/policy.html"><div class="toc-3-item">Writing a Policy</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="http://github.com/brooklyncentral/brooklyn"><div class="toc-3-item">brooklyn.git (github)</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-rc.2/dev/build/index.html"><div class="toc-2-item toc-2-header">Build and Test</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-rc.2/dev/build/index.html"><div class="toc-3-item">Maven</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-rc.2/dev/build/ide.html"><div class="toc-3-item">IDE</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-rc.2/dev/build/tests.html"><div class="toc-3-item">Tests</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-rc.2/dev/tips/index.html"><div class="toc-2-item toc-2-header">Tips and Tricks</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-rc.2/dev/tips/index.html"><div class="toc-3-item">Miscellany</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-rc.2/dev/tips/logging.html"><div class="toc-3-item">Logging</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-rc.2/dev/tips/standards.html"><div class="toc-3-item">Code Standards</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-rc.2/dev/tips/local-artifact-repo.html"><div class="toc-3-item">Local Artifact Repo</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-rc.2/dev/tips/update-docs.html"><div class="toc-3-item">Updating Docs</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-rc.2/dev/tips/release.html"><div class="toc-3-item">Release Process</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-rc.2/dev/wishlist.html"><div class="toc-2-item">Wishlist</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-rc.2/dev/links.html"><div class="toc-2-item toc-2-header">Links</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="https://github.com/brooklyncentral/"><div class="toc-3-item">Github repo</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="https://github.com/brooklyncentral/brooklyn/issues"><div class="toc-3-item">Github issues</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="http://ccweb.cloudsoftcorp.com/maven/libs-snapshot-local/io/brooklyn/"><div class="toc-3-item">Maven snapshots</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-rc.2/dev/how-to-contrib.html"><div class="toc-2-item">How to Contribute</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/v/0.6.0-rc.2/license/index.html"><div class="toc-1-item toc-1-header ">License</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-rc.2/license/license.html"><div class="toc-2-item">Apache License v2.0</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-rc.2/license/contributor-agreements/index.html"><div class="toc-2-item toc-2-header">Contributor Agreements</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-rc.2/license/contributor-agreements/index.html"><div class="toc-3-item">Instructions</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-rc.2/license/contributor-agreements/individual.html"><div class="toc-3-item">Individual CLA (echosign)</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-rc.2/license/contributor-agreements/corporate.html"><div class="toc-3-item">Corporate CLA (echosign)</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-rc.2/license/contributor-agreements/corporate-update-schedule.html"><div class="toc-3-item">CCLA Schedule A Update (echosign)</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-rc.2/license/contributor-agreements/brooklyn-icla.txt"><div class="toc-3-item">Individual CLA (raw text)</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0-rc.2/license/contributor-agreements/brooklyn-ccla.txt"><div class="toc-3-item">Corporate CLA (raw text)</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/v/0.6.0-rc.2/meta/versions.html"><div class="toc-1-item toc-1-header ">Meta</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-rc.2/meta/versions.html"><div class="toc-2-item">Versions</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-rc.2/meta/governance.html"><div class="toc-2-item">Governance</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-rc.2/meta/verify.html"><div class="toc-2-item">Verify</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0-rc.2/meta/contact.html"><div class="toc-2-item">Contact</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+ 
+</div>
+<br/>
+
+
+      </div>
+
+    </div><!--contentcontainer-->
+        
+    <div id="footer">
+        <p id="copyright">
+            <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
+            brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
+            &copy; 2013 Cloudsoft Corporation.
+        </p>
+    </div><!--footer -->
+
+</div><!--container-->
+
+</body>
+</html>
