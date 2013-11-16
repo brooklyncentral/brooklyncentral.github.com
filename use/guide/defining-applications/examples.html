@@ -161,11 +161,11 @@ $(document).ready(function() {
     <div id="header">
     
         <div id="identity">
-            <a href="http://brooklyncentral.github.com/" rel="home">Brooklyn</a>
+            <a href="http://brooklyncentral.github.io/" rel="home">Brooklyn</a>
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.6.0-rc.2</a></li>
+            <li><a href="/meta/versions.html">0.6.0-rc.4</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -390,7 +390,7 @@ need to figure out if this page should be kept at all
     <span class="nt">&lt;dependency&gt;</span>
         <span class="nt">&lt;groupId&gt;</span>io.brooklyn<span class="nt">&lt;/groupId&gt;</span>
         <span class="nt">&lt;artifactId&gt;</span>brooklyn-all<span class="nt">&lt;/artifactId&gt;</span>
-        <span class="nt">&lt;version&gt;</span>0.6.0-rc.2<span class="nt">&lt;/version&gt;</span>  <span class="c">&lt;!-- BROOKLYN_VERSION --&gt;</span>
+        <span class="nt">&lt;version&gt;</span>0.6.0-rc.4<span class="nt">&lt;/version&gt;</span>  <span class="c">&lt;!-- BROOKLYN_VERSION --&gt;</span>
     <span class="nt">&lt;/dependency&gt;</span>
 <span class="nt">&lt;/dependencies&gt;</span>
  
@@ -407,8 +407,7 @@ need to figure out if this page should be kept at all
         <span class="nt">&lt;checksumPolicy&gt;</span>fail<span class="nt">&lt;/checksumPolicy&gt;</span>
     <span class="nt">&lt;/snapshots&gt;</span>
 <span class="nt">&lt;/repository&gt;</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <h3>Starting a Tomcat Server</h3>
@@ -429,8 +428,7 @@ It is then started in a localhost location (other locations are shown in the nex
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;war&quot;</span><span class="o">,</span> <span class="s">&quot;/path/to/booking-mvc.war&quot;</span><span class="o">)));</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>The <code>wars</code> config is also supported (with config keys <code>ROOT_WAR</code> and <code>NAMED_WARS</code> the long-hand syntax);
@@ -446,8 +444,7 @@ The only difference is the location supplied.</p>
 
 <div class="highlight"><pre><code class="bash">brooklyn launch --app TomcatServerApp --location localhost
 brooklyn launch --app TomcatServerApp --location aws-ec2:eu-west-1
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <h3>Starting a Tomcat Cluster with Nginx</h3>
@@ -471,8 +468,7 @@ brooklyn launch --app TomcatServerApp --location aws-ec2:eu-west-1
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;initialSize&quot;</span><span class="o">,</span> <span class="mi">2</span><span class="o">));</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>This creates a cluster that of Tomcat servers, along with an Nginx instance. The <code>NginxController</code> instance
@@ -517,8 +513,7 @@ a web-cluster in each location.</p>
                                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;war&quot;</span><span class="o">,</span> <span class="s">&quot;/path/to/booking-mvc.war&quot;</span><span class="o">))));</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <h2>Examples Source</h2>

@@ -161,11 +161,11 @@ $(document).ready(function() {
     <div id="header">
     
         <div id="identity">
-            <a href="http://brooklyncentral.github.com/" rel="home">Brooklyn</a>
+            <a href="http://brooklyncentral.github.io/" rel="home">Brooklyn</a>
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.6.0-rc.2</a></li>
+            <li><a href="/meta/versions.html">0.6.0-rc.4</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -449,11 +449,10 @@ $(document).ready(function() {
 
 
 
-<div class="highlight"><pre><code class="bash">% curl -LO <span class="s2">&quot;http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.6.0-rc.2/brooklyn-dist-0.6.0-rc.2-dist.tar.gz&quot;</span>
-% tar xvzf brooklyn-dist-0.6.0-rc.2-dist.tar.gz
-% <span class="nb">export </span><span class="nv">BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/brooklyn-0.6.0-rc.2/
-</code></pre>
-</div>
+<div class="highlight"><pre><code class="bash">% curl -LO <span class="s2">&quot;http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.6.0-rc.4/brooklyn-dist-0.6.0-rc.4-dist.tar.gz&quot;</span>
+% tar xvzf brooklyn-dist-0.6.0-rc.4-dist.tar.gz
+% <span class="nb">export </span><span class="nv">BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/brooklyn-0.6.0-rc.4/
+</code></pre></div>
 
 
 
@@ -470,10 +469,9 @@ $(document).ready(function() {
 
 <div class="highlight"><pre><code class="bash">% git clone https://github.com/brooklyncentral/brooklyn-examples.git
 % <span class="nb">cd </span>brooklyn-examples
-% git checkout 0.6.0-rc.2
+% git checkout 0.6.0-rc.4
 % mvn clean install
-</code></pre>
-</div>
+</code></pre></div>
 
 
 
@@ -492,8 +490,7 @@ please visit <a href="/use/guide/management/index.html#cli">this section of the 
 
 
 <div class="highlight"><pre><code class="bash">% <span class="nb">cd </span>hadoop-and-whirr
-</code></pre>
-</div>
+</code></pre></div>
 
 
 
@@ -505,8 +502,7 @@ the <code>BROOKLYN_CLASSPATH</code> environment variable in the following way:</
 
 
 <div class="highlight"><pre><code class="bash">% <span class="nb">export </span><span class="nv">BROOKLYN_CLASSPATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/target/classes
-</code></pre>
-</div>
+</code></pre></div>
 
 
 
@@ -554,8 +550,7 @@ with an arbitrary size, using the <code>WhirrHadoopCluster</code> entity.</p>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;memory&quot;</span><span class="o">,</span> <span class="mi">2048</span><span class="o">));</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 
@@ -566,8 +561,7 @@ with an arbitrary size, using the <code>WhirrHadoopCluster</code> entity.</p>
 
 
 <div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.extras.whirr.WhirrHadoopExample --stopOnKeyPress --location aws-ec2:eu-west-1
-</code></pre>
-</div>
+</code></pre></div>
 
 
 
@@ -618,8 +612,7 @@ can be run from within Brooklyn:</p>
                 <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;recipe&quot;</span><span class="o">,</span> <span class="n">RECIPE</span><span class="o">));</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 
@@ -630,8 +623,7 @@ can be run from within Brooklyn:</p>
 
 
 <div class="highlight"><pre><code class="bash">% <span class="nb">export </span><span class="nv">BROOKLYN_CLASSPATH</span><span class="o">=</span>~/.m2/repository/org/apache/whirr/whirr-elasticsearch/0.8.1/whirr-elasticsearch-0.8.1.jar:<span class="nv">$BROOKLYN_CLASSPATH</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 
@@ -642,8 +634,7 @@ can be run from within Brooklyn:</p>
 
 
 <div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.extras.whirr.WhirrExample --stopOnKeyPress --location aws-ec2:eu-west-1
-</code></pre>
-</div>
+</code></pre></div>
 
 
 
