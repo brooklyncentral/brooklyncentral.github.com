@@ -1,0 +1,1102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+  <title>Publish-Subscribe Messagiung</title>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+
+  <link rel="stylesheet" href="/v/0.6.0/style/style.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/v/0.6.0/style/toc.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/v/0.6.0/style/docs/code.css" type="text/css" media="screen" />
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  
+	<!-- Sidebar/ToC Scripts and CSS -->
+	<script src="/v/0.6.0/style/js/jquery/jquery-1.7.1.min.js"></script>
+	<script src="/v/0.6.0/style/js/jquery/jquery-ui-1.8.18.custom.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/v/0.6.0/style/js/jquery/smoothness/jquery-ui-1.8.18.custom.css" />
+	
+	<script type="text/javascript" src="/v/0.6.0/style/js/superfish.js"></script>
+	<script type="text/javascript" src="/v/0.6.0/style/js/jquery.cookie.js"></script>
+	
+	
+<!-- Clipboard support -->
+<script src="/v/0.6.0/style/js/zeroclipboard/ZeroClipboard.js"></script>
+<style type="text/css">
+.clipboard_container { float: right; padding: 8px; }
+.clipboard_button {
+    background-image: url("/v/0.6.0/style/icons/clipboard-green-normal.png");
+    background-size: 18px 21px;
+    width: 18px; height: 21px;
+}
+.clipboard_button.hover  { background-image: url("/v/0.6.0/style/icons/clipboard-green-hover.png"); }
+.clipboard_button.active  { background-image: url("/v/0.6.0/style/icons/clipboard-green-click.png"); }'
+</style>
+<script type="text/javascript"> <!-- clipboard -->
+ZeroClipboard.setMoviePath( '/v/0.6.0/style/js/zeroclipboard/ZeroClipboard.swf' );
+</script>
+<script type="text/javascript"> <!-- clipboard positioning -->
+$(document).ready(function() {
+  $('<div class="clipboard_container" title="Copy to Clipboard">'+
+    '<div class="clipboard_button"/>'+
+  '</div>').insertBefore($('div.highlight'))
+  $('div.clipboard_container').each(function(index) {
+    var clipboard = new ZeroClipboard.Client();
+    clipboard.glue( $(this).find(":first")[0], $(this)[0] );
+    var target = $(this).next();
+    var txt = target.text().trim();
+    if (target.find('code.bash')) {
+      // Strip out bash prompts from the start of each line (i.e. '$' or '%' characters
+      // at the very start, or immediately following any newline). Correctly handles continuation
+      // lines, where a leading '$' or '%' is *not* a prompt character.
+      txt = txt.replace(/(^|[^\\]\n)[$%] /g, "$1");
+    }
+    clipboard.setText(txt);
+  });
+});
+</script>
+
+    <script type="text/javascript">
+        // initialise menu delay
+        jQuery(function(){
+            jQuery('ul#mainmenu').superfish({ 
+                autoArrows:  false,  // disable generation of arrow mark-up 
+                dropShadows: false,  // disable drop shadows 
+                disableHI:   true,   // set to true to disable hoverIntent detection 
+                delay:       500,    // the delay in milliseconds that the mouse can remain outside a submenu without it closing 
+                speed:       'fast', 
+            });
+        });
+    </script>
+
+<script type="text/javascript">
+
+<!-- search -->
+	$(function() {
+		$('#simple_google')
+			.submit(function() {
+				$('input[name="q"]').val("site:" + document.location.hostname + " " + $('input[name="brooklyn-search"]').val());
+			return true;
+			});
+		$('input[name="brooklyn-search"]').focus(function() {
+				if ($(this).val() === $(this).attr('placeholder')) {
+					$(this).val('');
+				}
+			})
+			.blur(function() {
+				if ($(this).val() === '') {
+					$(this).val($(this).attr('placeholder'));
+				}
+			})
+			.blur();
+    });
+    
+<!-- page notes -->
+   	$(function() {
+		if (document.location.pathname.replace(/^\/([^\/]*).*$/, '$1') === "v"){
+			var thisversion = document.location.pathname.split("/")[2],
+				msg = "";
+			
+			if (!$.cookie('brooklyn_versions') || 
+			        (($.inArray('ALL', $.cookie('brooklyn_versions').split(",")) === -1) &&
+			        ($.inArray(thisversion, $.cookie('brooklyn_versions').split(",")) === -1)) ){
+			    msg += "<div class='warning_banner_image'><img src='/v/0.6.0/style/icons/warning.png'/></div>";
+				msg += "<p>This content is for <strong>Brooklyn "+thisversion+"</strong>, and may differ across versions.</p>";
+			    msg += "<p>Are you using version "+thisversion+"?</p>";
+				msg += "<p class='warning_banner_buttons'>";
+				msg += "<a href = '#' onclick=\"set_user_version('"+thisversion+"');\">Yes, hide this warning</a>";
+			    msg += "<a href = '/'>No, show me the latest version</a>";
+				msg += "<a href = '/meta/versions.html'>Show all versions</a>";
+				msg += "</p>"
+							
+				$('#page_notes').html(msg);
+				$('#page_notes').fadeIn('slow');
+			}
+		}
+	});
+   	function get_user_versions() {
+   	    return $.cookie("brooklyn_versions") ? $.cookie("brooklyn_versions").split(",") : [];
+   	};
+	function set_user_version(version) {
+		var version_cookie = get_user_versions();
+		version_cookie.push(version);
+		$.cookie('brooklyn_versions', version_cookie, { expires: 365, path: '/' });
+		$('#page_notes').fadeOut();
+		event.preventDefault ? event.preventDefault() : event.returnValue = false;
+	};
+    function set_user_versions_all() {
+        var version_cookie = get_user_versions();
+        version_cookie.push("ALL");
+        $.cookie('brooklyn_versions', version_cookie, { expires: 365, path: '/' });
+        $('#page_notes').fadeOut();
+        event.preventDefault ? event.preventDefault() : event.returnValue = false;
+    };
+    function clear_user_versions() {
+        $.removeCookie('brooklyn_versions', { path: '/' });
+        $('#page_notes').fadeIn('slow');
+        event.preventDefault ? event.preventDefault() : event.returnValue = false;
+    };
+	
+   
+ <!-- analytics -->
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-30530918-1']);
+	_gaq.push(['_trackPageview']);
+	
+	(function() {
+	  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+
+</head>
+
+<body>
+
+    <ul id="shortcuts" title="Accessibility shortcuts menu">
+        <li><a href="#maincontent">Skip to main content</a></li>
+    </ul>
+   
+
+<div id="container">
+
+    <div id="header">
+    
+        <div id="identity">
+            <a href="http://brooklyncentral.github.io/" rel="home">Brooklyn</a>
+        </div>
+        
+        <ul id="quicklinks">
+            <li><a href="/v/0.6.0/meta/versions.html">0.6.0</a></li>
+            <li><a href="/v/0.6.0/start/download.html">Download</a></li>
+            <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
+            <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
+            <li><a href="/v/0.6.0/meta/contact.html">Contact</a></li>
+        </ul>
+
+        <div id="menubar">  
+
+
+
+
+
+
+
+<ul id="mainmenu"><!-- INSERT LINKS -->
+            
+
+  
+  
+  <li class=""><a href="/v/0.6.0/index.html">Overview</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.6.0/start/download.html">Download</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.6.0/use/guide/quickstart/index.html">Getting Started</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.6.0/start/walkthrough/index.html">Walkthrough</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.6.0/use/guide/index.html">User Guide</a></li>
+
+  
+  
+  <li class="toc-active"><a href="/v/0.6.0/use/examples/index.html">Examples</a></li>
+
+  
+  
+  <li class=""><a href="/v/0.6.0/dev/code/index.html">Contributing</a></li>
+
+
+</ul>                    
+
+            <form method="get" id="simple_google" class="searchform" action="http://www.google.com/search" method="get">
+                <input type="text" class="searchinput" name="brooklyn-search" placeholder="Search: type &amp; hit enter" />
+                <input type="hidden" name="q" value="" />
+            </form>
+            
+        </div>
+                
+    </div><!--header-->
+    
+    <div id="contentcontainer">
+    
+        <div id="maincontent">
+
+
+  
+
+
+
+
+
+
+
+    
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+
+    
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+                
+                
+                
+                
+                
+                
+            
+        
+            
+        
+    
+        
+        
+    
+        
+        
+    
+
+    
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+
+    
+    
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+
+
+
+            
+<p id="breadcrumb">
+    <a href="/v/0.6.0/use/index.html">Using brooklyn</a>
+    
+        &raquo; <a href="/v/0.6.0/use/examples/index.html">Examples</a>
+        
+            &raquo; <a href="/v/0.6.0/use/examples/messaging/index.html">Publish-Subscribe Messaging</a>
+        
+    
+</p>
+
+
+<div id="page_notes"></div>
+
+<h1 id="header_title">Publish-Subscribe Messagiung</h1>
+    
+<p>This example shows how a simple messaging application can be build
+in brooklyn, starting with configuring and launching a broker. For
+these examples we will use the Apache <a href="http://qpid.apache.org/">Qpid</a>
+Java AMQP message broker and clients using the
+<a href="http://docs.oracle.com/javaee/6/tutorial/doc/bnceh.html">JMS</a> API.</p>
+
+<!--- both snapshots and releases -->
+
+
+
+
+<!--- releases -->
+
+
+
+
+<p></p>
+
+
+
+
+<!--- RELEASE -->
+
+
+
+
+<h2>Before You Begin</h2>
+
+
+
+
+<p>To use the examples, you'll need <code>curl</code>, <code>git</code>, <code>java</code> (1.6+), and <code>maven</code> (v3) installed.</p>
+
+
+
+
+<h3>Installing Brooklyn</h3>
+
+
+
+
+<p>(If you followed the <a href="/use/guide/quickstart/index.html">Getting Started</a> instructions, you can skip to Installing the Examples.)</p>
+
+
+
+
+<p>Grab a copy of the Brooklyn distribution and set up <code>BROOKLYN_HOME</code>:</p>
+
+
+
+
+<div class="highlight"><pre><code class="bash">% curl -LO <span class="s2">&quot;http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.6.0/brooklyn-dist-0.6.0-dist.tar.gz&quot;</span>
+% tar xvzf brooklyn-dist-0.6.0-dist.tar.gz
+% <span class="nb">export </span><span class="nv">BROOKLYN_HOME</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/brooklyn-0.6.0/
+</code></pre></div>
+
+
+
+
+<h3>Installing the Examples</h3>
+
+
+
+
+<p>Grab a copy of the brooklyn-examples source code and build it with Maven:</p>
+
+
+
+
+<div class="highlight"><pre><code class="bash">% git clone https://github.com/brooklyncentral/brooklyn-examples.git
+% <span class="nb">cd </span>brooklyn-examples
+% git checkout 0.6.0
+% mvn clean install
+</code></pre></div>
+
+
+
+
+<p>For more information on ways to download Brooklyn please
+see the <a href="/v/0.6.0/start/download.html">download page</a>.
+For more information on the Brooklyn CLI and launching apps,
+please visit <a href="/v/0.6.0/use/guide/management/index.html#cli">this section of the user guide</a>.</p>
+
+
+<p>Now, go to this particular example's directory:</p>
+
+<div class="highlight"><pre><code class="bash">% <span class="nb">cd </span>simple-messaging-pubsub
+</code></pre></div>
+
+
+<p>The CLI needs to know where to find your compiled examples. You can set this up by exporting
+the <code>BROOKLYN_CLASSPATH</code> environment variable in the following way:</p>
+
+<div class="highlight"><pre><code class="bash">% <span class="nb">export </span><span class="nv">BROOKLYN_CLASSPATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/target/classes
+</code></pre></div>
+
+
+<p>The project <code>simple-messaging-pubsub</code> includes a deployment
+descriptor for our example messaging application and simple <em>Publish</em>
+and <em>Subscribe</em> JMS test client scripts.</p>
+
+<h2>Single Broker</h2>
+
+<p>The first example will include a Qpid broker, which we will customize
+to use the Oracle <a href="http://www.oracle.com/technetwork/products/berkeleydb/overview/index.html">BDB</a>
+message store as an example of a typical production setup. We will
+also create a queue for use by a pair of test clients.</p>
+
+<p>The <code>QpidBroker</code> entity is created like this, which uses the
+default configuration, specifying only the AMQP port and creates
+no queues or topics:</p>
+
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">StandaloneQpidBrokerExample</span> <span class="kd">extends</span> <span class="n">AbstractApplication</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// Configure the Qpid broker entity</span>
+        <span class="n">QpidBroker</span> <span class="n">broker</span> <span class="o">=</span> <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">QpidBroker</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;amqpPort&quot;</span><span class="o">,</span> <span class="mi">5672</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+
+
+<p>To install the custom configuration files and extra libraries for
+BDB, we specify some files to copy to the broker installation, using
+the <code>runtimeFiles</code> property. These files should be available in
+the classpath of the application when it is running, usually by
+copying them to the <code>src/main/resources</code> directory. For example,
+here we copy a custom XML configuration file and a new password
+file:</p>
+
+<div class="highlight"><pre><code class="java">        <span class="kd">final</span> <span class="n">String</span> <span class="n">CUSTOM_CONFIG_PATH</span> <span class="o">=</span> <span class="s">&quot;classpath://custom-config.xml&quot;</span><span class="o">;</span>
+        <span class="kd">final</span> <span class="n">String</span> <span class="n">PASSWD_PATH</span> <span class="o">=</span> <span class="s">&quot;classpath://passwd&quot;</span><span class="o">;</span>
+
+        <span class="n">QpidBroker</span> <span class="n">broker</span> <span class="o">=</span> <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">QpidBroker</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;amqpPort&quot;</span><span class="o">,</span> <span class="mi">5672</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;amqpVersion&quot;</span><span class="o">,</span> <span class="n">AmqpServer</span><span class="o">.</span><span class="na">AMQP_0_10</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;runtimeFiles&quot;</span><span class="o">,</span> <span class="n">ImmutableMap</span><span class="o">.</span><span class="na">builder</span><span class="o">()</span>
+                        <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">QpidBroker</span><span class="o">.</span><span class="na">CONFIG_XML</span><span class="o">,</span> <span class="n">CUSTOM_CONFIG_PATH</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">QpidBroker</span><span class="o">.</span><span class="na">PASSWD</span><span class="o">,</span> <span class="n">PASSWD_PATH</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">build</span><span class="o">()));</span>
+</code></pre></div>
+
+
+<p>Finally, we come to the complete configuration of our <code>QpidBroker</code>
+entity using the BDB store. The additional properties here specify
+the AMQP version and that a queue named <em>testQueue</em> should be created
+on startup.</p>
+
+<div class="highlight"><pre><code class="java">        <span class="kd">final</span> <span class="n">String</span> <span class="n">CUSTOM_CONFIG_PATH</span> <span class="o">=</span> <span class="s">&quot;classpath://custom-config.xml&quot;</span><span class="o">;</span>
+        <span class="kd">final</span> <span class="n">String</span> <span class="n">PASSWD_PATH</span> <span class="o">=</span> <span class="s">&quot;classpath://passwd&quot;</span><span class="o">;</span>
+        <span class="kd">final</span> <span class="n">String</span> <span class="n">QPID_BDBSTORE_JAR_PATH</span> <span class="o">=</span> <span class="s">&quot;classpath://qpid-bdbstore-0.14.jar&quot;</span><span class="o">;</span>
+        <span class="kd">final</span> <span class="n">String</span> <span class="n">BDBSTORE_JAR_PATH</span> <span class="o">=</span> <span class="s">&quot;classpath://je-5.0.34.jar&quot;</span><span class="o">;</span>
+
+        <span class="n">QpidBroker</span> <span class="n">broker</span> <span class="o">=</span> <span class="n">addChild</span><span class="o">(</span><span class="n">EntitySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">QpidBroker</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;amqpPort&quot;</span><span class="o">,</span> <span class="mi">5672</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;amqpVersion&quot;</span><span class="o">,</span> <span class="n">AmqpServer</span><span class="o">.</span><span class="na">AMQP_0_10</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;runtimeFiles&quot;</span><span class="o">,</span> <span class="n">ImmutableMap</span><span class="o">.</span><span class="na">builder</span><span class="o">()</span>
+                        <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">QpidBroker</span><span class="o">.</span><span class="na">CONFIG_XML</span><span class="o">,</span> <span class="n">CUSTOM_CONFIG_PATH</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">QpidBroker</span><span class="o">.</span><span class="na">PASSWD</span><span class="o">,</span> <span class="n">PASSWD_PATH</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;lib/opt/qpid-bdbstore-0.14.jar&quot;</span><span class="o">,</span> <span class="n">QPID_BDBSTORE_JAR_PATH</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;lib/opt/je-5.0.34.jar&quot;</span><span class="o">,</span> <span class="n">BDBSTORE_JAR_PATH</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">build</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="s">&quot;queue&quot;</span><span class="o">,</span> <span class="s">&quot;testQueue&quot;</span><span class="o">));</span>
+</code></pre></div>
+
+
+<h3>Running the Example</h3>
+
+<p>You can build and run the example (on *nix or Mac) after checking
+out the Brooklyn <a href="https://www.github.com/brooklyncentral/brooklyn">repository</a>
+as follows:</p>
+
+<div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn -v launch --app brooklyn.demo.StandaloneQpidBrokerExample --location localhost
+</code></pre></div>
+
+
+<p>Now, visit the Brooklyn web console on port 8081 (for pre 0.6 releases,
+use the credentials admin/password). This allows you to view the Brooklyn
+entities and their current state for debugging.</p>
+
+<p>Note that the installation may take some time, because the default
+deployment downloads the software from the official repos.  You can
+monitor start-up activity for each entity in the <code>Activity</code> pane
+in the management console, and see more detail by tailing the log
+file (<code>tail -f brooklyn.log</code>).</p>
+
+<p>After starting up, the demo script should display a summary of all
+the Brooklyn managed entities and their attributes. This will show
+both the Qpid broker and its child entity, the queue <em>testQueue</em>
+which was created at startup. The queue entity has sensors that
+monitor the depth of unread messages, which you can check while
+running the test client scripts later.</p>
+
+<p>If the <code>-v</code> flag is passed to the startup command, all configured
+entity and sensor details will be output. This includes the broker URL,
+which is used to configure JMS clients to connect to this broker.
+This URL can also be viewed as a sensor attribute in the web console,
+named <em>broker.url</em>.</p>
+
+<p>This sensor is common to <em>all</em> messaging brokers that Brooklyn
+provides, and is usually accessed by applications to allow them to
+provide it as a parameter to other entities, as shown in the code
+fragment below.</p>
+
+<div class="highlight"><pre><code class="java"><span class="n">String</span> <span class="n">url</span> <span class="o">=</span> <span class="n">broker</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="n">MessageBroker</span><span class="o">.</span><span class="na">BROKER_URL</span><span class="o">)</span>
+</code></pre></div>
+
+
+<p>Using the URL the demo script printed, you can run the test <code>Subscribe</code>
+and then <code>Publish</code> classes, to send messages using the broker. Simply
+run the commands in another window, with the provided URL as the
+only argument. Note that the URLs may be different to those printed
+below, and that any unquoted <code>&amp;</code> characters <em>must</em> be escaped,
+if present.</p>
+
+<div class="highlight"><pre><code class="bash">% <span class="nv">URL</span><span class="o">=</span><span class="s2">&quot;amqp://guest:guest@/localhost?brokerlist=&#39;tcp://localhost:5672&#39;&quot;</span>
+% java -cp <span class="s2">&quot;./resources/lib/*:./target/classes&quot;</span> brooklyn.demo.Subscribe <span class="k">${</span><span class="nv">URL</span><span class="k">}</span>
+% java -cp <span class="s2">&quot;./resources/lib/*:./target/classes&quot;</span> brooklyn.demo.Publish <span class="k">${</span><span class="nv">URL</span><span class="k">}</span>
+</code></pre></div>
+
+
+<p>In the <em>Publish</em> window you should see a log message every time a
+message is sent, like this:</p>
+
+<div class="highlight"><pre><code class="bash">2012-05-02 14:04:38,521 INFO  Sent message 65
+2012-05-02 14:04:39,522 INFO  Sent message 66
+</code></pre></div>
+
+
+<p>Similarly, the <em>Subscribe</em> windows should log on reciept of these
+messages, as follows:</p>
+
+<div class="highlight"><pre><code class="bash">2012-05-02 14:04:32,522 INFO  got message 41 <span class="nb">test </span>message 41
+2012-05-02 14:04:33,523 INFO  got message 42 <span class="nb">test </span>message 42
+</code></pre></div>
+
+
+<h3>Cloud Deployment</h3>
+
+<p>With appropriate setup (as described
+<a href="/v/0.6.0/use/guide/management/index.html#startup-config">here</a>)
+this can also be deployed to your favourite cloud, let's pretend
+it's Amazon Ireland, as follows:</p>
+
+<div class="highlight"><pre><code class="bash">% <span class="k">${</span><span class="nv">BROOKLYN_HOME</span><span class="k">}</span>/bin/brooklyn launch --app brooklyn.demo.StandaloneQpidBrokerExample --location aws-ec2:eu-west-1
+</code></pre></div>
+
+
+<p>If you encounter any difficulties, please
+<a href="/v/0.6.0/meta/contact.html">tell us</a> and we'll do our best
+to help.</p>
+
+
+        </div><!--maincontent-->
+        
+      <div id="sidebar">
+      
+
+
+  
+
+
+
+
+
+
+<div id="sidebar_toc">
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/v/0.6.0/start/index.html"><div class="toc-1-item toc-1-header ">Start</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0/index.html"><div class="toc-2-item">Overview</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0/start/walkthrough/index.html"><div class="toc-2-item">Walkthrough</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0/start/download.html"><div class="toc-2-item">Download</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0/start/docs-summary.html"><div class="toc-2-item">Documentation</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 toc-active">
+  
+	    <a href="/v/0.6.0/use/index.html"><div class="toc-1-item toc-1-header ">Using brooklyn</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0/use/guide/index.html"><div class="toc-2-item toc-2-header">User Guide</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0/use/guide/quickstart/index.html"><div class="toc-3-item">Quick Start</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0/use/guide/defining-applications/basic-concepts.html"><div class="toc-3-item">Defining Applications</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0/use/guide/management/index.html"><div class="toc-3-item">Management</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0/use/guide/policies/index.html"><div class="toc-3-item">Policies</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0/use/guide/entities/index.html"><div class="toc-3-item">Custom Entities</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0/use/guide/extras/index.html"><div class="toc-3-item">Extras</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 toc-active">
+      
+	        <a href="/v/0.6.0/use/examples/index.html"><div class="toc-2-item toc-2-header">Examples</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0/use/examples/webcluster/index.html"><div class="toc-3-item">Elastic Web Cluster</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0/use/examples/global-web-fabric/index.html"><div class="toc-3-item">Global Web Fabric</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0/use/examples/whirrhadoop/index.html"><div class="toc-3-item">Whirr Hadoop Cluster</div></a>
+              </div>
+        
+            
+              <div class="toc-3 toc-active">
+	            <a href="/v/0.6.0/use/examples/messaging/index.html"><div class="toc-3-item toc-active">Publish-Subscribe Messaging</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0/use/examples/nosql-cassandra/index.html"><div class="toc-3-item">Cassandra Cluster</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0/use/api/index.html"><div class="toc-2-item">API Reference (javadoc)</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0/use/contact.html"><div class="toc-2-item">Discuss</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/v/0.6.0/dev/code/index.html"><div class="toc-1-item toc-1-header ">Contributing</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0/dev/code/index.html"><div class="toc-2-item toc-2-header">The Code</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0/dev/code/index.html"><div class="toc-3-item">Structure</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0/dev/code/entity.html"><div class="toc-3-item">Writing an Entity</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0/dev/code/policy.html"><div class="toc-3-item">Writing a Policy</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="http://github.com/brooklyncentral/brooklyn"><div class="toc-3-item">brooklyn.git (github)</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0/dev/build/index.html"><div class="toc-2-item toc-2-header">Build and Test</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0/dev/build/index.html"><div class="toc-3-item">Maven</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0/dev/build/ide.html"><div class="toc-3-item">IDE</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0/dev/build/tests.html"><div class="toc-3-item">Tests</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0/dev/tips/index.html"><div class="toc-2-item toc-2-header">Tips and Tricks</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0/dev/tips/index.html"><div class="toc-3-item">Miscellany</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0/dev/tips/logging.html"><div class="toc-3-item">Logging</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0/dev/tips/standards.html"><div class="toc-3-item">Code Standards</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0/dev/tips/local-artifact-repo.html"><div class="toc-3-item">Local Artifact Repo</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0/dev/tips/update-docs.html"><div class="toc-3-item">Updating Docs</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0/dev/tips/release.html"><div class="toc-3-item">Release Process</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0/dev/wishlist.html"><div class="toc-2-item">Wishlist</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0/dev/links.html"><div class="toc-2-item toc-2-header">Links</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="https://github.com/brooklyncentral/"><div class="toc-3-item">Github repo</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="https://github.com/brooklyncentral/brooklyn/issues"><div class="toc-3-item">Github issues</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="http://ccweb.cloudsoftcorp.com/maven/libs-snapshot-local/io/brooklyn/"><div class="toc-3-item">Maven snapshots</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0/dev/how-to-contrib.html"><div class="toc-2-item">How to Contribute</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/v/0.6.0/license/index.html"><div class="toc-1-item toc-1-header ">License</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0/license/license.html"><div class="toc-2-item">Apache License v2.0</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0/license/contributor-agreements/index.html"><div class="toc-2-item toc-2-header">Contributor Agreements</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0/license/contributor-agreements/index.html"><div class="toc-3-item">Instructions</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0/license/contributor-agreements/individual.html"><div class="toc-3-item">Individual CLA (echosign)</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0/license/contributor-agreements/corporate.html"><div class="toc-3-item">Corporate CLA (echosign)</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0/license/contributor-agreements/corporate-update-schedule.html"><div class="toc-3-item">CCLA Schedule A Update (echosign)</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0/license/contributor-agreements/brooklyn-icla.txt"><div class="toc-3-item">Individual CLA (raw text)</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.6.0/license/contributor-agreements/brooklyn-ccla.txt"><div class="toc-3-item">Corporate CLA (raw text)</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/v/0.6.0/meta/versions.html"><div class="toc-1-item toc-1-header ">Meta</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0/meta/versions.html"><div class="toc-2-item">Versions</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0/meta/governance.html"><div class="toc-2-item">Governance</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0/meta/verify.html"><div class="toc-2-item">Verify</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.6.0/meta/contact.html"><div class="toc-2-item">Contact</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+ 
+</div>
+<br/>
+
+
+      </div>
+
+    </div><!--contentcontainer-->
+        
+    <div id="footer">
+        <p id="copyright">
+            <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
+            brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
+            &copy; 2013 Cloudsoft Corporation.
+        </p>
+    </div><!--footer -->
+
+</div><!--container-->
+
+</body>
+</html>
