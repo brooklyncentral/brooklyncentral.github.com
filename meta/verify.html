@@ -46,7 +46,10 @@ $(document).ready(function() {
     var target = $(this).next();
     var txt = target.text().trim();
     if (target.find('code.bash')) {
-      txt = txt.replace(/^[^%$]*[%$] /, "").replace(new RegExp('\n[^%$]*[%$] ','g'), "\n");
+      // Strip out bash prompts from the start of each line (i.e. '$' or '%' characters
+      // at the very start, or immediately following any newline). Correctly handles continuation
+      // lines, where a leading '$' or '%' is *not* a prompt character.
+      txt = txt.replace(/(^|[^\\]\n)[$%] /g, "$1");
     }
     clipboard.setText(txt);
   });
@@ -165,7 +168,7 @@ $(document).ready(function() {
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.6.0-rc.4</a></li>
+            <li><a href="/meta/versions.html">0.6.0</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -425,19 +428,19 @@ file and the <code>.asc</code> PGP signature file for the relevant artefact.</p>
 <p>Verify the signatures using one of the following commands:</p>
 
 <pre><code>pgpk -a brooklyn-gpg-public-key.asc
-pgpv brooklyn-0.6.0-rc.4-dist.tar.gz.asc
+pgpv brooklyn-0.6.0-dist.tar.gz.asc
 </code></pre>
 
 <p>or</p>
 
 <pre><code>pgp -ka brooklyn-gpg-public-key.asc
-pgp brooklyn-0.6.0-rc.4-dist.zip.asc
+pgp brooklyn-0.6.0-dist.zip.asc
 </code></pre>
 
 <p>or</p>
 
 <pre><code>gpg --import brooklyn-gpg-public-key.asc    
-gpg --verify brooklyn-0.6.0-rc.4-dist.tar.gz.asc
+gpg --verify brooklyn-0.6.0-dist.tar.gz.asc
 </code></pre>
 
 <p>You can also verify the SHA-1 checksum of the files.</p>

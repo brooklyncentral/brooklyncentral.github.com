@@ -46,7 +46,10 @@ $(document).ready(function() {
     var target = $(this).next();
     var txt = target.text().trim();
     if (target.find('code.bash')) {
-      txt = txt.replace(/^[^%$]*[%$] /, "").replace(new RegExp('\n[^%$]*[%$] ','g'), "\n");
+      // Strip out bash prompts from the start of each line (i.e. '$' or '%' characters
+      // at the very start, or immediately following any newline). Correctly handles continuation
+      // lines, where a leading '$' or '%' is *not* a prompt character.
+      txt = txt.replace(/(^|[^\\]\n)[$%] /g, "$1");
     }
     clipboard.setText(txt);
   });
@@ -165,7 +168,7 @@ $(document).ready(function() {
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.6.0-rc.4</a></li>
+            <li><a href="/meta/versions.html">0.6.0</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -436,7 +439,7 @@ download the Brooklyn quickstart archetype and setup a <code>brooklyn-sample</co
 Maven will automatically download Brooklyn and all dependencies.
 You can of course follow this walkthrough without installing it on your machine ... yet!</p>
 
-<div class="highlight"><pre><code class="bash"><span class="nv">$ </span><span class="nb">export </span><span class="nv">BROOKLYN_VERSION</span><span class="o">=</span>0.6.0-rc.4
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span><span class="nb">export </span><span class="nv">BROOKLYN_VERSION</span><span class="o">=</span>0.6.0
 <span class="nv">$ </span>mvn archetype:generate <span class="se">\</span>
     -DarchetypeGroupId<span class="o">=</span>io.brooklyn <span class="se">\</span>
     -DarchetypeArtifactId<span class="o">=</span>brooklyn-archetype-quickstart <span class="se">\</span>
@@ -479,7 +482,7 @@ file containing credentials for your preferred cloud provider.</p>
 <span class="nv">$ </span><span class="nb">cd </span>target/brooklyn-sample-0.1.0-SNAPSHOT-dist/brooklyn-sample-0.1.0-SNAPSHOT/
 
 <span class="nv">$ </span>./start.sh application <span class="se">\</span>
-    --class com.acme.sample.brooklyn.ClusterWebServerDatabaseSample <span class="se">\</span>
+    --class com.acme.sample.brooklyn.sample.app.ClusterWebServerDatabaseSample <span class="se">\</span>
     --location jclouds:aws-ec2:eu-west-1
 </code></pre></div>
 

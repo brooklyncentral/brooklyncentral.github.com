@@ -46,7 +46,10 @@ $(document).ready(function() {
     var target = $(this).next();
     var txt = target.text().trim();
     if (target.find('code.bash')) {
-      txt = txt.replace(/^[^%$]*[%$] /, "").replace(new RegExp('\n[^%$]*[%$] ','g'), "\n");
+      // Strip out bash prompts from the start of each line (i.e. '$' or '%' characters
+      // at the very start, or immediately following any newline). Correctly handles continuation
+      // lines, where a leading '$' or '%' is *not* a prompt character.
+      txt = txt.replace(/(^|[^\\]\n)[$%] /g, "$1");
     }
     clipboard.setText(txt);
   });
@@ -165,7 +168,7 @@ $(document).ready(function() {
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.6.0-rc.4</a></li>
+            <li><a href="/meta/versions.html">0.6.0</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -400,20 +403,20 @@ will need <code>curl</code>, <code>wget</code>, <code>tar</code>, <code>ssh</cod
 
 <p>Download the Brooklyn distribution. This contains Brooklyn, ready to run.</p>
 
-<p>Save the <a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.6.0-rc.4/brooklyn-dist-0.6.0-rc.4-dist.tar.gz">distro tgz file</a> to your home directory <code>~/</code>, or a
+<p>Save the <a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.6.0/brooklyn-dist-0.6.0-dist.tar.gz">distro tgz file</a> to your home directory <code>~/</code>, or a
 location of your choice. (Other <a href="/start/download.html">download options</a> are available.)</p>
 
 <p>Expand the <code>tar.gz</code> archive.</p>
 
-<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>tar -zxf brooklyn-dist-0.6.0-rc.4-dist.tar.gz
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>tar -zxf brooklyn-dist-0.6.0-dist.tar.gz
 </code></pre></div>
 
 
-<p>This will create a <code>brooklyn-0.6.0-rc.4</code> folder.</p>
+<p>This will create a <code>brooklyn-0.6.0</code> folder.</p>
 
 <p>Let's setup some paths for easy commands.</p>
 
-<div class="highlight"><pre><code class="bash"><span class="nv">$ </span><span class="nb">cd </span>brooklyn-0.6.0-rc.4
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span><span class="nb">cd </span>brooklyn-0.6.0
 <span class="nv">$ BROOKLYN_DIR</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>
 <span class="nv">$ </span><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$BROOKLYN_DIR</span>/bin/
 </code></pre></div>
@@ -447,7 +450,7 @@ and a service catalog from <code>~/.brooklyn/catalog.xml</code>.</p>
 
 
 <p><strong>Note:</strong> <code>~/.brooklyn</code> is an important directory, as this is where Brooklyn looks for configuration files and resources. It is <strong>not</strong> the
-same as the directory where Brooklyn is located (<code>$BROOKLYN_DIR</code> = <code>~/brooklyn-0.6.0-rc.4</code>, if you followed the commands above).</p>
+same as the directory where Brooklyn is located (<code>$BROOKLYN_DIR</code> = <code>~/brooklyn-0.6.0</code>, if you followed the commands above).</p>
 
 <p>Next, set up the following default/template files in that directory:</p>
 
