@@ -4,7 +4,6 @@
 
 <title>brooklyn.util.text (Brooklyn)</title>
 <META NAME="keywords" CONTENT="brooklyn.util.text package">
-<meta http-equiv="Content-Type" content="text/html; charset=MacRoman">
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 <link href="../../../groovy.ico" type="image/x-icon" rel="shortcut icon">
 <link href="../../../groovy.ico" type="image/x-icon" rel="icon">
@@ -229,7 +228,9 @@ Package brooklyn.util.text
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="WildcardGlobs.SpecialistGlobExpander.html" title="class in brooklyn/util/text">WildcardGlobs.SpecialistGlobExpander</A></B></TD>
-        <TD>expands glob, including custom syntax for numeric part</TD>
+        <TD>expands globs as per #getGlobsAfterBraceExpansion, 
+ but also handles numeric ranges, 
+ and optionally allows customized treatment of quoted regions and/or parentheses.</TD>
         </TR>
 
 </TABLE>
