@@ -97,12 +97,6 @@ Package brooklyn.enricher.basic
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="AbstractCombiningEnricher.html" title="class in brooklyn/enricher/basic">AbstractCombiningEnricher</A></B></TD>
-        <TD>Convenience base for transforming multiple sensors into a single new sensor.
- </TD>
-        </TR>
-
-        <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="AbstractEnricher.html" title="class in brooklyn/enricher/basic">AbstractEnricher</A></B></TD>
         <TD>Base Enricher implementation; all enrichers should extend this or its children</TD>
         </TR>
@@ -123,12 +117,32 @@ Package brooklyn.enricher.basic
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="Aggregator.html" title="class in brooklyn/enricher/basic">Aggregator</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="Combiner.html" title="class in brooklyn/enricher/basic">Combiner</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="Propagator.html" title="class in brooklyn/enricher/basic">Propagator</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="SensorPropagatingEnricher.html" title="class in brooklyn/enricher/basic">SensorPropagatingEnricher</A></B></TD>
         <TD>an enricher policy which just listens for the target sensor(s) on a child entity and passes it up</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="SensorTransformingEnricher.html" title="class in brooklyn/enricher/basic">SensorTransformingEnricher</A></B></TD>
+        <TD>@deprecated since 0.7.0; use Enrichers.builder()</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="Transformer.html" title="class in brooklyn/enricher/basic">Transformer</A></B></TD>
         <TD></TD>
         </TR>
 

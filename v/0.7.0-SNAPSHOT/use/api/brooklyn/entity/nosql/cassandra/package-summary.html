@@ -91,7 +91,16 @@ Package brooklyn.entity.nosql.cassandra
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="CassandraCluster.html" title="class in brooklyn/entity/nosql/cassandra">CassandraCluster</A></B></TD>
-        <TD>A cluster of CassandraNodes based on DynamicCluster which can be resized by a policy if required.</TD>
+        <TD>@deprecated since 0.7.0; use CassandraDatacenter which is equivalent -- 
+ but a less ambiguous name as "Cluster" in Cassandra corresponds to what Brooklyn terms a "Fabric".</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="CassandraDatacenter.html" title="class in brooklyn/entity/nosql/cassandra">CassandraDatacenter</A></B></TD>
+        <TD>A group of CassandraNodes -- based on Brooklyn's DynamicCluster 
+ (though it is a "Datacenter" in Cassandra terms, where Cassandra's "cluster" corresponds
+ to a Brooklyn Fabric, cf CassandraFabric). 
+ </TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -101,11 +110,16 @@ Package brooklyn.entity.nosql.cassandra
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="CassandraNode.html" title="class in brooklyn/entity/nosql/cassandra">CassandraNode</A></B></TD>
-        <TD>An <a href='../../../../brooklyn/entity/Entity.html' title='Entity'>Entity</a> that represents a Cassandra node in a CassandraCluster.</TD>
+        <TD>An <a href='../../../../brooklyn/entity/Entity.html' title='Entity'>Entity</a> that represents a Cassandra node in a CassandraDatacenter.</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="CassandraNodeDriver.html" title="class in brooklyn/entity/nosql/cassandra">CassandraNodeDriver</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="TokenGenerator.html" title="class in brooklyn/entity/nosql/cassandra">TokenGenerator</A></B></TD>
         <TD></TD>
         </TR>
 
@@ -126,17 +140,23 @@ Package brooklyn.entity.nosql.cassandra
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="CassandraClusterImpl.html" title="class in brooklyn/entity/nosql/cassandra">CassandraClusterImpl</A></B></TD>
-        <TD>Implementation of CassandraCluster.</TD>
+        <TD>@deprecated since 0.7.0; use CassandraDatacenter which is equivalent -- 
+ but a less ambiguous name as "Cluster" in Cassandra corresponds to what Brooklyn terms a "Fabric".</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="CassandraClusterImpl.SeedTracker.html" title="class in brooklyn/entity/nosql/cassandra">CassandraClusterImpl.SeedTracker</A></B></TD>
+        <TD WIDTH="15%"><B><A HREF="CassandraDatacenterImpl.html" title="class in brooklyn/entity/nosql/cassandra">CassandraDatacenterImpl</A></B></TD>
+        <TD>Implementation of CassandraDatacenter.</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="CassandraDatacenterImpl.SeedTracker.html" title="class in brooklyn/entity/nosql/cassandra">CassandraDatacenterImpl.SeedTracker</A></B></TD>
         <TD>For tracking our seeds. </TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="CassandraFabricImpl.html" title="class in brooklyn/entity/nosql/cassandra">CassandraFabricImpl</A></B></TD>
-        <TD>Implementation of CassandraCluster.</TD>
+        <TD>Implementation of CassandraDatacenter.</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -147,6 +167,26 @@ Package brooklyn.entity.nosql.cassandra
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="CassandraNodeSshDriver.html" title="class in brooklyn/entity/nosql/cassandra">CassandraNodeSshDriver</A></B></TD>
         <TD>Start a CassandraNode in a Location accessible over ssh.</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="TokenGenerators.html" title="class in brooklyn/entity/nosql/cassandra">TokenGenerators</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="TokenGenerators.AbstractTokenGenerator.html" title="class in brooklyn/entity/nosql/cassandra">TokenGenerators.AbstractTokenGenerator</A></B></TD>
+        <TD>Sub-classes are recommended to call <a href='#checkRangeValid()'>checkRangeValid()</a> at construction time.</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="TokenGenerators.NonNeg127TokenGenerator.html" title="class in brooklyn/entity/nosql/cassandra">TokenGenerators.NonNeg127TokenGenerator</A></B></TD>
+        <TD>token generator used by cassandra pre v1.2</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="TokenGenerators.PosNeg63TokenGenerator.html" title="class in brooklyn/entity/nosql/cassandra">TokenGenerators.PosNeg63TokenGenerator</A></B></TD>
+        <TD></TD>
         </TR>
 
 </TABLE>

@@ -92,12 +92,19 @@ Package brooklyn.cli
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="Main.html" title="class in brooklyn/cli">Main</A></B></TD>
-        <TD></TD>
+        <TD>This class is the primary CLI for brooklyn.
+ </TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="Main.BrooklynCommand.html" title="class in brooklyn/cli">Main.BrooklynCommand</A></B></TD>
-        <TD></TD>
+        <TD>abstract superclass for commands defining global options, but not arguments,
+ as that prevents Help from being injectable in the HelpCommand subclass</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="Main.BrooklynCommandCollectingArgs.html" title="class in brooklyn/cli">Main.BrooklynCommandCollectingArgs</A></B></TD>
+        <TD>common superclass for commands, defining global options (in our super) and extracting the arguments</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">

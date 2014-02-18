@@ -21,7 +21,7 @@
 	
 	
 <!-- Clipboard support -->
-<script src="/v/0.7.0-SNAPSHOT/style/js/zeroclipboard/ZeroClipboard.js"></script>
+<script src="/v/0.7.0-SNAPSHOT/style/js/zeroclipboard/ZeroClipboard.min.js"></script>
 <style type="text/css">
 .clipboard_container { float: right; padding: 8px; }
 .clipboard_button {
@@ -29,11 +29,11 @@
     background-size: 18px 21px;
     width: 18px; height: 21px;
 }
-.clipboard_button.hover  { background-image: url("/v/0.7.0-SNAPSHOT/style/icons/clipboard-green-hover.png"); }
-.clipboard_button.active  { background-image: url("/v/0.7.0-SNAPSHOT/style/icons/clipboard-green-click.png"); }'
+.clipboard_button:hover, .clipboard_button.zeroclipboard-is-hover { background-image: url("/v/0.7.0-SNAPSHOT/style/icons/clipboard-green-hover.png"); }
+.clipboard_button:active, .clipboard_button.zeroclipboard-is-active { background-image: url("/v/0.7.0-SNAPSHOT/style/icons/clipboard-green-click.png"); }'
 </style>
 <script type="text/javascript"> <!-- clipboard -->
-ZeroClipboard.setMoviePath( '/v/0.7.0-SNAPSHOT/style/js/zeroclipboard/ZeroClipboard.swf' );
+  ZeroClipboard.config({ moviePath: '/v/0.7.0-SNAPSHOT/style/js/zeroclipboard/ZeroClipboard.swf' });
 </script>
 <script type="text/javascript"> <!-- clipboard positioning -->
 $(document).ready(function() {
@@ -41,8 +41,8 @@ $(document).ready(function() {
     '<div class="clipboard_button"/>'+
   '</div>').insertBefore($('div.highlight'))
   $('div.clipboard_container').each(function(index) {
-    var clipboard = new ZeroClipboard.Client();
-    clipboard.glue( $(this).find(":first")[0], $(this)[0] );
+    var clipboard = new ZeroClipboard();
+    clipboard.clip( $(this).find(":first")[0], $(this)[0] );
     var target = $(this).next();
     var txt = target.text().trim();
     if (target.find('code.bash')) {
@@ -51,7 +51,10 @@ $(document).ready(function() {
       // lines, where a leading '$' or '%' is *not* a prompt character.
       txt = txt.replace(/(^|[^\\]\n)[$%] /g, "$1");
     }
-    clipboard.setText(txt);
+console.log("setting text to "+txt);
+    clipboard.on( 'dataRequested', function (client, args) {
+      client.setText( txt );
+    });
   });
 });
 </script>
@@ -699,7 +702,6 @@ along with an example global-web-fabric app.</p>
 <span class="kn">import</span> <span class="nn">brooklyn.entity.group.DynamicFabric</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">brooklyn.entity.proxy.AbstractController</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">brooklyn.entity.proxying.EntitySpec</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">brooklyn.entity.proxying.EntitySpecs</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">brooklyn.entity.webapp.ElasticJavaWebAppService</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">brooklyn.location.basic.PortRanges</span><span class="o">;</span>
 </code></pre>
@@ -749,7 +751,7 @@ for this example <code>localhost</code> will frequently not work unless Geoscali
         <span class="n">String</span> <span class="n">locations</span> <span class="o">=</span> <span class="n">CommandLineUtil</span><span class="o">.</span><span class="na">getCommandLineOption</span><span class="o">(</span><span class="n">args</span><span class="o">,</span> <span class="s">&quot;--locations&quot;</span><span class="o">,</span> <span class="n">Joiner</span><span class="o">.</span><span class="na">on</span><span class="o">(</span><span class="s">&quot;,&quot;</span><span class="o">).</span><span class="na">join</span><span class="o">(</span><span class="n">DEFAULT_LOCATIONS</span><span class="o">));</span>
 
         <span class="n">BrooklynLauncher</span> <span class="n">launcher</span> <span class="o">=</span> <span class="n">BrooklynLauncher</span><span class="o">.</span><span class="na">newInstance</span><span class="o">()</span>
-                <span class="o">.</span><span class="na">application</span><span class="o">(</span><span class="n">EntitySpecs</span><span class="o">.</span><span class="na">appSpec</span><span class="o">(</span><span class="n">GlobalWebFabricExample</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">displayName</span><span class="o">(</span><span class="s">&quot;Brooklyn Global Web Fabric Example&quot;</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">application</span><span class="o">(</span><span class="n">EntitySpec</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">StartableApplication</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">GlobalWebFabricExample</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">displayName</span><span class="o">(</span><span class="s">&quot;Brooklyn Global Web Fabric Example&quot;</span><span class="o">))</span>
                 <span class="o">.</span><span class="na">webconsolePort</span><span class="o">(</span><span class="n">port</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">locations</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">locations</span><span class="o">))</span>
                 <span class="o">.</span><span class="na">start</span><span class="o">();</span>

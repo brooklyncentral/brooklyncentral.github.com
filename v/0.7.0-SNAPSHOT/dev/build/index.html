@@ -21,7 +21,7 @@
 	
 	
 <!-- Clipboard support -->
-<script src="/v/0.7.0-SNAPSHOT/style/js/zeroclipboard/ZeroClipboard.js"></script>
+<script src="/v/0.7.0-SNAPSHOT/style/js/zeroclipboard/ZeroClipboard.min.js"></script>
 <style type="text/css">
 .clipboard_container { float: right; padding: 8px; }
 .clipboard_button {
@@ -29,11 +29,11 @@
     background-size: 18px 21px;
     width: 18px; height: 21px;
 }
-.clipboard_button.hover  { background-image: url("/v/0.7.0-SNAPSHOT/style/icons/clipboard-green-hover.png"); }
-.clipboard_button.active  { background-image: url("/v/0.7.0-SNAPSHOT/style/icons/clipboard-green-click.png"); }'
+.clipboard_button:hover, .clipboard_button.zeroclipboard-is-hover { background-image: url("/v/0.7.0-SNAPSHOT/style/icons/clipboard-green-hover.png"); }
+.clipboard_button:active, .clipboard_button.zeroclipboard-is-active { background-image: url("/v/0.7.0-SNAPSHOT/style/icons/clipboard-green-click.png"); }'
 </style>
 <script type="text/javascript"> <!-- clipboard -->
-ZeroClipboard.setMoviePath( '/v/0.7.0-SNAPSHOT/style/js/zeroclipboard/ZeroClipboard.swf' );
+  ZeroClipboard.config({ moviePath: '/v/0.7.0-SNAPSHOT/style/js/zeroclipboard/ZeroClipboard.swf' });
 </script>
 <script type="text/javascript"> <!-- clipboard positioning -->
 $(document).ready(function() {
@@ -41,8 +41,8 @@ $(document).ready(function() {
     '<div class="clipboard_button"/>'+
   '</div>').insertBefore($('div.highlight'))
   $('div.clipboard_container').each(function(index) {
-    var clipboard = new ZeroClipboard.Client();
-    clipboard.glue( $(this).find(":first")[0], $(this)[0] );
+    var clipboard = new ZeroClipboard();
+    clipboard.clip( $(this).find(":first")[0], $(this)[0] );
     var target = $(this).next();
     var txt = target.text().trim();
     if (target.find('code.bash')) {
@@ -51,7 +51,10 @@ $(document).ready(function() {
       // lines, where a leading '$' or '%' is *not* a prompt character.
       txt = txt.replace(/(^|[^\\]\n)[$%] /g, "$1");
     }
-    clipboard.setText(txt);
+console.log("setting text to "+txt);
+    clipboard.on( 'dataRequested', function (client, args) {
+      client.setText( txt );
+    });
   });
 });
 </script>
@@ -507,7 +510,6 @@ manifest and in the META-INF/MANIFEST.MF entry in the jar file.
 <span class="o">[</span>INFO<span class="o">]</span> Brooklyn Database Software Entities ............... SUCCESS <span class="o">[</span>7.815s<span class="o">]</span>
 <span class="o">[</span>INFO<span class="o">]</span> Brooklyn Whirr Base Entities ...................... SUCCESS <span class="o">[</span>21.292s<span class="o">]</span>
 <span class="o">[</span>INFO<span class="o">]</span> Brooklyn Hadoop System Entities ................... SUCCESS <span class="o">[</span>9.972s<span class="o">]</span>
-<span class="o">[</span>INFO<span class="o">]</span> Brooklyn OpenShift PaaS System Entities ........... SUCCESS <span class="o">[</span>11.857s<span class="o">]</span>
 <span class="o">[</span>INFO<span class="o">]</span> Brooklyn Web Console .............................. SUCCESS <span class="o">[</span>1:00.814s<span class="o">]</span>
 <span class="o">[</span>INFO<span class="o">]</span> Brooklyn Launcher ................................. SUCCESS <span class="o">[</span>1:00.603s<span class="o">]</span>
 <span class="o">[</span>INFO<span class="o">]</span> Brooklyn All Things ............................... SUCCESS <span class="o">[</span>23.358s<span class="o">]</span>

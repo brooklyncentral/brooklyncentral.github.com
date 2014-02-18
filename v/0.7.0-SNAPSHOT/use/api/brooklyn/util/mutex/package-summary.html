@@ -116,9 +116,16 @@ Package brooklyn.util.mutex
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="SemaphoreForTasks.html" title="class in brooklyn/util/mutex">SemaphoreForTasks</A></B></TD>
+        <TD>A subclass of SemaphoreWithOwners 
+ which additionally sets Task blocking information.</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="SemaphoreWithOwners.html" title="class in brooklyn/util/mutex">SemaphoreWithOwners</A></B></TD>
-        <TD>a subclass of Semaphore which requires the same thread to release as created it,
- and which tracks who created and released the semaphores</TD>
+        <TD>a subclass of java.util.concurrent.Semaphore 
+ which tracks who created and released the semaphores,
+ and which requires the same thread to release as created it.</TD>
         </TR>
 
 </TABLE>
