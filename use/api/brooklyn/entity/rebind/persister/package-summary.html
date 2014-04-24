@@ -4,6 +4,7 @@
 
 <title>brooklyn.entity.rebind.persister (Brooklyn)</title>
 <META NAME="keywords" CONTENT="brooklyn.entity.rebind.persister package">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 <link href="../../../../groovy.ico" type="image/x-icon" rel="shortcut icon">
 <link href="../../../../groovy.ico" type="image/x-icon" rel="icon">
@@ -121,7 +122,8 @@ Package brooklyn.entity.rebind.persister
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="BrooklynMementoPersisterToFile.html" title="class in brooklyn/entity/rebind/persister">BrooklynMementoPersisterToFile</A></B></TD>
-        <TD></TD>
+        <TD>@deprecated since 0.7.0 use BrooklynMementoPersisterToMultiFile instead; the single-file version
+             has not been tested recently or kept up-to-date.</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -145,7 +147,28 @@ Package brooklyn.entity.rebind.persister
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="XmlMementoSerializer.ConverterImpl.html" title="class in brooklyn/entity/rebind/persister">XmlMementoSerializer.ConverterImpl</A></B></TD>
+        <TD WIDTH="15%"><B><A HREF="XmlMementoSerializer.CustomMapper.html" title="class in brooklyn/entity/rebind/persister">XmlMementoSerializer.CustomMapper</A></B></TD>
+        <TD>For changing the tag used for anything that implements/extends the given type.
+ </TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="XmlMementoSerializer.EntityConverter.html" title="class in brooklyn/entity/rebind/persister">XmlMementoSerializer.EntityConverter</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="XmlMementoSerializer.IdentifiableConverter.html" title="class in brooklyn/entity/rebind/persister">XmlMementoSerializer.IdentifiableConverter</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="XmlMementoSerializer.LocationConverter.html" title="class in brooklyn/entity/rebind/persister">XmlMementoSerializer.LocationConverter</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="XmlMementoSerializer.TaskConverter.html" title="class in brooklyn/entity/rebind/persister">XmlMementoSerializer.TaskConverter</A></B></TD>
         <TD></TD>
         </TR>
 

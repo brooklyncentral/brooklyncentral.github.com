@@ -1,0 +1,874 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+  <title>Locations</title>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+
+  <link rel="stylesheet" href="/style/style.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/style/toc.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/style/docs/code.css" type="text/css" media="screen" />
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  
+	<!-- Sidebar/ToC Scripts and CSS -->
+	<script src="/style/js/jquery/jquery-1.7.1.min.js"></script>
+	<script src="/style/js/jquery/jquery-ui-1.8.18.custom.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/style/js/jquery/smoothness/jquery-ui-1.8.18.custom.css" />
+	
+	<script type="text/javascript" src="/style/js/superfish.js"></script>
+	<script type="text/javascript" src="/style/js/jquery.cookie.js"></script>
+	
+	
+<!-- Clipboard support -->
+<script src="/style/js/zeroclipboard/ZeroClipboard.min.js"></script>
+<style type="text/css">
+.clipboard_container { float: right; padding: 8px; }
+.clipboard_button {
+    background-image: url("/style/icons/clipboard-green-normal.png");
+    background-size: 18px 21px;
+    width: 18px; height: 21px;
+}
+.clipboard_button:hover, .clipboard_button.zeroclipboard-is-hover { background-image: url("/style/icons/clipboard-green-hover.png"); }
+.clipboard_button:active, .clipboard_button.zeroclipboard-is-active { background-image: url("/style/icons/clipboard-green-click.png"); }'
+</style>
+<script type="text/javascript"> <!-- clipboard -->
+  ZeroClipboard.config({ moviePath: '/style/js/zeroclipboard/ZeroClipboard.swf' });
+</script>
+<script type="text/javascript"> <!-- clipboard positioning -->
+$(document).ready(function() {
+  $('<div class="clipboard_container" title="Copy to Clipboard">'+
+    '<div class="clipboard_button"/>'+
+  '</div>').insertBefore($('div.highlight'))
+  $('div.clipboard_container').each(function(index) {
+    var clipboard = new ZeroClipboard();
+    clipboard.clip( $(this).find(":first")[0], $(this)[0] );
+    var target = $(this).next();
+    var txt = target.text().trim();
+    if (target.find('code.bash')) {
+      // Strip out bash prompts from the start of each line (i.e. '$' or '%' characters
+      // at the very start, or immediately following any newline). Correctly handles continuation
+      // lines, where a leading '$' or '%' is *not* a prompt character.
+      txt = txt.replace(/(^|[^\\]\n)[$%] /g, "$1");
+    }
+console.log("setting text to "+txt);
+    clipboard.on( 'dataRequested', function (client, args) {
+      client.setText( txt );
+    });
+  });
+});
+</script>
+
+    <script type="text/javascript">
+        // initialise menu delay
+        jQuery(function(){
+            jQuery('ul#mainmenu').superfish({ 
+                autoArrows:  false,  // disable generation of arrow mark-up 
+                dropShadows: false,  // disable drop shadows 
+                disableHI:   true,   // set to true to disable hoverIntent detection 
+                delay:       500,    // the delay in milliseconds that the mouse can remain outside a submenu without it closing 
+                speed:       'fast', 
+            });
+        });
+    </script>
+
+<script type="text/javascript">
+
+<!-- search -->
+	$(function() {
+		$('#simple_google')
+			.submit(function() {
+				$('input[name="q"]').val("site:" + document.location.hostname + " " + $('input[name="brooklyn-search"]').val());
+			return true;
+			});
+		$('input[name="brooklyn-search"]').focus(function() {
+				if ($(this).val() === $(this).attr('placeholder')) {
+					$(this).val('');
+				}
+			})
+			.blur(function() {
+				if ($(this).val() === '') {
+					$(this).val($(this).attr('placeholder'));
+				}
+			})
+			.blur();
+    });
+    
+<!-- page notes -->
+   	$(function() {
+		if (document.location.pathname.replace(/^\/([^\/]*).*$/, '$1') === "v"){
+			var thisversion = document.location.pathname.split("/")[2],
+				msg = "";
+			
+			if (!$.cookie('brooklyn_versions') || 
+			        (($.inArray('ALL', $.cookie('brooklyn_versions').split(",")) === -1) &&
+			        ($.inArray(thisversion, $.cookie('brooklyn_versions').split(",")) === -1)) ){
+			    msg += "<div class='warning_banner_image'><img src='/style/icons/warning.png'/></div>";
+				msg += "<p>This content is for <strong>Brooklyn "+thisversion+"</strong>, and may differ across versions.</p>";
+			    msg += "<p>Are you using version "+thisversion+"?</p>";
+				msg += "<p class='warning_banner_buttons'>";
+				msg += "<a href = '#' onclick=\"set_user_version('"+thisversion+"');\">Yes, hide this warning</a>";
+			    msg += "<a href = '/'>No, show me the latest version</a>";
+				msg += "<a href = '/meta/versions.html'>Show all versions</a>";
+				msg += "</p>"
+							
+				$('#page_notes').html(msg);
+				$('#page_notes').fadeIn('slow');
+			}
+		}
+	});
+   	function get_user_versions() {
+   	    return $.cookie("brooklyn_versions") ? $.cookie("brooklyn_versions").split(",") : [];
+   	};
+	function set_user_version(version) {
+		var version_cookie = get_user_versions();
+		version_cookie.push(version);
+		$.cookie('brooklyn_versions', version_cookie, { expires: 365, path: '/' });
+		$('#page_notes').fadeOut();
+		event.preventDefault ? event.preventDefault() : event.returnValue = false;
+	};
+    function set_user_versions_all() {
+        var version_cookie = get_user_versions();
+        version_cookie.push("ALL");
+        $.cookie('brooklyn_versions', version_cookie, { expires: 365, path: '/' });
+        $('#page_notes').fadeOut();
+        event.preventDefault ? event.preventDefault() : event.returnValue = false;
+    };
+    function clear_user_versions() {
+        $.removeCookie('brooklyn_versions', { path: '/' });
+        $('#page_notes').fadeIn('slow');
+        event.preventDefault ? event.preventDefault() : event.returnValue = false;
+    };
+	
+   
+ <!-- analytics -->
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-30530918-1']);
+	_gaq.push(['_trackPageview']);
+	
+	(function() {
+	  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+
+</head>
+
+<body>
+
+    <ul id="shortcuts" title="Accessibility shortcuts menu">
+        <li><a href="#maincontent">Skip to main content</a></li>
+    </ul>
+   
+
+<div id="container">
+
+    <div id="header">
+    
+        <div id="identity">
+            <a href="http://brooklyncentral.github.com/" rel="home">Brooklyn</a>
+        </div>
+        
+        <ul id="quicklinks">
+            <li><a href="/meta/versions.html">0.7.0-M1</a></li>
+            <li><a href="/start/download.html">Download</a></li>
+            <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
+            <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
+            <li><a href="/meta/contact.html">Contact</a></li>
+        </ul>
+
+        <div id="menubar">  
+
+
+
+
+
+
+
+<ul id="mainmenu"><!-- INSERT LINKS -->
+            
+
+  
+  
+  <li class=""><a href="/index.html">Overview</a></li>
+
+  
+  
+  <li class=""><a href="/start/download.html">Download</a></li>
+
+  
+  
+  <li class=""><a href="/use/guide/quickstart/index.html">Getting Started</a></li>
+
+  
+  
+  <li class=""><a href="/start/walkthrough/index.html">Walkthrough</a></li>
+
+  
+  
+  <li class="toc-active"><a href="/use/guide/index.html">User Guide</a></li>
+
+  
+  
+  <li class=""><a href="/use/examples/index.html">Examples</a></li>
+
+  
+  
+  <li class=""><a href="/dev/code/index.html">Contributing</a></li>
+
+
+</ul>                    
+
+            <form method="get" id="simple_google" class="searchform" action="http://www.google.com/search" method="get">
+                <input type="text" class="searchinput" name="brooklyn-search" placeholder="Search: type &amp; hit enter" />
+                <input type="hidden" name="q" value="" />
+            </form>
+            
+        </div>
+                
+    </div><!--header-->
+    
+    <div id="contentcontainer">
+    
+        <div id="maincontent">
+
+
+  
+
+
+
+
+
+
+
+    
+    
+
+    
+    
+        
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+            
+            
+            
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+
+
+
+            
+<p id="breadcrumb">
+    <a href="/use/guide/index.html">User Guide</a>
+    
+        &raquo; <a href="/use/guide/locations/index.html">Locations</a>
+        
+    
+</p>
+
+
+<div id="page_notes"></div>
+
+<h1 id="header_title">Locations</h1>
+    
+<p>Locations are the environments to which Brooklyn deploys applications.
+These can be clouds (public or private), fixed infrastructure environments, or your laptop.</p>
+
+<p>Brooklyn looks for Location configuration in <code>~/.brooklyn/brooklyn.properties</code>.</p>
+
+<h2>Setting up an SSH key</h2>
+
+<p>While some locations can be accessed using <em>user:password</em> credentials it is more common to use authentication keys.</p>
+
+<p>To use keyfile based authentication, Brooklyn requires that the management machine has an SSH key. By default Brooklyn looks for a key at <code>~/.ssh/id_rsa</code> and <code>~/.ssh/id_dsa</code>.</p>
+
+<p>If you do not already have an SSH key installed, create a new id_rsa key:</p>
+
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>ssh-keygen -t rsa -N <span class="s2">&quot;&quot;</span> -f ~/.ssh/id_rsa
+</code></pre>
+</div>
+
+
+<p>If you wish to use an existing key SSH, or an SSH key
+that has a passphrase, or a location other than <code>~/.ssh</code>, you can specify this in
+<code>brooklyn.properties</code> using <code>brooklyn.location.localhost.privateKeyFile</code> and
+<code>brooklyn.location.localhost.privateKeyPassphrase</code>.</p>
+
+<h2>Localhost</h2>
+
+<p>Brooklyn can access localhost if there is an SSH key on the machine and if the SSH key has been added to the list of  <code>authorized_keys</code> on that machine.</p>
+
+<div class="highlight"><pre><code class="bash"><span class="c"># _Appends_ id_rsa.pub to authorized_keys. Other keys are unaffected.</span>
+<span class="nv">$ </span>cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys
+</code></pre>
+</div>
+
+
+<p>MacOS user? In addition to the above, enable 'Remote Login' in System Preferences >
+ Sharing.</p>
+
+<h2>Cloud Endpoints (via jclouds)</h2>
+
+<p><a href="http://www.jclouds.org">Apache jclouds</a> is a multi-cloud library that Brooklyn uses to access many clouds. The <a href="http://jclouds.apache.org/reference/providers/">full list of supported providers</a> is available on jclouds.apache.org.</p>
+
+<p>Add your cloud provider's (API) credentials to <code>brooklyn.properties</code> and create an SSH key on the management machine.</p>
+
+<p>Some clouds provide both API keys and SSH keys. In this case add only the API credentials to <code>brooklyn.properties</code>. (jclouds will transparently use the API credentials to setup access using the management machine's SSH key.)</p>
+
+<h3>Example: AWS Virginia Large Centos</h3>
+
+<div class="highlight"><pre><code class="bash"><span class="c">## Snippet from ~/.brooklyn/brooklyn.properties.</span>
+
+<span class="c"># Provide jclouds with AWS API credentials.</span>
+brooklyn.location.jclouds.aws-ec2.identity <span class="o">=</span> AKA_YOUR_ACCESS_KEY_ID
+brooklyn.location.jclouds.aws-ec2.credential <span class="o">=</span> YourSecretKeyWhichIsABase64EncodedString
+
+<span class="c"># Name this location &#39;AWS Virginia Large Centos&#39; and wire to AWS US-East-1</span>
+brooklyn.location.named.AWS<span class="se">\ </span>Virginia<span class="se">\ </span>Large<span class="se">\ </span><span class="nv">Centos</span> <span class="o">=</span> jclouds:aws-ec2:us-east-1
+
+<span class="c"># (Using the same name) specify image, user and minimum ram size (ie instance size)</span>
+brooklyn.location.named.AWS<span class="se">\ </span>Virginia<span class="se">\ </span>Large<span class="se">\ </span>Centos.imageId<span class="o">=</span>us-east-1/ami-7d7bfc14
+brooklyn.location.named.AWS<span class="se">\ </span>Virginia<span class="se">\ </span>Large<span class="se">\ </span>Centos.user<span class="o">=</span>root
+brooklyn.location.named.AWS<span class="se">\ </span>Virginia<span class="se">\ </span>Large<span class="se">\ </span>Centos.minRam<span class="o">=</span>4096
+</code></pre>
+</div>
+
+
+<p>This will  appear as 'AWS Virginia Large Centos' in the web console, but will need to be escaped on the command line as:  <code>AWS\ Virginia\ Large\ Centos</code>.</p>
+
+<p>See the Getting Started <a href="/use/guide/quickstart/brooklyn.properties">template brooklyn.properties</a> for more examples of using cloud endpoints.</p>
+
+<h2>Fixed Infrastructure</h2>
+
+<p>Bringing your own nodes (BYON) to Brooklyn is straightforward.</p>
+
+<p>You will need the IP addresses of the nodes and the access credentials. Both SSH and password based login are supported.</p>
+
+<h3>Example: On-Prem Iron</h3>
+
+<div class="highlight"><pre><code class="bash"><span class="c">## Snippet from ~/.brooklyn/brooklyn.properties.</span>
+
+<span class="c"># Use the byon prefix, and provide the IP addresss (or IP ranges)</span>
+brooklyn.location.named.On-Prem<span class="se">\ </span>Iron<span class="se">\ </span><span class="nv">Example</span><span class="o">=</span>byon:<span class="o">(</span><span class="nv">hosts</span><span class="o">=</span><span class="s2">&quot;10.9.1.1,10.9.1.2,produser2@10.9.2.{10,11,20-29}&quot;</span><span class="o">)</span>
+brooklyn.location.named.On-Prem<span class="se">\ </span>Iron<span class="se">\ </span>Example.user<span class="o">=</span>produser1
+brooklyn.location.named.On-Prem<span class="se">\ </span>Iron<span class="se">\ </span>Example.privateKeyFile<span class="o">=</span>~/.ssh/produser_id_rsa
+brooklyn.location.named.On-Prem<span class="se">\ </span>Iron<span class="se">\ </span>Example.privateKeyPassphrase<span class="o">=</span>s3cr3tpassphrase
+</code></pre>
+</div>
+
+
+<h2>Advanced Options</h2>
+
+<p>Unusual provider? 'Featureful' API? Brooklyn can cope.</p>
+
+<p><a href="https://docs.google.com/a/cloudsoftcorp.com/spreadsheet/ccc?key=0Avy7Tdf2EOIqdGQzSlNiT2M0V19SejBScDhSdzMtT2c">This spreadsheet</a> provides explanation, guidance, and examples for the majority of location options.</p>
+
+
+        </div><!--maincontent-->
+        
+      <div id="sidebar">
+      
+
+
+  
+
+
+
+
+
+
+<div id="sidebar_toc">
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/start/index.html"><div class="toc-1-item">Start</div></a>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 toc-active">
+  
+	    <a href="/use/guide/index.html"><div class="toc-1-item toc-1-header ">User Guide</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/guide/quickstart/index.html"><div class="toc-2-item toc-2-header">Quick Start</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/quickstart/index.html"><div class="toc-3-item">Download & Deploy</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/quickstart/policies-and-catalogs.html"><div class="toc-3-item">Policies & Catalogs</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/guide/defining-applications/basic-concepts.html"><div class="toc-2-item toc-2-header">Defining Applications</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/defining-applications/basic-concepts.html"><div class="toc-3-item">Basic Concepts</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/defining-applications/advanced-concepts.html"><div class="toc-3-item">Advanced Concepts</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/defining-applications/common-usage.html"><div class="toc-3-item">Common Usage</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/defining-applications/yaml.html"><div class="toc-3-item">YAML Blueprints</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/defining-applications/archetype.html"><div class="toc-3-item">Maven Archetype</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/guide/management/index.html"><div class="toc-2-item toc-2-header">Management</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#introduction"><div class="toc-3-item">Introduction</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#startup-config"><div class="toc-3-item">Startup Configuration</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#cli"><div class="toc-3-item">Command Line Interface</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#console"><div class="toc-3-item">Management Web Console</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#observation-other"><div class="toc-3-item">Observation APIs</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#distributed-management"><div class="toc-3-item">Distributed Management</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#resilience"><div class="toc-3-item">Resilience</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#key-apis"><div class="toc-3-item">Key APIs</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#sensors-and-effectors"><div class="toc-3-item">Sensors and Effectors</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 toc-active">
+      
+	        <a href="/use/guide/locations/index.html"><div class="toc-2-item toc-active">Locations</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/guide/policies/index.html"><div class="toc-2-item toc-2-header">Policies</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/policies/index.html#introduction"><div class="toc-3-item">Introduction</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/policies/index.html#writing-policies"><div class="toc-3-item">Writing Policies</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/policies/index.html#off-the-shelf-policies"><div class="toc-3-item">Off-the-Shelf Policies</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/policies/index.html#implementing-policies"><div class="toc-3-item">Implementing Policies</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/guide/entities/index.html"><div class="toc-2-item toc-2-header">Custom Entities</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/entities/index.html#entity-lifestyle"><div class="toc-3-item">Entity Lifecycle</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/entities/index.html#implementation-classes"><div class="toc-3-item">What to Extend</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/entities/index.html#configuration"><div class="toc-3-item">Configuration</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/entities/index.html#implementing-sensors"><div class="toc-3-item">Implementing Sensors</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/entities/index.html#implementing-effectors"><div class="toc-3-item">Implementing Effectors</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/entities/index.html#testing"><div class="toc-3-item">Testing</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/guide/extras/index.html"><div class="toc-2-item toc-2-header">Extras</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/extras/index.html#web"><div class="toc-3-item">Web</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/extras/index.html#database"><div class="toc-3-item">Database</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/extras/index.html#nosql"><div class="toc-3-item">NoSQL</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/extras/index.html#messaging"><div class="toc-3-item">Messaging</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/extras/index.html#provisioning"><div class="toc-3-item">Provisioning</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+
+    
+    
+    
+	  <div class="toc-1 ">
+  
+	    <a href="/start/index.html"><div class="toc-1-item toc-1-header ">Elsewhere</div></a>
+        <div class="toc-1-children">
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/examples/index.html"><div class="toc-2-item toc-2-header">Examples</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/webcluster/index.html"><div class="toc-3-item">Elastic Web Cluster</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/global-web-fabric/index.html"><div class="toc-3-item">Global Web Fabric</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/whirrhadoop/index.html"><div class="toc-3-item">Whirr Hadoop Cluster</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/messaging/index.html"><div class="toc-3-item">Publish-Subscribe Messaging</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/examples/nosql-cassandra/index.html"><div class="toc-3-item">Cassandra Cluster</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/api/index.html"><div class="toc-2-item">API Reference</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/dev/code/index.html"><div class="toc-2-item toc-2-header">Contributing</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/code/index.html"><div class="toc-3-item">The Code</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/build/index.html"><div class="toc-3-item">Build and Test</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/tips/index.html"><div class="toc-3-item">Tips and Tricks</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/wishlist.html"><div class="toc-3-item">Wishlist</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/links.html"><div class="toc-3-item">Links</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/dev/how-to-contrib.html"><div class="toc-3-item">How to Contribute</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/license/index.html"><div class="toc-2-item">License</div></a>
+      
+          </div>
+    
+        </div>
+  
+      </div>
+ 
+</div>
+<br/>
+
+
+      </div>
+
+    </div><!--contentcontainer-->
+        
+    <div id="footer">
+        <p id="copyright">
+            <b>brooklyn is distributed under the Apache License v2.0.</b><br/>
+            brooklyn is a registered trademark of Cloudsoft Corporation.<br/>
+            &copy; 2013 Cloudsoft Corporation.
+        </p>
+    </div><!--footer -->
+
+</div><!--container-->
+
+</body>
+</html>

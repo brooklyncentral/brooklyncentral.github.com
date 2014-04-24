@@ -21,7 +21,7 @@
 	
 	
 <!-- Clipboard support -->
-<script src="/style/js/zeroclipboard/ZeroClipboard.js"></script>
+<script src="/style/js/zeroclipboard/ZeroClipboard.min.js"></script>
 <style type="text/css">
 .clipboard_container { float: right; padding: 8px; }
 .clipboard_button {
@@ -29,11 +29,11 @@
     background-size: 18px 21px;
     width: 18px; height: 21px;
 }
-.clipboard_button.hover  { background-image: url("/style/icons/clipboard-green-hover.png"); }
-.clipboard_button.active  { background-image: url("/style/icons/clipboard-green-click.png"); }'
+.clipboard_button:hover, .clipboard_button.zeroclipboard-is-hover { background-image: url("/style/icons/clipboard-green-hover.png"); }
+.clipboard_button:active, .clipboard_button.zeroclipboard-is-active { background-image: url("/style/icons/clipboard-green-click.png"); }'
 </style>
 <script type="text/javascript"> <!-- clipboard -->
-ZeroClipboard.setMoviePath( '/style/js/zeroclipboard/ZeroClipboard.swf' );
+  ZeroClipboard.config({ moviePath: '/style/js/zeroclipboard/ZeroClipboard.swf' });
 </script>
 <script type="text/javascript"> <!-- clipboard positioning -->
 $(document).ready(function() {
@@ -41,8 +41,8 @@ $(document).ready(function() {
     '<div class="clipboard_button"/>'+
   '</div>').insertBefore($('div.highlight'))
   $('div.clipboard_container').each(function(index) {
-    var clipboard = new ZeroClipboard.Client();
-    clipboard.glue( $(this).find(":first")[0], $(this)[0] );
+    var clipboard = new ZeroClipboard();
+    clipboard.clip( $(this).find(":first")[0], $(this)[0] );
     var target = $(this).next();
     var txt = target.text().trim();
     if (target.find('code.bash')) {
@@ -51,7 +51,10 @@ $(document).ready(function() {
       // lines, where a leading '$' or '%' is *not* a prompt character.
       txt = txt.replace(/(^|[^\\]\n)[$%] /g, "$1");
     }
-    clipboard.setText(txt);
+console.log("setting text to "+txt);
+    clipboard.on( 'dataRequested', function (client, args) {
+      client.setText( txt );
+    });
   });
 });
 </script>
@@ -164,11 +167,11 @@ $(document).ready(function() {
     <div id="header">
     
         <div id="identity">
-            <a href="http://brooklyncentral.github.io/" rel="home">Brooklyn</a>
+            <a href="http://brooklyncentral.github.com/" rel="home">Brooklyn</a>
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.6.0</a></li>
+            <li><a href="/meta/versions.html">0.7.0-M1</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -257,6 +260,8 @@ $(document).ready(function() {
     
     
         
+        
+            
         
             
         
@@ -426,7 +431,7 @@ You may also want Git and TestNG plugins.
 You can install these using Help -> Install New Software, or from the Eclipse Marketplace:</p>
 
 <ul>
-<li><p>Maven Plugin: m2e from <a href="http://download.eclipse.org/technology/m2e/releases">download.eclipse.org/technology/m2e/releases</a>
+<li><p>Maven Plugin: m2e from <a href="http://download.eclipse.org/technology/m2e/releases">download.eclipse.org/technology/m2e/releases</a>, or for kepler <a href="http://download.eclipse.org/releases/kepler">http://download.eclipse.org/releases/kepler</a>
 (typically bundled with Eclipse or available in the default update site set)</p></li>
 <li><p>Git Plugin: egit from <a href="http://download.eclipse.org/egit/updates">download.eclipse.org/egit/updates</a>
 (typically bundled with Eclipse or available in the default update site set)</p></li>
@@ -443,11 +448,17 @@ More details are at the <a href="http://groovy.codehaus.org/Eclipse+Plugin">groo
 <p>As of this writing, Eclipse 4.2 and Eclipse 4.3 are commonly used,
 and the codebase can be imported (Import -> Existing Maven Projects)
 and successfully built and run inside an IDE.
-However there are quicks, and mileage may vary.</p>
+However there are quirks, and mileage may vary.</p>
 
 <p>If you encounter issues, the following hints may be helpful:</p>
 
 <ul>
+<li><p>If you attempt to import projects before the plugins are installed, you may encounter errors such as
+'<code>No marketplace entries found to handle maven-compiler-plugin:2.3.2:compile in Eclipse</code>',
+and the projects will not be recognized as java projects. If you do, simply cancel the import
+(or delete the imported projects if they have been imported) and install the plugins as described above.
+If you have installed plugins from alternative locations, remove them and re-install them from the locations
+specified above.</p></li>
 <li><p>A quick command-line build (<code>mvn clean install -DskipTests</code>) followed by a workspace refresh
 can be useful to re-populate files which need to be copied to <code>target/</code></p></li>
 <li><p>m2e likes to put <code>excluding="**"</code> on <code>resources</code> directories; if you're seeing funny missing files
@@ -592,6 +603,11 @@ The tips <a href="http://www.jclouds.org/documentation/devguides/using-eclipse">
             
               <div class="toc-3 ">
 	            <a href="/use/guide/management/index.html"><div class="toc-3-item">Management</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/locations/index.html"><div class="toc-3-item">Locations</div></a>
               </div>
         
             

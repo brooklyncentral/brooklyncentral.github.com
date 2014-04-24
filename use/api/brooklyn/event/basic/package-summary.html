@@ -4,6 +4,7 @@
 
 <title>brooklyn.event.basic (Brooklyn)</title>
 <META NAME="keywords" CONTENT="brooklyn.event.basic package">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 <link href="../../../groovy.ico" type="image/x-icon" rel="shortcut icon">
 <link href="../../../groovy.ico" type="image/x-icon" rel="icon">
@@ -96,7 +97,8 @@ Package brooklyn.event.basic
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="MapConfigKey.MapModification.html" title="class in brooklyn/event/basic">MapConfigKey.MapModification</A></B></TD>
-        <TD></TD>
+        <TD>when passed as a value to a MapConfigKey, causes each of these items to be put 
+ (this Mod is redundant as no other value is really sensible)</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -128,6 +130,16 @@ Package brooklyn.event.basic
     <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
     <B>Class Summary</B></FONT></TH>
     </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="AbstractCollectionConfigKey.html" title="class in brooklyn/event/basic">AbstractCollectionConfigKey</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="AbstractStructuredConfigKey.html" title="class in brooklyn/event/basic">AbstractStructuredConfigKey</A></B></TD>
+        <TD></TD>
+        </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="AttributeMap.html" title="class in brooklyn/event/basic">AttributeMap</A></B></TD>
@@ -198,6 +210,16 @@ Package brooklyn.event.basic
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="DependentConfiguration.AttributeAndSensorCondition.html" title="class in brooklyn/event/basic">DependentConfiguration.AttributeAndSensorCondition</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="DependentConfiguration.Builder.html" title="class in brooklyn/event/basic">DependentConfiguration.Builder</A></B></TD>
+        <TD>Builder for producing variants of attributeWhenReady.</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="ListConfigKey.html" title="class in brooklyn/event/basic">ListConfigKey</A></B></TD>
         <TD>A config key representing a list of values. 
  </TD>
@@ -226,7 +248,7 @@ Package brooklyn.event.basic
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="MapConfigKey.MapModifications.html" title="class in brooklyn/event/basic">MapConfigKey.MapModifications</A></B></TD>
-        <TD></TD>
+        <TD>when passed as a value to a MapConfigKey, causes the map to be cleared and these items added</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -243,7 +265,7 @@ Package brooklyn.event.basic
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="SetConfigKey.html" title="class in brooklyn/event/basic">SetConfigKey</A></B></TD>
-        <TD>A config key representing a list of values. 
+        <TD>A config key representing a set of values. 
  </TD>
         </TR>
 
@@ -265,6 +287,13 @@ Package brooklyn.event.basic
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="SubElementConfigKey.html" title="class in brooklyn/event/basic">SubElementConfigKey</A></B></TD>
         <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="TemplatedStringAttributeSensorAndConfigKey.html" title="class in brooklyn/event/basic">TemplatedStringAttributeSensorAndConfigKey</A></B></TD>
+        <TD>A ConfigKey which takes a freemarker-templated string,
+ and whose value is converted to a sensor by processing the template 
+ with access to config and methods on the entity where it is set.</TD>
         </TR>
 
 </TABLE>

@@ -21,7 +21,7 @@
 	
 	
 <!-- Clipboard support -->
-<script src="/style/js/zeroclipboard/ZeroClipboard.js"></script>
+<script src="/style/js/zeroclipboard/ZeroClipboard.min.js"></script>
 <style type="text/css">
 .clipboard_container { float: right; padding: 8px; }
 .clipboard_button {
@@ -29,11 +29,11 @@
     background-size: 18px 21px;
     width: 18px; height: 21px;
 }
-.clipboard_button.hover  { background-image: url("/style/icons/clipboard-green-hover.png"); }
-.clipboard_button.active  { background-image: url("/style/icons/clipboard-green-click.png"); }'
+.clipboard_button:hover, .clipboard_button.zeroclipboard-is-hover { background-image: url("/style/icons/clipboard-green-hover.png"); }
+.clipboard_button:active, .clipboard_button.zeroclipboard-is-active { background-image: url("/style/icons/clipboard-green-click.png"); }'
 </style>
 <script type="text/javascript"> <!-- clipboard -->
-ZeroClipboard.setMoviePath( '/style/js/zeroclipboard/ZeroClipboard.swf' );
+  ZeroClipboard.config({ moviePath: '/style/js/zeroclipboard/ZeroClipboard.swf' });
 </script>
 <script type="text/javascript"> <!-- clipboard positioning -->
 $(document).ready(function() {
@@ -41,8 +41,8 @@ $(document).ready(function() {
     '<div class="clipboard_button"/>'+
   '</div>').insertBefore($('div.highlight'))
   $('div.clipboard_container').each(function(index) {
-    var clipboard = new ZeroClipboard.Client();
-    clipboard.glue( $(this).find(":first")[0], $(this)[0] );
+    var clipboard = new ZeroClipboard();
+    clipboard.clip( $(this).find(":first")[0], $(this)[0] );
     var target = $(this).next();
     var txt = target.text().trim();
     if (target.find('code.bash')) {
@@ -51,7 +51,10 @@ $(document).ready(function() {
       // lines, where a leading '$' or '%' is *not* a prompt character.
       txt = txt.replace(/(^|[^\\]\n)[$%] /g, "$1");
     }
-    clipboard.setText(txt);
+console.log("setting text to "+txt);
+    clipboard.on( 'dataRequested', function (client, args) {
+      client.setText( txt );
+    });
   });
 });
 </script>
@@ -164,11 +167,11 @@ $(document).ready(function() {
     <div id="header">
     
         <div id="identity">
-            <a href="http://brooklyncentral.github.io/" rel="home">Brooklyn</a>
+            <a href="http://brooklyncentral.github.com/" rel="home">Brooklyn</a>
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.6.0</a></li>
+            <li><a href="/meta/versions.html">0.7.0-M1</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -262,6 +265,8 @@ $(document).ready(function() {
     
     
         
+        
+            
         
             
         
@@ -418,7 +423,7 @@ $(document).ready(function() {
 
 <p>First time user? The <a href="/use/guide/quickstart/index.html">getting started</a> guide will walk you through downloading Brooklyn, setup of your <code>brooklyn.properties</code> and <code>catalog.xml</code> files, and then trying the <a href="#examples">examples</a>.</p>
 
-<h2>Download Version 0.6.0</h2>
+<h2>Download Version 0.7.0-M1</h2>
 
 <table>
 <tr>
@@ -428,27 +433,27 @@ $(document).ready(function() {
 </tr>
 <tr>
     <td style='text-align:left;vertical-align:top' rowspan='2'>Distro</td>
-    <td style='text-align:left'><a href='http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.6.0/brooklyn-dist-0.6.0-dist.zip' title='Download ZIP archive'>brooklyn-dist-0.6.0-dist.zip</a></td>
-    <td><small><a href='http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.6.0/brooklyn-dist-0.6.0-dist.zip.asc'>PGP</a>, <a href='http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.6.0/brooklyn-dist-0.6.0-dist.zip.sha1'>SHA1</a></small></td>
+    <td style='text-align:left'><a href='http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.7.0-M1/brooklyn-dist-0.7.0-M1-dist.zip' title='Download ZIP archive'>brooklyn-dist-0.7.0-M1-dist.zip</a></td>
+    <td><small><a href='http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.7.0-M1/brooklyn-dist-0.7.0-M1-dist.zip.asc'>PGP</a>, <a href='http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.7.0-M1/brooklyn-dist-0.7.0-M1-dist.zip.sha1'>SHA1</a></small></td>
 </tr>
 <tr>
-    <td style='text-align:left'><a href='http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.6.0/brooklyn-dist-0.6.0-dist.tar.gz' title='Download TGZ archive'>brooklyn-dist-0.6.0-dist.tar.gz</a></td>
-    <td ><small><a href='http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.6.0/brooklyn-dist-0.6.0-dist.tar.gz.asc'>PGP</a>, <a href='http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.6.0/brooklyn-dist-0.6.0-dist.tar.gz.sha1'>SHA1</a></small></td>
+    <td style='text-align:left'><a href='http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.7.0-M1/brooklyn-dist-0.7.0-M1-dist.tar.gz' title='Download TGZ archive'>brooklyn-dist-0.7.0-M1-dist.tar.gz</a></td>
+    <td ><small><a href='http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.7.0-M1/brooklyn-dist-0.7.0-M1-dist.tar.gz.asc'>PGP</a>, <a href='http://repo1.maven.org/maven2/io/brooklyn/brooklyn-dist/0.7.0-M1/brooklyn-dist-0.7.0-M1-dist.tar.gz.sha1'>SHA1</a></small></td>
 </tr>
 <tr>
     <td style='text-align:left'>All Jar</td>
-    <td style='text-align:left'><a href='http://repo1.maven.org/maven2/io/brooklyn/brooklyn-all/0.6.0/brooklyn-all-0.6.0-with-dependencies.jar' title='Download the ALL JAR'>brooklyn-all-0.6.0-with-dependencies.jar</a></td>
-    <td ><small><a href='http://repo1.maven.org/maven2/io/brooklyn/brooklyn-all/0.6.0/brooklyn-all-0.6.0-with-dependencies.jar.asc'>PGP</a>, <a href='http://repo1.maven.org/maven2/io/brooklyn/brooklyn-all/0.6.0/brooklyn-all-0.6.0-with-dependencies.jar.sha1'>SHA1<a/></small></td>
+    <td style='text-align:left'><a href='http://repo1.maven.org/maven2/io/brooklyn/brooklyn-all/0.7.0-M1/brooklyn-all-0.7.0-M1-with-dependencies.jar' title='Download the ALL JAR'>brooklyn-all-0.7.0-M1-with-dependencies.jar</a></td>
+    <td ><small><a href='http://repo1.maven.org/maven2/io/brooklyn/brooklyn-all/0.7.0-M1/brooklyn-all-0.7.0-M1-with-dependencies.jar.asc'>PGP</a>, <a href='http://repo1.maven.org/maven2/io/brooklyn/brooklyn-all/0.7.0-M1/brooklyn-all-0.7.0-M1-with-dependencies.jar.sha1'>SHA1<a/></small></td>
 </tr>
 <tr>
     <td style='text-align:left'>Release notes</td>
-    <td style='text-align:left'><a href='/start/release-notes.html'>0.6.0</a></td>
+    <td style='text-align:left'><a href='/start/release-notes.html'>0.7.0-M1</a></td>
     <td> - </td>
 </tr>
 </table>
 
 
-<p><span style='float:right'><small>Source: <a href='http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22io.brooklyn%22%20AND%20v%3A%220.6.0%22'>Maven Central</a></small></span></p>
+<p><span style='float:right'><small>Source: <a href='http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22io.brooklyn%22%20AND%20v%3A%220.7.0-M1%22'>Maven Central</a></small></span></p>
 
 <p><a name="distro"></a></p>
 
@@ -469,7 +474,7 @@ $(document).ready(function() {
 <p>This is a single JAR containing all of Brooklyn and its dependencies, for developing Brooklyn into your own applications. Just download your preferred flavour and add it to your classpath.</p>
 
 <ul>
-<li><p><a href="http://search.maven.org/#artifactdetails|io.brooklyn|brooklyn-all|0.6.0|jar">Version 0.6.0</a></p></li>
+<li><p><a href="http://search.maven.org/#artifactdetails|io.brooklyn|brooklyn-all|0.7.0-M1|jar">Version 0.7.0-M1</a></p></li>
 <li><p>previous stable versions: <a href="http://repo1.maven.org/maven2/io/brooklyn/brooklyn-all/">Maven Central</a></p></li>
 <li>previous snapshot versions: <a href="https://oss.sonatype.org/content/groups/public/io/brooklyn/brooklyn-all/">Sonatype</a></li>
 </ul>
@@ -486,25 +491,25 @@ $(document).ready(function() {
 <p>You can checkout the examples from the <a href="http://github.com/brooklyncentral/brooklyn-examples">brooklyn-examples git repository</a>.</p>
 
 <p>Maven (v3) is required to build them, as described <a href="/dev/build/">here</a>.
-The examples for this version (0.6.0) are in the branch
-<code>0.6.0</code>, so if you have <code>git</code> and <code>mvn</code> already, you can simply:</p>
+The examples for this version (0.7.0-M1) are in the branch
+<code>0.7.0-M1</code>, so if you have <code>git</code> and <code>mvn</code> already, you can simply:</p>
 
 <div class="highlight"><pre><code class="bash">% git clone https://github.com/brooklyncentral/brooklyn-examples.git
 % <span class="nb">cd </span>brooklyn-examples
-% git checkout 0.6.0
+% git checkout 0.7.0-M1
 % mvn clean install
 </code></pre>
 </div>
 
 
 <p>If you don't use <code>git</code>, you can download the projects as a tarball instead
-from <a href="https://github.com/brooklyncentral/brooklyn-examples/tarball/0.6.0">this link</a>.
+from <a href="https://github.com/brooklyncentral/brooklyn-examples/tarball/0.7.0-M1">this link</a>.
 These commands should do the trick:</p>
 
-<div class="highlight"><pre><code class="bash">% curl -L -o brooklyn-examples-0.6.0.tgz <span class="se">\</span>
-     https://github.com/brooklyncentral/brooklyn-examples/tarball/0.6.0
-% tar xvfz brooklyn-examples-0.6.0.tgz
-% mv brooklyncentral-brooklyn-examples-* brooklyn-examples-0.6.0 <span class="se">\</span>
+<div class="highlight"><pre><code class="bash">% curl -L -o brooklyn-examples-0.7.0-M1.tgz <span class="se">\</span>
+     https://github.com/brooklyncentral/brooklyn-examples/tarball/0.7.0-M1
+% tar xvfz brooklyn-examples-0.7.0-M1.tgz
+% mv brooklyncentral-brooklyn-examples-* brooklyn-examples-0.7.0-M1 <span class="se">\</span>
      <span class="c"># change the strange name which github assigns in the tarball</span>
 % mvn clean install
 </code></pre>
@@ -523,7 +528,7 @@ These commands should do the trick:</p>
         <span class="nt">&lt;dependency&gt;</span>
             <span class="nt">&lt;groupId&gt;</span>io.brooklyn<span class="nt">&lt;/groupId&gt;</span>
             <span class="nt">&lt;artifactId&gt;</span>brooklyn-all<span class="nt">&lt;/artifactId&gt;</span>
-            <span class="nt">&lt;version&gt;</span>0.6.0<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;version&gt;</span>0.7.0-M1<span class="nt">&lt;/version&gt;</span>
         <span class="nt">&lt;/dependency&gt;</span>
     <span class="nt">&lt;/dependencies&gt;</span>
 </code></pre>
@@ -533,7 +538,7 @@ These commands should do the trick:</p>
 <p><code>brooklyn-all</code> (used above) brings in all dependencies, including jclouds and Apache Whirr.
 If you prefer a smaller repo you might want just <code>brooklyn-core</code>,  <code>brooklyn-policies</code>,
 and some of <code>brooklyn-software-webapp</code>,  <code>brooklyn-software-database</code>, <code>brooklyn-software-messaging</code>, or others
-(browse the full list <a href="http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22io.brooklyn%22%20AND%20v%3A%220.6.0%22">here</a>).</p>
+(browse the full list <a href="http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22io.brooklyn%22%20AND%20v%3A%220.7.0-M1%22">here</a>).</p>
 
 <p>If you wish to use the Sonatype and/or Cloudsoft repositories (particularly for snapshots),
 you can add some of the following sections:</p>
@@ -665,6 +670,11 @@ Information on working with the source is <a href="/dev/code">here</a>.</p>
             
               <div class="toc-3 ">
 	            <a href="/use/guide/management/index.html"><div class="toc-3-item">Management</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/locations/index.html"><div class="toc-3-item">Locations</div></a>
               </div>
         
             

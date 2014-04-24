@@ -4,6 +4,7 @@
 
 <title>brooklyn.entity.basic (Brooklyn)</title>
 <META NAME="keywords" CONTENT="brooklyn.entity.basic package">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 <link href="../../../groovy.ico" type="image/x-icon" rel="shortcut icon">
 <link href="../../../groovy.ico" type="image/x-icon" rel="icon">
@@ -124,7 +125,7 @@ Package brooklyn.entity.basic
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="BasicStartable.LocationsFilter.html" title="class in brooklyn/entity/basic">BasicStartable.LocationsFilter</A></B></TD>
-        <TD></TD>
+        <TD>@deprecated since 0.7.0; use Locations#LocationFilter#LocationFilter</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -173,7 +174,7 @@ Package brooklyn.entity.basic
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="SameServerEntity.html" title="class in brooklyn/entity/basic">SameServerEntity</A></B></TD>
         <TD>An entity that, on start(MachineProvisioningLocation), will obtain a machine
- and pass that to each of its children by calling their <a href='../../../Startable.html#start(java.util.Collection)' title='Startable.start'>Startable.start</a>
+ and pass that to each of its children by calling their Startable#start(java.util.Collection)
  methods with that machine.</TD>
         </TR>
 
@@ -189,6 +190,18 @@ Package brooklyn.entity.basic
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="StartableApplication.html" title="class in brooklyn/entity/basic">StartableApplication</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="VanillaSoftwareProcess.html" title="class in brooklyn/entity/basic">VanillaSoftwareProcess</A></B></TD>
+        <TD>downloads and unpacks the archive indicated (optionally), 
+ then runs the management commands (scripts) indicated
+ (relative to the root of the archive if supplied, otherwise in a tmp working dir) to manage</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="VanillaSoftwareProcessDriver.html" title="class in brooklyn/entity/basic">VanillaSoftwareProcessDriver</A></B></TD>
         <TD></TD>
         </TR>
 
@@ -281,23 +294,28 @@ Package brooklyn.entity.basic
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="BrooklynConfigKeys.html" title="class in brooklyn/entity/basic">BrooklynConfigKeys</A></B></TD>
-        <TD></TD>
+        <TD>Commonly used config keys, for use in entities. </TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="BrooklynTasks.html" title="class in brooklyn/entity/basic">BrooklynTasks</A></B></TD>
+        <TD WIDTH="15%"><B><A HREF="BrooklynTaskTags.html" title="class in brooklyn/entity/basic">BrooklynTaskTags</A></B></TD>
         <TD>Provides utilities for making Tasks easier to work with in Brooklyn.
  </TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="BrooklynTasks.WrappedEntity.html" title="class in brooklyn/entity/basic">BrooklynTasks.WrappedEntity</A></B></TD>
+        <TD WIDTH="15%"><B><A HREF="BrooklynTaskTags.WrappedEntity.html" title="class in brooklyn/entity/basic">BrooklynTaskTags.WrappedEntity</A></B></TD>
         <TD></TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="BrooklynTasks.WrappedStream.html" title="class in brooklyn/entity/basic">BrooklynTasks.WrappedStream</A></B></TD>
+        <TD WIDTH="15%"><B><A HREF="BrooklynTaskTags.WrappedStream.html" title="class in brooklyn/entity/basic">BrooklynTaskTags.WrappedStream</A></B></TD>
         <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="BrooklynTasks.html" title="class in brooklyn/entity/basic">BrooklynTasks</A></B></TD>
+        <TD>@deprecated since 0.7.0 use BrooklynTaskTags</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -339,11 +357,6 @@ Package brooklyn.entity.basic
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="EffectorUtils.html" title="class in brooklyn/entity/basic">EffectorUtils</A></B></TD>
-        <TD>@deprecated Use brooklyn.management.internal.EffectorUtils; deprecated since 0.5</TD>
-        </TR>
-
-        <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="EmptySoftwareProcessImpl.html" title="class in brooklyn/entity/basic">EmptySoftwareProcessImpl</A></B></TD>
         <TD></TD>
         </TR>
@@ -382,26 +395,6 @@ Package brooklyn.entity.basic
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="EntityReferences.html" title="class in brooklyn/entity/basic">EntityReferences</A></B></TD>
-        <TD>@deprecated since 0.6; code is unused and unnecessary</TD>
-        </TR>
-
-        <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="EntityReferences.EntityCollectionReference.html" title="class in brooklyn/entity/basic">EntityReferences.EntityCollectionReference</A></B></TD>
-        <TD></TD>
-        </TR>
-
-        <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="EntityReferences.EntityReference.html" title="class in brooklyn/entity/basic">EntityReferences.EntityReference</A></B></TD>
-        <TD>Serialization helper.</TD>
-        </TR>
-
-        <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="EntityReferences.SelfEntityReference.html" title="class in brooklyn/entity/basic">EntityReferences.SelfEntityReference</A></B></TD>
-        <TD></TD>
-        </TR>
-
-        <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="EntityTypeSnapshot.html" title="class in brooklyn/entity/basic">EntityTypeSnapshot</A></B></TD>
         <TD></TD>
         </TR>
@@ -433,6 +426,11 @@ Package brooklyn.entity.basic
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="SameServerDriverLifecycleEffectorTasks.html" title="class in brooklyn/entity/basic">SameServerDriverLifecycleEffectorTasks</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="SameServerEntityImpl.html" title="class in brooklyn/entity/basic">SameServerEntityImpl</A></B></TD>
         <TD></TD>
         </TR>
@@ -447,6 +445,16 @@ Package brooklyn.entity.basic
         <TD WIDTH="15%"><B><A HREF="SoftwareProcessImpl.html" title="class in brooklyn/entity/basic">SoftwareProcessImpl</A></B></TD>
         <TD>An Entity representing a piece of software which can be installed, run, and controlled.
  </TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="VanillaSoftwareProcessImpl.html" title="class in brooklyn/entity/basic">VanillaSoftwareProcessImpl</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="VanillaSoftwareProcessSshDriver.html" title="class in brooklyn/entity/basic">VanillaSoftwareProcessSshDriver</A></B></TD>
+        <TD></TD>
         </TR>
 
 </TABLE>
@@ -469,36 +477,9 @@ Package brooklyn.entity.basic
         <TD>An enumeration representing the status of an <a href='../../../brooklyn/entity/Entity.html' title='Entity'>Entity</a>.</TD>
         </TR>
 
-</TABLE>
-&nbsp;
-<P>
-<DL>
-</DL>
-<hr>
-    
-
-
-
-
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-    <TR BGCOLOR="#90DDF7" CLASS="TableHeadingColor">
-    <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-    <B>Annotation Type Summary</B></FONT></TH>
-    </TR>
-
         <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="DefaultValue.html" title="class in brooklyn/entity/basic">DefaultValue</A></B></TD>
-        <TD>Provides runtime access to the name of a paramter, esp for effectors; typically matches any default value supplied in the code</TD>
-        </TR>
-
-        <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="Description.html" title="class in brooklyn/entity/basic">Description</A></B></TD>
-        <TD>Provides runtime access to the description of an effector or paramter, esp for effectors.</TD>
-        </TR>
-
-        <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="NamedParameter.html" title="class in brooklyn/entity/basic">NamedParameter</A></B></TD>
-        <TD>Provides a runtime name of a paramter, esp for effectors; typically matches the name in the code.</TD>
+        <TD WIDTH="15%"><B><A HREF="SoftwareProcess.ChildStartableMode.html" title="class in brooklyn/entity/basic">SoftwareProcess.ChildStartableMode</A></B></TD>
+        <TD>controls the behavior when starting (stop, restart) Startable children as part of the start (stop, restart) effector on this entity</TD>
         </TR>
 
 </TABLE>
@@ -508,6 +489,9 @@ Package brooklyn.entity.basic
 </DL>
 <hr>
     
+
+
+
 
 
 <p><b>Brooklyn Multi-Cloud Application Management Platform</b> <br/> <a href="http://brooklyncentral.github.com/" target="_top">brooklyncentral.github.com</a>. Apache License. &copy; 2012.</p>

@@ -21,7 +21,7 @@
 	
 	
 <!-- Clipboard support -->
-<script src="/style/js/zeroclipboard/ZeroClipboard.js"></script>
+<script src="/style/js/zeroclipboard/ZeroClipboard.min.js"></script>
 <style type="text/css">
 .clipboard_container { float: right; padding: 8px; }
 .clipboard_button {
@@ -29,11 +29,11 @@
     background-size: 18px 21px;
     width: 18px; height: 21px;
 }
-.clipboard_button.hover  { background-image: url("/style/icons/clipboard-green-hover.png"); }
-.clipboard_button.active  { background-image: url("/style/icons/clipboard-green-click.png"); }'
+.clipboard_button:hover, .clipboard_button.zeroclipboard-is-hover { background-image: url("/style/icons/clipboard-green-hover.png"); }
+.clipboard_button:active, .clipboard_button.zeroclipboard-is-active { background-image: url("/style/icons/clipboard-green-click.png"); }'
 </style>
 <script type="text/javascript"> <!-- clipboard -->
-ZeroClipboard.setMoviePath( '/style/js/zeroclipboard/ZeroClipboard.swf' );
+  ZeroClipboard.config({ moviePath: '/style/js/zeroclipboard/ZeroClipboard.swf' });
 </script>
 <script type="text/javascript"> <!-- clipboard positioning -->
 $(document).ready(function() {
@@ -41,8 +41,8 @@ $(document).ready(function() {
     '<div class="clipboard_button"/>'+
   '</div>').insertBefore($('div.highlight'))
   $('div.clipboard_container').each(function(index) {
-    var clipboard = new ZeroClipboard.Client();
-    clipboard.glue( $(this).find(":first")[0], $(this)[0] );
+    var clipboard = new ZeroClipboard();
+    clipboard.clip( $(this).find(":first")[0], $(this)[0] );
     var target = $(this).next();
     var txt = target.text().trim();
     if (target.find('code.bash')) {
@@ -51,7 +51,10 @@ $(document).ready(function() {
       // lines, where a leading '$' or '%' is *not* a prompt character.
       txt = txt.replace(/(^|[^\\]\n)[$%] /g, "$1");
     }
-    clipboard.setText(txt);
+console.log("setting text to "+txt);
+    clipboard.on( 'dataRequested', function (client, args) {
+      client.setText( txt );
+    });
   });
 });
 </script>
@@ -164,11 +167,11 @@ $(document).ready(function() {
     <div id="header">
     
         <div id="identity">
-            <a href="http://brooklyncentral.github.io/" rel="home">Brooklyn</a>
+            <a href="http://brooklyncentral.github.com/" rel="home">Brooklyn</a>
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.6.0</a></li>
+            <li><a href="/meta/versions.html">0.7.0-M1</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -257,6 +260,8 @@ $(document).ready(function() {
     
     
         
+        
+            
         
             
         
@@ -407,7 +412,7 @@ $(document).ready(function() {
 <!--- display which version we are using, based on where it is written -->
 
 
-<h3>Brooklyn v0.6.0</h3>
+<h3>Brooklyn v0.7.0-M1</h3>
 
 <!--- not snapshot -->
 
@@ -418,13 +423,14 @@ $(document).ready(function() {
 
 
 <p>This is the documentation for the latest stable version of Brooklyn,
-generated 20 Nov 2013.
+generated 24 Apr 2014.
 Other versions with documentation available are listed below.</p>
 
 <h3>Version History</h3>
 
 <ul>
 <li><p><strong><a href="/v/0.7.0-SNAPSHOT">0.7.0-SNAPSHOT (master)</a></strong></p></li>
+<li><p><strong><a href="/v/0.7.0-M1">0.7.0-M1 (master)</a></strong></p></li>
 <li><p><strong><a href="/v/0.6.0/">0.6.0</a></strong>: locations are constructed using LocationSpec rather than calling constructor directly, improved Chef (&amp; Windows) support, more entities, more clouds, Hazelcast datagrid, GUI improvements (Nov 2013)</p></li>
 <li><p><strong><a href="/v/0.5.0/">0.5.0</a></strong>: includes new JS GUI and REST API, rebind/persistence support, cleaner model and naming conventions, more entities (May 2013)</p></li>
 <li><p><strong><a href="/v/0.4.0/">0.4.0</a></strong>: initial public GA release of Brooklyn to Maven Central, supporting wide range of entities and examples (Jan 2013)</p></li>
@@ -544,6 +550,11 @@ New major and minor releases zero the less significant counters.</p>
             
               <div class="toc-3 ">
 	            <a href="/use/guide/management/index.html"><div class="toc-3-item">Management</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/locations/index.html"><div class="toc-3-item">Locations</div></a>
               </div>
         
             

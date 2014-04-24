@@ -21,7 +21,7 @@
 	
 	
 <!-- Clipboard support -->
-<script src="/style/js/zeroclipboard/ZeroClipboard.js"></script>
+<script src="/style/js/zeroclipboard/ZeroClipboard.min.js"></script>
 <style type="text/css">
 .clipboard_container { float: right; padding: 8px; }
 .clipboard_button {
@@ -29,11 +29,11 @@
     background-size: 18px 21px;
     width: 18px; height: 21px;
 }
-.clipboard_button.hover  { background-image: url("/style/icons/clipboard-green-hover.png"); }
-.clipboard_button.active  { background-image: url("/style/icons/clipboard-green-click.png"); }'
+.clipboard_button:hover, .clipboard_button.zeroclipboard-is-hover { background-image: url("/style/icons/clipboard-green-hover.png"); }
+.clipboard_button:active, .clipboard_button.zeroclipboard-is-active { background-image: url("/style/icons/clipboard-green-click.png"); }'
 </style>
 <script type="text/javascript"> <!-- clipboard -->
-ZeroClipboard.setMoviePath( '/style/js/zeroclipboard/ZeroClipboard.swf' );
+  ZeroClipboard.config({ moviePath: '/style/js/zeroclipboard/ZeroClipboard.swf' });
 </script>
 <script type="text/javascript"> <!-- clipboard positioning -->
 $(document).ready(function() {
@@ -41,8 +41,8 @@ $(document).ready(function() {
     '<div class="clipboard_button"/>'+
   '</div>').insertBefore($('div.highlight'))
   $('div.clipboard_container').each(function(index) {
-    var clipboard = new ZeroClipboard.Client();
-    clipboard.glue( $(this).find(":first")[0], $(this)[0] );
+    var clipboard = new ZeroClipboard();
+    clipboard.clip( $(this).find(":first")[0], $(this)[0] );
     var target = $(this).next();
     var txt = target.text().trim();
     if (target.find('code.bash')) {
@@ -51,7 +51,10 @@ $(document).ready(function() {
       // lines, where a leading '$' or '%' is *not* a prompt character.
       txt = txt.replace(/(^|[^\\]\n)[$%] /g, "$1");
     }
-    clipboard.setText(txt);
+console.log("setting text to "+txt);
+    clipboard.on( 'dataRequested', function (client, args) {
+      client.setText( txt );
+    });
   });
 });
 </script>
@@ -164,11 +167,11 @@ $(document).ready(function() {
     <div id="header">
     
         <div id="identity">
-            <a href="http://brooklyncentral.github.io/" rel="home">Brooklyn</a>
+            <a href="http://brooklyncentral.github.com/" rel="home">Brooklyn</a>
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/meta/versions.html">0.6.0</a></li>
+            <li><a href="/meta/versions.html">0.7.0-M1</a></li>
             <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
@@ -257,6 +260,8 @@ $(document).ready(function() {
     
     
         
+        
+            
         
             
         
@@ -401,21 +406,24 @@ $(document).ready(function() {
 
 <h1 id="header_title">Release Notes</h1>
     
-<h2>Brooklyn Version 0.6.0</h2>
+<h2>Brooklyn Version 0.7.0-M1</h2>
 
 <ul>
 <li>Introduction</li>
 <li>New Features</li>
 <li>Backwards Compatibility</li>
+<li>Expectations for future releases</li>
 <li>Community Activity</li>
 </ul>
 
 
 <h3>Introduction</h3>
 
-<p>This release includes many big features. It incorporates a lot of improvements and feedback from our community. Thank you!</p>
+<p>This milestone release includes many big features, and brings us much closer to 0.7.0.</p>
 
-<p>Thanks also go to Brooklyn's commercial users. Brooklyn continues to be used in many exciting projects, including managing distributed database clusters, and cloud-enabling financial service applications (not to mention the custom PaaS offerings, big data clusters, and three-tier web-apps that Brooklyn was being used in at Version 0.5.0).</p>
+<p>It incorporates a lot of improvements and feedback from our community. Thank you!</p>
+
+<p>Thanks also go to Brooklyn's commercial users. Already Brooklyn has been adopted into some very exciting projects including</p>
 
 <p>For more information, please checkout <a href="http://brooklyncentral.github.io">brooklyncentral.github.io</a>, and the mailing lists:</p>
 
@@ -427,91 +435,124 @@ $(document).ready(function() {
 
 <h3>New Features</h3>
 
-<p><em>The changes listed here compare Brooklyn 0.5.0 and 0.6.0, and incorporate changes from the 0.6.0 milestone releases. Items marked <strong>&sup1;</strong> are new since 0.6.0-M2</em></p>
+<p>The major changes between 0.6.0 and 0.7.0-M1 are:</p>
 
 <ol>
-<li><p>Locations are now constructed using a <code>LocationSpec</code>, rather than calling the constructor directly. This improvement is required to allow the Brooklyn management plane to track locations and persist their state.</p></li>
-<li><p>Location specific and advanced features can be implemented using location extension points. The extension mechanism allows client-code to call <code>location.hasExtension(extensionClass)</code> and <code>location.getExtension(extensionClass)</code>.</p></li>
-<li><p>Hazelcast datagrid implementation added. (NB: this is still considered experimental.)</p></li>
-<li><p>A datagrid can be used to store the entity/location state within Brooklyn. This feature is currently disabled by default (i.e. storing to an in-memory pseduo-datagrid); work will continue on this in subsequent releases.</p></li>
-<li><p>Brooklyn now tracks location and application usage, and records it in the datagrid. More generally:</p>
+<li><p>Blueprints in YAML. This is a <em>major</em> step forward, making writing using and modifying
+blueprints accessible to a wider audience. By writing a YAML text file, without touching
+a line of Java code, one can wire together the components and runtime policies of an
+application. The format follows the OASIS CAMP specification with some extensions:
+https://www.oasis-open.org/committees/camp/</p></li>
+<li><p>Persistence and rebind. Brooklyn persists its state, so that on restart it will rebind
+to the existing entities under management. Previously, this required custom coding.
+Now it just requires starting with <code>brooklyn launch --persist auto --noShutdownOnExit</code>.
+Most likely, <code>--persist auto</code> will become the default in the 0.7.0 GA release.
+Note that policies are not yet persisted and will not be present after a stop-and-rebind;
+this will be fixed in another release soon!</p></li>
+<li><p>Many usability and performance improvements to the web-console.</p></li>
+<li><p>Reloading of brooklyn configuration. When triggered (through the web-console, REST api, or
+via code), the brooklyn.properties will be reloaded.</p></li>
+<li><p>Various performance improvements, including reuse of ssh sessions when executing
+multiple (frequent) ssh commands on a given machine.</p></li>
+<li><p>The maven archetype, for generating a new downstream project, has an improved main class.
+This extends the default brooklyn main (used by <code>brooklyn launch</code>) so shares all the
+same features.</p></li>
+<li><p>Increased Windows support - Brooklyn can now be started on Windows using the new
+<code>brooklyn.ps1</code> script, which behaves as the Linux/UNIX <code>brooklyn</code> script.</p></li>
+<li><p>Improvements to REST api, including:</p>
 
 <ul>
-<li>Create/destroy of VMs (through location manage/unmanage) is tracked</li>
-<li>Application start/stop/destroy is tracked</li>
-<li>Current and historic usage information can be retrieved through the REST API.</li>
+<li>Deploying YAML blueprints</li>
+<li>Retrieving location details</li>
+<li>Fetching entity info for all (or filtered) descendants; see /{application}/descendants</li>
 </ul>
 </li>
-<li><p>Improved Support for Chef, significantly improving support for using Windows machines.</p></li>
-<li><p>Several additional clouds are supported, including:</p>
+<li><p>Many new conveniences and utilities, including:</p>
 
 <ul>
-<li>Abiquo (see also <a href="http://www.cloudsoftcorp.com/news/as-simple-as-abc-the-abiquo-brooklyn-catalog/">this blog post</a>)</li>
-<li>Google Compute Engine</li>
-<li><em>See also:</em> Community Activity, below.</li>
+<li>brooklyn.entity.software.OsTasks for finding the OS and architecture details of a machine.</li>
+<li>brooklyn.util.os.Os, including for improved use of tmp directories.</li>
+<li>brooklyn.enricher.Enrichers.builder(), for easier construction of enrichers using a
+fluent API.</li>
+<li>brooklyn.util.http.HttpTool, including a fluent API for building
+org.apache.http.client.HttpClient and for doing simple GET/POST/PUT/DELETE requests.</li>
+<li>brooklyn.util.javalang.Threads</li>
 </ul>
 </li>
-<li><p>Several new entities have been added, including:</p>
+<li><p>Massive improvements to several clouds, including SoftLayer and Google Compute Engine
+(being contributed back to jclouds).</p></li>
+<li><p>New entities include:</p>
 
 <ul>
-<li>BindDnsServer</li>
-<li>Jetty6Server</li>
-<li>MongoDB replica sets</li>
-<li>BrooklynNode (for Brooklyn bootstrap deploying Brooklyn)</li>
-<li>New PostgreSQL entity (via Chef)</li>
+<li>VanillaSoftwareProcess for a script-based entity, requiring no Java code to be written.</li>
+<li>MongoDB sharded database.</li>
+<li>Solr</li>
+<li>Zookeeper ensemble (i.e. a cluster of Zeekeeper servers)</li>
 </ul>
 </li>
-<li><p>A new <a href="https://github.com/brooklyncentral/brooklyn/blob/master/locations/jclouds/src/main/resources/brooklyn/location-metadata.properties">location-metadata.properties</a> file allows metadata values (e.g. ISO-3166, lat/lon coordinates, etc) to be added to and overridden. Metadata in <code>brooklyn.properties</code> overrides metadata in <code>location-metadata.properties</code>.</p></li>
-<li><p>GUI Improvements: Better ability to drill down on tasks, auto-updating entity-tree with status indicators, faster status updates, and better performance over slow links.</p></li>
-<li><p>Improved entity and machine restart logic&sup1;, to handle failed components and dead-on-arrival&sup1; machines even better.</p></li>
-<li><p>Improved onboarding, with the creation of a Maven Archetype for a sample application, (which can be used as a template for new applications) and updates to the <a href="/use/guide/quickstart/brooklyn.properties">Getting Started brooklyn.properties</a> to get HP Cloud and SoftLayer users onboard faster.</p></li>
-<li><p>Sandbox: Support for rolling out complex apps described using CAMP YAML. This simplifies writing application blueprints, as YAML config files are more accessible and easier to write than Java code. &sup1;</p></li>
-<li><p>Big improvements to the Cassandra integration, including new tutorials for high-availability and wide-area (inter-cloud-provider) cassandra clusters.&sup1;</p></li>
-<li><p>The policies for an entity can now be defined in in an entity's spec. (Simplifying adding policies to entities, and requiring less code to be written.) &sup1;</p></li>
-<li><p>Added support for a cluster to spread its members across a provider's availability zones (e.g. in <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html">AWS</a>), to give high availability for that cluster. &sup1;</p></li>
-<li><p>Improved the Brooklyn load balancer abstraction, so that it can be used with things like the CloudStack load balancer or AWS elastic load balancer. &sup1;</p></li>
 </ol>
 
 
 <h3>Backwards Compatibility</h3>
 
-<p>For upgrading from 0.5.0 to 0.6.0, existing entities/applications/policies will still work, provided they did not previously have deprecation warnings.</p>
-
-<p>Some additional code has been deprecated - users are strongly encouraged to update these:</p>
+<ol>
+<li><p>OpenShift integration has moved from core brooklyn to the downstream project
+https://github.com/cloudsoft/brooklyn-openshift</p></li>
+<li><p>Code deprecated in 0.6.0 has been deleted.</p></li>
+<li><p>Location configuration getter/setter methods changed to match those of Entities.
+This is in preparation for having all Locations <em>be</em> Entities, expected in 0.7.0 GA.</p></li>
+<li><p>Some additional code has been deprecated - users are strongly encouraged to update these:</p>
 
 <ol>
-<li><p>Use <code>LocationSpec</code> (and <code>managementContext.getLocationManager().createLocation(LocationSpec.spec(MyLocClazz.class)</code>), rather than calling location constructors directly.</p></li>
-<li><p>In brooklyn.properties Locations must now be specified as <code>brooklyn.location.*</code>  (e.g. <code>brooklyn.location.jclouds.*</code> rather than brooklyn.jclouds.*). Property names should use CamelCase (e.g. <code>brooklyn.location.jclouds.publicKeyFile</code> instead of brooklyn.jclouds.public-key-file). Using the old conventions will give deprecation warnings in the logs.</p></li>
-<li><p>Use <code>@Effector</code> and <code>@EffectorParam</code> for annotating effector methods in an entity (rather than <code>@Description</code>, <code>@NamedParameter</code> and <code>@DefaultValue</code>).
-<code>location.getName()</code> has been renamed to <code>location.getDisplayName()</code>, to be consistent with Entity. The <code>location.getChildLocations()</code> and <code>location.getParentLocation()</code> have also been renamed to <code>getChildren()</code> and <code>getParent()</code> respectively.</p></li>
-<li><p>If overriding a config key in an entity to change the default value specified in a super-type entity or constant, then use <code>ConfigKeys.newConfigKeyWithDefault(...)</code>.</p></li>
-<li><p>Use <code>ConfigKeys.newStringConfigKey(...)</code> and similar methods, rather than using <code>new ConfigKey&lt;String&gt;(String.class, ...)</code></p></li>
-<li><p><code>ListConfigKey</code> has been deprecated because it no longer guarantees order; instead use <code>SetConfigKey</code>. This is a consequence of efficiently using a datagrid to store the data.</p></li>
-<li><p>Use the new <code>FeedConfig.onFailure()</code>, <code>FeedConfig.onError()</code> and <code>FeedConfig.checkSuccess()</code>. For example, This is now called to determine if a http 404 is a success or failure (default: failure), and if an ssh non-zero exit code is a failure (default: yes).</p></li>
-<li><p>Some package/class changes, such as:</p>
+<li>Various enricher classes, and base abstract classes, have been deprecated in favour
+of the new Enrichers.builder().</li>
+<li>BasicGroup.CHILDREN_AS_MEMBERS, preferring the new Group.addMemberChild()</li>
+<li>BasicStartable.LocationFilter has been generalised to Locations.LocationsFilter</li>
+<li>Config keys SUGGESTED_INSTALL_DIR and SUGGESTED_RUN_DIR are renamed to INSTALL_DIR
+and RUN_DIR respectively.</li>
+<li>brooklyn.event.feed.http.HttpPolls is deprecated, preferring brooklyn.util.http.HttpTool</li>
+<li>brooklyn.util.task.ExecutionUtils is deprecated, preferring more strongly typed
+approaches.</li>
+<li>Methods of brooklyn.util.ResourceUtils are deprecated, preferring methods in
+other less generic utility classes.</li>
+<li> Changes to REST api:
 
 <ul>
-<li><code>brooklyn.util.NetworkUtils</code> renamed to <code>brooklyn.util.net.Networking</code></li>
-<li><code>brooklyn.entity.basic.lifecycle.CommonCommands</code> renamed to <code>brooklyn.util.ssh.CommonCommands</code></li>
-<li><code>brooklyn.util.MutableMap</code> renamed to <code>brooklyn.util.collections.MutableMap</code></li>
+<li>ApplicationSpec is deprecated, preferring the YAML approach.</li>
+<li>/v1/server/version deprecated, preferring /v1/server/version</li>
 </ul>
 </li>
-<li><p>Logging has been updated. Please see <a href="/docs/dev/tips/logging.html">logging.md</a>.  Existing custom logback.xml configuration may no longer work (e.g. brooklyn logback-defaults.xml no longer exists).</p></li>
-<li><code>EntitySpecs.spec(...)</code> is now deprecated; use <code>EntitySpec.create(...)</code> instead.</li>
-<li><code>JcloudsLocationCustomizer</code>: method signatures have changed. For those extending <code>BasicJcloudsLocationCustomizer</code> as recommended, existing code will work but should be changed to use the new signatures.</li>
-<li>Deprecated <code>new BasicConfigKey(key, defaultValue)</code>. Instead use <code>ConfigKeys.newConfigKeyWithDefault(key, defaultValue)</code>.</li>
+<li>brooklyn.rest.util.URLParamEncoder deprecated, moved to brooklyn.util.net.URLParamEncoder</li>
+<li>Config keys DB_URL and MARIADB_URL deprecated, preferring DATASTORE_URL.
+ Note this may break backwards compatibility where the string name "database.url" was used;
+ these need to be changed to "datastore.url".</li>
+<li>CassandraCluster renamed to CassandraDatacenter, to match Cassandra's naming convention.</li>
+<li>brooklyn.util.ssh.IptablesCommands.Protocol deprecated, preferring the new more generic
+brooklyn.util.net.Protocol</li>
+<li>ShellUtils deprecated as it loses important information. Prefer utilities such as ShellFeed.</li>
+</ol>
+</li>
 </ol>
 
 
-<p>There have been some other minor changes, where code is now deprecated - all such changes are clearly marked in the javadoc, indicating the recommended approach.</p>
+<h3>Expectations for future releases</h3>
+
+<p>Big things we expect in 0.7.0 GA, or very soon after, include:</p>
+
+<ol>
+<li><p>Location extends Entity - i.e. all locations will be entities and can be explored
+better via the API and managed autonomically.</p></li>
+<li><p>Brooklyn persistence on by default, with improved robustness, error reporting, and
+manual recovery.</p></li>
+</ol>
+
 
 <h3>Community Activity</h3>
 
-<p><a href="http://www.cloudsoftcorp.com">Cloudsoft</a> has created Locations for IBM SmartCloud Enterprise and Ravello (repos: <a href="https://github.com/cloudsoft/ibm-smartcloud">github:cloudsoft/ibm-smartcloud</a>, <a href="https://github.com/cloudsoft/brooklyn-ravello">github:cloudsoft/brooklyn-ravello</a>). This code is public, subject to the Cloudsoft developer licence.</p>
+<p>We're really exciting about the open source downstream projects using Brooklyn,
+especially for Cassandra, MongoDB and OpenGamma to name but a few.</p>
 
-<h3>0.6.0-M2 - GA Changes</h3>
-
-<p>Features marked <strong>&sup1;</strong> (Features 11, 13-17, above) were added in the last push to 0.6.0 GA.</p>
+<p>We're also looking forward to imminent support for Docker, being led by @andreaturli</p>
 
 
         </div><!--maincontent-->
@@ -601,6 +642,11 @@ $(document).ready(function() {
             
               <div class="toc-3 ">
 	            <a href="/use/guide/management/index.html"><div class="toc-3-item">Management</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/locations/index.html"><div class="toc-3-item">Locations</div></a>
               </div>
         
             
