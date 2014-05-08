@@ -36,11 +36,14 @@ brooklyn.entity.messaging.kafka
 brooklyn.entity.messaging.qpid
 brooklyn.entity.messaging.rabbit
 brooklyn.entity.messaging.storm
+brooklyn.entity.monitoring.monit
 brooklyn.entity.network.bind
 brooklyn.entity.nosql.cassandra
 brooklyn.entity.nosql.couchdb
 brooklyn.entity.nosql.mongodb
+brooklyn.entity.nosql.mongodb.sharding
 brooklyn.entity.nosql.redis
+brooklyn.entity.nosql.riak
 brooklyn.entity.nosql.solr
 brooklyn.entity.osgi.karaf
 brooklyn.entity.proxy
@@ -79,6 +82,7 @@ brooklyn.location
 brooklyn.location.access
 brooklyn.location.basic
 brooklyn.location.cloud
+brooklyn.location.dynamic
 brooklyn.location.geo
 brooklyn.location.jclouds
 brooklyn.location.jclouds.config
@@ -114,6 +118,7 @@ brooklyn.util.collections
 brooklyn.util.config
 brooklyn.util.crypto
 brooklyn.util.exceptions
+brooklyn.util.file
 brooklyn.util.flags
 brooklyn.util.guava
 brooklyn.util.http
@@ -152,4 +157,5 @@ io.brooklyn.camp.brooklyn.spi.dsl.methods
 io.brooklyn.camp.brooklyn.spi.dsl.parse
 io.brooklyn.camp.brooklyn.spi.lookup
 io.brooklyn.camp.brooklyn.spi.platform
+org.jclouds.googlecomputeengine.config
 org.osgi.jmx
