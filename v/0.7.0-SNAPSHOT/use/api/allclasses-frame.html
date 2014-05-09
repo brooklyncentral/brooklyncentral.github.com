@@ -343,6 +343,14 @@ All Classes
 <BR>
 <A HREF="brooklyn/location/basic/BasicMachineMetadata.html" title="class in brooklyn.location.basic" target="classFrame">BasicMachineMetadata</A>
 <BR>
+<A HREF="brooklyn/entity/rebind/plane/dto/BasicManagementNodeSyncRecord.html" title="class in brooklyn.entity.rebind.plane.dto" target="classFrame">BasicManagementNodeSyncRecord</A>
+<BR>
+<A HREF="brooklyn/entity/rebind/plane/dto/BasicManagementNodeSyncRecord.Builder.html" title="class in brooklyn.entity.rebind.plane.dto.BasicManagementNodeSyncRecord" target="classFrame">BasicManagementNodeSyncRecord.Builder</A>
+<BR>
+<A HREF="brooklyn/management/ha/BasicMasterChooser.html" title="class in brooklyn.management.ha" target="classFrame">BasicMasterChooser</A>
+<BR>
+<A HREF="brooklyn/management/ha/BasicMasterChooser.AlphabeticMasterChooser.html" title="class in brooklyn.management.ha.BasicMasterChooser" target="classFrame">BasicMasterChooser.AlphabeticMasterChooser</A>
+<BR>
 <A HREF="brooklyn/event/basic/BasicNotificationSensor.html" title="class in brooklyn.event.basic" target="classFrame">BasicNotificationSensor</A>
 <BR>
 <A HREF="brooklyn/location/basic/BasicOsDetails.html" title="class in brooklyn.location.basic" target="classFrame">BasicOsDetails</A>
@@ -487,9 +495,13 @@ All Classes
 <BR>
 <A HREF="brooklyn/entity/brooklynnode/BrooklynNode.html" title="interface in brooklyn.entity.brooklynnode" target="classFrame"><I>BrooklynNode</I></A>
 <BR>
+<A HREF="brooklyn/entity/brooklynnode/BrooklynNode.DeployBlueprintEffector.html" title="interface in brooklyn.entity.brooklynnode.BrooklynNode" target="classFrame"><I>BrooklynNode.DeployBlueprintEffector</I></A>
+<BR>
 <A HREF="brooklyn/entity/brooklynnode/BrooklynNodeDriver.html" title="interface in brooklyn.entity.brooklynnode" target="classFrame"><I>BrooklynNodeDriver</I></A>
 <BR>
 <A HREF="brooklyn/entity/brooklynnode/BrooklynNodeImpl.html" title="class in brooklyn.entity.brooklynnode" target="classFrame">BrooklynNodeImpl</A>
+<BR>
+<A HREF="brooklyn/entity/brooklynnode/BrooklynNodeImpl.DeployBlueprintEffectorBody.html" title="class in brooklyn.entity.brooklynnode.BrooklynNodeImpl" target="classFrame">BrooklynNodeImpl.DeployBlueprintEffectorBody</A>
 <BR>
 <A HREF="brooklyn/entity/brooklynnode/BrooklynNodeSshDriver.html" title="class in brooklyn.entity.brooklynnode" target="classFrame">BrooklynNodeSshDriver</A>
 <BR>
@@ -1037,6 +1049,8 @@ All Classes
 <BR>
 <A HREF="brooklyn/util/xstream/EnumCaseForgivingSingleValueConverter.html" title="class in brooklyn.util.xstream" target="classFrame">EnumCaseForgivingSingleValueConverter</A>
 <BR>
+<A HREF="brooklyn/util/javalang/Enums.html" title="class in brooklyn.util.javalang" target="classFrame">Enums</A>
+<BR>
 <A HREF="brooklyn/util/exceptions/Exceptions.html" title="class in brooklyn.util.exceptions" target="classFrame">Exceptions</A>
 <BR>
 <A HREF="brooklyn/util/task/system/internal/ExecWithLoggingHelpers.html" title="class in brooklyn.util.task.system.internal" target="classFrame">ExecWithLoggingHelpers</A>
@@ -1155,6 +1169,20 @@ All Classes
 <BR>
 <A HREF="brooklyn/demo/HighAvailabilityCassandraCluster.html" title="class in brooklyn.demo" target="classFrame">HighAvailabilityCassandraCluster</A>
 <BR>
+<A HREF="brooklyn/management/ha/HighAvailabilityManager.html" title="interface in brooklyn.management.ha" target="classFrame"><I>HighAvailabilityManager</I></A>
+<BR>
+<A HREF="brooklyn/management/ha/HighAvailabilityManagerImpl.html" title="class in brooklyn.management.ha" target="classFrame">HighAvailabilityManagerImpl</A>
+<BR>
+<A HREF="brooklyn/management/ha/HighAvailabilityManagerImpl.PromotionListener.html" title="interface in brooklyn.management.ha.HighAvailabilityManagerImpl" target="classFrame"><I>HighAvailabilityManagerImpl.PromotionListener</I></A>
+<BR>
+<A HREF="brooklyn/management/ha/HighAvailabilityMode.html" title="enum in brooklyn.management.ha" target="classFrame">HighAvailabilityMode</A>
+<BR>
+<A HREF="brooklyn/rest/domain/HighAvailabilitySummary.html" title="class in brooklyn.rest.domain" target="classFrame">HighAvailabilitySummary</A>
+<BR>
+<A HREF="brooklyn/rest/domain/HighAvailabilitySummary.HaNodeSummary.html" title="class in brooklyn.rest.domain.HighAvailabilitySummary" target="classFrame">HighAvailabilitySummary.HaNodeSummary</A>
+<BR>
+<A HREF="brooklyn/rest/transform/HighAvailabilityTransformer.html" title="class in brooklyn.rest.transform" target="classFrame">HighAvailabilityTransformer</A>
+<BR>
 <A HREF="brooklyn/location/geo/HostGeoInfo.html" title="class in brooklyn.location.geo" target="classFrame">HostGeoInfo</A>
 <BR>
 <A HREF="brooklyn/location/geo/HostGeoLookup.html" title="interface in brooklyn.location.geo" target="classFrame"><I>HostGeoLookup</I></A>
@@ -1171,7 +1199,7 @@ All Classes
 <BR>
 <A HREF="brooklyn/event/feed/http/HttpPollConfig.html" title="class in brooklyn.event.feed.http" target="classFrame">HttpPollConfig</A>
 <BR>
-<A HREF="brooklyn/event/feed/http/HttpPollValue.html" title="class in brooklyn.event.feed.http" target="classFrame">HttpPollValue</A>
+<A HREF="brooklyn/event/feed/http/HttpPollValue.html" title="interface in brooklyn.event.feed.http" target="classFrame"><I>HttpPollValue</I></A>
 <BR>
 <A HREF="brooklyn/event/feed/http/HttpPolls.html" title="class in brooklyn.event.feed.http" target="classFrame">HttpPolls</A>
 <BR>
@@ -1196,6 +1224,8 @@ All Classes
 <A HREF="brooklyn/util/http/HttpTool.HttpRequestBuilder.html" title="class in brooklyn.util.http.HttpTool" target="classFrame">HttpTool.HttpRequestBuilder</A>
 <BR>
 <A HREF="brooklyn/util/http/HttpTool.TrustAllStrategy.html" title="class in brooklyn.util.http.HttpTool" target="classFrame">HttpTool.TrustAllStrategy</A>
+<BR>
+<A HREF="brooklyn/util/http/HttpToolResponse.html" title="class in brooklyn.util.http" target="classFrame">HttpToolResponse</A>
 <BR>
 <A HREF="brooklyn/event/feed/http/HttpValueFunctions.html" title="class in brooklyn.event.feed.http" target="classFrame">HttpValueFunctions</A>
 <BR>
@@ -1567,6 +1597,28 @@ All Classes
 <BR>
 <A HREF="brooklyn/management/internal/ManagementContextInternal.html" title="interface in brooklyn.management.internal" target="classFrame"><I>ManagementContextInternal</I></A>
 <BR>
+<A HREF="brooklyn/management/ha/ManagementNodeState.html" title="enum in brooklyn.management.ha" target="classFrame">ManagementNodeState</A>
+<BR>
+<A HREF="brooklyn/management/ha/ManagementNodeSyncRecord.html" title="interface in brooklyn.management.ha" target="classFrame"><I>ManagementNodeSyncRecord</I></A>
+<BR>
+<A HREF="brooklyn/management/ha/ManagementPlaneSyncRecord.html" title="interface in brooklyn.management.ha" target="classFrame"><I>ManagementPlaneSyncRecord</I></A>
+<BR>
+<A HREF="brooklyn/management/ha/ManagementPlaneSyncRecordDeltaImpl.html" title="class in brooklyn.management.ha" target="classFrame">ManagementPlaneSyncRecordDeltaImpl</A>
+<BR>
+<A HREF="brooklyn/management/ha/ManagementPlaneSyncRecordDeltaImpl.Builder.html" title="class in brooklyn.management.ha.ManagementPlaneSyncRecordDeltaImpl" target="classFrame">ManagementPlaneSyncRecordDeltaImpl.Builder</A>
+<BR>
+<A HREF="brooklyn/entity/rebind/plane/dto/ManagementPlaneSyncRecordImpl.html" title="class in brooklyn.entity.rebind.plane.dto" target="classFrame">ManagementPlaneSyncRecordImpl</A>
+<BR>
+<A HREF="brooklyn/entity/rebind/plane/dto/ManagementPlaneSyncRecordImpl.Builder.html" title="class in brooklyn.entity.rebind.plane.dto.ManagementPlaneSyncRecordImpl" target="classFrame">ManagementPlaneSyncRecordImpl.Builder</A>
+<BR>
+<A HREF="brooklyn/management/ha/ManagementPlaneSyncRecordPersister.html" title="interface in brooklyn.management.ha" target="classFrame"><I>ManagementPlaneSyncRecordPersister</I></A>
+<BR>
+<A HREF="brooklyn/management/ha/ManagementPlaneSyncRecordPersister.Delta.html" title="interface in brooklyn.management.ha.ManagementPlaneSyncRecordPersister" target="classFrame"><I>ManagementPlaneSyncRecordPersister.Delta</I></A>
+<BR>
+<A HREF="brooklyn/management/ha/ManagementPlaneSyncRecordPersister.Delta.MasterChange.html" title="enum in brooklyn.management.ha.ManagementPlaneSyncRecordPersister.Delta" target="classFrame">ManagementPlaneSyncRecordPersister.Delta.MasterChange</A>
+<BR>
+<A HREF="brooklyn/management/ha/ManagementPlaneSyncRecordPersisterToMultiFile.html" title="class in brooklyn.management.ha" target="classFrame">ManagementPlaneSyncRecordPersisterToMultiFile</A>
+<BR>
 <A HREF="brooklyn/management/internal/ManagementTransitionInfo.html" title="class in brooklyn.management.internal" target="classFrame">ManagementTransitionInfo</A>
 <BR>
 <A HREF="brooklyn/management/internal/ManagementTransitionInfo.ManagementTransitionMode.html" title="enum in brooklyn.management.internal.ManagementTransitionInfo" target="classFrame">ManagementTransitionInfo.ManagementTransitionMode</A>
@@ -1588,6 +1640,8 @@ All Classes
 <A HREF="brooklyn/entity/database/mariadb/MariaDbNodeImpl.html" title="class in brooklyn.entity.database.mariadb" target="classFrame">MariaDbNodeImpl</A>
 <BR>
 <A HREF="brooklyn/entity/database/mariadb/MariaDbSshDriver.html" title="class in brooklyn.entity.database.mariadb" target="classFrame">MariaDbSshDriver</A>
+<BR>
+<A HREF="brooklyn/management/ha/MasterChooser.html" title="interface in brooklyn.management.ha" target="classFrame"><I>MasterChooser</I></A>
 <BR>
 <A HREF="brooklyn/util/math/MathFunctions.html" title="class in brooklyn.util.math" target="classFrame">MathFunctions</A>
 <BR>
@@ -1616,6 +1670,8 @@ All Classes
 <A HREF="brooklyn/mementos/Memento.html" title="interface in brooklyn.mementos" target="classFrame"><I>Memento</I></A>
 <BR>
 <A HREF="brooklyn/entity/rebind/persister/MementoFileWriter.html" title="class in brooklyn.entity.rebind.persister" target="classFrame">MementoFileWriter</A>
+<BR>
+<A HREF="brooklyn/entity/rebind/persister/MementoFileWriterSync.html" title="class in brooklyn.entity.rebind.persister" target="classFrame">MementoFileWriterSync</A>
 <BR>
 <A HREF="brooklyn/entity/rebind/persister/MementoSerializer.html" title="interface in brooklyn.entity.rebind.persister" target="classFrame"><I>MementoSerializer</I></A>
 <BR>
@@ -1996,6 +2052,8 @@ All Classes
 <A HREF="brooklyn/config/render/RendererHints.NamedAction.html" title="interface in brooklyn.config.render.RendererHints" target="classFrame"><I>RendererHints.NamedAction</I></A>
 <BR>
 <A HREF="brooklyn/config/render/RendererHints.NamedActionWithUrl.html" title="class in brooklyn.config.render.RendererHints" target="classFrame">RendererHints.NamedActionWithUrl</A>
+<BR>
+<A HREF="brooklyn/util/repeat/Repeater.html" title="class in brooklyn.util.repeat" target="classFrame">Repeater</A>
 <BR>
 <A HREF="brooklyn/util/internal/Repeater.html" title="class in brooklyn.util.internal" target="classFrame">Repeater</A>
 <BR>

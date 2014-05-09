@@ -1,0 +1,232 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+<title>brooklyn.management.ha (Brooklyn)</title>
+<META NAME="keywords" CONTENT="brooklyn.management.ha package">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
+<link href="../../../groovy.ico" type="image/x-icon" rel="shortcut icon">
+<link href="../../../groovy.ico" type="image/x-icon" rel="icon">
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="brooklyn.management.ha (Brooklyn)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</head>
+
+<body BGCOLOR="white" onload="windowTitle();">
+<hr>
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<a name="navbar_top"><!-- --></a>
+<table summary="" width="100%" border="0" cellpadding="1" cellspacing="0">
+<tbody><tr>
+<td colspan="2" class="NavBarCell1" bgcolor="#eeeeff">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table summary="" border="0" cellpadding="0" cellspacing="3">
+  <tbody><tr valign="top" align="center">
+  <td class="NavBarCell1" bgcolor="#eeeeff">    <a href="../../../overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td class="NavBarCell1Rev" bgcolor="#ffffff"> &nbsp;<font class="NavBarFont1Rev"><b>Package</b></font>&nbsp;</td>
+  <td class="NavBarCell1" bgcolor="#eeeeff">    <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <!--
+  <td class="NavBarCell1" bgcolor="#eeeeff">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  -->
+  <td class="NavBarCell1" bgcolor="#eeeeff">    <a href="../../../deprecated-list.html"><font class="NavBarFont1"><b>Deprecated</b></font></a>&nbsp;</td>
+  <td class="NavBarCell1" bgcolor="#eeeeff">    <a href="../../../index-all.html"><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td class="NavBarCell1" bgcolor="#eeeeff">    <a href="../../../help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</tbody></table>
+</td>
+<td rowspan="3" valign="top" align="right"><em>
+    <b>Brooklyn</b>
+</em>
+</td>
+</tr>
+
+<tr>
+<td class="NavBarCell2" bgcolor="white"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td class="NavBarCell2" bgcolor="white"><font size="-2">
+  <a href="../../../index.html?brooklyn/management/ha/package-summary.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="package-summary.html" target="_top"><b>NO FRAMES</b></a>  &nbsp;
+&nbsp;<script type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../allclasses-frame.html"><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+  <A HREF="../../../allclasses-frame.html"><B>All Classes</B></A>
+</noscript>
+
+
+</font></td>
+</tr>
+</tbody></table>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+
+<HR>
+<H2>
+Package brooklyn.management.ha
+</H2>
+
+
+
+<P>&nbsp;</P>
+
+
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+    <TR BGCOLOR="#90DDF7" CLASS="TableHeadingColor">
+    <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+    <B>Interface Summary</B></FONT></TH>
+    </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="HighAvailabilityManager.html" title="class in brooklyn/management/ha">HighAvailabilityManager</A></B></TD>
+        <TD>Monitors other management nodes (via the ManagementPlaneSyncRecordPersister) to detect
+ if the current master has failed or stopped. </TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="HighAvailabilityManagerImpl.PromotionListener.html" title="class in brooklyn/management/ha">HighAvailabilityManagerImpl.PromotionListener</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="ManagementNodeSyncRecord.html" title="class in brooklyn/management/ha">ManagementNodeSyncRecord</A></B></TD>
+        <TD>Represents the state of a management-node.</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="ManagementPlaneSyncRecord.html" title="class in brooklyn/management/ha">ManagementPlaneSyncRecord</A></B></TD>
+        <TD>Meta-data about the management plane - the management nodes and who is currently master.
+ </TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="ManagementPlaneSyncRecordPersister.html" title="class in brooklyn/management/ha">ManagementPlaneSyncRecordPersister</A></B></TD>
+        <TD>Controls the persisting and reading back of mementos relating to the management plane.
+ </TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="ManagementPlaneSyncRecordPersister.Delta.html" title="class in brooklyn/management/ha">ManagementPlaneSyncRecordPersister.Delta</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="MasterChooser.html" title="class in brooklyn/management/ha">MasterChooser</A></B></TD>
+        <TD>For choosing which management node to promote, when master detected as failed or stopped.</TD>
+        </TR>
+
+</TABLE>
+&nbsp;
+<P>
+<DL>
+</DL>
+<hr>
+    
+
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+    <TR BGCOLOR="#90DDF7" CLASS="TableHeadingColor">
+    <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+    <B>Class Summary</B></FONT></TH>
+    </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="BasicMasterChooser.html" title="class in brooklyn/management/ha">BasicMasterChooser</A></B></TD>
+        <TD>@since 0.7.0</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="BasicMasterChooser.AlphabeticMasterChooser.html" title="class in brooklyn/management/ha">BasicMasterChooser.AlphabeticMasterChooser</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="HighAvailabilityManagerImpl.html" title="class in brooklyn/management/ha">HighAvailabilityManagerImpl</A></B></TD>
+        <TD>This is the guts of the high-availability solution in Brooklyn.</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="ManagementPlaneSyncRecordDeltaImpl.html" title="class in brooklyn/management/ha">ManagementPlaneSyncRecordDeltaImpl</A></B></TD>
+        <TD>@since 0.7.0</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="ManagementPlaneSyncRecordDeltaImpl.Builder.html" title="class in brooklyn/management/ha">ManagementPlaneSyncRecordDeltaImpl.Builder</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="ManagementPlaneSyncRecordPersisterToMultiFile.html" title="class in brooklyn/management/ha">ManagementPlaneSyncRecordPersisterToMultiFile</A></B></TD>
+        <TD>Structure of files is:
+ <ul>
+   <li><TT>plane/</TT> - top-level directory
+     <ul>
+       <li><TT>master</TT> - contains the id of the management-node that is currently master
+       <li><TT>change.log</TT> - log of changes made
+       <li><TT>nodes/</TT> - sub-directory, containing one file per management-node
+         <ul>
+           <li><TT>a9WiuVKp</TT> - file named after the management-node's id, containing the management node's current state
+           <li><TT>E1eDXQF3</TT>
+         </ul>
+     </ul>
+ </ul></TD>
+        </TR>
+
+</TABLE>
+&nbsp;
+<P>
+<DL>
+</DL>
+<hr>
+    
+
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+    <TR BGCOLOR="#90DDF7" CLASS="TableHeadingColor">
+    <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+    <B>Enum Summary</B></FONT></TH>
+    </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="HighAvailabilityMode.html" title="class in brooklyn/management/ha">HighAvailabilityMode</A></B></TD>
+        <TD>Specifies the HA mode that a mgmt node should run in</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="ManagementNodeState.html" title="class in brooklyn/management/ha">ManagementNodeState</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="ManagementPlaneSyncRecordPersister.Delta.MasterChange.html" title="class in brooklyn/management/ha">ManagementPlaneSyncRecordPersister.Delta.MasterChange</A></B></TD>
+        <TD></TD>
+        </TR>
+
+</TABLE>
+&nbsp;
+<P>
+<DL>
+</DL>
+<hr>
+    
+
+
+
+
+
+<p><b>Brooklyn Multi-Cloud Application Management Platform</b> <br/> <a href="http://brooklyncentral.github.com/" target="_top">brooklyncentral.github.com</a>. Apache License. &copy; 2012.</p>
+<hr>
+</body>
+</html>

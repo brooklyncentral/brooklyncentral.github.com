@@ -52,6 +52,7 @@ brooklyn.entity.proxying
 brooklyn.entity.rebind
 brooklyn.entity.rebind.dto
 brooklyn.entity.rebind.persister
+brooklyn.entity.rebind.plane.dto
 brooklyn.entity.software
 brooklyn.entity.trait
 brooklyn.entity.webapp
@@ -91,6 +92,7 @@ brooklyn.location.jclouds.pool
 brooklyn.location.jclouds.templates
 brooklyn.location.jclouds.zone
 brooklyn.management
+brooklyn.management.ha
 brooklyn.management.internal
 brooklyn.management.usage
 brooklyn.mementos
@@ -137,6 +139,7 @@ brooklyn.util.mutex
 brooklyn.util.net
 brooklyn.util.os
 brooklyn.util.pool
+brooklyn.util.repeat
 brooklyn.util.ssh
 brooklyn.util.stream
 brooklyn.util.task

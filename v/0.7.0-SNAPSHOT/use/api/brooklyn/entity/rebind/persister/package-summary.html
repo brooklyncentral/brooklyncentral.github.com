@@ -91,7 +91,8 @@ Package brooklyn.entity.rebind.persister
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="MementoSerializer.html" title="class in brooklyn/entity/rebind/persister">MementoSerializer</A></B></TD>
-        <TD></TD>
+        <TD>Serializes the given object; it is often used with BrooklynMemento for persisting and restoring,
+ though it can be used for any object (and is also used for the ManagementNodeSyncRecord instances)</TD>
         </TR>
 
 </TABLE>
@@ -116,7 +117,7 @@ Package brooklyn.entity.rebind.persister
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="BrooklynMementoPersisterInMemory.html" title="class in brooklyn/entity/rebind/persister">BrooklynMementoPersisterInMemory</A></B></TD>
-        <TD></TD>
+        <TD>@deprecated since 0.7.0 for production use BrooklynMementoPersisterToMultiFile instead; class be moved to tests</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -133,6 +134,11 @@ Package brooklyn.entity.rebind.persister
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="MementoFileWriter.html" title="class in brooklyn/entity/rebind/persister">MementoFileWriter</A></B></TD>
         <TD>For asynchronously writing to a file.</TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="MementoFileWriterSync.html" title="class in brooklyn/entity/rebind/persister">MementoFileWriterSync</A></B></TD>
+        <TD>For synchronously writing to a file - all calls block.</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">

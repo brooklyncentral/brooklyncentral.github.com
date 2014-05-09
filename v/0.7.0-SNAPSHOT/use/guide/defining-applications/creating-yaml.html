@@ -459,9 +459,15 @@ although for these you'll supply an <code>endpoint: https://9.9.9.9:9999/v2.0/</
 
 <p>You can also specify pre-existing servers to use -- "bring-your-own-nodes".
 These can be a global pool or specific to a service.
-Both styles are shown here (though normally only one will be selected, depending on the blueprint):</p>
+Both styles are shown here (though normally only one will be selected,</p>
 
-<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">simple-appserver-with-location</span>
+<!-- TODO see #1377, currently it is *parent* location which is preferred typically -->
+
+
+<p>
+depending on the blueprint):</p>
+
+<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">simple-appserver-with-location-byon</span>
 <span class="l-Scalar-Plain">location</span><span class="p-Indicator">:</span>
   <span class="l-Scalar-Plain">byon</span><span class="p-Indicator">:</span>
     <span class="l-Scalar-Plain">user</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">brooklyn</span>
@@ -492,11 +498,11 @@ set up "named locations" you can use as <code>location: named:my_cloudstack</cod
 
 <p>Another simple blueprint will just create a VM which you can use, without any software installed upon it:</p>
 
-<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">simple-appserver-with-location</span>
+<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">simple-vm</span>
 <span class="l-Scalar-Plain">services</span><span class="p-Indicator">:</span>
 <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">type</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">brooklyn.entity.basic.EmptySoftwareProcess</span>
   <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">VM</span>
-  <span class="l-Scalar-Plain">provisioningProperties</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">provisioning.properties</span><span class="p-Indicator">:</span>
     <span class="l-Scalar-Plain">minRam</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">8192</span>
     <span class="l-Scalar-Plain">minCores</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">4</span>
     <span class="l-Scalar-Plain">minDisk</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">100</span>
@@ -504,14 +510,14 @@ set up "named locations" you can use as <code>location: named:my_cloudstack</cod
 </div>
 
 
-<p><strong>We've omitted the <code>location</code> section here and in many of the examples below;
-add the appropriate choice when you paste your YAML. Note that the <code>provisioningProperties</code> will be
-ignored if deploying to <code>localhost</code> or <code>byon</code> fixed-IP machines.</strong></p>
+<p><em>We've omitted the <code>location</code> section here and in many of the examples below;
+add the appropriate choice when you paste your YAML. Note that the <code>provisioning.properties</code> will be
+ignored if deploying to <code>localhost</code> or <code>byon</code> fixed-IP machines.</em></p>
 
 <p>This will create a VM with the specified parameters in your choice of cloud.
 In the GUI (and in the REST API), the entity is called "VM",
 and the hostname and IP address(es) are reported as <a href="/v/0.7.0-SNAPSHOT/use/guide/defining-applications/basic-concepts.html">sensors</a>.
-There are many more <code>provisioningProperties</code> supported here,
+There are many more <code>provisioning.properties</code> supported here,
 including:</p>
 
 <ul>
@@ -532,7 +538,7 @@ so if you have keys set up you can immediately ssh in!)</li>
 <p>One way is just to repeat the <code>- type: brooklyn.entity.basic.EmptySoftwareProcess</code> block,
 but there's another way which will keep your powder <a href="http://en.wikipedia.org/wiki/Don't_repeat_yourself">DRY</a>:</p>
 
-<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">simple-appserver-with-location</span>
+<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">cluster-vm</span>
 <span class="l-Scalar-Plain">services</span><span class="p-Indicator">:</span>
 <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">type</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">brooklyn.entity.group.DynamicCluster</span>
   <span class="l-Scalar-Plain">initialSize</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">5</span>
@@ -540,7 +546,7 @@ but there's another way which will keep your powder <a href="http://en.wikipedia
     <span class="l-Scalar-Plain">$brooklyn:entitySpec</span><span class="p-Indicator">:</span>
       <span class="l-Scalar-Plain">type</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">brooklyn.entity.basic.EmptySoftwareProcess</span>
       <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">VM</span>
-      <span class="l-Scalar-Plain">provisioningProperties</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">provisioning.properties</span><span class="p-Indicator">:</span>
         <span class="l-Scalar-Plain">minRam</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">8192</span>
         <span class="l-Scalar-Plain">minCores</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">4</span>
         <span class="l-Scalar-Plain">minDisk</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">100</span>
@@ -705,9 +711,7 @@ in superclasses and are portable across multiple implementations.</p>
 </div>
 
 
-<p>We've also brought in the <code>provisioningProperties</code> from the VM example earlier
-(although here is is specified as a config key, which takes dot notation,
-in contrast to flags which take camel-case) --
+<p>We've also brought in the <code>provisioning.properties</code> from the VM example earlier
 so our database has 8GB RAM.
 Any of those properties, including <code>imageId</code> and <code>user</code>, can be defined on a per-entity basis.</p>
 
@@ -774,7 +778,7 @@ We can set up our blueprint to do autoscaling based on requests per second
 (keeping it in the range 10..100, with a maximum of 5 appserver nodes)
 as follows:</p>
 
-<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">appserver-policy</span>
+<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">appserver-w-policy</span>
 <span class="l-Scalar-Plain">services</span><span class="p-Indicator">:</span>
 <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">type</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">brooklyn.entity.webapp.ControlledDynamicWebAppCluster</span>
   <span class="l-Scalar-Plain">initialSize</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">1</span>
@@ -837,18 +841,15 @@ including <code>bash</code> and Chef.</p>
 
 <p>It's just a <code>sleep</code> statement, but you get the idea:  it could be any script you want.</p>
 
-<!-- TODO
-If it's a big script, you'll probably prefer to have it live somewhere else.
-You can write a script to download artifacts and then invoke another script, 
+<p>If it's a big script, you'll probably prefer to have it live somewhere else.
+You can write a script to download artifacts and then invoke another script,
 or you can specify an artifact to download and a script to run relative to the root
-(with `start.sh` being the default).
-The following shows the use of `download.url` to do the same thing,
-assuming the script is in `start.sh` in the root of the archive at 
-`/tmp/vanilla-date.tgz`:
+(with <code>start.sh</code> being the default).
+The following shows the use of <code>download.url</code> to do the same thing,
+assuming the script is in <code>start.sh</code> in the root of the archive at
+<code>/tmp/vanilla-date.tgz</code>:</p>
 
-
-<div class="highlight"><pre><code class="yaml"><span class="c1"># TODO WIP</span>
-<span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">vanilla-bash-date-file</span>
+<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">vanilla-bash-date-file</span>
 <span class="l-Scalar-Plain">location</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">localhost</span>
 <span class="l-Scalar-Plain">services</span><span class="p-Indicator">:</span>
 <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">type</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">brooklyn.entity.basic.VanillaSoftwareProcess</span>
@@ -858,25 +859,18 @@ assuming the script is in `start.sh` in the root of the archive at
 </div>
 
 
--->
-
-
 <p>Because Brooklyn insists on monitoring the process,
 the one complexity is that the script should
 write the PID of the process to <code>$PID_FILE</code>.
 (There are other options, as documented on the Javadoc of the <code>VanillaSoftwareProcess</code> class.)</p>
 
-<!-- 
-TODO restarter policy
-
-Here, because the backgrounded process will terminate after 60s,
-you'll see the entity come up in Brooklyn (after 3s) but then it will fail after a minute.
+<p>Here, you'll see the entity come up in Brooklyn after 3s due to the final sleep,
+but after another 57s the backgrounded process whose PID is monitored will terminate.
+The service will then show as "on-fire".
 If we pretend that's simulating a real-world failure, we might wish to attach a policy
-which automatically restarts it:   
+which automatically restarts it:</p>
 
-
-<div class="highlight"><pre><code class="yaml"><span class="c1"># simple illustration of VanillaSoftwareProcess which makes it easy to launch arbitrary software on machines</span>
-<span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">vanilla-bash-date-restarter</span>
+<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">vanilla-bash-date-restarter</span>
 <span class="l-Scalar-Plain">location</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">localhost</span>
 <span class="l-Scalar-Plain">services</span><span class="p-Indicator">:</span>
 <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">type</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">brooklyn.entity.basic.VanillaSoftwareProcess</span>
@@ -888,10 +882,12 @@ which automatically restarts it:
     <span class="no">echo $! &gt; $PID_FILE</span>
     <span class="no">sleep 3</span>
   <span class="l-Scalar-Plain">brooklyn.policies</span><span class="p-Indicator">:</span>
+  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">policyType</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">brooklyn.policy.ha.ServiceFailureDetector</span>
+    <span class="l-Scalar-Plain">brooklyn.config</span><span class="p-Indicator">:</span>
+      <span class="c1"># only count it failed if it has been down for 10s</span>
+      <span class="l-Scalar-Plain">serviceFailedStabilizationDelay</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">10s</span>
   <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">policyType</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">brooklyn.policy.ha.ServiceRestarter</span>
     <span class="l-Scalar-Plain">brooklyn.config</span><span class="p-Indicator">:</span>
-      <span class="c1"># monitor the &quot;service.up&quot; sensor</span>
-      <span class="l-Scalar-Plain">failureSensorToMonitor</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">$brooklyn:sensor(&quot;brooklyn.entity.basic.Attributes&quot;, &quot;service.isUp&quot;)</span>
       <span class="c1"># by default, 2 failures w/in 3m will cause it to give up;</span>
       <span class="c1"># let&#39;s lower that limit so it restarts continually! </span>
       <span class="l-Scalar-Plain">failOnRecurringFailuresInThisDuration</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">30s</span>
@@ -899,10 +895,13 @@ which automatically restarts it:
 </div>
 
 
--->
-
-
-
+<p>One common pattern in Brooklyn is to compose simple policies.
+In the blueprint above, one policy is triggering a failure sensor
+if the service is down for 10s; the other policy responds to these
+failures by restarting the service.
+With this blueprint, you'll see this show-date-and-sleep "service"
+fail every minute, but then -- like a phoenix rising from its ashes --
+be restarted.</p>
 
 <!--
 TODO building up children entities
@@ -911,9 +910,16 @@ TODO adding sensors and effectors
 -->
 
 
-<h3>Using Chef Recipes</h3>
 
-<p>TODO</p>
+
+<!--
+
+### Using Chef Recipes
+
+TODO
+
+-->
+
 
 <h3>More Information</h3>
 
