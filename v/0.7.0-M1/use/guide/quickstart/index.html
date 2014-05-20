@@ -254,17 +254,6 @@ console.log("setting text to "+txt);
             
         
         
-            
-                
-                
-                
-                
-                
-                
-            
-        
-            
-        
     
         
         
@@ -298,9 +287,6 @@ console.log("setting text to "+txt);
             
         
             
-        
-    
-        
         
     
         
@@ -388,8 +374,6 @@ console.log("setting text to "+txt);
     
         &raquo; <a href="/v/0.7.0-M1/use/guide/quickstart/index.html">Quick Start</a>
         
-            &raquo; <a href="/v/0.7.0-M1/use/guide/quickstart/index.html">Download & Deploy</a>
-        
     
 </p>
 
@@ -413,29 +397,29 @@ console.log("setting text to "+txt);
 <!--- RELEASE -->
 
 
-<p>This guide will walk you through deploying an application to a public cloud.</p>
+<p>This guide will walk you through deploying an application to a public cloud, and managing that application.</p>
 
 <p>We will be deploying an example 3-tier web application, described using this blueprint:</p>
 
 <div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">My Web Cluster</span>
-<span class="l-Scalar-Plain">location</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">location</span>
+<span class="l-Scalar-Plain">location</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">localhost</span>
+
 <span class="l-Scalar-Plain">services</span><span class="p-Indicator">:</span>
 
 <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">serviceType</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">brooklyn.entity.webapp.ControlledDynamicWebAppCluster</span>
   <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">My Web</span>
+  <span class="l-Scalar-Plain">location</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">localhost</span>
   <span class="l-Scalar-Plain">brooklyn.config</span><span class="p-Indicator">:</span>
-    <span class="l-Scalar-Plain">wars.root</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://search.maven.org/remotecontent?filepath=io/brooklyn/example/brooklyn-example-hello-world-sql-webapp/0.7.0-M1/brooklyn-example-hello-world-sql-webapp-0.7.0-M1.war</span>
-    <span class="l-Scalar-Plain">java.sysprops</span><span class="p-Indicator">:</span>
-      <span class="l-Scalar-Plain">brooklyn.example.db.url</span><span class="p-Indicator">:</span> <span class="p-Indicator">&gt;</span>
-        <span class="no">$brooklyn:formatString(&quot;jdbc:%s%s?user=%s\\&amp;password=%s&quot;,</span>
-        <span class="no">component(&quot;db&quot;).attributeWhenReady(&quot;datastore.url&quot;),</span>
-        <span class="no">&quot;visitors&quot;, &quot;brooklyn&quot;, &quot;br00k11n&quot;)</span>
+    <span class="l-Scalar-Plain">wars.root</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://search.maven.org/remotecontent?filepath=io/brooklyn/example/brooklyn-example-hello-world-sql-webapp/0.6.0-M2/brooklyn-example-hello-world-sql-webapp-0.6.0-M2.war</span>
+    <span class="l-Scalar-Plain">java.sysprops</span><span class="p-Indicator">:</span> 
+      <span class="l-Scalar-Plain">brooklyn.example.db.url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">$brooklyn:formatString(&quot;jdbc:%s%s?user=%s\\&amp;password=%s&quot;,</span>
+         <span class="l-Scalar-Plain">component(&quot;db&quot;).attributeWhenReady(&quot;database.url&quot;), &quot;visitors&quot;, &quot;brooklyn&quot;, &quot;br00k11n&quot;)</span>
 
 <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">serviceType</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">brooklyn.entity.database.mysql.MySqlNode</span>
   <span class="l-Scalar-Plain">id</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">db</span>
   <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">My DB</span>
   <span class="l-Scalar-Plain">brooklyn.config</span><span class="p-Indicator">:</span>
-    <span class="l-Scalar-Plain">creationScriptUrl</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">https://bit.ly/brooklyn-visitors-creation-script</span>
+    <span class="l-Scalar-Plain">creationScriptUrl</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">classpath://visitors-creation-script.sql</span>
 </code></pre>
 </div>
 
@@ -455,13 +439,11 @@ console.log("setting text to "+txt);
 
 <p>This will create a <code>brooklyn-0.7.0-M1</code> folder.</p>
 
-<p>Note: You'll need a Java JRE or SDK installed (version 6 or later), as Brooklyn is Java under the covers.</p>
+<p>Note: you'll also need Java JRE or SDK installed (version 6 or later).</p>
 
 <h2>Launch Brooklyn</h2>
 
 <p>Let's setup some paths for easy commands.</p>
-
-<p>(Click the clipboard on these code snippets for easier c&amp;p.)</p>
 
 <div class="highlight"><pre><code class="bash"><span class="nv">$ </span><span class="nb">cd </span>brooklyn-0.7.0-M1
 <span class="nv">$ BROOKLYN_DIR</span><span class="o">=</span><span class="s2">&quot;$(pwd)&quot;</span>
@@ -479,9 +461,7 @@ console.log("setting text to "+txt);
 
 <p>Brooklyn will output the address of the management interface:</p>
 
-<p><code>INFO  Starting brooklyn web-console on loopback interface because no security config is set</code></p>
-
-<p><code>INFO  Started Brooklyn console at http://127.0.0.1:8081/, running classpath://brooklyn.war and []</code></p>
+<p><code>... Started Brooklyn console at http://127.0.0.1:8081/</code> (<a href="http://127.0.0.1:8081/">link</a>)</p>
 
 <p>But before we really use Brooklyn, we need to setup some Locations.</p>
 
@@ -489,24 +469,20 @@ console.log("setting text to "+txt);
 
 <h2>Configuring a Location</h2>
 
-<p>Brooklyn deploys applications to Locations.</p>
-
-<p>Locations can be clouds, machines with fixed IPs or localhost (for testing).</p>
+<p>Brooklyn deploys applications to Locations. Locations can be clouds, machines with fixed IPs or localhost (for testing).</p>
 
 <p>Brooklyn loads Location configuration  from <code>~/.brooklyn/brooklyn.properties</code>.</p>
 
-<p>Create a <code>.brooklyn</code> folder in your home directory and download the template <a href="brooklyn.properties">brooklyn.properties</a> to that folder.</p>
+<p>Create a <code>.brooklyn</code> folder in your home directory:</p>
 
 <div class="highlight"><pre><code class="bash"><span class="nv">$ </span>mkdir ~/.brooklyn
-<span class="nv">$ </span><span class="nb">cd</span> ~/.brooklyn
-<span class="nv">$ </span>wget /v/0.7.0-M1/use/guide/quickstart/brooklyn.properties
 </code></pre>
 </div>
 
 
-<p>Open brooklyn.properties in a text editor and add your cloud credentials.</p>
+<p>Download the template <a href="brooklyn.properties">brooklyn.properties</a>  and place this in <code>~/.brooklyn</code>.</p>
 
-<p>If you would rather test Brooklyn on localhost, follow <a href="/v/0.7.0-M1/use/guide/locations/">these instructions</a> to ensure that your Brooklyn can access your machine.</p>
+<p>Open the file in a text editor and add your cloud credentials. If you would rather test Brooklyn on localhost, follow <a href="/use/guide/locations/">these instructions</a> to ensure that your Brooklyn can access your machine.</p>
 
 <p>Restart Brooklyn:</p>
 
@@ -517,113 +493,75 @@ console.log("setting text to "+txt);
 
 <h2>Launching an Application</h2>
 
-<p>There are several ways to deploy a YAML blueprint (including specifying the blueprint on the command line or submitting it via the REST API).</p>
+<p>There are several ways to deploy a YAML blueprint:</p>
 
-<p>For now, we will simply copy-and-paste the raw YAML blueprint into the web console.</p>
+<ol>
+<li>We can supply a blueprint file at startup: <code>brooklyn launch --app /path/to/myblueprint.yaml</code></li>
+<li>We can deploy using the web-console.</li>
+<li>We can deploy using the brooklyn REST api.</li>
+</ol>
 
-<p>Open the web console (<a href="http://127.0.0.1:8081">127.0.0.1:8081</a>). As Brooklyn is not currently managing any applications the 'Create Application' dialog opens automatically. Select the YAML tab.</p>
 
-<p><img src="images/add-application-modal-yaml.png" alt="Brooklyn web console, showing the YAML tab of the Add Application dialog." /></p>
+<p>We will use the second option to deploy a 3-tier web-app, using the YAML file at the top of this page.</p>
 
-<h3>Chose your Cloud / Location</h3>
+<p>On the home page of the Brooklyn web-console, click the "add application" button (if no applications are currently running, this will be opened automatically). Select the YAML tab and paste your YAML code.</p>
 
-<p>Edit the 'location' parameter in the YAML template (repeated below) to use the location you configured.</p>
+<h3>Chose your cloud / location</h3>
 
-<p>For example, replace:</p>
+<p>Edit the yaml to use the location you configured, e.g. replace:</p>
 
-<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">location</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">location</span>
+<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">location</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">localhost</span>
 </code></pre>
 </div>
 
 
-<p>with (one of):</p>
+<p>with:</p>
 
-<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">location</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">aws-ec2:us-east-1</span>
-<span class="l-Scalar-Plain">location</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">rackspace-cloudservers-us:ORD</span>
-<span class="l-Scalar-Plain">location</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">google-compute-engine:europe-west1-a</span>
-<span class="l-Scalar-Plain">location</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">localhost</span>
+<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">location</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">google-compute-engine:europe-west1-a</span>
 </code></pre>
 </div>
 
 
-<p><strong>My Web Cluster Blueprint</strong></p>
+<p>Click "finish". You should see your application listed, with status "STARTING".</p>
 
-<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">My Web Cluster</span>
-<span class="l-Scalar-Plain">location</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">location</span>
-<span class="l-Scalar-Plain">services</span><span class="p-Indicator">:</span>
+<h2>Monitoring and managing applications</h2>
 
-<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">serviceType</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">brooklyn.entity.webapp.ControlledDynamicWebAppCluster</span>
-  <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">My Web</span>
-  <span class="l-Scalar-Plain">brooklyn.config</span><span class="p-Indicator">:</span>
-    <span class="l-Scalar-Plain">wars.root</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://search.maven.org/remotecontent?filepath=io/brooklyn/example/brooklyn-example-hello-world-sql-webapp/0.7.0-M1/brooklyn-example-hello-world-sql-webapp-0.7.0-M1.war</span>
-    <span class="l-Scalar-Plain">java.sysprops</span><span class="p-Indicator">:</span>
-      <span class="l-Scalar-Plain">brooklyn.example.db.url</span><span class="p-Indicator">:</span> <span class="p-Indicator">&gt;</span>
-        <span class="no">$brooklyn:formatString(&quot;jdbc:%s%s?user=%s\\&amp;password=%s&quot;,</span>
-        <span class="no">component(&quot;db&quot;).attributeWhenReady(&quot;datastore.url&quot;),</span>
-        <span class="no">&quot;visitors&quot;, &quot;brooklyn&quot;, &quot;br00k11n&quot;)</span>
+<p>In the Brooklyn web-console clicking on an application listed on the home page, or the Applications tab, will show all the applications currently running.</p>
 
-<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">serviceType</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">brooklyn.entity.database.mysql.MySqlNode</span>
-  <span class="l-Scalar-Plain">id</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">db</span>
-  <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">My DB</span>
-  <span class="l-Scalar-Plain">brooklyn.config</span><span class="p-Indicator">:</span>
-    <span class="l-Scalar-Plain">creationScriptUrl</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">https://bit.ly/brooklyn-visitors-creation-script</span>
-</code></pre>
-</div>
+<p>We can explore the management hierarchy of an application, which will show us the entities it is composed of. If you have deployed the above YAML, then you'll see a standard 3-tier web-app. Clicking on the ControlledDynamicWebAppCluster will show if the cluster is ready to serve and, when ready, will provide a web address for the front of the loadbalancer.</p>
 
+<p>If the service.isUp, you can view the demo web application in your browser at the webapp.url.</p>
 
-<p>Paste the modified YAML into the dialog and click 'Finish'.
-The dialog will close and Brooklyn will begin deploying your application.</p>
+<p>Through the Activities tab, you can drill into the activities each entity is doing or has recently done. Click on the task to see its details, and to drill into its "Children Tasks". For example, if you drill into MySqlNode's start operation, you can see the "Start (processes)", then "launch", and then the ssh command used including the stdin, stdout and stderr.</p>
 
-<p>Your application will be shown as 'Starting' on the web console's front page.</p>
+<h2>Stopping the application</h2>
 
-<p><img src="images/my-web-cluster-starting.png" alt="My Web Cluster is STARTING." /></p>
+<p>To stop an application, select the application in the tree view, click on the Effectors tab, and invoke the "Stop" effector. This will cleanly shutdown all components in the application.</p>
 
-<h2>Monitoring and Managing Applications</h2>
+<h3>Testing the Policies</h3>
 
-<p>Click on the application name, or open the Applications tab.</p>
+<p>Brooklyn at its heart is a policy driven management plane which can implement business and technical policies.</p>
 
-<p>We can explore the management hierarchy of the application, which will show us the entities it is composed of.</p>
+<p>The Web Cluster with DB demo comes pre-configured with an <code>AutoScalerPolicy</code>, attached to
+the cluster of JBoss7 servers and a <code>targets</code> policy attached to the loadbalancer. You can
+ observe policies this in the management console using the Policy tab of the relevant
+ entity (e.g. <code>DynamicWebAppCluster</code> shows the <code>AutoScalerPolicy</code>.</p>
 
-<ul>
-<li>My Web Cluster (A <code>BasicApplication</code>)
+<p>The cluster autoscaler policy will automatically scale the cluster up or down to be the
+right size for the current load. ('One server' is the minimum size allowed by the policy.)
+The loadbalancer will automatically be updated by the targets policy as the cluster size
+changes.</p>
 
-<ul>
-<li>My DB (A <code>MySqlNode</code>)</li>
-<li>My Web (A <code>ControlledDynamicWebAppCluster</code>)
-
-<ul>
-<li>Cluster of JBoss7 Servers (A <code>DynamicWebAppCluster</code>)</li>
-<li>NginxController (An <code>NginxController</code>)</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-
-<p>Clicking on the 'My Web' entity will show the Summary tab. Here we can see if the cluster is ready to serve and, when ready, grab the web address for the front of the loadbalancer.</p>
-
-<p><img src="images/my-web.png" alt="Exploring My Web." /></p>
-
-<p>The Activity tab allows us to drill down into what activities each entity is currently doing or has recently done. It is possible to drill down to all child tasks, and view the commands issued, and any errors or warnings that occured.</p>
-
-<p>Drill into the 'My DB' start operation. Working down through  'Start (processes)', then 'launch', we can discover the ssh command used including the stdin, stdout and stderr.</p>
-
-<p><a href="images/my-db-activities-large.png"><img src="images/my-db-activities.png" alt="My DB Activities." /></a></p>
-
-<h2>Stopping the Application</h2>
-
-<p>To stop an application, select the application in the tree view (the top/root entity), click on the Effectors tab, and invoke the 'Stop' effector. This will cleanly shutdown all components in the application and return any cloud machines that were being used.</p>
-
-<p><a href="images/my-web-cluster-stop-confirm-large.png"><img src="images/my-web-cluster-stop-confirm.png" alt="My DB Activities." /></a></p>
+<p>Sitting idle, your cluster will only contain one server, but you can check that the policy
+works  using a tool like <a href="http://jmeter.apache.org/">jmeter</a> pointed at the nginx endpoint
+to create load on the cluster.</p>
 
 <h3>Next</h3>
 
-<p>So far we have touched on Brooklyn's ability to <em>deploy</em> an application blueprint to a cloud provider, but this a very small part of Brooklyn's capabilities!</p>
-
-<p>Brooklyn's real power is in using Policies to automatically <em>manage</em> applications. There is also the (very useful) ability to store a catalog of application blueprints, ready to go.</p>
-
-<p><a href="policies-and-catalogs.html">Getting Started - Policies and Catalogs</a></p>
+<p>The <a href="/v/0.7.0-M1/use/examples/webcluster/index.html">Elastic Web Cluster Example</a> page
+details how to build the demo application from scratch. It shows how Brooklyn can
+complement your application with policy driven management, and how an application can be
+run without using the service catalog.</p>
 
 
         </div><!--maincontent-->
@@ -662,20 +600,7 @@ The dialog will close and Brooklyn will begin deploying your application.</p>
         
 	      <div class="toc-2 toc-active">
       
-	        <a href="/v/0.7.0-M1/use/guide/quickstart/index.html"><div class="toc-2-item toc-2-header toc-active">Quick Start</div></a>
-            <div class="toc-2-children-popup"><div class="toc-2-children">
-        
-            
-              <div class="toc-3 toc-active">
-	            <a href="/v/0.7.0-M1/use/guide/quickstart/index.html"><div class="toc-3-item toc-active">Download & Deploy</div></a>
-              </div>
-        
-            
-              <div class="toc-3 ">
-	            <a href="/v/0.7.0-M1/use/guide/quickstart/policies-and-catalogs.html"><div class="toc-3-item">Policies & Catalogs</div></a>
-              </div>
-        
-            </div></div>
+	        <a href="/v/0.7.0-M1/use/guide/quickstart/index.html"><div class="toc-2-item toc-active">Quick Start</div></a>
       
           </div>
     
@@ -768,14 +693,6 @@ The dialog will close and Brooklyn will begin deploying your application.</p>
               </div>
         
             </div></div>
-      
-          </div>
-    
-        
-        
-	      <div class="toc-2 ">
-      
-	        <a href="/v/0.7.0-M1/use/guide/locations/index.html"><div class="toc-2-item">Locations</div></a>
       
           </div>
     
