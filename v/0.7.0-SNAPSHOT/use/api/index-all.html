@@ -6169,7 +6169,7 @@ and* first 8 bits in the first byte</dd>
 </dt><dd>Encodes a string suitable for use as a URL in an HTML form: space to +, and high-numbered chars assuming UTF-8.
  </dd>
 <dt><a href="brooklyn/util/text/StringEscapes.JavaStringEscapes.html#escapeJavaString(java.lang.String, java.lang.Appendable)" title="Method in StringEscapes.JavaStringEscapes"><b>escapeJavaString</b>(String, Appendable)</b></a> - Method in <a href="brooklyn/util/text/StringEscapes.JavaStringEscapes.html">StringEscapes.JavaStringEscapes</a>
-</dt><dd></dd>
+</dt><dd>converts normal string to java escaped for double-quotes (but not wrapped in double quotes)</dd>
 <dt><a href="brooklyn/util/text/StringEscapes.BashStringEscapes.html#escapeLiteralForDoubleQuotedBash(java.lang.String)" title="Method in StringEscapes.BashStringEscapes"><b>escapeLiteralForDoubleQuotedBash</b>(String)</b></a> - Method in <a href="brooklyn/util/text/StringEscapes.BashStringEscapes.html">StringEscapes.BashStringEscapes</a>
 </dt><dd>performs replacements on a string so that it can be legally inserted into a double-quoted bash context 
  (without the surrounding double quotes; see also <a href='#wrapBash(java.lang.String)'>wrapBash(String)</a>)</dd>
@@ -6583,7 +6583,7 @@ and* first 8 bits in the first byte</dd>
 <dt><a href="brooklyn/entity/drivers/downloads/FilenameProducers.html" title="Class in brooklyn.entity.drivers.downloads"><b>FilenameProducers</b></a> - Class in <a href="./brooklyn/entity/drivers/downloads/package-summary.html">brooklyn.entity.drivers.downloads</a>
 </dt><dd></dd>
 <dt><a href="brooklyn/entity/webapp/FilenameToWebContextMapper.html" title="Class in brooklyn.entity.webapp"><b>FilenameToWebContextMapper</b></a> - Class in <a href="./brooklyn/entity/webapp/package-summary.html">brooklyn.entity.webapp</a>
-</dt><dd></dd>
+</dt><dd>utilities for translating consistently between a filename (http://acme.org/foo.war) and a web context path (/foo)</dd>
 <dt><a href="brooklyn/location/jclouds/pool/MachineSet.html#filtered(Predicate)" title="Method in MachineSet"><b>filtered</b>(Predicate)</b></a> - Method in <a href="brooklyn/location/jclouds/pool/MachineSet.html">MachineSet</a>
 </dt><dd></dd>
 <dt><a href="brooklyn/config/ConfigUtils.html#filterFor(brooklyn.config.BrooklynProperties, Predicate)" title="Method in ConfigUtils"><b>filterFor</b>(BrooklynProperties, Predicate)</b></a> - Method in <a href="brooklyn/config/ConfigUtils.html">ConfigUtils</a>
@@ -24068,7 +24068,8 @@ and* first 8 bits in the first byte</dd>
 </dt><dd>given a string in java syntax, e.g. wrapped in quotes and with backslash escapes, returns the literal value,
  without the surrounding quotes and unescaped; throws IllegalArgumentException if not a valid java string</dd>
 <dt><a href="brooklyn/util/text/StringEscapes.JavaStringEscapes.html#unwrapJavaStringIfWrapped(java.lang.String)" title="Method in StringEscapes.JavaStringEscapes"><b>unwrapJavaStringIfWrapped</b>(String)</b></a> - Method in <a href="brooklyn/util/text/StringEscapes.JavaStringEscapes.html">StringEscapes.JavaStringEscapes</a>
-</dt><dd></dd>
+</dt><dd>as <a href='#unwrapJavaString(java.lang.String)'>unwrapJavaString(String)</a> if the given string is wrapped in double quotes;
+ otherwise just returns the given string</dd>
 <dt><a href="brooklyn/util/text/StringEscapes.JavaStringEscapes.html#unwrapJsonishListIfPossible(java.lang.String)" title="Method in StringEscapes.JavaStringEscapes"><b>unwrapJsonishListIfPossible</b>(String)</b></a> - Method in <a href="brooklyn/util/text/StringEscapes.JavaStringEscapes.html">StringEscapes.JavaStringEscapes</a>
 </dt><dd>converts a comma separated list in a single string to a list of strings, 
  doing what would be expected if given java or json style string as input,
