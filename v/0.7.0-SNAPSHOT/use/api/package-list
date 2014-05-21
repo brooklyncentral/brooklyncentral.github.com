@@ -39,6 +39,7 @@ brooklyn.entity.messaging.storm
 brooklyn.entity.monitoring.monit
 brooklyn.entity.network.bind
 brooklyn.entity.nosql.cassandra
+brooklyn.entity.nosql.couchbase
 brooklyn.entity.nosql.couchdb
 brooklyn.entity.nosql.mongodb
 brooklyn.entity.nosql.mongodb.sharding

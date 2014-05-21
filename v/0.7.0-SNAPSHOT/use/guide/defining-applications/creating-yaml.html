@@ -808,6 +808,9 @@ as follows:</p>
 </div>
 
 
+<p>Use your favorite load-generation tool (<code>jmeter</code> is one good example) to send a huge
+volume of requests against the server and see the policies kick in to resize it.</p>
+
 <h2>New Custom Entities</h2>
 
 <p>So far we've covered how to configure and compose entities.
@@ -823,85 +826,86 @@ including <code>bash</code> and Chef.</p>
 <p>The following blueprint shows how a simple script can be embedded in the YAML
 (the <code>|</code> character is special YAML which makes it easier to insert multi-line text):</p>
 
-<div class="highlight"><pre><code class="yaml"><span class="c1"># simple illustration of VanillaSoftwareProcess which makes it easy to launch arbitrary software on machines</span>
-<span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">vanilla-bash-date</span>
+<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Simple Netcat Server Example</span>
 <span class="l-Scalar-Plain">location</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">localhost</span>
 <span class="l-Scalar-Plain">services</span><span class="p-Indicator">:</span>
 <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">type</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">brooklyn.entity.basic.VanillaSoftwareProcess</span>
-  <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Date1</span>
+  <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Simple Netcat Server</span>
   <span class="l-Scalar-Plain">launch.command</span><span class="p-Indicator">:</span> <span class="p-Indicator">|</span>
-    <span class="no">echo utc `date +%s` &gt; DATE</span>
-    <span class="no">echo human `date` &gt;&gt; DATE</span>
-    <span class="no">nohup sleep 60 &amp;</span>
+    <span class="no">echo hello | nc -l 4321 &amp;</span>
     <span class="no">echo $! &gt; $PID_FILE</span>
-    <span class="no">sleep 3</span>
 </code></pre>
 </div>
 
 
-<p>It's just a <code>sleep</code> statement, but you get the idea:  it could be any script you want.</p>
+<p>This starts a simple <code>nc</code> listener on port 4321 which will respond <code>hello</code> to the first
+session which connects to it. Test it by running <code>telnet localhost 4321</code>.</p>
 
-<p>If it's a big script, you'll probably prefer to have it live somewhere else.
-You can write a script to download artifacts and then invoke another script,
-or you can specify an artifact to download and a script to run relative to the root
-(with <code>start.sh</code> being the default).
-The following shows the use of <code>download.url</code> to do the same thing,
-assuming the script is in <code>start.sh</code> in the root of the archive at
-<code>/tmp/vanilla-date.tgz</code>:</p>
+<p>This is just a simple script, but it shows how any script can be easily embedded here,
+including a script to download and run other artifacts.
+Many artifacts are already packaged such that they can be downloaded and launched
+with a simple script, and <code>VanillaSoftwareProcess</code> can also be used for them.
+We can specify a <code>download.url</code> which downloads artifacts (unpacking TAR, TGZ, and ZIP archives)
+before running <code>launch.command</code> relative to where that file is installed (or unpacked),
+with <code>./start.sh</code> being the default <code>launch.command</code>.</p>
 
-<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">vanilla-bash-date-file</span>
+<p>So if we create a file <code>/tmp/netcat-server.tgz</code> containing just <code>start.sh</code> in the root
+which consists of the two lines in the previous example,
+we can instead write our example as:</p>
+
+<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Simple Netcat Example From File</span>
 <span class="l-Scalar-Plain">location</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">localhost</span>
 <span class="l-Scalar-Plain">services</span><span class="p-Indicator">:</span>
 <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">type</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">brooklyn.entity.basic.VanillaSoftwareProcess</span>
-  <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Date1</span>
-  <span class="l-Scalar-Plain">download.url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">file:///tmp/vanilla-date.tgz</span>
+  <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Simple Netcat Server</span>
+  <span class="l-Scalar-Plain">download.url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">file:///tmp/netcat-server.tgz</span>
 </code></pre>
 </div>
 
 
-<p>Because Brooklyn insists on monitoring the process,
-the one complexity is that the script should
-write the PID of the process to <code>$PID_FILE</code>.
-(There are other options, as documented on the Javadoc of the <code>VanillaSoftwareProcess</code> class.)</p>
+<p>The one requirement of the script is that it store the process ID (PID) in the file
+pointed to by <code>$PID_FILE</code>, hence the second line of the script.
+This is because Brooklyn wants to monitor the services under management.
+(There are other options, as documented on the Javadoc of the <code>VanillaSoftwareProcess</code> class.)
+And indeed, once you've run one <code>telnet</code> to the server, you'll see that the
+service has gone "on fire" in Brooklyn -- because the <code>nc</code> process has stopped.</p>
 
-<p>Here, you'll see the entity come up in Brooklyn after 3s due to the final sleep,
-but after another 57s the backgrounded process whose PID is monitored will terminate.
-The service will then show as "on-fire".
-If we pretend that's simulating a real-world failure, we might wish to attach a policy
-which automatically restarts it:</p>
+<p>Besides detecting this failure, Brooklyn policies can be added to the YAML to take appropriate
+action. A simple recovery here might just be to restart the process:</p>
 
-<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">vanilla-bash-date-restarter</span>
+<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Simple Netcat Server with Restart</span>
 <span class="l-Scalar-Plain">location</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">localhost</span>
 <span class="l-Scalar-Plain">services</span><span class="p-Indicator">:</span>
 <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">type</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">brooklyn.entity.basic.VanillaSoftwareProcess</span>
-  <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Date1</span>
+  <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Simple Netcat Server</span>
   <span class="l-Scalar-Plain">launch.command</span><span class="p-Indicator">:</span> <span class="p-Indicator">|</span>
-    <span class="no">echo utc `date +%s` &gt; DATE</span>
-    <span class="no">echo human `date` &gt;&gt; DATE</span>
-    <span class="no">nohup sleep 60 &amp;</span>
+    <span class="no">echo hello | nc -l 4321 &amp;</span>
     <span class="no">echo $! &gt; $PID_FILE</span>
-    <span class="no">sleep 3</span>
   <span class="l-Scalar-Plain">brooklyn.policies</span><span class="p-Indicator">:</span>
   <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">policyType</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">brooklyn.policy.ha.ServiceFailureDetector</span>
     <span class="l-Scalar-Plain">brooklyn.config</span><span class="p-Indicator">:</span>
-      <span class="c1"># only count it failed if it has been down for 10s</span>
-      <span class="l-Scalar-Plain">serviceFailedStabilizationDelay</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">10s</span>
+      <span class="c1"># wait 15s after service fails before propagating failure</span>
+      <span class="l-Scalar-Plain">serviceFailedStabilizationDelay</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">15s</span>
   <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">policyType</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">brooklyn.policy.ha.ServiceRestarter</span>
     <span class="l-Scalar-Plain">brooklyn.config</span><span class="p-Indicator">:</span>
-      <span class="c1"># by default, 2 failures w/in 3m will cause it to give up;</span>
-      <span class="c1"># let&#39;s lower that limit so it restarts continually! </span>
-      <span class="l-Scalar-Plain">failOnRecurringFailuresInThisDuration</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">30s</span>
+      <span class="c1"># repeated failures in a time window can cause the restarter to abort,</span>
+      <span class="c1"># propagating the failure; a time window of 0 will mean it always restarts!</span>
+      <span class="l-Scalar-Plain">failOnRecurringFailuresInThisDuration</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">0</span>
 </code></pre>
 </div>
 
 
-<p>One common pattern in Brooklyn is to compose simple policies.
-In the blueprint above, one policy is triggering a failure sensor
-if the service is down for 10s; the other policy responds to these
-failures by restarting the service.
-With this blueprint, you'll see this show-date-and-sleep "service"
-fail every minute, but then -- like a phoenix rising from its ashes --
-be restarted.</p>
+<p>Autonomic management in Brooklyn often follows the principle that complex behaviours emerge
+from composing simple policies.
+The blueprint above uses one policy to triggering a failure sensor when the service is down,
+and another responds to such failures by restarting the service.
+This makes it easy to configure various aspects, such as to delay to see if the service itself recovers
+(which here we've set to 15 seconds) or to bail out on multiple failures within a time window (which again we are not doing).
+Running with this blueprint, you'll see that the service shows as on fire for 15s after a <code>telnet</code>,
+before the policy restarts it.</p>
+
+<p>This of course is a simple example, but it shows many of the building blocks used in real-world blueprints,
+and how often they can be easily described and combined in Brooklyn YAML blueprints.</p>
 
 <!--
 TODO building up children entities
@@ -923,7 +927,7 @@ TODO
 
 <h3>More Information</h3>
 
-<p>Plenty of examples of YAML exist in the Brooklyn codebase,
+<p>Plenty of examples of blueprints exist in the Brooklyn codebase,
 so a good starting point is to <a href="/v/0.7.0-SNAPSHOT/dev/code/index.html"><code>git clone</code></a> it
 and search for <code>*.yaml</code> files therein.</p>
 

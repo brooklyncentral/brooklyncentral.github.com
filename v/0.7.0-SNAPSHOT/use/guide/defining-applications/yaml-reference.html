@@ -421,19 +421,30 @@ the entity being defined, with these being the most common:</p>
 <li><p><code>id</code>: an ID string, used to refer to this service</p></li>
 <li><p><code>location</code> (or <code>locations</code>): as defined in the root element</p></li>
 <li><p><code>brooklyn.config</code>: configuration key-value pairs passed to the service entity being created</p></li>
-<li><p><code>brooklyn.children</code>: TODO</p></li>
-<li><p><code>brooklyn.policies</code>: TODO</p></li>
+<li><p><code>brooklyn.children</code>: a list of <code>ServiceSpecifications</code> which will be configured as children of this entity</p></li>
+<li><p><code>brooklyn.policies</code>: a list of policies, each as a map described with their <code>type</code> and their <code>brooklyn.config</code> as keys</p></li>
+<li><p><code>brooklyn.enrichers</code>: a list of enrichers, each as a map described with their <code>type</code> and their <code>brooklyn.config</code> as keys</p></li>
+<li><p><code>brooklyn.initializers</code>: a list of <code>EntityInitializer</code> instances to be constructed and run against the entity,
+each as a map described with their <code>type</code> and their <code>brooklyn.config</code> as keys.
+An <code>EntityInitiailzer</code> can perform arbitrary customization to an entity whilst it is being constructed,
+such as adding dynamic sensors and effectors. These classes must expose a public constructor taking
+a single <code>Map</code> where the <code>brooklyn.config</code> is passed in.</p></li>
 </ul>
 
 
-<p>Each entity can define additional key-value pairs, with other keys being passed as flags,
-so consult its documentation or source for more information.</p>
+<p>Entities may accept additional key-value pairs,
+usually documented on the entity.
+These typically consist of the config keys or flags (indicated by <code>@SetFromFlag</code>) declared on the entity class itself.
+Declared flags and config keys may be passed in at the root of the <code>ServiceSpecification</code> or in <code>brooklyn.config</code>.
+(Undeclared config is only accepted in the <code>brooklyn.config</code> map.)</p>
 
 <h2><code>LocationSpecification</code> Elements</h2>
 
-<p>TODO - as a string or as a map</p>
+<!-- TODO - expand this, currently it's concise notes -->
 
-<p>in brief it is like this:</p>
+
+<p>In brief, location specs are supplied as follows, either for the entire application (at the root)
+or for a specific <code>ServiceSpecification</code>:</p>
 
 <pre><code>location:
   jclouds:aws-ec2:
@@ -442,21 +453,20 @@ so consult its documentation or source for more information.</p>
     credential: &lt;access-key-hex-digits&gt;
 </code></pre>
 
-<p>or in many cases it can be in-lined:</p>
+<p>Or in many cases it can be in-lined:</p>
 
 <pre><code>location: localhost
 location: named:my_openstack
 location: aws-ec2:us-west-1
 </code></pre>
 
-<p>for the first, you'll need password-less ssh access to localhost.
-for the second, you'll need to define a named location in <code>brooklyn.properties</code>,
+<p>For the first immediately, you'll need password-less ssh access to localhost.
+For the second, you'll need to define a named location in <code>brooklyn.properties</code>,
 using <code>brooklyn.location.named.my_openstack....</code> properties.
-for the third, you'll need to have the identity and credentials defined in
-<code>brooklyn.properties</code>, using <code>brooklyn.location.jclouds.aws-ec2....</code> properties.
-for more information see TODO.</p>
+For the third, you'll need to have the identity and credentials defined in
+<code>brooklyn.properties</code>, using <code>brooklyn.location.jclouds.aws-ec2....</code> properties.</p>
 
-<p>if specifying multiple locations</p>
+<p>If specifying multiple locations, e.g. for a fabric:</p>
 
 <pre><code>locations:
 - localhost
@@ -468,22 +478,45 @@ for more information see TODO.</p>
     credential: &lt;access-key-hex-digits&gt;
 </code></pre>
 
-<p>finally, if you have pre-existing nodes, you can use the <code>byon</code> provider:</p>
+<p>If you have pre-existing nodes, you can use the <code>byon</code> provider, either in this format:</p>
 
 <pre><code>location:
   byon:
     user: root
-    privateKeyFile: ~/.ssh/couchbase.pem
+    privateKeyFile: ~/.ssh/key.pem
     hosts:
-    - 159.253.144.139
-    - 81.95.144.59
-    - 159.253.144.140
     - 81.95.144.58
+    - 81.95.144.59
+    - brooklyn@159.253.144.139
+    - brooklyn@159.253.144.140
 </code></pre>
 
-<p>TODO with byon, in yaml are ranges supported e.g. <code>127.0.0.[1-127]</code>?</p>
+<p>or:</p>
 
-<p>TODO with byon, how do you specify per-host user?</p>
+<pre><code>location:
+  byon:
+    user: root
+    privateKeyFile: ~/.ssh/key.pem
+    hosts: "{81.95.144.{58,59},brooklyn@159.253.144.{139-140}"
+</code></pre>
+
+<p>You cannot use glob expansions with the list notation, nor can you specify per-host
+information apart from user within a single <code>byon</code> declaration.
+However you can combine locations using <code>multi</code>:</p>
+
+<pre><code>location:
+  multi:
+    targets:
+    - byon:
+        user: root
+        privateKeyFile: ~/.ssh/key.pem
+        hosts:
+        - 81.95.144.58
+        - 81.95.144.59
+    - byon:
+        privateKeyFile: ~/.ssh/brooklyn_key.pem
+        hosts: brooklyn@159.253.144{139-140}
+</code></pre>
 
 <h2>DSL Commands</h2>
 
@@ -524,15 +557,19 @@ but as an <code>EntitySpec</code> suitable for setting as the value of <code>Con
 
 <h2>Some Powerful YAML Entities</h2>
 
-<p>TODO - All entities support configuration via YAML, but these entities in particular
+<p>All entities support configuration via YAML, but these entities in particular
 have been designed for general purpose use from YAML.  Consult the Javadoc for these
 elements for more information:</p>
 
 <ul>
-<li>Vanilla Software</li>
-<li>Chef</li>
-<li>Group and Cluster</li>
-<li>Fabric</li>
+<li><strong>Vanilla Software</strong> in <code>VanillaSoftareProcess</code>: makes it very easy to build entities
+which use <code>bash</code> commands to install and the PID to stop and restart</li>
+<li><strong>Chef</strong> in <code>ChefSoftwareProcess</code>: makes it easy to use Chef cookbooks to build entities,
+either with recipes following conventions or with configuration in the <code>ServiceSpecification</code>
+to use artibitrary recipes</li>
+<li><code>DynamicCluster</code>: provides resizable clusters given a <code>memberSpec</code> set with <code>$brooklyn.entitySpec(Map)</code> as described above</li>
+<li><code>DynamicFabric</code>: provides a set of homogeneous instances started in different locations,
+with an effector to <code>addLocation</code>, i.e. add a new instance in a given location, at runtime</li>
 </ul>
 
 
