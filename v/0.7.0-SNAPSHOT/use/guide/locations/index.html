@@ -207,7 +207,7 @@ console.log("setting text to "+txt);
 
   
   
-  <li class=""><a href="/v/0.7.0-SNAPSHOT/use/guide/index.html">User Guide</a></li>
+  <li class="toc-active"><a href="/v/0.7.0-SNAPSHOT/use/guide/index.html">User Guide</a></li>
 
   
   
@@ -249,19 +249,6 @@ console.log("setting text to "+txt);
     
         
         
-    
-        
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -270,36 +257,6 @@ console.log("setting text to "+txt);
         
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-    
-        
-        
-            
-        
-            
-        
-            
-        
-            
-        
-    
-        
         
             
         
@@ -326,14 +283,6 @@ console.log("setting text to "+txt);
         
             
         
-    
-
-    
-    
-        
-        
-            
-        
             
         
             
@@ -343,6 +292,11 @@ console.log("setting text to "+txt);
             
         
     
+        
+            
+            
+            
+            
         
         
     
@@ -356,25 +310,78 @@ console.log("setting text to "+txt);
         
             
         
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
         
     
         
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
         
     
 
+    
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
+    
 
 
-    
-    
-    
-    
 
             
 <p id="breadcrumb">
-    <a href="/v/0.7.0-SNAPSHOT">Home</a>
+    <a href="/v/0.7.0-SNAPSHOT/use/guide/index.html">User Guide</a>
     
         &raquo; <a href="/v/0.7.0-SNAPSHOT/use/guide/locations/index.html">Locations</a>
         
@@ -391,9 +398,11 @@ These can be clouds (public or private), fixed infrastructure environments, or y
 
 <p>Brooklyn looks for Location configuration in <code>~/.brooklyn/brooklyn.properties</code>.</p>
 
-<h3>Must have an SSH key</h3>
+<h2>Setting up an SSH key</h2>
 
-<p>To access any locations, Brooklyn must have access to an SSH key. By default Brooklyn looks for a key at <code>~/.ssh/id_rsa</code> and <code>~/.ssh/id_dsa</code>.</p>
+<p>While some locations can be accessed using <em>user:password</em> credentials it is more common to use authentication keys.</p>
+
+<p>To use keyfile based authentication, Brooklyn requires that the management machine has an SSH key. By default Brooklyn looks for a key at <code>~/.ssh/id_rsa</code> and <code>~/.ssh/id_dsa</code>.</p>
 
 <p>If you do not already have an SSH key installed, create a new id_rsa key:</p>
 
@@ -409,7 +418,7 @@ that has a passphrase, or a location other than <code>~/.ssh</code>, you can spe
 
 <h2>Localhost</h2>
 
-<p>To allow Brooklyn to access locahost the SSH key must be added to the <code>authorized_keys</code> on that machine.</p>
+<p>Brooklyn can access localhost if there is an SSH key on the machine and if the SSH key has been added to the list of  <code>authorized_keys</code> on that machine.</p>
 
 <div class="highlight"><pre><code class="bash"><span class="c"># _Appends_ id_rsa.pub to authorized_keys. Other keys are unaffected.</span>
 <span class="nv">$ </span>cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys
@@ -417,51 +426,55 @@ that has a passphrase, or a location other than <code>~/.ssh</code>, you can spe
 </div>
 
 
-<p>(MacOS user?: In addition to the above, enable 'Remote Login' in System Preferences >
- Sharing.)</p>
+<p>MacOS user? In addition to the above, enable 'Remote Login' in System Preferences >
+ Sharing.</p>
 
 <h2>Cloud Endpoints (via jclouds)</h2>
 
-<p><a href="http://www.jclouds.org">Apache jclouds</a> is a multi-cloud library that Brooklyn uses to access <a href="http://www.jclouds.org/documentation/reference/supported-providers/">many clouds</a>.</p>
+<p><a href="http://www.jclouds.org">Apache jclouds</a> is a multi-cloud library that Brooklyn uses to access many clouds. The <a href="http://jclouds.apache.org/reference/providers/">full list of supported providers</a> is available on jclouds.apache.org.</p>
+
+<p>Add your cloud provider's (API) credentials to <code>brooklyn.properties</code> and create an SSH key on the management machine.</p>
+
+<p>Some clouds provide both API keys and SSH keys. In this case add only the API credentials to <code>brooklyn.properties</code>. (jclouds will transparently use the API credentials to setup access using the management machine's SSH key.)</p>
 
 <h3>Example: AWS Virginia Large Centos</h3>
 
-<div class="highlight"><pre><code class="bash"><span class="c"># Provide jclouds with AWS API credentials.</span>
-brooklyn.jclouds.aws-ec2.identity <span class="o">=</span> AKA_YOUR_ACCESS_KEY_ID
-brooklyn.jclouds.aws-ec2.credential <span class="o">=</span> YourSecretKeyWhichIsABase64EncodedString
+<div class="highlight"><pre><code class="bash"><span class="c">## Snippet from ~/.brooklyn/brooklyn.properties.</span>
+
+<span class="c"># Provide jclouds with AWS API credentials.</span>
+brooklyn.location.jclouds.aws-ec2.identity <span class="o">=</span> AKA_YOUR_ACCESS_KEY_ID
+brooklyn.location.jclouds.aws-ec2.credential <span class="o">=</span> YourSecretKeyWhichIsABase64EncodedString
 
 <span class="c"># Name this location &#39;AWS Virginia Large Centos&#39; and wire to AWS US-East-1</span>
 brooklyn.location.named.AWS<span class="se">\ </span>Virginia<span class="se">\ </span>Large<span class="se">\ </span><span class="nv">Centos</span> <span class="o">=</span> jclouds:aws-ec2:us-east-1
 
-<span class="c"># Specify image, user and minimum ram size (ie instance size)</span>
+<span class="c"># (Using the same name) specify image, user and minimum ram size (ie instance size)</span>
 brooklyn.location.named.AWS<span class="se">\ </span>Virginia<span class="se">\ </span>Large<span class="se">\ </span>Centos.imageId<span class="o">=</span>us-east-1/ami-7d7bfc14
 brooklyn.location.named.AWS<span class="se">\ </span>Virginia<span class="se">\ </span>Large<span class="se">\ </span>Centos.user<span class="o">=</span>root
 brooklyn.location.named.AWS<span class="se">\ </span>Virginia<span class="se">\ </span>Large<span class="se">\ </span>Centos.minRam<span class="o">=</span>4096
-
-<span class="c"># Snippet from ~/.brooklyn/brooklyn.properties.</span>
 </code></pre>
 </div>
 
 
-<p>This will  appear as 'AWS Virginia Large Centos' in the web console, but will need to be escaped on the command line:  <code>AWS\ Virginia\ Large\ Centos</code>.</p>
+<p>This will  appear as 'AWS Virginia Large Centos' in the web console, but will need to be escaped on the command line as:  <code>AWS\ Virginia\ Large\ Centos</code>.</p>
 
 <p>See the Getting Started <a href="/use/guide/quickstart/brooklyn.properties">template brooklyn.properties</a> for more examples of using cloud endpoints.</p>
 
 <h2>Fixed Infrastructure</h2>
 
-<p>Bring-ing your own nodes (BYON) to Brooklyn is straightforward.</p>
+<p>Bringing your own nodes (BYON) to Brooklyn is straightforward.</p>
 
 <p>You will need the IP addresses of the nodes and the access credentials. Both SSH and password based login are supported.</p>
 
 <h3>Example: On-Prem Iron</h3>
 
-<div class="highlight"><pre><code class="bash"><span class="c"># Use the byon prefix, and provide the IP addresss (or IP ranges)</span>
+<div class="highlight"><pre><code class="bash"><span class="c">## Snippet from ~/.brooklyn/brooklyn.properties.</span>
+
+<span class="c"># Use the byon prefix, and provide the IP addresss (or IP ranges)</span>
 brooklyn.location.named.On-Prem<span class="se">\ </span>Iron<span class="se">\ </span><span class="nv">Example</span><span class="o">=</span>byon:<span class="o">(</span><span class="nv">hosts</span><span class="o">=</span><span class="s2">&quot;10.9.1.1,10.9.1.2,produser2@10.9.2.{10,11,20-29}&quot;</span><span class="o">)</span>
 brooklyn.location.named.On-Prem<span class="se">\ </span>Iron<span class="se">\ </span>Example.user<span class="o">=</span>produser1
 brooklyn.location.named.On-Prem<span class="se">\ </span>Iron<span class="se">\ </span>Example.privateKeyFile<span class="o">=</span>~/.ssh/produser_id_rsa
 brooklyn.location.named.On-Prem<span class="se">\ </span>Iron<span class="se">\ </span>Example.privateKeyPassphrase<span class="o">=</span>s3cr3tpassphrase
-
-<span class="c"># Snippet from ~/.brooklyn/brooklyn.properties.</span>
 </code></pre>
 </div>
 
@@ -500,7 +513,7 @@ brooklyn.location.named.On-Prem<span class="se">\ </span>Iron<span class="se">\ 
     
     
     
-	  <div class="toc-1 ">
+	  <div class="toc-1 toc-active">
   
 	    <a href="/v/0.7.0-SNAPSHOT/use/guide/index.html"><div class="toc-1-item toc-1-header ">User Guide</div></a>
         <div class="toc-1-children">
@@ -509,7 +522,20 @@ brooklyn.location.named.On-Prem<span class="se">\ </span>Iron<span class="se">\ 
         
 	      <div class="toc-2 ">
       
-	        <a href="/v/0.7.0-SNAPSHOT/use/guide/quickstart/index.html"><div class="toc-2-item">Quick Start</div></a>
+	        <a href="/v/0.7.0-SNAPSHOT/use/guide/quickstart/index.html"><div class="toc-2-item toc-2-header">Quick Start</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.7.0-SNAPSHOT/use/guide/quickstart/index.html"><div class="toc-3-item">Download & Deploy</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.7.0-SNAPSHOT/use/guide/quickstart/policies-and-catalogs.html"><div class="toc-3-item">Policies & Catalogs</div></a>
+              </div>
+        
+            </div></div>
       
           </div>
     
@@ -612,6 +638,14 @@ brooklyn.location.named.On-Prem<span class="se">\ </span>Iron<span class="se">\ 
               </div>
         
             </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 toc-active">
+      
+	        <a href="/v/0.7.0-SNAPSHOT/use/guide/locations/index.html"><div class="toc-2-item toc-active">Locations</div></a>
       
           </div>
     
