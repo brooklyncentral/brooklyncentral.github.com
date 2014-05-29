@@ -541,7 +541,7 @@ function windowTitle()
 </dt><dd></dd>
 <dt><a href="brooklyn/event/basic/ListConfigKey.ListModifications.html#addAll(java.util.Collection)" title="Method in ListConfigKey.ListModifications"><b>addAll</b>(Collection)</b></a> - Method in <a href="brooklyn/event/basic/ListConfigKey.ListModifications.html">ListConfigKey.ListModifications</a>
 </dt><dd>when passed as a value to a ListConfigKey, causes each of these items to be added</dd>
-<dt><a href="brooklyn/util/collections/MutableList.html#addAll(java.lang.Iterable)" title="Method in MutableList"><b>addAll</b>(Iterable)</b></a> - Method in <a href="brooklyn/util/collections/MutableList.html">MutableList</a>
+<dt><a href="brooklyn/util/collections/MutableList.html#addAll(java.util.Iterator)" title="Method in MutableList"><b>addAll</b>(Iterator)</b></a> - Method in <a href="brooklyn/util/collections/MutableList.html">MutableList</a>
 </dt><dd></dd>
 <dt><a href="brooklyn/util/collections/MutableList.Builder.html#addAll(java.util.Iterator)" title="Method in MutableList.Builder"><b>addAll</b>(Iterator)</b></a> - Method in <a href="brooklyn/util/collections/MutableList.Builder.html">MutableList.Builder</a>
 </dt><dd></dd>
@@ -1102,7 +1102,7 @@ function windowTitle()
 </dt><dd></dd>
 <dt><a href="brooklyn/util/text/StringShortener.html#append(java.lang.String, java.lang.String)" title="Method in StringShortener"><b>append</b>(String, String)</b></a> - Method in <a href="brooklyn/util/text/StringShortener.html">StringShortener</a>
 </dt><dd></dd>
-<dt><a href="brooklyn/util/collections/MutableList.html#appendAll(java.lang.Iterable)" title="Method in MutableList"><b>appendAll</b>(Iterable)</b></a> - Method in <a href="brooklyn/util/collections/MutableList.html">MutableList</a>
+<dt><a href="brooklyn/util/collections/MutableList.html#appendAll(java.util.Iterator)" title="Method in MutableList"><b>appendAll</b>(Iterator)</b></a> - Method in <a href="brooklyn/util/collections/MutableList.html">MutableList</a>
 </dt><dd>as java.util.List#addAll(java.util.Collection) but fluent style </dd>
 <dt><a href="brooklyn/util/text/Identifiers.html#appendBase64IdFromValueOfLength(long, int, java.lang.StringBuilder)" title="Method in Identifiers"><b>appendBase64IdFromValueOfLength</b>(long, int, StringBuilder)</b></a> - Method in <a href="brooklyn/util/text/Identifiers.html">Identifiers</a>
 </dt><dd></dd>
@@ -1285,6 +1285,8 @@ function windowTitle()
 </dt><dd>Create an ArchiveBuilder for an archive with the given name.</dd>
 <dt><a href="brooklyn/util/file/ArchiveBuilder.html" title="Class in brooklyn.util.file"><b>ArchiveBuilder</b></a> - Class in <a href="./brooklyn/util/file/package-summary.html">brooklyn.util.file</a>
 </dt><dd>Build a Zip or Jar archive.</dd>
+<dt><a href="brooklyn/util/file/ArchiveTasks.html" title="Class in brooklyn.util.file"><b>ArchiveTasks</b></a> - Class in <a href="./brooklyn/util/file/package-summary.html">brooklyn.util.file</a>
+</dt><dd></dd>
 <dt><a href="brooklyn/util/file/ArchiveUtils.html" title="Class in brooklyn.util.file"><b>ArchiveUtils</b></a> - Class in <a href="./brooklyn/util/file/package-summary.html">brooklyn.util.file</a>
 </dt><dd></dd>
 <dt><a href="brooklyn/util/file/ArchiveUtils.ArchiveType.html" title="Enum in brooklyn.util.file.ArchiveUtils"><b>ArchiveUtils.ArchiveType</b></a> - Enum in <a href="./brooklyn/util/file/package-summary.html">brooklyn.util.file</a>
@@ -3577,6 +3579,8 @@ and* first 8 bits in the first byte</dd>
 </dt><dd></dd>
 <dt><a href="brooklyn/entity/nosql/mongodb/sharding/MongoDBShardedDeployment.html#CONFIG_CLUSTER_SIZE" title="Field in MongoDBShardedDeployment"><b>CONFIG_CLUSTER_SIZE</b></a> - Field in <a href="brooklyn/entity/nosql/mongodb/sharding/MongoDBShardedDeployment.html">MongoDBShardedDeployment</a>
 </dt><dd></dd>
+<dt><a href="io/brooklyn/camp/brooklyn/spi/dsl/methods/DslComponent.html#config(java.lang.String)" title="Method in DslComponent"><b>config</b>(String)</b></a> - Method in <a href="io/brooklyn/camp/brooklyn/spi/dsl/methods/DslComponent.html">DslComponent</a>
+</dt><dd></dd>
 <dt><a href="brooklyn/entity/basic/EntityFunctions.html#config(brooklyn.config.ConfigKey)" title="Method in EntityFunctions"><b>config</b>(ConfigKey)</b></a> - Method in <a href="brooklyn/entity/basic/EntityFunctions.html">EntityFunctions</a>
 </dt><dd></dd>
 <dt><a href="brooklyn/entity/webapp/jboss/JBoss7SshDriver.html#CONFIG_FILE" title="Field in JBoss7SshDriver"><b>CONFIG_FILE</b></a> - Field in <a href="brooklyn/entity/webapp/jboss/JBoss7SshDriver.html">JBoss7SshDriver</a>
@@ -4951,7 +4955,9 @@ and* first 8 bits in the first byte</dd>
 </dt><dd></dd>
 <dt><a href="brooklyn/event/basic/DependentConfiguration.Builder.html" title="Class in brooklyn.event.basic.DependentConfiguration"><b>DependentConfiguration.Builder</b></a> - Class in <a href="./brooklyn/event/basic/package-summary.html">brooklyn.event.basic</a>
 </dt><dd>Builder for producing variants of attributeWhenReady.</dd>
-<dt><a href="brooklyn/util/file/ArchiveUtils.html#deploy(java.util.Map, java.lang.String, brooklyn.location.basic.SshMachineLocation, java.lang.String, java.lang.String, java.lang.String)" title="Method in ArchiveUtils"><b>deploy</b>(Map, String, SshMachineLocation, String, String, String)</b></a> - Method in <a href="brooklyn/util/file/ArchiveUtils.html">ArchiveUtils</a>
+<dt><a href="brooklyn/util/file/ArchiveTasks.html#deploy(brooklyn.util.ResourceUtils, java.util.Map, java.lang.String, brooklyn.location.basic.SshMachineLocation, java.lang.String, boolean, java.lang.String, java.lang.String)" title="Method in ArchiveTasks"><b>deploy</b>(ResourceUtils, Map, String, SshMachineLocation, String, boolean, String, String)</b></a> - Method in <a href="brooklyn/util/file/ArchiveTasks.html">ArchiveTasks</a>
+</dt><dd>returns a task which installs and unpacks the given archive, as per ArchiveUtils#deploy(ResourceUtils, Map, String, SshMachineLocation, String, String, String)#deploy(ResourceUtils, Map, String, SshMachineLocation, String, String, String)</dd>
+<dt><a href="brooklyn/util/file/ArchiveUtils.html#deploy(brooklyn.util.ResourceUtils, java.util.Map, java.lang.String, brooklyn.location.basic.SshMachineLocation, java.lang.String, boolean, java.lang.String, java.lang.String)" title="Method in ArchiveUtils"><b>deploy</b>(ResourceUtils, Map, String, SshMachineLocation, String, boolean, String, String)</b></a> - Method in <a href="brooklyn/util/file/ArchiveUtils.html">ArchiveUtils</a>
 </dt><dd>Deploys an archive file to a remote machine and extracts the contents.</dd>
 <dt><a href="brooklyn/entity/brooklynnode/BrooklynNode.html#DEPLOY_BLUEPRINT" title="Field in BrooklynNode"><b>DEPLOY_BLUEPRINT</b></a> - Field in <a href="brooklyn/entity/brooklynnode/BrooklynNode.html">BrooklynNode</a>
 </dt><dd></dd>
@@ -5426,8 +5432,6 @@ and* first 8 bits in the first byte</dd>
 </dt><dd></dd>
 <dt><a href="brooklyn/entity/zookeeper/ZooKeeperNode.html#DOWNLOAD_URL" title="Field in ZooKeeperNode"><b>DOWNLOAD_URL</b></a> - Field in <a href="brooklyn/entity/zookeeper/ZooKeeperNode.html">ZooKeeperNode</a>
 </dt><dd></dd>
-<dt><a href="brooklyn/entity/chef/ChefBashCommands.html#downloadAndExpandCookbook(java.lang.String)" title="Method in ChefBashCommands"><b>downloadAndExpandCookbook</b>(String)</b></a> - Method in <a href="brooklyn/entity/chef/ChefBashCommands.html">ChefBashCommands</a>
-</dt><dd>as <a href='#downloadAndExpandCookbook(java.lang.String, java.lang.String)'>downloadAndExpandCookbook(String, String)</a> with no cookbook name</dd>
 <dt><a href="brooklyn/entity/drivers/downloads/DownloadProducerFromCloudsoftRepo.html" title="Class in brooklyn.entity.drivers.downloads"><b>DownloadProducerFromCloudsoftRepo</b></a> - Class in <a href="./brooklyn/entity/drivers/downloads/package-summary.html">brooklyn.entity.drivers.downloads</a>
 </dt><dd></dd>
 <dt><a href="brooklyn/entity/drivers/downloads/DownloadProducerFromCloudsoftRepo.html#DownloadProducerFromCloudsoftRepo(brooklyn.config.StringConfigMap)" title="Constructor in DownloadProducerFromCloudsoftRepo"><b>DownloadProducerFromCloudsoftRepo</b>(StringConfigMap)</b></a> - Constructor in <a href="brooklyn/entity/drivers/downloads/DownloadProducerFromCloudsoftRepo.html">DownloadProducerFromCloudsoftRepo</a>
@@ -7616,6 +7620,8 @@ and* first 8 bits in the first byte</dd>
 </dt><dd></dd>
 <dt><a href="brooklyn/entity/nosql/mongodb/AbstractMongoDBSshDriver.html#getBaseName()" title="Method in AbstractMongoDBSshDriver"><b>getBaseName</b>()</b></a> - Method in <a href="brooklyn/entity/nosql/mongodb/AbstractMongoDBSshDriver.html">AbstractMongoDBSshDriver</a>
 </dt><dd></dd>
+<dt><a href="brooklyn/util/net/Urls.html#getBasename(java.lang.String)" title="Method in Urls"><b>getBasename</b>(String)</b></a> - Method in <a href="brooklyn/util/net/Urls.html">Urls</a>
+</dt><dd>return the last segment of the given url before any '?'</dd>
 <dt><a href="brooklyn/entity/drivers/downloads/DownloadSubstituters.html#getBasicAddonSubstitutions(brooklyn.entity.drivers.EntityDriver, java.lang.String)" title="Method in DownloadSubstituters"><b>getBasicAddonSubstitutions</b>(EntityDriver, String)</b></a> - Method in <a href="brooklyn/entity/drivers/downloads/DownloadSubstituters.html">DownloadSubstituters</a>
 </dt><dd></dd>
 <dt><a href="brooklyn/entity/drivers/downloads/DownloadSubstituters.html#getBasicEntitySubstitutions(brooklyn.entity.drivers.EntityDriver)" title="Method in DownloadSubstituters"><b>getBasicEntitySubstitutions</b>(EntityDriver)</b></a> - Method in <a href="brooklyn/entity/drivers/downloads/DownloadSubstituters.html">DownloadSubstituters</a>
@@ -13061,8 +13067,8 @@ and* first 8 bits in the first byte</dd>
 </dt><dd></dd>
 <dt><a href="brooklyn/entity/messaging/activemq/ActiveMQSshDriver.html#install()" title="Method in ActiveMQSshDriver"><b>install</b>()</b></a> - Method in <a href="brooklyn/entity/messaging/activemq/ActiveMQSshDriver.html">ActiveMQSshDriver</a>
 </dt><dd></dd>
-<dt><a href="brooklyn/util/file/ArchiveUtils.html#install(java.util.Map, brooklyn.location.basic.SshMachineLocation, java.lang.String, java.lang.String, int)" title="Method in ArchiveUtils"><b>install</b>(Map, SshMachineLocation, String, String, int)</b></a> - Method in <a href="brooklyn/util/file/ArchiveUtils.html">ArchiveUtils</a>
-</dt><dd>Installs a URL onto a remote machine.</dd>
+<dt><a href="brooklyn/util/file/ArchiveUtils.html#install(brooklyn.util.ResourceUtils, java.util.Map, brooklyn.location.basic.SshMachineLocation, java.lang.String, java.lang.String, int)" title="Method in ArchiveUtils"><b>install</b>(ResourceUtils, Map, SshMachineLocation, String, String, int)</b></a> - Method in <a href="brooklyn/util/file/ArchiveUtils.html">ArchiveUtils</a>
+</dt><dd></dd>
 <dt><a href="brooklyn/entity/network/bind/BindDnsServerSshDriver.html#install()" title="Method in BindDnsServerSshDriver"><b>install</b>()</b></a> - Method in <a href="brooklyn/entity/network/bind/BindDnsServerSshDriver.html">BindDnsServerSshDriver</a>
 </dt><dd></dd>
 <dt><a href="brooklyn/entity/brooklynnode/BrooklynNodeSshDriver.html#install()" title="Method in BrooklynNodeSshDriver"><b>install</b>()</b></a> - Method in <a href="brooklyn/entity/brooklynnode/BrooklynNodeSshDriver.html">BrooklynNodeSshDriver</a>
@@ -13184,6 +13190,8 @@ and* first 8 bits in the first byte</dd>
 </dt><dd></dd>
 <dt><a href="brooklyn/entity/osgi/karaf/KarafContainerImpl.html#installFeature(java.lang.String)" title="Method in KarafContainerImpl"><b>installFeature</b>(String)</b></a> - Method in <a href="brooklyn/entity/osgi/karaf/KarafContainerImpl.html">KarafContainerImpl</a>
 </dt><dd></dd>
+<dt><a href="brooklyn/util/task/ssh/SshTasks.html#installFromUrl(brooklyn.util.ResourceUtils, java.util.Map, brooklyn.location.basic.SshMachineLocation, java.lang.String, java.lang.String)" title="Method in SshTasks"><b>installFromUrl</b>(ResourceUtils, Map, SshMachineLocation, String, String)</b></a> - Method in <a href="brooklyn/util/task/ssh/SshTasks.html">SshTasks</a>
+</dt><dd>task to install a file given a url, where the url is resolved remotely first then locally</dd>
 <dt><a href="brooklyn/entity/basic/AbstractSoftwareProcessSshDriver.html#INSTALLING" title="Field in AbstractSoftwareProcessSshDriver"><b>INSTALLING</b></a> - Field in <a href="brooklyn/entity/basic/AbstractSoftwareProcessSshDriver.html">AbstractSoftwareProcessSshDriver</a>
 </dt><dd></dd>
 <dt><a href="brooklyn/util/ssh/BashCommands.html#installJava6()" title="Method in BashCommands"><b>installJava6</b>()</b></a> - Method in <a href="brooklyn/util/ssh/BashCommands.html">BashCommands</a>
@@ -20673,8 +20681,8 @@ and* first 8 bits in the first byte</dd>
 
 <dl>
 
-<dt><a href="brooklyn/util/text/Strings.html#s(int)" title="Method in Strings"><b>s</b>(int)</b></a> - Method in <a href="brooklyn/util/text/Strings.html">Strings</a>
-</dt><dd>returns "s" if the argument is not 1, empty string otherwise; useful when constructing plurals</dd>
+<dt><a href="brooklyn/util/text/Strings.html#s(java.util.Iterator)" title="Method in Strings"><b>s</b>(Iterator)</b></a> - Method in <a href="brooklyn/util/text/Strings.html">Strings</a>
+</dt><dd>as <a href='#s(int)'>s(int)</a> based on size of argument</dd>
 <dt><a href="brooklyn/entity/effector/Effectors.html#sameInstance(brooklyn.entity.Effector, brooklyn.entity.Effector)" title="Method in Effectors"><b>sameInstance</b>(Effector, Effector)</b></a> - Method in <a href="brooklyn/entity/effector/Effectors.html">Effectors</a>
 </dt><dd></dd>
 <dt><a href="brooklyn/entity/basic/SameServerDriverLifecycleEffectorTasks.html" title="Class in brooklyn.entity.basic"><b>SameServerDriverLifecycleEffectorTasks</b></a> - Class in <a href="./brooklyn/entity/basic/package-summary.html">brooklyn.entity.basic</a>
@@ -20892,6 +20900,8 @@ and* first 8 bits in the first byte</dd>
  (currently is all the return values of individual tasks, but we
  might want some pipeline support and eventually only to return final value...)</dd>
 <dt><a href="brooklyn/util/task/SequentialTask.html#SequentialTask(java.lang.Iterable)" title="Constructor in SequentialTask"><b>SequentialTask</b>(Iterable)</b></a> - Constructor in <a href="brooklyn/util/task/SequentialTask.html">SequentialTask</a>
+</dt><dd></dd>
+<dt><a href="brooklyn/util/guava/SerializablePredicate.html" title="Interface in brooklyn.util.guava"><b>SerializablePredicate</b></a> - Interface in <a href="./brooklyn/util/guava/package-summary.html">brooklyn.util.guava</a>
 </dt><dd></dd>
 <dt><a href="brooklyn/util/internal/LanguageUtils.html#serialize(java.lang.Object)" title="Method in LanguageUtils"><b>serialize</b>(Object)</b></a> - Method in <a href="brooklyn/util/internal/LanguageUtils.html">LanguageUtils</a>
 </dt><dd></dd>
@@ -23685,6 +23695,8 @@ and* first 8 bits in the first byte</dd>
 <dt><a href="brooklyn/util/stream/DelegatingPrintStream.html#toString()" title="Method in DelegatingPrintStream"><b>toString</b>()</b></a> - Method in <a href="brooklyn/util/stream/DelegatingPrintStream.html">DelegatingPrintStream</a>
 </dt><dd></dd>
 <dt><a href="brooklyn/entity/drivers/downloads/DownloadSubstituters.Substituter.html#toString()" title="Method in DownloadSubstituters.Substituter"><b>toString</b>()</b></a> - Method in <a href="brooklyn/entity/drivers/downloads/DownloadSubstituters.Substituter.html">DownloadSubstituters.Substituter</a>
+</dt><dd></dd>
+<dt><a href="io/brooklyn/camp/brooklyn/spi/dsl/methods/DslComponent.html#toString()" title="Method in DslComponent"><b>toString</b>()</b></a> - Method in <a href="io/brooklyn/camp/brooklyn/spi/dsl/methods/DslComponent.html">DslComponent</a>
 </dt><dd></dd>
 <dt><a href="brooklyn/util/time/Duration.html#toString()" title="Method in Duration"><b>toString</b>()</b></a> - Method in <a href="brooklyn/util/time/Duration.html">Duration</a>
 </dt><dd></dd>
