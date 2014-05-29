@@ -5,35 +5,35 @@
   <title>Writing YAML Blueprints</title>
   <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 
-  <link rel="stylesheet" href="/v/0.7.0-SNAPSHOT/style/style.css" type="text/css" media="screen" />
-  <link rel="stylesheet" href="/v/0.7.0-SNAPSHOT/style/toc.css" type="text/css" media="screen" />
-  <link rel="stylesheet" href="/v/0.7.0-SNAPSHOT/style/docs/code.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/style/style.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/style/toc.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/style/docs/code.css" type="text/css" media="screen" />
 
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   
 	<!-- Sidebar/ToC Scripts and CSS -->
-	<script src="/v/0.7.0-SNAPSHOT/style/js/jquery/jquery-1.7.1.min.js"></script>
-	<script src="/v/0.7.0-SNAPSHOT/style/js/jquery/jquery-ui-1.8.18.custom.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="/v/0.7.0-SNAPSHOT/style/js/jquery/smoothness/jquery-ui-1.8.18.custom.css" />
+	<script src="/style/js/jquery/jquery-1.7.1.min.js"></script>
+	<script src="/style/js/jquery/jquery-ui-1.8.18.custom.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/style/js/jquery/smoothness/jquery-ui-1.8.18.custom.css" />
 	
-	<script type="text/javascript" src="/v/0.7.0-SNAPSHOT/style/js/superfish.js"></script>
-	<script type="text/javascript" src="/v/0.7.0-SNAPSHOT/style/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="/style/js/superfish.js"></script>
+	<script type="text/javascript" src="/style/js/jquery.cookie.js"></script>
 	
 	
 <!-- Clipboard support -->
-<script src="/v/0.7.0-SNAPSHOT/style/js/zeroclipboard/ZeroClipboard.min.js"></script>
+<script src="/style/js/zeroclipboard/ZeroClipboard.min.js"></script>
 <style type="text/css">
 .clipboard_container { float: right; padding: 8px; }
 .clipboard_button {
-    background-image: url("/v/0.7.0-SNAPSHOT/style/icons/clipboard-green-normal.png");
+    background-image: url("/style/icons/clipboard-green-normal.png");
     background-size: 18px 21px;
     width: 18px; height: 21px;
 }
-.clipboard_button:hover, .clipboard_button.zeroclipboard-is-hover { background-image: url("/v/0.7.0-SNAPSHOT/style/icons/clipboard-green-hover.png"); }
-.clipboard_button:active, .clipboard_button.zeroclipboard-is-active { background-image: url("/v/0.7.0-SNAPSHOT/style/icons/clipboard-green-click.png"); }'
+.clipboard_button:hover, .clipboard_button.zeroclipboard-is-hover { background-image: url("/style/icons/clipboard-green-hover.png"); }
+.clipboard_button:active, .clipboard_button.zeroclipboard-is-active { background-image: url("/style/icons/clipboard-green-click.png"); }'
 </style>
 <script type="text/javascript"> <!-- clipboard -->
-  ZeroClipboard.config({ moviePath: '/v/0.7.0-SNAPSHOT/style/js/zeroclipboard/ZeroClipboard.swf' });
+  ZeroClipboard.config({ moviePath: '/style/js/zeroclipboard/ZeroClipboard.swf' });
 </script>
 <script type="text/javascript"> <!-- clipboard positioning -->
 $(document).ready(function() {
@@ -103,7 +103,7 @@ console.log("setting text to "+txt);
 			if (!$.cookie('brooklyn_versions') || 
 			        (($.inArray('ALL', $.cookie('brooklyn_versions').split(",")) === -1) &&
 			        ($.inArray(thisversion, $.cookie('brooklyn_versions').split(",")) === -1)) ){
-			    msg += "<div class='warning_banner_image'><img src='/v/0.7.0-SNAPSHOT/style/icons/warning.png'/></div>";
+			    msg += "<div class='warning_banner_image'><img src='/style/icons/warning.png'/></div>";
 				msg += "<p>This content is for <strong>Brooklyn "+thisversion+"</strong>, and may differ across versions.</p>";
 			    msg += "<p>Are you using version "+thisversion+"?</p>";
 				msg += "<p class='warning_banner_buttons'>";
@@ -171,11 +171,11 @@ console.log("setting text to "+txt);
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/v/0.7.0-SNAPSHOT/meta/versions.html">0.7.0-SNAPSHOT</a></li>
-            <li><a href="/v/0.7.0-SNAPSHOT/start/download.html">Download</a></li>
+            <li><a href="/meta/versions.html">0.7.0-SNAPSHOT</a></li>
+            <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
-            <li><a href="/v/0.7.0-SNAPSHOT/meta/contact.html">Contact</a></li>
+            <li><a href="/meta/contact.html">Contact</a></li>
         </ul>
 
         <div id="menubar">  
@@ -191,31 +191,31 @@ console.log("setting text to "+txt);
 
   
   
-  <li class=""><a href="/v/0.7.0-SNAPSHOT/index.html">Overview</a></li>
+  <li class=""><a href="/index.html">Overview</a></li>
 
   
   
-  <li class=""><a href="/v/0.7.0-SNAPSHOT/start/download.html">Download</a></li>
+  <li class=""><a href="/start/download.html">Download</a></li>
 
   
   
-  <li class=""><a href="/v/0.7.0-SNAPSHOT/use/guide/quickstart/index.html">Getting Started</a></li>
+  <li class=""><a href="/use/guide/quickstart/index.html">Getting Started</a></li>
 
   
   
-  <li class=""><a href="/v/0.7.0-SNAPSHOT/start/walkthrough/index.html">Walkthrough</a></li>
+  <li class=""><a href="/start/walkthrough/index.html">Walkthrough</a></li>
 
   
   
-  <li class="toc-active"><a href="/v/0.7.0-SNAPSHOT/use/guide/index.html">User Guide</a></li>
+  <li class="toc-active"><a href="/use/guide/index.html">User Guide</a></li>
 
   
   
-  <li class=""><a href="/v/0.7.0-SNAPSHOT/use/examples/index.html">Examples</a></li>
+  <li class=""><a href="/use/examples/index.html">Examples</a></li>
 
   
   
-  <li class=""><a href="/v/0.7.0-SNAPSHOT/dev/code/index.html">Contributing</a></li>
+  <li class=""><a href="/dev/code/index.html">Contributing</a></li>
 
 
 </ul>                    
@@ -383,11 +383,11 @@ console.log("setting text to "+txt);
 
             
 <p id="breadcrumb">
-    <a href="/v/0.7.0-SNAPSHOT/use/guide/index.html">User Guide</a>
+    <a href="/use/guide/index.html">User Guide</a>
     
-        &raquo; <a href="/v/0.7.0-SNAPSHOT/use/guide/defining-applications/basic-concepts.html">Defining Applications</a>
+        &raquo; <a href="/use/guide/defining-applications/basic-concepts.html">Defining Applications</a>
         
-            &raquo; <a href="/v/0.7.0-SNAPSHOT/use/guide/defining-applications/creating-yaml.html">YAML Blueprints</a>
+            &raquo; <a href="/use/guide/defining-applications/creating-yaml.html">YAML Blueprints</a>
         
     
 </p>
@@ -421,7 +421,7 @@ it's easy to add new extensions using your favorite JVM language.)</p>
 <ul>
 <li><p>The <code>name</code> is just for the benefit of us humans.</p></li>
 <li><p>The <code>location</code> specifies where this should be deployed.
-If you've <a href="/v/0.7.0-SNAPSHOT/use/guide/locations/">set up passwordless localhost SSH access</a>
+If you've <a href="/use/guide/locations/">set up passwordless localhost SSH access</a>
 you can use <code>localhost</code> as above, but if not, just wait ten seconds for the next example.</p></li>
 <li><p>The <code>services</code> block takes a list of the typed services we want to deploy.
 This is the meat of the blueprint plan, as you'll see below.</p></li>
@@ -429,7 +429,7 @@ This is the meat of the blueprint plan, as you'll see below.</p></li>
 
 
 <p>Finally, that clipboard in the corner lets you easily copy-and-paste into the web-console:
-simply <a href="/v/0.7.0-SNAPSHOT/use/guide/quickstart/">download and launch</a> Brooklyn,
+simply <a href="/use/guide/quickstart/">download and launch</a> Brooklyn,
 then in the "Add Application" dialog at the web console
 (usually <a href="http://127.0.0.1:8081/">http://127.0.0.1:8081/</a>.
 There are several other ways to deploy, including <code>curl</code> and via the command-line,
@@ -495,7 +495,7 @@ YAML supports this, and sometimes that makes more readable plans.
 (Although in this case a simple <code>location: localhost</code> is equivalent and even more succinct, but this is a tutorial.)</p>
 
 <p>For more information see the Locations section of the <a href="yaml-reference.html">YAML reference</a>
-and in the <a href="/v/0.7.0-SNAPSHOT/use/guide/locations/">User's Guide</a>.
+and in the <a href="/use/guide/locations/">User's Guide</a>.
 Another good reference is the <a href="/use/guide/quickstart/brooklyn.properties">template brooklyn.properties</a>,
 which if you install in <code>~/.brooklyn/brooklyn.properties</code> and edit with your credentials,<br/>
 allows you to refer to clouds simply as <code>location: jclouds:aws-ec2:eu-west-1</code> or
@@ -523,7 +523,7 @@ ignored if deploying to <code>localhost</code> or <code>byon</code> fixed-IP mac
 
 <p>This will create a VM with the specified parameters in your choice of cloud.
 In the GUI (and in the REST API), the entity is called "VM",
-and the hostname and IP address(es) are reported as <a href="/v/0.7.0-SNAPSHOT/use/guide/defining-applications/basic-concepts.html">sensors</a>.
+and the hostname and IP address(es) are reported as <a href="/use/guide/defining-applications/basic-concepts.html">sensors</a>.
 There are many more <code>provisioning.properties</code> supported here,
 including:</p>
 
@@ -586,7 +586,7 @@ The example above thus gives us 5 VMs identical to the one we created in the pre
 Now let's return to our app-server example and explore how more interesting
 services can be configured, composed, and combined.</p>
 
-<p>Also note there are some good overview materials <a href="/v/0.7.0-SNAPSHOT//use/guide/defining-applications/basic-concepts.html">here</a>
+<p>Also note there are some good overview materials <a href="//use/guide/defining-applications/basic-concepts.html">here</a>
 covering clusters, sensors, effectors and more,
 if you're the kind of person who likes to learn more about concepts before seeing them in action.</p>
 
@@ -935,19 +935,19 @@ TODO
 <h3>More Information</h3>
 
 <p>Plenty of examples of blueprints exist in the Brooklyn codebase,
-so a good starting point is to <a href="/v/0.7.0-SNAPSHOT/dev/code/index.html"><code>git clone</code></a> it
+so a good starting point is to <a href="/dev/code/index.html"><code>git clone</code></a> it
 and search for <code>*.yaml</code> files therein.</p>
 
 <p>Brooklyn lived as a Java framework for many years before we felt confident
 to make a declarative front-end, so you can do pretty much anything you want to
 by dropping to the JVM. Information on that is available:
-* in the <a href="/v/0.7.0-SNAPSHOT/use/guide/entities/index.html">user guide</a>,
-* through a <a href="/v/0.7.0-SNAPSHOT/use/guide/defining-applications/archetype.html">Maven archetype</a>,
+* in the <a href="/use/guide/entities/index.html">user guide</a>,
+* through a <a href="/use/guide/defining-applications/archetype.html">Maven archetype</a>,
 * in the <a href="https://github.com/brooklyncentral/brooklyn">codebase</a>,
-* and in plenty of <a href="/v/0.7.0-SNAPSHOT/use/examples/index.html">examples</a>.</p>
+* and in plenty of <a href="/use/examples/index.html">examples</a>.</p>
 
 <p>You can also come talk to us, on IRC (#brooklyncentral on Freenode) or
-any of the usual <a href="/v/0.7.0-SNAPSHOT/meta/contact.html">hailing frequencies</a>,
+any of the usual <a href="/meta/contact.html">hailing frequencies</a>,
 as these documents are a work in progress.</p>
 
 
@@ -971,7 +971,7 @@ as these documents are a work in progress.</p>
     
 	  <div class="toc-1 ">
   
-	    <a href="/v/0.7.0-SNAPSHOT/start/index.html"><div class="toc-1-item">Start</div></a>
+	    <a href="/start/index.html"><div class="toc-1-item">Start</div></a>
   
       </div>
 
@@ -980,24 +980,24 @@ as these documents are a work in progress.</p>
     
 	  <div class="toc-1 toc-active">
   
-	    <a href="/v/0.7.0-SNAPSHOT/use/guide/index.html"><div class="toc-1-item toc-1-header ">User Guide</div></a>
+	    <a href="/use/guide/index.html"><div class="toc-1-item toc-1-header ">User Guide</div></a>
         <div class="toc-1-children">
     
         
         
 	      <div class="toc-2 ">
       
-	        <a href="/v/0.7.0-SNAPSHOT/use/guide/quickstart/index.html"><div class="toc-2-item toc-2-header">Quick Start</div></a>
+	        <a href="/use/guide/quickstart/index.html"><div class="toc-2-item toc-2-header">Quick Start</div></a>
             <div class="toc-2-children-popup"><div class="toc-2-children">
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/quickstart/index.html"><div class="toc-3-item">Download & Deploy</div></a>
+	            <a href="/use/guide/quickstart/index.html"><div class="toc-3-item">Download & Deploy</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/quickstart/policies-and-catalogs.html"><div class="toc-3-item">Policies & Catalogs</div></a>
+	            <a href="/use/guide/quickstart/policies-and-catalogs.html"><div class="toc-3-item">Policies & Catalogs</div></a>
               </div>
         
             </div></div>
@@ -1008,98 +1008,42 @@ as these documents are a work in progress.</p>
         
 	      <div class="toc-2 toc-active">
       
-	        <a href="/v/0.7.0-SNAPSHOT/use/guide/defining-applications/basic-concepts.html"><div class="toc-2-item toc-2-header">Defining Applications</div></a>
+	        <a href="/use/guide/defining-applications/basic-concepts.html"><div class="toc-2-item toc-2-header">Defining Applications</div></a>
             <div class="toc-2-children-popup"><div class="toc-2-children">
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/defining-applications/basic-concepts.html"><div class="toc-3-item">Basic Concepts</div></a>
+	            <a href="/use/guide/defining-applications/basic-concepts.html"><div class="toc-3-item">Basic Concepts</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/defining-applications/advanced-concepts.html"><div class="toc-3-item">Advanced Concepts</div></a>
+	            <a href="/use/guide/defining-applications/advanced-concepts.html"><div class="toc-3-item">Advanced Concepts</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/defining-applications/common-usage.html"><div class="toc-3-item">Common Usage</div></a>
+	            <a href="/use/guide/defining-applications/common-usage.html"><div class="toc-3-item">Common Usage</div></a>
               </div>
         
             
               <div class="toc-3 toc-active">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/defining-applications/creating-yaml.html"><div class="toc-3-item toc-active">YAML Blueprints</div></a>
+	            <a href="/use/guide/defining-applications/creating-yaml.html"><div class="toc-3-item toc-active">YAML Blueprints</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/defining-applications/deploying-yaml.html"><div class="toc-3-item">Deploying YAML</div></a>
+	            <a href="/use/guide/defining-applications/deploying-yaml.html"><div class="toc-3-item">Deploying YAML</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/defining-applications/yaml-reference.html"><div class="toc-3-item">YAML Reference</div></a>
+	            <a href="/use/guide/defining-applications/yaml-reference.html"><div class="toc-3-item">YAML Reference</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/defining-applications/archetype.html"><div class="toc-3-item">Maven Archetype</div></a>
-              </div>
-        
-            </div></div>
-      
-          </div>
-    
-        
-        
-	      <div class="toc-2 ">
-      
-	        <a href="/v/0.7.0-SNAPSHOT/use/guide/management/index.html"><div class="toc-2-item toc-2-header">Management</div></a>
-            <div class="toc-2-children-popup"><div class="toc-2-children">
-        
-            
-              <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/management/index.html#introduction"><div class="toc-3-item">Introduction</div></a>
-              </div>
-        
-            
-              <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/management/index.html#startup-config"><div class="toc-3-item">Startup Configuration</div></a>
-              </div>
-        
-            
-              <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/management/index.html#cli"><div class="toc-3-item">Command Line Interface</div></a>
-              </div>
-        
-            
-              <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/management/index.html#console"><div class="toc-3-item">Management Web Console</div></a>
-              </div>
-        
-            
-              <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/management/index.html#observation-other"><div class="toc-3-item">Observation APIs</div></a>
-              </div>
-        
-            
-              <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/management/index.html#distributed-management"><div class="toc-3-item">Distributed Management</div></a>
-              </div>
-        
-            
-              <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/management/index.html#resilience"><div class="toc-3-item">Resilience</div></a>
-              </div>
-        
-            
-              <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/management/index.html#key-apis"><div class="toc-3-item">Key APIs</div></a>
-              </div>
-        
-            
-              <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/management/index.html#sensors-and-effectors"><div class="toc-3-item">Sensors and Effectors</div></a>
+	            <a href="/use/guide/defining-applications/archetype.html"><div class="toc-3-item">Maven Archetype</div></a>
               </div>
         
             </div></div>
@@ -1110,35 +1054,52 @@ as these documents are a work in progress.</p>
         
 	      <div class="toc-2 ">
       
-	        <a href="/v/0.7.0-SNAPSHOT/use/guide/locations/index.html"><div class="toc-2-item">Locations</div></a>
-      
-          </div>
-    
-        
-        
-	      <div class="toc-2 ">
-      
-	        <a href="/v/0.7.0-SNAPSHOT/use/guide/policies/index.html"><div class="toc-2-item toc-2-header">Policies</div></a>
+	        <a href="/use/guide/management/index.html"><div class="toc-2-item toc-2-header">Management</div></a>
             <div class="toc-2-children-popup"><div class="toc-2-children">
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/policies/index.html#introduction"><div class="toc-3-item">Introduction</div></a>
+	            <a href="/use/guide/management/index.html#introduction"><div class="toc-3-item">Introduction</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/policies/index.html#writing-policies"><div class="toc-3-item">Writing Policies</div></a>
+	            <a href="/use/guide/management/index.html#startup-config"><div class="toc-3-item">Startup Configuration</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/policies/index.html#off-the-shelf-policies"><div class="toc-3-item">Off-the-Shelf Policies</div></a>
+	            <a href="/use/guide/management/index.html#cli"><div class="toc-3-item">Command Line Interface</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/policies/index.html#implementing-policies"><div class="toc-3-item">Implementing Policies</div></a>
+	            <a href="/use/guide/management/index.html#console"><div class="toc-3-item">Management Web Console</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#observation-other"><div class="toc-3-item">Observation APIs</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#distributed-management"><div class="toc-3-item">Distributed Management</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#resilience"><div class="toc-3-item">Resilience</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#key-apis"><div class="toc-3-item">Key APIs</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/management/index.html#sensors-and-effectors"><div class="toc-3-item">Sensors and Effectors</div></a>
               </div>
         
             </div></div>
@@ -1149,37 +1110,35 @@ as these documents are a work in progress.</p>
         
 	      <div class="toc-2 ">
       
-	        <a href="/v/0.7.0-SNAPSHOT/use/guide/entities/index.html"><div class="toc-2-item toc-2-header">Custom Entities</div></a>
+	        <a href="/use/guide/locations/index.html"><div class="toc-2-item">Locations</div></a>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/guide/policies/index.html"><div class="toc-2-item toc-2-header">Policies</div></a>
             <div class="toc-2-children-popup"><div class="toc-2-children">
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/entities/index.html#entity-lifestyle"><div class="toc-3-item">Entity Lifecycle</div></a>
+	            <a href="/use/guide/policies/index.html#introduction"><div class="toc-3-item">Introduction</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/entities/index.html#implementation-classes"><div class="toc-3-item">What to Extend</div></a>
+	            <a href="/use/guide/policies/index.html#writing-policies"><div class="toc-3-item">Writing Policies</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/entities/index.html#configuration"><div class="toc-3-item">Configuration</div></a>
+	            <a href="/use/guide/policies/index.html#off-the-shelf-policies"><div class="toc-3-item">Off-the-Shelf Policies</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/entities/index.html#implementing-sensors"><div class="toc-3-item">Implementing Sensors</div></a>
-              </div>
-        
-            
-              <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/entities/index.html#implementing-effectors"><div class="toc-3-item">Implementing Effectors</div></a>
-              </div>
-        
-            
-              <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/entities/index.html#testing"><div class="toc-3-item">Testing</div></a>
+	            <a href="/use/guide/policies/index.html#implementing-policies"><div class="toc-3-item">Implementing Policies</div></a>
               </div>
         
             </div></div>
@@ -1190,32 +1149,73 @@ as these documents are a work in progress.</p>
         
 	      <div class="toc-2 ">
       
-	        <a href="/v/0.7.0-SNAPSHOT/use/guide/extras/index.html"><div class="toc-2-item toc-2-header">Extras</div></a>
+	        <a href="/use/guide/entities/index.html"><div class="toc-2-item toc-2-header">Custom Entities</div></a>
             <div class="toc-2-children-popup"><div class="toc-2-children">
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/extras/index.html#web"><div class="toc-3-item">Web</div></a>
+	            <a href="/use/guide/entities/index.html#entity-lifestyle"><div class="toc-3-item">Entity Lifecycle</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/extras/index.html#database"><div class="toc-3-item">Database</div></a>
+	            <a href="/use/guide/entities/index.html#implementation-classes"><div class="toc-3-item">What to Extend</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/extras/index.html#nosql"><div class="toc-3-item">NoSQL</div></a>
+	            <a href="/use/guide/entities/index.html#configuration"><div class="toc-3-item">Configuration</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/extras/index.html#messaging"><div class="toc-3-item">Messaging</div></a>
+	            <a href="/use/guide/entities/index.html#implementing-sensors"><div class="toc-3-item">Implementing Sensors</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/extras/index.html#provisioning"><div class="toc-3-item">Provisioning</div></a>
+	            <a href="/use/guide/entities/index.html#implementing-effectors"><div class="toc-3-item">Implementing Effectors</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/entities/index.html#testing"><div class="toc-3-item">Testing</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/use/guide/extras/index.html"><div class="toc-2-item toc-2-header">Extras</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/extras/index.html#web"><div class="toc-3-item">Web</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/extras/index.html#database"><div class="toc-3-item">Database</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/extras/index.html#nosql"><div class="toc-3-item">NoSQL</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/extras/index.html#messaging"><div class="toc-3-item">Messaging</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/use/guide/extras/index.html#provisioning"><div class="toc-3-item">Provisioning</div></a>
               </div>
         
             </div></div>
@@ -1231,39 +1231,39 @@ as these documents are a work in progress.</p>
     
 	  <div class="toc-1 ">
   
-	    <a href="/v/0.7.0-SNAPSHOT/start/index.html"><div class="toc-1-item toc-1-header ">Elsewhere</div></a>
+	    <a href="/start/index.html"><div class="toc-1-item toc-1-header ">Elsewhere</div></a>
         <div class="toc-1-children">
     
         
         
 	      <div class="toc-2 ">
       
-	        <a href="/v/0.7.0-SNAPSHOT/use/examples/index.html"><div class="toc-2-item toc-2-header">Examples</div></a>
+	        <a href="/use/examples/index.html"><div class="toc-2-item toc-2-header">Examples</div></a>
             <div class="toc-2-children-popup"><div class="toc-2-children">
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/examples/webcluster/index.html"><div class="toc-3-item">Elastic Web Cluster</div></a>
+	            <a href="/use/examples/webcluster/index.html"><div class="toc-3-item">Elastic Web Cluster</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/examples/global-web-fabric/index.html"><div class="toc-3-item">Global Web Fabric</div></a>
+	            <a href="/use/examples/global-web-fabric/index.html"><div class="toc-3-item">Global Web Fabric</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/examples/whirrhadoop/index.html"><div class="toc-3-item">Whirr Hadoop Cluster</div></a>
+	            <a href="/use/examples/whirrhadoop/index.html"><div class="toc-3-item">Whirr Hadoop Cluster</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/examples/messaging/index.html"><div class="toc-3-item">Publish-Subscribe Messaging</div></a>
+	            <a href="/use/examples/messaging/index.html"><div class="toc-3-item">Publish-Subscribe Messaging</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/examples/nosql-cassandra/index.html"><div class="toc-3-item">Cassandra Cluster</div></a>
+	            <a href="/use/examples/nosql-cassandra/index.html"><div class="toc-3-item">Cassandra Cluster</div></a>
               </div>
         
             </div></div>
@@ -1274,7 +1274,7 @@ as these documents are a work in progress.</p>
         
 	      <div class="toc-2 ">
       
-	        <a href="/v/0.7.0-SNAPSHOT/use/api/index.html"><div class="toc-2-item">API Reference</div></a>
+	        <a href="/use/api/index.html"><div class="toc-2-item">API Reference</div></a>
       
           </div>
     
@@ -1282,37 +1282,37 @@ as these documents are a work in progress.</p>
         
 	      <div class="toc-2 ">
       
-	        <a href="/v/0.7.0-SNAPSHOT/dev/code/index.html"><div class="toc-2-item toc-2-header">Contributing</div></a>
+	        <a href="/dev/code/index.html"><div class="toc-2-item toc-2-header">Contributing</div></a>
             <div class="toc-2-children-popup"><div class="toc-2-children">
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/dev/code/index.html"><div class="toc-3-item">The Code</div></a>
+	            <a href="/dev/code/index.html"><div class="toc-3-item">The Code</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/dev/build/index.html"><div class="toc-3-item">Build and Test</div></a>
+	            <a href="/dev/build/index.html"><div class="toc-3-item">Build and Test</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/dev/tips/index.html"><div class="toc-3-item">Tips and Tricks</div></a>
+	            <a href="/dev/tips/index.html"><div class="toc-3-item">Tips and Tricks</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/dev/wishlist.html"><div class="toc-3-item">Wishlist</div></a>
+	            <a href="/dev/wishlist.html"><div class="toc-3-item">Wishlist</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/dev/links.html"><div class="toc-3-item">Links</div></a>
+	            <a href="/dev/links.html"><div class="toc-3-item">Links</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/dev/how-to-contrib.html"><div class="toc-3-item">How to Contribute</div></a>
+	            <a href="/dev/how-to-contrib.html"><div class="toc-3-item">How to Contribute</div></a>
               </div>
         
             </div></div>
@@ -1323,7 +1323,7 @@ as these documents are a work in progress.</p>
         
 	      <div class="toc-2 ">
       
-	        <a href="/v/0.7.0-SNAPSHOT/license/index.html"><div class="toc-2-item">License</div></a>
+	        <a href="/license/index.html"><div class="toc-2-item">License</div></a>
       
           </div>
     

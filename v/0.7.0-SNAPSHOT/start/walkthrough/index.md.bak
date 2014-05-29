@@ -5,35 +5,35 @@
   <title>Walkthrough</title>
   <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 
-  <link rel="stylesheet" href="/v/0.7.0-SNAPSHOT/style/style.css" type="text/css" media="screen" />
-  <link rel="stylesheet" href="/v/0.7.0-SNAPSHOT/style/toc.css" type="text/css" media="screen" />
-  <link rel="stylesheet" href="/v/0.7.0-SNAPSHOT/style/docs/code.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/style/style.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/style/toc.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/style/docs/code.css" type="text/css" media="screen" />
 
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   
 	<!-- Sidebar/ToC Scripts and CSS -->
-	<script src="/v/0.7.0-SNAPSHOT/style/js/jquery/jquery-1.7.1.min.js"></script>
-	<script src="/v/0.7.0-SNAPSHOT/style/js/jquery/jquery-ui-1.8.18.custom.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="/v/0.7.0-SNAPSHOT/style/js/jquery/smoothness/jquery-ui-1.8.18.custom.css" />
+	<script src="/style/js/jquery/jquery-1.7.1.min.js"></script>
+	<script src="/style/js/jquery/jquery-ui-1.8.18.custom.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/style/js/jquery/smoothness/jquery-ui-1.8.18.custom.css" />
 	
-	<script type="text/javascript" src="/v/0.7.0-SNAPSHOT/style/js/superfish.js"></script>
-	<script type="text/javascript" src="/v/0.7.0-SNAPSHOT/style/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="/style/js/superfish.js"></script>
+	<script type="text/javascript" src="/style/js/jquery.cookie.js"></script>
 	
 	
 <!-- Clipboard support -->
-<script src="/v/0.7.0-SNAPSHOT/style/js/zeroclipboard/ZeroClipboard.min.js"></script>
+<script src="/style/js/zeroclipboard/ZeroClipboard.min.js"></script>
 <style type="text/css">
 .clipboard_container { float: right; padding: 8px; }
 .clipboard_button {
-    background-image: url("/v/0.7.0-SNAPSHOT/style/icons/clipboard-green-normal.png");
+    background-image: url("/style/icons/clipboard-green-normal.png");
     background-size: 18px 21px;
     width: 18px; height: 21px;
 }
-.clipboard_button:hover, .clipboard_button.zeroclipboard-is-hover { background-image: url("/v/0.7.0-SNAPSHOT/style/icons/clipboard-green-hover.png"); }
-.clipboard_button:active, .clipboard_button.zeroclipboard-is-active { background-image: url("/v/0.7.0-SNAPSHOT/style/icons/clipboard-green-click.png"); }'
+.clipboard_button:hover, .clipboard_button.zeroclipboard-is-hover { background-image: url("/style/icons/clipboard-green-hover.png"); }
+.clipboard_button:active, .clipboard_button.zeroclipboard-is-active { background-image: url("/style/icons/clipboard-green-click.png"); }'
 </style>
 <script type="text/javascript"> <!-- clipboard -->
-  ZeroClipboard.config({ moviePath: '/v/0.7.0-SNAPSHOT/style/js/zeroclipboard/ZeroClipboard.swf' });
+  ZeroClipboard.config({ moviePath: '/style/js/zeroclipboard/ZeroClipboard.swf' });
 </script>
 <script type="text/javascript"> <!-- clipboard positioning -->
 $(document).ready(function() {
@@ -103,7 +103,7 @@ console.log("setting text to "+txt);
 			if (!$.cookie('brooklyn_versions') || 
 			        (($.inArray('ALL', $.cookie('brooklyn_versions').split(",")) === -1) &&
 			        ($.inArray(thisversion, $.cookie('brooklyn_versions').split(",")) === -1)) ){
-			    msg += "<div class='warning_banner_image'><img src='/v/0.7.0-SNAPSHOT/style/icons/warning.png'/></div>";
+			    msg += "<div class='warning_banner_image'><img src='/style/icons/warning.png'/></div>";
 				msg += "<p>This content is for <strong>Brooklyn "+thisversion+"</strong>, and may differ across versions.</p>";
 			    msg += "<p>Are you using version "+thisversion+"?</p>";
 				msg += "<p class='warning_banner_buttons'>";
@@ -171,11 +171,11 @@ console.log("setting text to "+txt);
         </div>
         
         <ul id="quicklinks">
-            <li><a href="/v/0.7.0-SNAPSHOT/meta/versions.html">0.7.0-SNAPSHOT</a></li>
-            <li><a href="/v/0.7.0-SNAPSHOT/start/download.html">Download</a></li>
+            <li><a href="/meta/versions.html">0.7.0-SNAPSHOT</a></li>
+            <li><a href="/start/download.html">Download</a></li>
             <li><a href="https://github.com/brooklyncentral">GitHub</a></li>
             <li><a href="https://twitter.com/#!/search?q=brooklyncentral">Twitter</a></li>
-            <li><a href="/v/0.7.0-SNAPSHOT/meta/contact.html">Contact</a></li>
+            <li><a href="/meta/contact.html">Contact</a></li>
         </ul>
 
         <div id="menubar">  
@@ -191,31 +191,31 @@ console.log("setting text to "+txt);
 
   
   
-  <li class=""><a href="/v/0.7.0-SNAPSHOT/index.html">Overview</a></li>
+  <li class=""><a href="/index.html">Overview</a></li>
 
   
   
-  <li class=""><a href="/v/0.7.0-SNAPSHOT/start/download.html">Download</a></li>
+  <li class=""><a href="/start/download.html">Download</a></li>
 
   
   
-  <li class=""><a href="/v/0.7.0-SNAPSHOT/use/guide/quickstart/index.html">Getting Started</a></li>
+  <li class=""><a href="/use/guide/quickstart/index.html">Getting Started</a></li>
 
   
   
-  <li class=""><a href="/v/0.7.0-SNAPSHOT/start/walkthrough/index.html">Walkthrough</a></li>
+  <li class=""><a href="/start/walkthrough/index.html">Walkthrough</a></li>
 
   
   
-  <li class=""><a href="/v/0.7.0-SNAPSHOT/use/guide/index.html">User Guide</a></li>
+  <li class=""><a href="/use/guide/index.html">User Guide</a></li>
 
   
   
-  <li class=""><a href="/v/0.7.0-SNAPSHOT/use/examples/index.html">Examples</a></li>
+  <li class=""><a href="/use/examples/index.html">Examples</a></li>
 
   
   
-  <li class=""><a href="/v/0.7.0-SNAPSHOT/dev/code/index.html">Contributing</a></li>
+  <li class=""><a href="/dev/code/index.html">Contributing</a></li>
 
 
 </ul>                    
@@ -394,9 +394,9 @@ console.log("setting text to "+txt);
 
             
 <p id="breadcrumb">
-    <a href="/v/0.7.0-SNAPSHOT">Home</a>
+    <a href="">Home</a>
     
-        &raquo; <a href="/v/0.7.0-SNAPSHOT/start/walkthrough/index.md.bak">Walkthrough</a>
+        &raquo; <a href="/start/walkthrough/index.md.bak">Walkthrough</a>
         
     
 </p>
@@ -475,7 +475,7 @@ You can of course follow this walkthrough without installing it on your machine 
 
 
 *Note*: As this is a snapshot version of Brooklyn, the code above includes a `-DarchetypeCatalog` specification.
-This can be omitted for release versions, or if you already have a local `mvn install` of Brooklyn installed as described [here](/v/0.7.0-SNAPSHOT/dev/code/index.html).
+This can be omitted for release versions, or if you already have a local `mvn install` of Brooklyn installed as described [here](/dev/code/index.html).
 
 
 
@@ -501,7 +501,7 @@ provides a template to follow.
 ## Deploying the Application
 
 If you have not already done so, follow the section in the 
-[Getting Started Guide](/v/0.7.0-SNAPSHOT/use/guide/quickstart/index.html) to create a `brooklyn.properties` 
+[Getting Started Guide](/use/guide/quickstart/index.html) to create a `brooklyn.properties` 
 file containing credentials for your preferred cloud provider. 
 
 To launch this application, build the project and run the `start.sh` script in the resulting assembly:
@@ -607,16 +607,16 @@ Fire up a JMeter session (or other load testing tool) and blast the Nginx addres
  
 In addition to the sample project created by the archetype, with its README and
 `assembly` build, you can find additional code related to this example included with Brooklyn as the ``simple-web-cluster`` example,
-described [in detail here](/v/0.7.0-SNAPSHOT/use/examples/webcluster).
+described [in detail here](/use/examples/webcluster).
 
 For your applications, you might want to mix in other data stores, messaging systems, or on-line services including PaaS.
 Brooklyn supports some of these out-of-the-box, including a wide-range of tools which it can use Whirr to provision, such as Hadoop.
 But if you have something you don't see, 
-[let us know](/v/0.7.0-SNAPSHOT/meta/contact.html) -- 
+[let us know](/meta/contact.html) -- 
 we want to work with you to 
-[write a new entity](/v/0.7.0-SNAPSHOT/dev/code/entity.html) or
-[policy](/v/0.7.0-SNAPSHOT/dev/code/policy.html) 
-and [contribute it](/v/0.7.0-SNAPSHOT/dev/how-to-contrib.html).
+[write a new entity](/dev/code/entity.html) or
+[policy](/dev/code/policy.html) 
+and [contribute it](/dev/how-to-contrib.html).
 
 
 <!--
@@ -646,7 +646,7 @@ Alternatively you can just add a ``main`` method to the application class as fol
 </div>
 
 
-Compile and run this with the [``brooklyn-all`` jar](/v/0.7.0-SNAPSHOT/start/download.html) on the classpath,
+Compile and run this with the [``brooklyn-all`` jar](/start/download.html) on the classpath,
 pointing at your favourite WAR on your filesystem. 
 (If the ``import`` packages aren't picked up correctly,
 you can cheat by looking at [the file in Github](https://github.com/brooklyncentral/brooklyn/blob/master/examples/simple-web-cluster/src/main/java/brooklyn/demo/WebClusterDatabaseExample.java);
@@ -656,7 +656,7 @@ and you'll find a sample WAR which uses the database as configured above
  
 If you want to adventure beyond ``localhost`` (the default),
 simply supply the your favourite cloud (e.g. ``aws-ec2:eu-west-1``)
-with credentials set up as described [here](/v/0.7.0-SNAPSHOT/use/guide/management/index.html#startup-config).
+with credentials set up as described [here](/use/guide/management/index.html#startup-config).
 
 -->
 
@@ -681,14 +681,14 @@ with credentials set up as described [here](/v/0.7.0-SNAPSHOT/use/guide/manageme
     
 	  <div class="toc-1 ">
   
-	    <a href="/v/0.7.0-SNAPSHOT/start/index.html"><div class="toc-1-item toc-1-header ">Start</div></a>
+	    <a href="/start/index.html"><div class="toc-1-item toc-1-header ">Start</div></a>
         <div class="toc-1-children">
     
         
         
 	      <div class="toc-2 ">
       
-	        <a href="/v/0.7.0-SNAPSHOT/index.html"><div class="toc-2-item">Overview</div></a>
+	        <a href="/index.html"><div class="toc-2-item">Overview</div></a>
       
           </div>
     
@@ -696,7 +696,7 @@ with credentials set up as described [here](/v/0.7.0-SNAPSHOT/use/guide/manageme
         
 	      <div class="toc-2 ">
       
-	        <a href="/v/0.7.0-SNAPSHOT/start/walkthrough/index.html"><div class="toc-2-item">Walkthrough</div></a>
+	        <a href="/start/walkthrough/index.html"><div class="toc-2-item">Walkthrough</div></a>
       
           </div>
     
@@ -704,7 +704,7 @@ with credentials set up as described [here](/v/0.7.0-SNAPSHOT/use/guide/manageme
         
 	      <div class="toc-2 ">
       
-	        <a href="/v/0.7.0-SNAPSHOT/start/download.html"><div class="toc-2-item">Download</div></a>
+	        <a href="/start/download.html"><div class="toc-2-item">Download</div></a>
       
           </div>
     
@@ -712,7 +712,7 @@ with credentials set up as described [here](/v/0.7.0-SNAPSHOT/use/guide/manageme
         
 	      <div class="toc-2 ">
       
-	        <a href="/v/0.7.0-SNAPSHOT/start/docs-summary.html"><div class="toc-2-item">Documentation</div></a>
+	        <a href="/start/docs-summary.html"><div class="toc-2-item">Documentation</div></a>
       
           </div>
     
@@ -725,49 +725,49 @@ with credentials set up as described [here](/v/0.7.0-SNAPSHOT/use/guide/manageme
     
 	  <div class="toc-1 ">
   
-	    <a href="/v/0.7.0-SNAPSHOT/use/index.html"><div class="toc-1-item toc-1-header ">Using brooklyn</div></a>
+	    <a href="/use/index.html"><div class="toc-1-item toc-1-header ">Using brooklyn</div></a>
         <div class="toc-1-children">
     
         
         
 	      <div class="toc-2 ">
       
-	        <a href="/v/0.7.0-SNAPSHOT/use/guide/index.html"><div class="toc-2-item toc-2-header">User Guide</div></a>
+	        <a href="/use/guide/index.html"><div class="toc-2-item toc-2-header">User Guide</div></a>
             <div class="toc-2-children-popup"><div class="toc-2-children">
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/quickstart/index.html"><div class="toc-3-item">Quick Start</div></a>
+	            <a href="/use/guide/quickstart/index.html"><div class="toc-3-item">Quick Start</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/defining-applications/basic-concepts.html"><div class="toc-3-item">Defining Applications</div></a>
+	            <a href="/use/guide/defining-applications/basic-concepts.html"><div class="toc-3-item">Defining Applications</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/management/index.html"><div class="toc-3-item">Management</div></a>
+	            <a href="/use/guide/management/index.html"><div class="toc-3-item">Management</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/locations/index.html"><div class="toc-3-item">Locations</div></a>
+	            <a href="/use/guide/locations/index.html"><div class="toc-3-item">Locations</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/policies/index.html"><div class="toc-3-item">Policies</div></a>
+	            <a href="/use/guide/policies/index.html"><div class="toc-3-item">Policies</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/entities/index.html"><div class="toc-3-item">Custom Entities</div></a>
+	            <a href="/use/guide/entities/index.html"><div class="toc-3-item">Custom Entities</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/guide/extras/index.html"><div class="toc-3-item">Extras</div></a>
+	            <a href="/use/guide/extras/index.html"><div class="toc-3-item">Extras</div></a>
               </div>
         
             </div></div>
@@ -778,32 +778,32 @@ with credentials set up as described [here](/v/0.7.0-SNAPSHOT/use/guide/manageme
         
 	      <div class="toc-2 ">
       
-	        <a href="/v/0.7.0-SNAPSHOT/use/examples/index.html"><div class="toc-2-item toc-2-header">Examples</div></a>
+	        <a href="/use/examples/index.html"><div class="toc-2-item toc-2-header">Examples</div></a>
             <div class="toc-2-children-popup"><div class="toc-2-children">
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/examples/webcluster/index.html"><div class="toc-3-item">Elastic Web Cluster</div></a>
+	            <a href="/use/examples/webcluster/index.html"><div class="toc-3-item">Elastic Web Cluster</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/examples/global-web-fabric/index.html"><div class="toc-3-item">Global Web Fabric</div></a>
+	            <a href="/use/examples/global-web-fabric/index.html"><div class="toc-3-item">Global Web Fabric</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/examples/whirrhadoop/index.html"><div class="toc-3-item">Whirr Hadoop Cluster</div></a>
+	            <a href="/use/examples/whirrhadoop/index.html"><div class="toc-3-item">Whirr Hadoop Cluster</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/examples/messaging/index.html"><div class="toc-3-item">Publish-Subscribe Messaging</div></a>
+	            <a href="/use/examples/messaging/index.html"><div class="toc-3-item">Publish-Subscribe Messaging</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/use/examples/nosql-cassandra/index.html"><div class="toc-3-item">Cassandra Cluster</div></a>
+	            <a href="/use/examples/nosql-cassandra/index.html"><div class="toc-3-item">Cassandra Cluster</div></a>
               </div>
         
             </div></div>
@@ -814,7 +814,7 @@ with credentials set up as described [here](/v/0.7.0-SNAPSHOT/use/guide/manageme
         
 	      <div class="toc-2 ">
       
-	        <a href="/v/0.7.0-SNAPSHOT/use/api/index.html"><div class="toc-2-item">API Reference (javadoc)</div></a>
+	        <a href="/use/api/index.html"><div class="toc-2-item">API Reference (javadoc)</div></a>
       
           </div>
     
@@ -822,7 +822,7 @@ with credentials set up as described [here](/v/0.7.0-SNAPSHOT/use/guide/manageme
         
 	      <div class="toc-2 ">
       
-	        <a href="/v/0.7.0-SNAPSHOT/use/contact.html"><div class="toc-2-item">Discuss</div></a>
+	        <a href="/use/contact.html"><div class="toc-2-item">Discuss</div></a>
       
           </div>
     
@@ -835,29 +835,29 @@ with credentials set up as described [here](/v/0.7.0-SNAPSHOT/use/guide/manageme
     
 	  <div class="toc-1 ">
   
-	    <a href="/v/0.7.0-SNAPSHOT/dev/code/index.html"><div class="toc-1-item toc-1-header ">Contributing</div></a>
+	    <a href="/dev/code/index.html"><div class="toc-1-item toc-1-header ">Contributing</div></a>
         <div class="toc-1-children">
     
         
         
 	      <div class="toc-2 ">
       
-	        <a href="/v/0.7.0-SNAPSHOT/dev/code/index.html"><div class="toc-2-item toc-2-header">The Code</div></a>
+	        <a href="/dev/code/index.html"><div class="toc-2-item toc-2-header">The Code</div></a>
             <div class="toc-2-children-popup"><div class="toc-2-children">
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/dev/code/index.html"><div class="toc-3-item">Structure</div></a>
+	            <a href="/dev/code/index.html"><div class="toc-3-item">Structure</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/dev/code/entity.html"><div class="toc-3-item">Writing an Entity</div></a>
+	            <a href="/dev/code/entity.html"><div class="toc-3-item">Writing an Entity</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/dev/code/policy.html"><div class="toc-3-item">Writing a Policy</div></a>
+	            <a href="/dev/code/policy.html"><div class="toc-3-item">Writing a Policy</div></a>
               </div>
         
             
@@ -873,22 +873,22 @@ with credentials set up as described [here](/v/0.7.0-SNAPSHOT/use/guide/manageme
         
 	      <div class="toc-2 ">
       
-	        <a href="/v/0.7.0-SNAPSHOT/dev/build/index.html"><div class="toc-2-item toc-2-header">Build and Test</div></a>
+	        <a href="/dev/build/index.html"><div class="toc-2-item toc-2-header">Build and Test</div></a>
             <div class="toc-2-children-popup"><div class="toc-2-children">
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/dev/build/index.html"><div class="toc-3-item">Maven</div></a>
+	            <a href="/dev/build/index.html"><div class="toc-3-item">Maven</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/dev/build/ide.html"><div class="toc-3-item">IDE</div></a>
+	            <a href="/dev/build/ide.html"><div class="toc-3-item">IDE</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/dev/build/tests.html"><div class="toc-3-item">Tests</div></a>
+	            <a href="/dev/build/tests.html"><div class="toc-3-item">Tests</div></a>
               </div>
         
             </div></div>
@@ -899,37 +899,37 @@ with credentials set up as described [here](/v/0.7.0-SNAPSHOT/use/guide/manageme
         
 	      <div class="toc-2 ">
       
-	        <a href="/v/0.7.0-SNAPSHOT/dev/tips/index.html"><div class="toc-2-item toc-2-header">Tips and Tricks</div></a>
+	        <a href="/dev/tips/index.html"><div class="toc-2-item toc-2-header">Tips and Tricks</div></a>
             <div class="toc-2-children-popup"><div class="toc-2-children">
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/dev/tips/index.html"><div class="toc-3-item">Miscellany</div></a>
+	            <a href="/dev/tips/index.html"><div class="toc-3-item">Miscellany</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/dev/tips/logging.html"><div class="toc-3-item">Logging</div></a>
+	            <a href="/dev/tips/logging.html"><div class="toc-3-item">Logging</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/dev/tips/standards.html"><div class="toc-3-item">Code Standards</div></a>
+	            <a href="/dev/tips/standards.html"><div class="toc-3-item">Code Standards</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/dev/tips/local-artifact-repo.html"><div class="toc-3-item">Local Artifact Repo</div></a>
+	            <a href="/dev/tips/local-artifact-repo.html"><div class="toc-3-item">Local Artifact Repo</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/dev/tips/update-docs.html"><div class="toc-3-item">Updating Docs</div></a>
+	            <a href="/dev/tips/update-docs.html"><div class="toc-3-item">Updating Docs</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/dev/tips/release.html"><div class="toc-3-item">Release Process</div></a>
+	            <a href="/dev/tips/release.html"><div class="toc-3-item">Release Process</div></a>
               </div>
         
             </div></div>
@@ -940,7 +940,7 @@ with credentials set up as described [here](/v/0.7.0-SNAPSHOT/use/guide/manageme
         
 	      <div class="toc-2 ">
       
-	        <a href="/v/0.7.0-SNAPSHOT/dev/wishlist.html"><div class="toc-2-item">Wishlist</div></a>
+	        <a href="/dev/wishlist.html"><div class="toc-2-item">Wishlist</div></a>
       
           </div>
     
@@ -948,7 +948,7 @@ with credentials set up as described [here](/v/0.7.0-SNAPSHOT/use/guide/manageme
         
 	      <div class="toc-2 ">
       
-	        <a href="/v/0.7.0-SNAPSHOT/dev/links.html"><div class="toc-2-item toc-2-header">Links</div></a>
+	        <a href="/dev/links.html"><div class="toc-2-item toc-2-header">Links</div></a>
             <div class="toc-2-children-popup"><div class="toc-2-children">
         
             
@@ -974,7 +974,7 @@ with credentials set up as described [here](/v/0.7.0-SNAPSHOT/use/guide/manageme
         
 	      <div class="toc-2 ">
       
-	        <a href="/v/0.7.0-SNAPSHOT/dev/how-to-contrib.html"><div class="toc-2-item">How to Contribute</div></a>
+	        <a href="/dev/how-to-contrib.html"><div class="toc-2-item">How to Contribute</div></a>
       
           </div>
     
@@ -987,14 +987,14 @@ with credentials set up as described [here](/v/0.7.0-SNAPSHOT/use/guide/manageme
     
 	  <div class="toc-1 ">
   
-	    <a href="/v/0.7.0-SNAPSHOT/license/index.html"><div class="toc-1-item toc-1-header ">License</div></a>
+	    <a href="/license/index.html"><div class="toc-1-item toc-1-header ">License</div></a>
         <div class="toc-1-children">
     
         
         
 	      <div class="toc-2 ">
       
-	        <a href="/v/0.7.0-SNAPSHOT/license/license.html"><div class="toc-2-item">Apache License v2.0</div></a>
+	        <a href="/license/license.html"><div class="toc-2-item">Apache License v2.0</div></a>
       
           </div>
     
@@ -1002,37 +1002,37 @@ with credentials set up as described [here](/v/0.7.0-SNAPSHOT/use/guide/manageme
         
 	      <div class="toc-2 ">
       
-	        <a href="/v/0.7.0-SNAPSHOT/license/contributor-agreements/index.html"><div class="toc-2-item toc-2-header">Contributor Agreements</div></a>
+	        <a href="/license/contributor-agreements/index.html"><div class="toc-2-item toc-2-header">Contributor Agreements</div></a>
             <div class="toc-2-children-popup"><div class="toc-2-children">
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/license/contributor-agreements/index.html"><div class="toc-3-item">Instructions</div></a>
+	            <a href="/license/contributor-agreements/index.html"><div class="toc-3-item">Instructions</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/license/contributor-agreements/individual.html"><div class="toc-3-item">Individual CLA (echosign)</div></a>
+	            <a href="/license/contributor-agreements/individual.html"><div class="toc-3-item">Individual CLA (echosign)</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/license/contributor-agreements/corporate.html"><div class="toc-3-item">Corporate CLA (echosign)</div></a>
+	            <a href="/license/contributor-agreements/corporate.html"><div class="toc-3-item">Corporate CLA (echosign)</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/license/contributor-agreements/corporate-update-schedule.html"><div class="toc-3-item">CCLA Schedule A Update (echosign)</div></a>
+	            <a href="/license/contributor-agreements/corporate-update-schedule.html"><div class="toc-3-item">CCLA Schedule A Update (echosign)</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/license/contributor-agreements/brooklyn-icla.txt"><div class="toc-3-item">Individual CLA (raw text)</div></a>
+	            <a href="/license/contributor-agreements/brooklyn-icla.txt"><div class="toc-3-item">Individual CLA (raw text)</div></a>
               </div>
         
             
               <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/license/contributor-agreements/brooklyn-ccla.txt"><div class="toc-3-item">Corporate CLA (raw text)</div></a>
+	            <a href="/license/contributor-agreements/brooklyn-ccla.txt"><div class="toc-3-item">Corporate CLA (raw text)</div></a>
               </div>
         
             </div></div>
@@ -1048,14 +1048,14 @@ with credentials set up as described [here](/v/0.7.0-SNAPSHOT/use/guide/manageme
     
 	  <div class="toc-1 ">
   
-	    <a href="/v/0.7.0-SNAPSHOT/meta/versions.html"><div class="toc-1-item toc-1-header ">Meta</div></a>
+	    <a href="/meta/versions.html"><div class="toc-1-item toc-1-header ">Meta</div></a>
         <div class="toc-1-children">
     
         
         
 	      <div class="toc-2 ">
       
-	        <a href="/v/0.7.0-SNAPSHOT/meta/versions.html"><div class="toc-2-item">Versions</div></a>
+	        <a href="/meta/versions.html"><div class="toc-2-item">Versions</div></a>
       
           </div>
     
@@ -1063,7 +1063,7 @@ with credentials set up as described [here](/v/0.7.0-SNAPSHOT/use/guide/manageme
         
 	      <div class="toc-2 ">
       
-	        <a href="/v/0.7.0-SNAPSHOT/meta/governance.html"><div class="toc-2-item">Governance</div></a>
+	        <a href="/meta/governance.html"><div class="toc-2-item">Governance</div></a>
       
           </div>
     
@@ -1071,7 +1071,7 @@ with credentials set up as described [here](/v/0.7.0-SNAPSHOT/use/guide/manageme
         
 	      <div class="toc-2 ">
       
-	        <a href="/v/0.7.0-SNAPSHOT/meta/verify.html"><div class="toc-2-item">Verify</div></a>
+	        <a href="/meta/verify.html"><div class="toc-2-item">Verify</div></a>
       
           </div>
     
@@ -1079,7 +1079,7 @@ with credentials set up as described [here](/v/0.7.0-SNAPSHOT/use/guide/manageme
         
 	      <div class="toc-2 ">
       
-	        <a href="/v/0.7.0-SNAPSHOT/meta/contact.html"><div class="toc-2-item">Contact</div></a>
+	        <a href="/meta/contact.html"><div class="toc-2-item">Contact</div></a>
       
           </div>
     
