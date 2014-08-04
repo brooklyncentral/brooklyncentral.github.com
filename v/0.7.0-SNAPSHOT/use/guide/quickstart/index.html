@@ -1,3 +1,23 @@
+
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 
@@ -181,6 +201,26 @@ console.log("setting text to "+txt);
         <div id="menubar">  
 
 
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+
 
 
 
@@ -234,6 +274,26 @@ console.log("setting text to "+txt);
         <div id="maincontent">
 
 
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+
   
 
 
@@ -308,6 +368,23 @@ console.log("setting text to "+txt);
     
         
         
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+        
     
         
         
@@ -368,8 +445,6 @@ console.log("setting text to "+txt);
         
     
         
-        
-            
         
             
         
@@ -420,7 +495,25 @@ console.log("setting text to "+txt);
 
 <p>We will be deploying an example 3-tier web application, described using this blueprint:</p>
 
-<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">My Web Cluster</span>
+<div class="highlight"><pre><code class="yaml"><span class="c1">#</span>
+<span class="c1"># Licensed to the Apache Software Foundation (ASF) under one</span>
+<span class="c1"># or more contributor license agreements.  See the NOTICE file</span>
+<span class="c1"># distributed with this work for additional information</span>
+<span class="c1"># regarding copyright ownership.  The ASF licenses this file</span>
+<span class="c1"># to you under the Apache License, Version 2.0 (the</span>
+<span class="c1"># &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1"># with the License.  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#  http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing,</span>
+<span class="c1"># software distributed under the License is distributed on an</span>
+<span class="c1"># &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY</span>
+<span class="c1"># KIND, either express or implied.  See the License for the</span>
+<span class="c1"># specific language governing permissions and limitations</span>
+<span class="c1"># under the License.</span>
+<span class="c1">#</span>
+<span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">My Web Cluster</span>
 <span class="l-Scalar-Plain">location</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">location</span>
 <span class="l-Scalar-Plain">services</span><span class="p-Indicator">:</span>
 
@@ -482,23 +575,26 @@ console.log("setting text to "+txt);
 
 <p>Brooklyn will output the address of the management interface:</p>
 
-<p><code>INFO  Starting brooklyn web-console on loopback interface because no security config is set</code></p>
+<pre><code>INFO  Starting brooklyn web-console on loopback interface because no security config is set
+INFO  Started Brooklyn console at http://127.0.0.1:8081/, running classpath://brooklyn.war and []
+</code></pre>
 
-<p><code>INFO  Started Brooklyn console at http://127.0.0.1:8081/, running classpath://brooklyn.war and []</code></p>
+<p>But before we really use Brooklyn, we need to configure security and locations.
+In particular, if you are running on a remote server, you'll notice that Brooklyn has
+bound only to the loopback device, not a public network interface, and you won't be able
+to access the server. This is for security reasons; you can override by passing <code>-b 0.0.0.0</code>,
+or once you have configured security it will automatically bind to all interfaces by default.</p>
 
-<p>But before we really use Brooklyn, we need to setup some Locations.</p>
+<p>Stop Brooklyn with ctrl-c, or in the web-browser (under "Help"), or with <code>kill</code>.
+(The PID is written to a file in the directory where you launch.)</p>
 
-<p>Stop Brooklyn with ctrl-c.</p>
+<p><a name="properties"></a></p>
 
-<h2>Configuring a Location</h2>
+<h2>Configuring Brooklyn with brooklyn.properties</h2>
 
-<p>Brooklyn deploys applications to Locations.</p>
-
-<p>Locations can be clouds, machines with fixed IPs or localhost (for testing).</p>
-
-<p>Brooklyn loads Location configuration  from <code>~/.brooklyn/brooklyn.properties</code>.</p>
-
-<p>Create a <code>.brooklyn</code> folder in your home directory and download the template <a href="brooklyn.properties">brooklyn.properties</a> to that folder.</p>
+<p>Brooklyn reads startup configuration from a file <code>~/.brooklyn/brooklyn.properties</code>, by default.
+You can create this from a template <a href="brooklyn.properties">brooklyn.properties</a> file which you edit;
+this file can be installed with:</p>
 
 <div class="highlight"><pre><code class="bash"><span class="nv">$ </span>mkdir ~/.brooklyn
 <span class="nv">$ </span><span class="nb">cd</span> ~/.brooklyn
@@ -507,18 +603,59 @@ console.log("setting text to "+txt);
 </div>
 
 
-<p>Open brooklyn.properties in a text editor and add your cloud credentials.</p>
+<p>Open this file in a text editor and follow the instructions there. The main settings are summarized below:</p>
 
-<p>If you would rather test Brooklyn on localhost, follow <a href="/v/0.7.0-SNAPSHOT/use/guide/locations/">these instructions</a> to ensure that your Brooklyn can access your machine.</p>
+<p><a name="security"></a></p>
 
-<p>Restart Brooklyn:</p>
+<h2>Configuring Security</h2>
 
-<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>brooklyn launch
+<p>To configure Brooklyn to run on a public IP address, security should be enabled.
+The simplest way is to define a user and password in <code>~/.brooklyn/brooklyn.properties</code>
+(described above):</p>
+
+<pre><code>brooklyn.webconsole.security.users=admin
+brooklyn.webconsole.security.user.admin.password=s3cr3t
 </code></pre>
-</div>
 
+<p>Other modes, including LDAP, are described in this file.</p>
 
-<h2>Launching an Application</h2>
+<p>The other common setting is to run under https (on port 8443 by default):</p>
+
+<pre><code>brooklyn.webconsole.security.https.required=true
+</code></pre>
+
+<p>These settings require a restart to Brooklyn.</p>
+
+<p><a name="location"></a></p>
+
+<h2>Configuring a Location</h2>
+
+<p>Brooklyn deploys applications to <code>`locations''. These locations
+can be clouds, machines with fixed IPs or localhost (for testing).
+Their configuration can be specified in</code>~/.brooklyn/brooklyn.properties<code>(described above),
+and then these locations can be easily selected within Brooklyn.
+Alternatively this information can be specified in the YAML when applications are deployed,
+without needing to set it in</code>brooklyn.properties`.</p>
+
+<p>Some sample settings for this are:</p>
+
+<pre><code>brooklyn.location.jclouds.aws-ec2.identity = AKA_YOUR_ACCESS_KEY_ID
+brooklyn.location.jclouds.aws-ec2.credential = &lt;access-key-hex-digits&gt;
+brooklyn.location.named.aws-california = jclouds:aws-ec2:us-west-1
+brooklyn.location.named.aws-california.displayName = AWS US West 1 (CA)
+
+brooklyn.location.jclouds.softlayer.identity = username
+brooklyn.location.jclouds.softlayer.credential = &lt;private-key-hex-digits&gt;
+brooklyn.location.named.softlayer-dal05 = jclouds:softlayer:dal05
+brooklyn.location.named.softlayer-dal05.displayName = Softlayer Dallas
+</code></pre>
+
+<p>If you want to test Brooklyn on localhost, follow <a href="/v/0.7.0-SNAPSHOT/use/guide/locations/">these instructions</a>
+to ensure that your Brooklyn can access your machine.</p>
+
+<p>Once updated, restart Brooklyn (or reload the properties within the web GUI).</p>
+
+<h2>Launching an Application in Brooklyn</h2>
 
 <p>There are several ways to deploy a YAML blueprint (including specifying the blueprint on the command line or submitting it via the REST API).</p>
 
@@ -551,7 +688,25 @@ console.log("setting text to "+txt);
 
 <p><strong>My Web Cluster Blueprint</strong></p>
 
-<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">My Web Cluster</span>
+<div class="highlight"><pre><code class="yaml"><span class="c1">#</span>
+<span class="c1"># Licensed to the Apache Software Foundation (ASF) under one</span>
+<span class="c1"># or more contributor license agreements.  See the NOTICE file</span>
+<span class="c1"># distributed with this work for additional information</span>
+<span class="c1"># regarding copyright ownership.  The ASF licenses this file</span>
+<span class="c1"># to you under the Apache License, Version 2.0 (the</span>
+<span class="c1"># &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1"># with the License.  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#  http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing,</span>
+<span class="c1"># software distributed under the License is distributed on an</span>
+<span class="c1"># &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY</span>
+<span class="c1"># KIND, either express or implied.  See the License for the</span>
+<span class="c1"># specific language governing permissions and limitations</span>
+<span class="c1"># under the License.</span>
+<span class="c1">#</span>
+<span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">My Web Cluster</span>
 <span class="l-Scalar-Plain">location</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">location</span>
 <span class="l-Scalar-Plain">services</span><span class="p-Indicator">:</span>
 
@@ -633,6 +788,26 @@ The dialog will close and Brooklyn will begin deploying your application.</p>
         
       <div id="sidebar">
       
+
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
 
 
   
@@ -783,6 +958,52 @@ The dialog will close and Brooklyn will begin deploying your application.</p>
             
               <div class="toc-3 ">
 	            <a href="/v/0.7.0-SNAPSHOT/use/guide/management/index.html#sensors-and-effectors"><div class="toc-3-item">Sensors and Effectors</div></a>
+              </div>
+        
+            </div></div>
+      
+          </div>
+    
+        
+        
+	      <div class="toc-2 ">
+      
+	        <a href="/v/0.7.0-SNAPSHOT/use/guide/persistence/index.html"><div class="toc-2-item toc-2-header">Persistence</div></a>
+            <div class="toc-2-children-popup"><div class="toc-2-children">
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.7.0-SNAPSHOT/use/guide/persistence/index.html#introduction"><div class="toc-3-item">Introduction</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.7.0-SNAPSHOT/use/guide/persistence/index.html#command-line-options"><div class="toc-3-item">Command Line Options</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.7.0-SNAPSHOT/use/guide/persistence/index.html#file-based-persistence"><div class="toc-3-item">File-based Persistence</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.7.0-SNAPSHOT/use/guide/persistence/index.html#object-store-persistence"><div class="toc-3-item">Object Store Persistence</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.7.0-SNAPSHOT/use/guide/persistence/index.html#rebind"><div class="toc-3-item">Rebind</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.7.0-SNAPSHOT/use/guide/persistence/index.html#handling-rebind-failures"><div class="toc-3-item">Handling Rebind Failures</div></a>
+              </div>
+        
+            
+              <div class="toc-3 ">
+	            <a href="/v/0.7.0-SNAPSHOT/use/guide/persistence/index.html#writing-persistable-code"><div class="toc-3-item">Writing Persistable Code</div></a>
               </div>
         
             </div></div>
@@ -981,11 +1202,6 @@ The dialog will close and Brooklyn will begin deploying your application.</p>
             
               <div class="toc-3 ">
 	            <a href="/v/0.7.0-SNAPSHOT/dev/tips/index.html"><div class="toc-3-item">Tips and Tricks</div></a>
-              </div>
-        
-            
-              <div class="toc-3 ">
-	            <a href="/v/0.7.0-SNAPSHOT/dev/wishlist.html"><div class="toc-3-item">Wishlist</div></a>
               </div>
         
             
