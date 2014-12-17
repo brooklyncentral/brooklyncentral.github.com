@@ -1,6 +1,0 @@
-#ruby-gemset=brooklyn-docs
-
-source 'https://rubygems.org'
-gem 'jekyll', '~>0'
-gem 'json'
-gem 'rdiscount'

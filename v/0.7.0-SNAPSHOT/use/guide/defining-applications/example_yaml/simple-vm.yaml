@@ -1,8 +1,0 @@
-name: simple-vm
-services:
-- type: brooklyn.entity.basic.EmptySoftwareProcess
-  name: VM
-  provisioning.properties:
-    minRam: 8192
-    minCores: 4
-    minDisk: 100
